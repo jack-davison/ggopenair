@@ -1,0 +1,22 @@
+Package: ggopenair
+Type: Package
+Title: Air Pollution Data Visualisation using ggplot2
+Version: 0.1.0
+Authors@R: 
+  c(person(given = "Jack",
+           family = "Davison",
+           role = c("cre", "aut"),
+           email = "davison.jack.jd@gmail.com"))
+Description: Recreate the air quality data visualisations of 'openair' using 
+  the popular 'ggplot2' plotting package.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.1
+Imports: 
+    dplyr,
+    ggplot2,
+    magrittr,
+    openair,
+    rlang,
+    tidyr

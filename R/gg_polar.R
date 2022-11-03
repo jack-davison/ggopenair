@@ -380,14 +380,15 @@ gg_polar <-
         plot = FALSE
       )$data
 
-    if (!"miss" %in% names(oa_data))
+    if (!"miss" %in% names(oa_data)) {
       oa_data[["miss"]] <- oa_data[["z"]]
+    }
 
     dat <-
       oa_data %>%
       tidyr::drop_na("miss", "u", "v") %>%
       dplyr::mutate(
-        r = sqrt(.data$u ^ 2 + (.data$v * -1) ^ 2),
+        r = sqrt(.data$u^2 + (.data$v * -1)^2),
         t = dplyr::if_else(.data$u < 0, atan((.data$v * -1) / .data$u) + pi, atan((.data$v * -1) / .data$u)),
         t = (.data$t * (180 / pi)) + 90
       ) %>%
@@ -414,15 +415,18 @@ gg_polar <-
       ggplot2::expand_limits(y = 0)
 
     if (uncertainty | all(type != "default")) {
-      if (uncertainty)
+      if (uncertainty) {
         type <- "default"
+      }
       if (length(type) == 1) {
         plt <-
           plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
       } else {
         plt <-
-          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[type[1]]]),
-                                    rows = ggplot2::vars(.data[[type[2]]]))
+          plt + ggplot2::facet_grid(
+            cols = ggplot2::vars(.data[[type[1]]]),
+            rows = ggplot2::vars(.data[[type[2]]])
+          )
       }
     }
 

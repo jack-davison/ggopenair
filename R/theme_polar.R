@@ -25,16 +25,17 @@ theme_polar <- function(guides = TRUE) {
 
   # optionally control guides
   if (guides) {
-    theme <- list(theme,
-                  ggplot2::guides(
-                    color = ggplot2::guide_colorbar(
-                      frame.colour = "white",
-                      ticks.colour = "white",
-                      barheight = grid::unit(10, "cm")
-                    )
-                  ))
+    theme <- list(
+      theme,
+      ggplot2::guides(
+        color = ggplot2::guide_colorbar(
+          frame.colour = "white",
+          ticks.colour = "white",
+          barheight = grid::unit(10, "cm")
+        )
+      )
+    )
   }
 
   theme
-
 }

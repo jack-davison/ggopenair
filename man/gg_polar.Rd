@@ -78,7 +78,7 @@ coordinates, the default is wind speed, \dQuote{ws}.}
   \code{polarFreq} will be better. Setting \code{statistic = "weighted.mean"}
   can be useful because it provides an indication of the concentration *
   frequency of occurrence and will highlight the wind speed/direction
-  conditions that dominate the overall mean.Can be:
+  conditions that dominate the overall mean. Can be:
 
   \itemize{ \item  \dQuote{mean} (default), \dQuote{median}, \dQuote{max}
   (maximum), \dQuote{frequency}. \dQuote{stdev} (standard deviation),

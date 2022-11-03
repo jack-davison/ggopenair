@@ -399,7 +399,7 @@ gg_polar <-
     plt <-
       ggplot2::ggplot(dat, ggplot2::aes(.data$t, .data$r)) +
       ggplot2::coord_polar() +
-      ggplot2::geom_point(ggplot2::aes(color = .data$z), na.rm = T) +
+      scattermore::geom_scattermore(interpolate = T, pointsize = 1, ggplot2::aes(color = .data$z), na.rm = T) +
       ggplot2::scale_x_continuous(
         breaks = seq(0, 270, 90),
         limits = c(0, 360),

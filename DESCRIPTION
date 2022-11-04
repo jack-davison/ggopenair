@@ -19,5 +19,6 @@ Imports:
     magrittr,
     openair,
     rlang,
+    scales,
     scattermore,
     tidyr

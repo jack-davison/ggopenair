@@ -1,7 +1,8 @@
 #' Annotate a Polar Plot with a Coloured Wedge
 #'
 #' This is a wrapper around [ggplot2::annotate()] which draws a semi-transparent
-#' wedge on a [gg_polar()] plot.
+#' wedge on a plot with polar coordinates (for example, plots produced with
+#' [gg_polar()] or [gg_annulus()]).
 #'
 #' @param start The angle at which to start the wedge. Can be expressed
 #'   numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",

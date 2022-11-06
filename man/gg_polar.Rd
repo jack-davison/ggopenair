@@ -24,12 +24,13 @@ gg_polar(
   x_error = NA,
   y_error = NA,
   kernel = "gaussian",
-  tau = 0.5
+  tau = 0.5,
+  alpha = 1
 )
 }
 \arguments{
-\item{data}{A data frame minimally containing \code{wd}, another variable
-to plot in polar coordinates (the default is a column \dQuote{ws} --- wind
+\item{data}{A data frame minimally containing \code{wd}, another variable to
+plot in polar coordinates (the default is a column \dQuote{ws} --- wind
 speed) and a pollutant. Should also contain \code{date} if plots by time
 period are required.}
 
@@ -236,6 +237,9 @@ supported but this may be enhanced in the future.}
 \item{tau}{The quantile to be estimated when \code{statistic} is set to
 \code{"quantile.slope"}. Default is \code{0.5} which is equal to the median
 and will be ignored if \code{"quantile.slope"} is not used.}
+
+\item{alpha}{The transparency of the polar plot. This is mainly useful to
+overlay the polar plot on a map.}
 }
 \value{
 As well as generating the plot itself, \code{polarPlot} also returns

@@ -60,8 +60,8 @@
 #' predicted surface together with upper and lower 95% confidence intervals,
 #' which take account of the frequency of measurements.
 #'
-#' @param data A data frame minimally containing \code{wd}, another variable
-#'   to plot in polar coordinates (the default is a column \dQuote{ws} --- wind
+#' @param data A data frame minimally containing \code{wd}, another variable to
+#'   plot in polar coordinates (the default is a column \dQuote{ws} --- wind
 #'   speed) and a pollutant. Should also contain \code{date} if plots by time
 #'   period are required.
 #'
@@ -269,6 +269,9 @@
 #'   \code{"quantile.slope"}. Default is \code{0.5} which is equal to the median
 #'   and will be ignored if \code{"quantile.slope"} is not used.
 #'
+#' @param alpha The transparency of the polar plot. This is mainly useful to
+#'   overlay the polar plot on a map.
+#'
 #' @return As well as generating the plot itself, \code{polarPlot} also returns
 #'   an object of class ``openair''. The object includes three main components:
 #'   \code{call}, the command used to generate the plot; \code{data}, the data
@@ -353,7 +356,8 @@ gg_polar <-
            x_error = NA,
            y_error = NA,
            kernel = "gaussian",
-           tau = 0.5) {
+           tau = 0.5,
+           alpha = 1) {
     # run original openair
     oa_data <-
       openair::polarPlot(
@@ -400,7 +404,13 @@ gg_polar <-
     plt <-
       ggplot2::ggplot(dat, ggplot2::aes(.data$t, .data$r)) +
       ggplot2::coord_polar() +
-      scattermore::geom_scattermore(interpolate = T, pointsize = 1, ggplot2::aes(color = .data$z), na.rm = T) +
+      scattermore::geom_scattermore(
+        interpolate = T,
+        pointsize = 1,
+        ggplot2::aes(color = .data$z),
+        na.rm = T,
+        alpha = alpha
+      ) +
       ggplot2::scale_x_continuous(
         breaks = seq(0, 270, 90),
         limits = c(0, 360),

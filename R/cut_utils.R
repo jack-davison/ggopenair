@@ -84,7 +84,6 @@ cut_date <-
     if (!is.factor(x)) x <- factor(x)
 
     return(x)
-
   }
 
 #' Discretise wind speed into sectors
@@ -107,27 +106,26 @@ cut_date <-
 #' # data frame
 #' dplyr::mutate(openair::mydata, wd_bin = cut_wd(wd))
 #' }
-cut_wd <- function(x, resolution = "medium"){
-
+cut_wd <- function(x, resolution = "medium") {
   res <-
-    switch(
-      resolution,
+    switch(resolution,
       high = 22.5,
       medium = 45,
       low = 90
     )
 
   labs <-
-    switch(
-      resolution,
-      high = c("N", "NNE", "NE", "ENE", "E", "ESE",
-               "SE", "SSE", "S", "SSW", "SW", "WSW",
-               "W", "WNW", "NW", "NNW", "N"),
+    switch(resolution,
+      high = c(
+        "N", "NNE", "NE", "ENE", "E", "ESE",
+        "SE", "SSE", "S", "SSW", "SW", "WSW",
+        "W", "WNW", "NW", "NNW", "N"
+      ),
       medium = c("N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"),
       low = c("N", "E", "S", "W", "N")
     )
 
-  breaks <- c(0, seq(0, 360, res) + res/2)
+  breaks <- c(0, seq(0, 360, res) + res / 2)
 
   y <- cut(
     x,
@@ -138,7 +136,6 @@ cut_wd <- function(x, resolution = "medium"){
   y[x == 0] <- "N"
 
   return(y)
-
 }
 
 #' cut season helper function
@@ -162,5 +159,4 @@ cut_season <- function(x, hemisphere) {
       x %in% c("Sep", "Oct", "Nov") ~ "Spring (SON)"
     )
   }
-
 }

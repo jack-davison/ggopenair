@@ -29,11 +29,11 @@ An annotation to be added to [ggplot2::ggplot()].
 \description{
 This is a wrapper around [ggplot2::annotate()] which draws a semi-transparent
 wedge on a plot with polar coordinates (for example, plots produced with
-[gg_polar()] or [gg_annulus()]).
+[gg_polar_plot()] or [gg_polar_annulus()]).
 }
 \examples{
 \dontrun{
-gg_polar(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
+gg_polar_plot(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
 }
 
 }

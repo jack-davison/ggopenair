@@ -160,39 +160,36 @@
 #'   including \code{print}, \code{plot} and \code{summary}.
 #' @keywords methods
 
-gg_annulus <- function(data,
-                       pollutant,
-                       local_tz = NULL,
-                       period = "hour",
-                       type = "default",
-                       statistic = "mean",
-                       percentile = NA,
-                       width = 1,
-                       min_bin = 1,
-                       exclude_missing = TRUE,
-                       pad_date = FALSE,
-                       force_positive = TRUE,
-                       k = c(20, 10),
-                       normalise = FALSE) {
+gg_polar_annulus <- function(data,
+                             pollutant,
+                             local_tz = NULL,
+                             period = "hour",
+                             type = "default",
+                             statistic = "mean",
+                             percentile = NA,
+                             width = 1,
+                             min_bin = 1,
+                             exclude_missing = TRUE,
+                             pad_date = FALSE,
+                             force_positive = TRUE,
+                             k = c(20, 10),
+                             normalise = FALSE) {
   # respond to period
-  scale <- switch(
-    period,
+  scale <- switch(period,
     hour = c(0, 23),
     season = c(0, 12),
     weekday = c(0, 7),
     trend = c(0, 10)
   )
 
-  breaks <- switch(
-    period,
+  breaks <- switch(period,
     hour = c(23, seq(0, 24, 6)),
     season = scale,
     weekday = scale,
     trend = c()
   )
 
-  labels <- switch(
-    period,
+  labels <- switch(period,
     hour = breaks,
     season = c("Jan", "Dec"),
     weekday = c("Sun", "Sat"),
@@ -223,7 +220,7 @@ gg_annulus <- function(data,
     oa_data %>%
     tidyr::drop_na("z", "u", "v") %>%
     dplyr::mutate(
-      r = sqrt(.data$u ^ 2 + (.data$v * -1) ^ 2),
+      r = sqrt(.data$u^2 + (.data$v * -1)^2),
       t = dplyr::if_else(.data$u < 0, atan((.data$v * -1) / .data$u) + pi, atan((.data$v * -1) / .data$u)),
       t = (.data$t * (180 / pi)) + 90
     ) %>%
@@ -243,14 +240,16 @@ gg_annulus <- function(data,
       interpolate = T,
       na.rm = TRUE
     ) +
-    ggplot2::expand_limits(y = -max(plot_dat$r) * (1/width)) +
+    ggplot2::expand_limits(y = -max(plot_dat$r) * (1 / width)) +
     ggplot2::scale_x_continuous(
       breaks = seq(0, 270, 90),
       limits = c(0, 360),
       labels = c("N", "E", "S", "W")
     ) +
-    ggplot2::labs(x = NULL, y = NULL,
-                  color = openair::quickText(paste(pollutant, collapse = ", "))) +
+    ggplot2::labs(
+      x = NULL, y = NULL,
+      color = openair::quickText(paste(pollutant, collapse = ", "))
+    ) +
     ggplot2::scale_y_continuous(breaks = breaks, labels = labels)
 
   plt

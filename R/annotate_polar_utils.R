@@ -2,7 +2,7 @@
 #'
 #' This is a wrapper around [ggplot2::annotate()] which draws a semi-transparent
 #' wedge on a plot with polar coordinates (for example, plots produced with
-#' [gg_polar()] or [gg_annulus()]).
+#' [gg_polar_plot()] or [gg_polar_annulus()]).
 #'
 #' @param start The angle at which to start the wedge. Can be expressed
 #'   numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' gg_polar(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
+#' gg_polar_plot(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
 #' }
 #'
 annotate_polar_wedge <- function(start, end, fill = "red", colour = NA, alpha = .25, ...) {
@@ -71,7 +71,7 @@ annotate_polar_wedge <- function(start, end, fill = "red", colour = NA, alpha = 
 #'
 #' @examples
 #' \dontrun{
-#' gg_polar(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
+#' gg_polar_plot(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
 #' }
 #'
 annotate_polar_axis <- function(breaks, direction = "NW", drop = TRUE, ...) {

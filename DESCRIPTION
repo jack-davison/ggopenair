@@ -19,6 +19,8 @@ Imports:
     lubridate,
     magrittr,
     openair,
+    patchwork,
+    purrr,
     rlang,
     scales,
     scattermore,

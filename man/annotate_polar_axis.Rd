@@ -29,7 +29,7 @@ directly on the plot, and optionally drops the labels at the side.
 }
 \examples{
 \dontrun{
-gg_polar(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
+gg_polar_plot(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
 }
 
 }

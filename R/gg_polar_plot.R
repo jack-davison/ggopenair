@@ -269,6 +269,10 @@
 #'   \code{"quantile.slope"}. Default is \code{0.5} which is equal to the median
 #'   and will be ignored if \code{"quantile.slope"} is not used.
 #'
+#' @param return What should the function return? One of:
+#' * "plot" --- a minimal plot with default theme, colours and scales (default).
+#' * "data" --- the raw data used to create the polar plot.
+#'
 #' @param alpha The transparency of the polar plot. This is mainly useful to
 #'   overlay the polar plot on a map.
 #'
@@ -336,7 +340,7 @@
 #'
 #' @export
 
-gg_polar <-
+gg_polar_plot <-
   function(data,
            pollutant,
            x = "ws",
@@ -357,6 +361,7 @@ gg_polar <-
            y_error = NA,
            kernel = "gaussian",
            tau = 0.5,
+           return = "plot",
            alpha = 1) {
     # run original openair
     oa_data <-
@@ -440,5 +445,10 @@ gg_polar <-
       }
     }
 
-    plt
+    if (return == "plot") {
+      return(plt)
+    }
+    if (return == "data") {
+      return(dat)
+    }
   }

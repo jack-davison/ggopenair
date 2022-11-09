@@ -31,19 +31,19 @@ An openair polar plot looks like this:
 openair::polarPlot(openair::mydata)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-legacy-1.png" style="display: block; margin: auto;" />
 
 To achieve the same result in `ggopenair` one would write:
 
 ``` r
 library(ggopenair)
 
-gg_polar(openair::mydata, "nox") +
+gg_polar_plot(openair::mydata, "nox") +
   theme_polar() +
   scale_opencolours()
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-ggpolar-1.png" style="display: block; margin: auto;" />
 
 This is more long winded, but the flexibility allows users to customise
 their outputs very closely. For example:
@@ -52,41 +52,35 @@ their outputs very closely. For example:
     example, we can use the style from the Wall Street Journal:
 
 ``` r
-gg_polar(openair::mydata, "nox") +
+gg_polar_plot(openair::mydata, "nox") +
   ggthemes::theme_wsj() +
   ggplot2::scale_color_gradientn(colours = rev(ggthemes::wsj_pal()(2))) +
   ggplot2::guides(color = ggplot2::guide_colorbar(barwidth = grid::unit(5, "cm")))
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-themes-1.png" style="display: block; margin: auto;" />
 
 -   **Scales:** Use any `ggplot2` scale function to change how the plot
     behaves. For example, use `scale_color_binned()` to bin the colour
     bar.
 
 ``` r
-gg_polar(openair::mydata, "nox") +
+gg_polar_plot(openair::mydata, "nox") +
   theme_polar() +
   ggplot2::scale_color_binned(type = "viridis",
                               breaks = seq(0, 1000, 50))
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-scales-1.png" style="display: block; margin: auto;" />
 
 -   **Annotations:** Use `annotate()` to easily draw on your polar plots
     to draw attention to certain aspects.
 
 ``` r
-gg_polar(openair::mydata, "nox") +
+gg_polar_plot(openair::mydata, "nox") +
   theme_polar() +
   scale_opencolours("inferno") +
-  ggplot2::annotate(
-    geom = "rect",
-    xmin = 180, xmax = 270,
-    ymin = -Inf, ymax = Inf,
-    fill = "red", color = NA,
-    alpha = .25
-  ) +
+  annotate_polar_wedge("S", "W") +
   ggplot2::annotate(
     geom = "text",
     x = (270+180)/2, y = 12, angle = -45,
@@ -95,20 +89,28 @@ gg_polar(openair::mydata, "nox") +
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-annotations-1.png" style="display: block; margin: auto;" />
 
 -   **Extensions:** Use any of the `ggplot2` extension packages out
-    there, such as `patchwork`.
+    there, such as `patchwork`. For example, a polar plot could be
+    inserted into a time variation plot:
 
 ``` r
 library(patchwork)
-plt <- gg_polar(openair::mydata, "nox") + theme_polar(guides = FALSE)
 
-(plt + scale_opencolours()) +
-  (plt + scale_opencolours("jet")) +
-  (plt + scale_opencolours("greyscale")) +
-  (plt + scale_opencolours("viridis")) &
-  ggplot2::theme(legend.position = "none")
+polar <-
+  gg_polar_plot(openair::mydata, "nox") + 
+  theme_polar(guides = FALSE) + 
+  ggplot2::theme(panel.border = ggplot2::element_rect(fill = NA, color = "black")) +
+  scale_opencolours()
+
+tv <- gg_timevariation(openair::mydata, "nox", return = "list")
+
+(tv$day_hour + ggplot2::theme_bw() + ggplot2::theme(legend.position = "none")) /
+  ((tv$month + ggplot2::theme_bw() + ggplot2::theme(legend.position = "none")) | 
+     polar |
+     (tv$day + ggplot2::theme_bw() + ggplot2::theme(legend.position = "none"))) +
+  plot_layout(heights = c(.8, 1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-patch-1.png" width="100%" style="display: block; margin: auto;" />

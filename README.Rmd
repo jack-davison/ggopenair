@@ -6,7 +6,7 @@ editor_options:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r knitropts, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -36,16 +36,16 @@ remotes::install_github("jack-davison/ggopenair")
 
 An openair polar plot looks like this:
 
-```{r}
+```{r legacy}
 openair::polarPlot(openair::mydata)
 ```
 
 To achieve the same result in `ggopenair` one would write:
 
-```{r}
+```{r ggpolar}
 library(ggopenair)
 
-gg_polar(openair::mydata, "nox") +
+gg_polar_plot(openair::mydata, "nox") +
   theme_polar() +
   scale_opencolours()
 ```
@@ -54,8 +54,8 @@ This is more long winded, but the flexibility allows users to customise their ou
 
 -  **Custom Themes:** Use `ggplot2::theme()` or any theme package. For example, we can use the style from the Wall Street Journal:
 
-```{r}
-gg_polar(openair::mydata, "nox") +
+```{r themes}
+gg_polar_plot(openair::mydata, "nox") +
   ggthemes::theme_wsj() +
   ggplot2::scale_color_gradientn(colours = rev(ggthemes::wsj_pal()(2))) +
   ggplot2::guides(color = ggplot2::guide_colorbar(barwidth = grid::unit(5, "cm")))
@@ -63,8 +63,8 @@ gg_polar(openair::mydata, "nox") +
 
 -  **Scales:** Use any `ggplot2` scale function to change how the plot behaves. For example, use `scale_color_binned()` to bin the colour bar.
 
-```{r}
-gg_polar(openair::mydata, "nox") +
+```{r scales}
+gg_polar_plot(openair::mydata, "nox") +
   theme_polar() +
   ggplot2::scale_color_binned(type = "viridis",
                               breaks = seq(0, 1000, 50))
@@ -72,17 +72,11 @@ gg_polar(openair::mydata, "nox") +
 
 -  **Annotations:** Use `annotate()` to easily draw on your polar plots to draw attention to certain aspects.
 
-```{r}
-gg_polar(openair::mydata, "nox") +
+```{r annotations}
+gg_polar_plot(openair::mydata, "nox") +
   theme_polar() +
   scale_opencolours("inferno") +
-  ggplot2::annotate(
-    geom = "rect",
-    xmin = 180, xmax = 270,
-    ymin = -Inf, ymax = Inf,
-    fill = "red", color = NA,
-    alpha = .25
-  ) +
+  annotate_polar_wedge("S", "W") +
   ggplot2::annotate(
     geom = "text",
     x = (270+180)/2, y = 12, angle = -45,
@@ -91,17 +85,24 @@ gg_polar(openair::mydata, "nox") +
   )
 ```
 
--  **Extensions:** Use any of the `ggplot2` extension packages out there, such as `patchwork`.
+-  **Extensions:** Use any of the `ggplot2` extension packages out there, such as `patchwork`. For example, a polar plot could be inserted into a time variation plot:
 
-```{r fig.height=6}
+```{r patch, fig.height=6, fig.width=10, out.width="100%"}
 library(patchwork)
-plt <- gg_polar(openair::mydata, "nox") + theme_polar(guides = FALSE)
 
-(plt + scale_opencolours()) +
-  (plt + scale_opencolours("jet")) +
-  (plt + scale_opencolours("greyscale")) +
-  (plt + scale_opencolours("viridis")) &
-  ggplot2::theme(legend.position = "none")
+polar <-
+  gg_polar_plot(openair::mydata, "nox") + 
+  theme_polar(guides = FALSE) + 
+  ggplot2::theme(panel.border = ggplot2::element_rect(fill = NA, color = "black")) +
+  scale_opencolours()
+
+tv <- gg_timevariation(openair::mydata, "nox", return = "list")
+
+(tv$day_hour + ggplot2::theme_bw() + ggplot2::theme(legend.position = "none")) /
+  ((tv$month + ggplot2::theme_bw() + ggplot2::theme(legend.position = "none")) | 
+     polar |
+     (tv$day + ggplot2::theme_bw() + ggplot2::theme(legend.position = "none"))) +
+  plot_layout(heights = c(.8, 1))
 
 ```
 

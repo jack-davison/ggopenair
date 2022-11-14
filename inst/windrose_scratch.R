@@ -1,8 +1,8 @@
 
 library(openair)
 
-dat <- polar_data |>
-  dplyr::group_split(site) |>
+dat <- polar_data %>%
+  dplyr::group_split(site) %>%
   rlang::set_names(unique(polar_data$site))
 
 nott <- openair::importAURN(site = "sunr", year = 2020)
@@ -15,31 +15,31 @@ openair::windRose(mydata)$data -> data
 library(tidyverse)
 
 plot_dat <-
-  data |>
-  filter(wd >= 0) |>
+  data %>%
+  filter(wd >= 0) %>%
   pivot_longer(matches("Interval\\d+"), names_prefix = "Interval",
-               names_transform = list(name = as.integer)) |>
-  group_by(default, wd) |>
+               names_transform = list(name = as.integer)) %>%
+  group_by(default, wd) %>%
   mutate(value = if_else(!is.na(lag(value)),
                          value - lag(value),
-                         value)) |>
-  mutate(name = factor(name) |> fct_inseq() |> fct_rev(),
-         wd = factor(wd)) |>
-  ungroup(wd) |>
+                         value)) %>%
+  mutate(name = factor(name) %>% fct_inseq() %>% fct_rev(),
+         wd = factor(wd)) %>%
+  ungroup(wd) %>%
   mutate(lab = str_glue("mean = {panel.fun} | calm = {calm}%"))
 
-data |>
-  filter(wd >= 0) |>
+data %>%
+  filter(wd >= 0) %>%
   pivot_longer(matches("Interval\\d+"), names_prefix = "Interval",
-               names_transform = list(name = as.integer)) |>
-  arrange(name) |>
-  group_by(default, wd) |>
+               names_transform = list(name = as.integer)) %>%
+  arrange(name) %>%
+  group_by(default, wd) %>%
   mutate(value = if_else(!is.na(lag(value)),
                          value - lag(value),
-                         value))  |>
-  ungroup(wd) |>
+                         value))  %>%
+  ungroup(wd) %>%
   mutate(lab = str_glue("mean = {panel.fun} | calm = {calm}%"),
-         name = if_else(name == 8, 9L, name))|>
+         name = if_else(name == 8, 9L, name))%>%
   ggplot(aes(x = wd)) +
   geom_col(aes(y = value, fill = name), width = 30/(3/2), color = "white") +
   scale_fill_stepsn(breaks = -1:9, show.limits = T, colors = openColours(), right = F) +
@@ -55,7 +55,7 @@ data |>
   facet_wrap(vars(default, lab)) +
   expand_limits(y = -2)
 
-plot_dat |>
+plot_dat %>%
   ggplot(aes(x = wd, y = value)) +
   geom_col(aes(fill = factor(name)), width = .75) +
   coord_polar(start = pi / 12) +

@@ -75,8 +75,8 @@ gg_polar_percentile <- function(data, pollutant,
     )
 
   plt <-
-    plot_dat |>
-    dplyr::filter(percentile != 999) |>
+    plot_dat %>%
+    dplyr::filter(percentile != 999) %>%
     ggplot2::ggplot(ggplot2::aes(x = .data$wd, y = .data[[pollutant]])) +
     ggplot2::geom_step(ggplot2::aes(color = factor(percentile)),
       linewidth = line_width,

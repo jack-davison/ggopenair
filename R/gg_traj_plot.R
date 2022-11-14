@@ -45,19 +45,25 @@ gg_traj_plot <- function(data,
   londiff <-
     (max(data[[lon]], na.rm = T) - min(data[[lon]], na.rm = T))
   lonrange <-
-    c(min(data[[lon]], na.rm = T) - londiff * 0.1,
-      max(data[[lon]], na.rm = T) + londiff * 0.1)
+    c(
+      min(data[[lon]], na.rm = T) - londiff * 0.1,
+      max(data[[lon]], na.rm = T) + londiff * 0.1
+    )
   biglonrange <-
     c(min(data[[lon]], na.rm = T) - londiff * 2, max(data[[lon]], na.rm = T) + londiff * 2)
 
   latdiff <-
     (max(data[[lat]], na.rm = T) - min(data[[lat]], na.rm = T)) * 0.1
   latrange <-
-    c(min(data[[lat]], na.rm = T) - latdiff * 0.1,
-      max(data[[lat]], na.rm = T) + latdiff * 0.1)
+    c(
+      min(data[[lat]], na.rm = T) - latdiff * 0.1,
+      max(data[[lat]], na.rm = T) + latdiff * 0.1
+    )
   biglatrange <-
-    c(min(data[[lat]], na.rm = T) - latdiff * 2,
-      max(data[[lat]], na.rm = T) + latdiff * 2)
+    c(
+      min(data[[lat]], na.rm = T) - latdiff * 2,
+      max(data[[lat]], na.rm = T) + latdiff * 2
+    )
 
   world <- maps::map("world", plot = FALSE, fill = TRUE) %>%
     maptools::pruneMap(xlim = biglonrange, ylim = biglatrange) %>%
@@ -84,7 +90,7 @@ gg_traj_plot <- function(data,
     ggplot2::geom_path(mapping = aesthetics, alpha = alpha)
 
   if (!is.null(n_points)) {
-    plt = plt + ggplot2::geom_point(
+    plt <- plt + ggplot2::geom_point(
       data = dplyr::filter(data, .data$hour.inc %% n_points == 0),
       aesthetics,
       alpha = alpha
@@ -93,19 +99,22 @@ gg_traj_plot <- function(data,
 
   if (!is.null(facet)) {
     if (length(facet) == 2) {
-      plt = plt + ggplot2::facet_grid(rows = ggplot2::vars(.data[[facet[1]]]),
-                                      cols = ggplot2::vars(.data[[facet[2]]]))
+      plt <- plt + ggplot2::facet_grid(
+        rows = ggplot2::vars(.data[[facet[1]]]),
+        cols = ggplot2::vars(.data[[facet[2]]])
+      )
     }
     if (length(facet) == 1) {
-      plt = plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
+      plt <- plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
     }
   }
 
   plt +
-    ggplot2::coord_map(projection = projection,
-                       xlim = lonrange,
-                       ylim = latrange,
-                       ...) +
+    ggplot2::coord_map(
+      projection = projection,
+      xlim = lonrange,
+      ylim = latrange,
+      ...
+    ) +
     ggplot2::labs(x = NULL, y = NULL)
-
 }

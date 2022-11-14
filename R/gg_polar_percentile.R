@@ -56,7 +56,7 @@ gg_polar_percentile <- function(data, pollutant,
                                 mean = TRUE,
                                 mean_lty = 1,
                                 mean_width = 1,
-                                mean_colour = "grey"){
+                                mean_colour = "grey") {
   # run openair
   oa_data <- openair::percentileRose(
     mydata = data,
@@ -68,20 +68,25 @@ gg_polar_percentile <- function(data, pollutant,
   )$data
 
   plot_dat <-
-    dplyr::filter(oa_data,
-           .data$percentile != 0,
-           .data$wd != 365)
+    dplyr::filter(
+      oa_data,
+      .data$percentile != 0,
+      .data$wd != 365
+    )
 
   plt <-
     plot_dat |>
     dplyr::filter(percentile != 999) |>
     ggplot2::ggplot(ggplot2::aes(x = .data$wd, y = .data[[pollutant]])) +
     ggplot2::geom_step(ggplot2::aes(color = factor(percentile)),
-                       linewidth = line_width,
-                       lty = line_lty) +
+      linewidth = line_width,
+      lty = line_lty
+    ) +
     ggplot2::coord_polar(start = -pi / 36) +
-    ggplot2::scale_x_continuous(breaks = c(0, 90, 180, 270),
-                                labels = c("N", "E", "S", "W")) +
+    ggplot2::scale_x_continuous(
+      breaks = c(0, 90, 180, 270),
+      labels = c("N", "E", "S", "W")
+    ) +
     ggplot2::expand_limits(y = 0) +
     ggplot2::labs(x = NULL, y = NULL, color = "Percentile")
 
@@ -102,11 +107,12 @@ gg_polar_percentile <- function(data, pollutant,
         plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
     } else {
       plt <-
-        plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[type[1]]]),
-                                  rows = ggplot2::vars(.data[[type[2]]]))
+        plt + ggplot2::facet_grid(
+          cols = ggplot2::vars(.data[[type[1]]]),
+          rows = ggplot2::vars(.data[[type[2]]])
+        )
     }
   }
 
   plt
-
 }

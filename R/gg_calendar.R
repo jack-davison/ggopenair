@@ -24,7 +24,6 @@
 #'   annotate_calendar_text(colour = "white", size = 5, type = "date") +
 #'   annotate_calendar_wd(colour = "black")
 #' }
-
 gg_calendar <-
   function(data,
            pollutant,
@@ -53,10 +52,11 @@ gg_calendar <-
 
     plot_data <-
       tidyr::separate(oa_data,
-                      .data$cuts,
-                      c("month", "year"),
-                      sep = "-",
-                      convert = TRUE) %>%
+        .data$cuts,
+        c("month", "year"),
+        sep = "-",
+        convert = TRUE
+      ) %>%
       dplyr::mutate(month = forcats::fct_reorder(.data$month, match(.data$month, month.name)))
 
     plt <-
@@ -66,10 +66,13 @@ gg_calendar <-
         y = .data$y,
         fill = .data$conc.mat
       ),
-      colour = border_colour) +
+      colour = border_colour
+      ) +
       ggplot2::scale_y_continuous(breaks = NULL, name = NULL) +
-      ggplot2::scale_x_continuous(breaks = 1:7, name = NULL,
-                         labels = c("S", "S", "M", "T", "W", "T", "F")) +
+      ggplot2::scale_x_continuous(
+        breaks = 1:7, name = NULL,
+        labels = c("S", "S", "M", "T", "W", "T", "F")
+      ) +
       ggplot2::coord_equal(expand = F, clip = "off") +
       ggplot2::labs(fill = openair::quickText(pollutant)) +
       ggplot2::theme_minimal()
@@ -79,12 +82,13 @@ gg_calendar <-
         ggplot2::facet_wrap(ggplot2::vars(.data$month))
     } else {
       plt <- plt +
-        ggplot2::facet_grid(rows = ggplot2::vars(.data$year),
-                            cols = ggplot2::vars(.data$month))
+        ggplot2::facet_grid(
+          rows = ggplot2::vars(.data$year),
+          cols = ggplot2::vars(.data$month)
+        )
     }
 
     plt
-
   }
 
 
@@ -112,9 +116,10 @@ annotate_calendar_text <-
            size = 3,
            digits = 0,
            ...) {
-    type = switch(type,
-                  date = "date.mat",
-                  value = "conc.mat")
+    type <- switch(type,
+      date = "date.mat",
+      value = "conc.mat"
+    )
 
     list(
       ggplot2::geom_text(
@@ -146,7 +151,8 @@ annotate_calendar_text <-
         size = size,
         colour = colour,
         ...
-      ))
+      )
+    )
   }
 
 #' Annotate a Calendar Plot with Wind Direction Arrows

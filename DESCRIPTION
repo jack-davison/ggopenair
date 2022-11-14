@@ -15,14 +15,17 @@ LazyData: true
 RoxygenNote: 7.2.1
 Imports: 
     dplyr,
+    forcats,
     ggplot2,
     lubridate,
     magrittr,
+    metR,
     openair,
     patchwork,
     purrr,
     rlang,
     scales,
     scattermore,
+    tibble,
     tidyr,
     zoo

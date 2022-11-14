@@ -429,7 +429,7 @@ gg_polar_plot <-
       ) +
       ggplot2::expand_limits(y = 0)
 
-    if (uncertainty | all(type != "default")) {
+    if (uncertainty | any(type != "default")) {
       if (uncertainty) {
         type <- "default"
       }

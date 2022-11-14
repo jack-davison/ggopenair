@@ -25,7 +25,7 @@ gg_polar_plot(
   y_error = NA,
   kernel = "gaussian",
   tau = 0.5,
-  return = "plain",
+  return = "plot",
   alpha = 1
 )
 }

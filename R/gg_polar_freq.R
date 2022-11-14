@@ -61,8 +61,7 @@ gg_polar_freq <-
            type = "default",
            min_bin = 1,
            border_colour = NA) {
-
-    if (!is.null(pollutant)){
+    if (!is.null(pollutant)) {
       oa_data <-
         openair::polarFreq(
           mydata = data,
@@ -89,30 +88,32 @@ gg_polar_freq <-
         )$data
     }
 
-  plt <-
-    oa_data %>%
-    dplyr::filter(.data$wd != 0) %>%
-    dplyr::mutate(wd = .data$wd - (360/wd_nint)) %>%
-    ggplot2::ggplot(ggplot2::aes(x = .data$wd, y = .data$ws)) +
-    ggplot2::geom_tile(colour = border_colour, ggplot2::aes(fill = .data$weights)) +
-    ggplot2::coord_polar(start = -pi / wd_nint) +
-    ggplot2::expand_limits(y = -2.5) +
-    ggplot2::scale_x_continuous(breaks = c(0, 90, 180, 270),
-                                labels = c("N", "E", "S", "W")) +
-    ggplot2::labs(x = NULL, y = NULL, fill = openair::quickText(pollutant))
+    plt <-
+      oa_data %>%
+      dplyr::filter(.data$wd != 0) %>%
+      dplyr::mutate(wd = .data$wd - (360 / wd_nint)) %>%
+      ggplot2::ggplot(ggplot2::aes(x = .data$wd, y = .data$ws)) +
+      ggplot2::geom_tile(colour = border_colour, ggplot2::aes(fill = .data$weights)) +
+      ggplot2::coord_polar(start = -pi / wd_nint) +
+      ggplot2::expand_limits(y = -2.5) +
+      ggplot2::scale_x_continuous(
+        breaks = c(0, 90, 180, 270),
+        labels = c("N", "E", "S", "W")
+      ) +
+      ggplot2::labs(x = NULL, y = NULL, fill = openair::quickText(pollutant))
 
-  if (any(type != "default")) {
-    if (length(type) == 1) {
-      plt <-
-        plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
-    } else {
-      plt <-
-        plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[type[1]]]),
-                                  rows = ggplot2::vars(.data[[type[2]]]))
+    if (any(type != "default")) {
+      if (length(type) == 1) {
+        plt <-
+          plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
+      } else {
+        plt <-
+          plt + ggplot2::facet_grid(
+            cols = ggplot2::vars(.data[[type[1]]]),
+            rows = ggplot2::vars(.data[[type[2]]])
+          )
+      }
     }
+
+    plt
   }
-
-  plt
-
-  }
-

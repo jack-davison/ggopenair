@@ -259,8 +259,10 @@ gg_polar_annulus <- function(data,
         plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
     } else {
       plt <-
-        plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[type[1]]]),
-                                  rows = ggplot2::vars(.data[[type[2]]]))
+        plt + ggplot2::facet_grid(
+          cols = ggplot2::vars(.data[[type[1]]]),
+          rows = ggplot2::vars(.data[[type[2]]])
+        )
     }
   }
 

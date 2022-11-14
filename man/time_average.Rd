@@ -63,7 +63,7 @@ data frames (through [dplyr::group_by()]).
 \examples{
 \dontrun{
 mydata \%>\%
-    dplyr::group_by(season = cut_date(date, "season")) \%>\%
-    time_average("year")
+  dplyr::group_by(season = cut_date(date, "season")) \%>\%
+  time_average("year")
 }
 }

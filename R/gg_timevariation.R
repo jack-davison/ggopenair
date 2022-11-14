@@ -273,7 +273,7 @@ gg_timevariation <- function(mydata,
   if (return == "ensemble") {
     bottom <- patchwork::wrap_plots(plt_hour, plt_day, plt_month)
     (patchwork::wrap_plots(plt_day_hour, bottom, ncol = 1) +
-        patchwork::plot_layout(guides = "collect")) &
+      patchwork::plot_layout(guides = "collect")) &
       ggplot2::labs(y = ylab)
   }
 }

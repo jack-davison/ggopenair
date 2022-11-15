@@ -4,13 +4,9 @@
 \alias{theme_polar}
 \title{Default Polar Plot Theme}
 \usage{
-theme_polar(guides = TRUE, panel_ontop = TRUE)
+theme_polar(panel_ontop = TRUE)
 }
 \arguments{
-\item{guides}{Resize the legend? Defaults to `TRUE`. `FALSE` may be useful if
-you are controlling the legend yourself with [ggplot2::theme()] and/or
-[ggplot2::guides()], but still want to apply the axis formatting.}
-
 \item{panel_ontop}{Place panel grids on top of the plot geometries? The
 default, `TRUE`, can make polar plots easier to interpret, but this
 behaviour may not always be desired.}
@@ -21,5 +17,5 @@ A ggplot theme object defining for use with [ggplot2::ggplot()].
 \description{
 This is a complete theme which attempts to recreate the styling of
 [openair::polarPlot()]. As an alternative to using this theme, you could use
-[ggplot2::theme()] and [ggplot2::guides()].
+[ggplot2::theme()] or any of the in-built `ggplot2` themes.
 }

@@ -33,7 +33,7 @@ An openair polar plot looks like this:
 openair::polarPlot(ggopenair::marylebone)
 ```
 
-<img src="man/figures/README-legacy-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/readme-legacy-1.png" style="display: block; margin: auto;" />
 
 To achieve the same result in `ggopenair` one would write:
 
@@ -47,7 +47,7 @@ gg_polar_plot(marylebone, "nox") +
   scale_opencolours()
 ```
 
-<img src="man/figures/README-ggpolar-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/readme-ggpolar-1.png" style="display: block; margin: auto;" />
 
 This is more long winded, but the flexibility allows users to customise
 their outputs very closely. For example:
@@ -64,7 +64,7 @@ gg_polar_plot(marylebone, "nox") +
   guides(color = guide_colorbar(barwidth = grid::unit(5, "cm")))
 ```
 
-<img src="man/figures/README-themes-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/readme-themes-1.png" style="display: block; margin: auto;" />
 
 Or we could make our polar plot blend in with some other plots produced
 in Google Sheets:
@@ -75,7 +75,7 @@ gg_polar_plot(marylebone, "nox") +
   scale_color_gradientn(colours = ggthemes::gdocs_pal()(3))
 ```
 
-<img src="man/figures/README-unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/readme-unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
 
 ### Scales
 
@@ -90,7 +90,7 @@ gg_polar_plot(marylebone, "nox") +
                              breaks = seq(0, 1000, 40))
 ```
 
-<img src="man/figures/README-scales-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/readme-scales-1.png" style="display: block; margin: auto;" />
 
 Alternatively, one could use the “trans” argument to shift the colour
 scale. This could be particularly useful for `gg_polar_freq()`, which
@@ -110,7 +110,7 @@ patchwork::wrap_plots(shift_axis("identity"),
                       shift_axis("log10"))
 ```
 
-<img src="man/figures/README-trans-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/readme-trans-1.png" style="display: block; margin: auto;" />
 
 ### Annotations
 
@@ -123,10 +123,10 @@ gg_polar_plot(marylebone, "nox") +
   theme_polar() +
   scale_opencolours("inferno") +
   annotate_polar_wedge("S", "W") +
-  annotate_polar_axis(seq(5, 20, 5), color = "grey50")
+  annotate_polar_axis(seq(5, 15, 5), color = "grey50")
 ```
 
-<img src="man/figures/README-annotations-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/readme-annotations-1.png" style="display: block; margin: auto;" />
 
 Calendar plots also possess their own dedicated annotation functions.
 
@@ -139,7 +139,7 @@ marylebone |>
   scale_opencolours()
 ```
 
-<img src="man/figures/README-calendar-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/readme-calendar-1.png" style="display: block; margin: auto;" />
 
 ### Extension
 
@@ -163,4 +163,4 @@ tv$day_hour / (tv$month | tv$day | polar) +
   plot_layout(heights = c(.8, 1), guides = "collect")
 ```
 
-<img src="man/figures/README-patch-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/readme-patch-1.png" width="100%" style="display: block; margin: auto;" />

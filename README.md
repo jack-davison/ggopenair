@@ -58,7 +58,7 @@ Use `ggplot2::theme()` or any theme package. For example, we can use the
 style from the Wall Street Journal:
 
 ``` r
-gg_polar_plot(openair::mydata, "nox") +
+gg_polar_plot(marylebone, "nox") +
   ggthemes::theme_wsj() +
   scale_color_gradientn(colours = rev(ggthemes::wsj_pal()(2))) +
   guides(color = guide_colorbar(barwidth = grid::unit(5, "cm")))
@@ -70,7 +70,7 @@ Or we could make our polar plot blend in with some other plots produced
 in Google Sheets:
 
 ``` r
-gg_polar_plot(openair::mydata, "nox") +
+gg_polar_plot(marylebone, "nox") +
   ggthemes::theme_gdocs() +
   scale_color_gradientn(colours = ggthemes::gdocs_pal()(3))
 ```
@@ -83,7 +83,7 @@ Use any `ggplot2` scale function to change how the plot behaves. For
 example, use `scale_color_binned()` to bin the colour bar.
 
 ``` r
-gg_polar_plot(openair::mydata, "nox") +
+gg_polar_plot(marylebone, "nox") +
   theme_polar() +
   scale_color_steps(low = "black",
                              high = "goldenrod",
@@ -119,7 +119,7 @@ attention to certain aspects. In-built annotation functions make it easy
 to, for example, draw a highlighting wedge or direct axis labels.
 
 ``` r
-gg_polar_plot(openair::mydata, "nox") +
+gg_polar_plot(marylebone, "nox") +
   theme_polar() +
   scale_opencolours("inferno") +
   annotate_polar_wedge("S", "W") +
@@ -151,12 +151,12 @@ variation plot.
 library(patchwork)
 
 polar <-
-  gg_polar_plot(openair::mydata, "nox") + 
+  gg_polar_plot(marylebone, "nox") + 
   theme_polar() + 
   theme(panel.border = element_rect(fill = NA, color = "black")) +
   scale_opencolours()
 
-tv <- gg_timevariation(openair::mydata, "nox", return = "list")
+tv <- gg_timevariation(marylebone, "nox", return = "list")
 tv <- purrr::map(tv, ~.x + theme_classic() + theme(legend.position = "none", panel.border = element_rect(fill = NA)))
 
 tv$day_hour / (tv$month | tv$day | polar) +

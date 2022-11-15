@@ -76,26 +76,32 @@ annotate_polar_wedge <- function(start, end, fill = "red", colour = NA, alpha = 
 #'
 annotate_polar_axis <- function(breaks, direction = "NW", drop = TRUE, ...) {
   x <- str_to_angle(direction)
-  cross <- tidyr::crossing(x = x, y = breaks)
-  out <-
+
+  func <- function(.x)
     ggplot2::annotate(
       geom = "text",
-      x = cross$x,
-      y = cross$y,
-      label = cross$y,
+      x = x,
+      y = .x,
+      label = as.character(.x),
       ...
     )
 
+  out <-
+    purrr::map(.x = breaks,
+               .f = func)
+
   if (drop) {
     out <-
-      list(
+      append(
         out,
-        ggplot2::theme(
+        list(ggplot2::theme(
           axis.text.y = ggplot2::element_blank(),
           axis.ticks.y = ggplot2::element_blank()
         )
-      )
+        ))
   }
+
+  out
 }
 
 #' Turn cardinal direction to numeric

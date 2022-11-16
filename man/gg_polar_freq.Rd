@@ -75,7 +75,7 @@ circumstances.}
 \item{border_colour}{The colour to use for the border of each tile. Defaults
 to `NA`, which removes the border.}
 
-\item{alpha}{The transparency of the polar plot. This is mainly useful to
+\item{alpha}{The transparency of the plot. This is mainly useful to
 overlay the polar plot on a map.}
 }
 \description{

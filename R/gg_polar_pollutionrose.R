@@ -95,7 +95,7 @@ gg_polar_pollrose <-
       pretty() %>%
       diff() %>%
       unique()
-    axis_extend <- axis_extend * 3/4
+    axis_extend <- axis_extend * 3 / 4
 
     if (length(type) == 2) {
       data_grouped <-
@@ -108,8 +108,9 @@ gg_polar_pollrose <-
     plot_data <-
       data_grouped %>%
       dplyr::mutate(value = dplyr::if_else(!is.na(dplyr::lag(.data$value)),
-                                           .data$value - dplyr::lag(.data$value),
-                                           .data$value))  %>%
+        .data$value - dplyr::lag(.data$value),
+        .data$value
+      )) %>%
       dplyr::ungroup("wd") %>%
       dplyr::mutate(lab = stringr::str_glue("mean = {panel.fun}\ncalm = {calm}%"))
 
@@ -120,17 +121,17 @@ gg_polar_pollrose <-
         width = angle * width,
         color = border
       ) +
-      ggplot2::coord_polar(start = (angle/2) / 360 * 2 * pi, clip = "off") +
+      ggplot2::coord_polar(start = (angle / 2) / 360 * 2 * pi, clip = "off") +
       ggplot2::scale_x_continuous(
         breaks = c(90, 180, 270, 360),
-        limits = c((angle/2), 360+(angle/2)),
+        limits = c((angle / 2), 360 + (angle / 2)),
         labels = c("E", "S", "W", "N")
       ) +
       ggplot2::geom_label(
         size = 3,
         ggplot2::aes(
           x = 135,
-          y = axis_extend*4,
+          y = axis_extend * 4,
           label = .data$lab
         )
       ) +
@@ -143,11 +144,12 @@ gg_polar_pollrose <-
           plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
       } else {
         plt <-
-          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[type[1]]]),
-                                    rows = ggplot2::vars(.data[[type[2]]]))
+          plt + ggplot2::facet_grid(
+            cols = ggplot2::vars(.data[[type[1]]]),
+            rows = ggplot2::vars(.data[[type[2]]])
+          )
       }
     }
 
     plt
-
   }

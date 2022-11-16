@@ -130,7 +130,7 @@ gg_polar_windrose <-
         !is.na(dplyr::lag(.data$value)),
         .data$value - dplyr::lag(.data$value),
         .data$value
-      ))  %>%
+      )) %>%
       dplyr::ungroup("wd") %>%
       dplyr::mutate(lab = stringr::str_glue("mean = {panel.fun}\ncalm = {calm}%"))
 
@@ -148,12 +148,14 @@ gg_polar_windrose <-
         limits = c((angle / 2), 360 + (angle / 2)),
         labels = c("E", "S", "W", "N")
       ) +
-      ggplot2::geom_label(size = 3,
-                          ggplot2::aes(
-                            x = 135,
-                            y = axis_extend * 4,
-                            label = .data$lab
-                          )) +
+      ggplot2::geom_label(
+        size = 3,
+        ggplot2::aes(
+          x = 135,
+          y = axis_extend * 4,
+          label = .data$lab
+        )
+      ) +
       ggplot2::labs(x = NULL, y = NULL, fill = openair::quickText("ws")) +
       ggplot2::expand_limits(y = -axis_extend)
 
@@ -163,11 +165,12 @@ gg_polar_windrose <-
           plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
       } else {
         plt <-
-          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[type[1]]]),
-                                    rows = ggplot2::vars(.data[[type[2]]]))
+          plt + ggplot2::facet_grid(
+            cols = ggplot2::vars(.data[[type[1]]]),
+            rows = ggplot2::vars(.data[[type[2]]])
+          )
       }
     }
 
     plt
-
   }

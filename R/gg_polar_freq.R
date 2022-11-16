@@ -94,8 +94,10 @@ gg_polar_freq <-
     plt <-
       oa_data %>%
       dplyr::filter(.data$wd != 0) %>%
-      dplyr::mutate(wd = .data$wd - (360 / wd_nint),
-                    wd = dplyr::if_else(.data$wd == max(.data$wd), 0, .data$wd + (360/wd_nint))) %>%
+      dplyr::mutate(
+        wd = .data$wd - (360 / wd_nint),
+        wd = dplyr::if_else(.data$wd == max(.data$wd), 0, .data$wd + (360 / wd_nint))
+      ) %>%
       ggplot2::ggplot(ggplot2::aes(x = .data$wd, y = .data$ws)) +
       ggplot2::geom_tile(alpha = alpha, colour = border_colour, ggplot2::aes(fill = .data$weights)) +
       ggplot2::coord_polar(start = -pi / wd_nint) +

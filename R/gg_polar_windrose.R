@@ -154,7 +154,7 @@ gg_polar_windrose <-
                             y = axis_extend * 4,
                             label = .data$lab
                           )) +
-      ggplot2::labs(x = NULL, y = NULL, fill = NULL) +
+      ggplot2::labs(x = NULL, y = NULL, fill = openair::quickText("ws")) +
       ggplot2::expand_limits(y = -axis_extend)
 
     if (any(type != "default")) {

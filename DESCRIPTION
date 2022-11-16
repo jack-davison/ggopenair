@@ -29,6 +29,7 @@ Imports:
     rlang,
     scales,
     scattermore,
+    stringr,
     tibble,
     tidyr,
     zoo

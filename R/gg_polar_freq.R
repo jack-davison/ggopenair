@@ -50,6 +50,8 @@
 #'   circumstances.
 #' @param border_colour The colour to use for the border of each tile. Defaults
 #'   to `NA`, which removes the border.
+#' @param alpha The transparency of the polar plot. This is mainly useful to
+#'   overlay the polar plot on a map.
 #' @export
 
 gg_polar_freq <-
@@ -60,7 +62,8 @@ gg_polar_freq <-
            wd_nint = 36,
            type = "default",
            min_bin = 1,
-           border_colour = NA) {
+           border_colour = NA,
+           alpha = 1) {
     if (!is.null(pollutant)) {
       oa_data <-
         openair::polarFreq(
@@ -91,9 +94,10 @@ gg_polar_freq <-
     plt <-
       oa_data %>%
       dplyr::filter(.data$wd != 0) %>%
-      dplyr::mutate(wd = .data$wd - (360 / wd_nint)) %>%
+      dplyr::mutate(wd = .data$wd - (360 / wd_nint),
+                    wd = if_else(.data$wd == max(.data$wd), 0, .data$wd + (360/wd_nint))) %>%
       ggplot2::ggplot(ggplot2::aes(x = .data$wd, y = .data$ws)) +
-      ggplot2::geom_tile(colour = border_colour, ggplot2::aes(fill = .data$weights)) +
+      ggplot2::geom_tile(alpha = alpha, colour = border_colour, ggplot2::aes(fill = .data$weights)) +
       ggplot2::coord_polar(start = -pi / wd_nint) +
       ggplot2::expand_limits(y = -2.5) +
       ggplot2::scale_x_continuous(

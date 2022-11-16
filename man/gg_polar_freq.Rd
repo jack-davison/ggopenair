@@ -12,7 +12,8 @@ gg_polar_freq(
   wd_nint = 36,
   type = "default",
   min_bin = 1,
-  border_colour = NA
+  border_colour = NA,
+  alpha = 1
 )
 }
 \arguments{
@@ -73,6 +74,9 @@ circumstances.}
 
 \item{border_colour}{The colour to use for the border of each tile. Defaults
 to `NA`, which removes the border.}
+
+\item{alpha}{The transparency of the polar plot. This is mainly useful to
+overlay the polar plot on a map.}
 }
 \description{
 Function to plot wind speed/direction frequencies and other statistics

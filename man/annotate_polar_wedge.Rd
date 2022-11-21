@@ -28,8 +28,8 @@ An annotation to be added to [ggplot2::ggplot()].
 }
 \description{
 This is a wrapper around [ggplot2::annotate()] which draws a semi-transparent
-wedge on a plot with polar coordinates (for example, plots produced with
-[gg_polar_plot()] or [gg_polar_annulus()]).
+wedge on a plot with continuous polar coordinates (any of [gg_polar_plot()],
+[gg_polar_annulus()], [gg_polar_freq()] or [gg_polar_percentile()]).
 }
 \examples{
 \dontrun{

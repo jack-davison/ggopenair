@@ -1,8 +1,8 @@
 #' Annotate a Polar Plot with a Coloured Wedge
 #'
 #' This is a wrapper around [ggplot2::annotate()] which draws a semi-transparent
-#' wedge on a plot with polar coordinates (for example, plots produced with
-#' [gg_polar_plot()] or [gg_polar_annulus()]).
+#' wedge on a plot with continuous polar coordinates (any of [gg_polar_plot()],
+#' [gg_polar_annulus()], [gg_polar_freq()] or [gg_polar_percentile()]).
 #'
 #' @param start The angle at which to start the wedge. Can be expressed
 #'   numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
@@ -54,7 +54,10 @@ annotate_polar_wedge <- function(start, end, fill = "red", colour = NA, alpha = 
 #' Annotate a Polar Plot with Axis Labels
 #'
 #' This is a wrapper around [ggplot2::annotate()] which draws the y-axis labels
-#' directly on the plot, and optionally drops the labels at the side.
+#' directly on the plot, and optionally drops the labels at the side. Note that,
+#' owing to the way [ggplot2::geom_col()] interacts with
+#' [ggplot2::coord_polar()], the "direction" argument may require more
+#' trial-and-error when used with [gg_polar_pollrose()] and [gg_polar_windrose()].
 #'
 #' @param breaks The axis breaks to label on the plot. It may be appropriate to
 #'   use [seq()] to obtain equally spaced labels.

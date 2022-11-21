@@ -25,7 +25,10 @@ An annotation to be added to [ggplot2::ggplot()].
 }
 \description{
 This is a wrapper around [ggplot2::annotate()] which draws the y-axis labels
-directly on the plot, and optionally drops the labels at the side.
+directly on the plot, and optionally drops the labels at the side. Note that,
+owing to the way [ggplot2::geom_col()] interacts with
+[ggplot2::coord_polar()], the "direction" argument may require more
+trial-and-error when used with [gg_polar_pollrose()] and [gg_polar_windrose()].
 }
 \examples{
 \dontrun{

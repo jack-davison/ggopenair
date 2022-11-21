@@ -15,7 +15,8 @@ gg_polar_percentile(
   mean = TRUE,
   mean_lty = 1,
   mean_width = 1,
-  mean_colour = "grey"
+  mean_colour = "grey",
+  alpha = 1
 )
 }
 \arguments{
@@ -74,6 +75,9 @@ number of samples in the same wind sector (see Ashbaugh et al.,
 \item{mean_width}{Line width for mean line.}
 
 \item{mean_colour}{Line colour for mean line.}
+
+\item{alpha}{The transparency of the plot. This is mainly useful to
+overlay the polar plot on a map.}
 }
 \description{
 Function to plot percentiles by wind direction

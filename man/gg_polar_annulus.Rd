@@ -18,7 +18,8 @@ gg_polar_annulus(
   pad_date = FALSE,
   force_positive = TRUE,
   k = c(20, 10),
-  normalise = FALSE
+  normalise = FALSE,
+  alpha = 1
 )
 }
 \arguments{
@@ -151,6 +152,9 @@ their mean value. This is done \emph{after} fitting the smooth surface.
 This option is particularly useful if one is interested in the patterns of
 concentrations for several pollutants on different scales e.g. NOx and CO.
 Often useful if more than one \code{pollutant} is chosen.}
+
+\item{alpha}{The transparency of the polar plot. This is mainly useful to
+overlay the polar plot on a map.}
 }
 \value{
 As well as generating the plot itself, \code{polarAnnulus} also

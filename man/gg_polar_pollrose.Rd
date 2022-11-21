@@ -14,7 +14,8 @@ gg_polar_pollrose(
   normalise = FALSE,
   statistic = "prop.count",
   width = 0.9,
-  border = NA
+  border = NA,
+  alpha = 1
 )
 }
 \arguments{
@@ -81,6 +82,9 @@ each bin.}
 makes them disappear entirely. Defaults to \code{0.9}.}
 
 \item{border}{Border colour for shaded areas. Default is no border.}
+
+\item{alpha}{The transparency of the plot. This is mainly useful to
+overlay the polar plot on a map.}
 }
 \description{
 Traditional wind rose plot and pollution rose variation

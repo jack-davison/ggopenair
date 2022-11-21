@@ -45,6 +45,8 @@
 #' @param mean_lty Line type for mean line.
 #' @param mean_width Line width for mean line.
 #' @param mean_colour Line colour for mean line.
+#' @param alpha The transparency of the plot. This is mainly useful to
+#'   overlay the polar plot on a map.
 #' @export
 #' @family polar directional analysis plotting functions
 gg_polar_percentile <- function(data, pollutant,
@@ -56,7 +58,8 @@ gg_polar_percentile <- function(data, pollutant,
                                 mean = TRUE,
                                 mean_lty = 1,
                                 mean_width = 1,
-                                mean_colour = "grey") {
+                                mean_colour = "grey",
+                                alpha = 1) {
   # run openair
   oa_data <- openair::percentileRose(
     mydata = data,
@@ -80,7 +83,8 @@ gg_polar_percentile <- function(data, pollutant,
     ggplot2::ggplot(ggplot2::aes(x = .data$wd, y = .data[[pollutant]])) +
     ggplot2::geom_step(ggplot2::aes(color = factor(percentile)),
       linewidth = line_width,
-      lty = line_lty
+      lty = line_lty,
+      alpha = alpha
     ) +
     ggplot2::coord_polar(start = -pi / 36) +
     ggplot2::scale_x_continuous(

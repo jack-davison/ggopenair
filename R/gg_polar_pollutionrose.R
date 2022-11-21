@@ -54,6 +54,8 @@
 #'   \code{width = 1} makes all bars meet at their edges and \code{width = 0}
 #'   makes them disappear entirely. Defaults to \code{0.9}.
 #' @param border Border colour for shaded areas. Default is no border.
+#' @param alpha The transparency of the plot. This is mainly useful to
+#'   overlay the polar plot on a map.
 #' @export
 #' @family polar directional analysis plotting functions
 gg_polar_pollrose <-
@@ -66,7 +68,8 @@ gg_polar_pollrose <-
            normalise = FALSE,
            statistic = "prop.count",
            width = 0.9,
-           border = NA) {
+           border = NA,
+           alpha = 1) {
     oa_data <-
       openair::pollutionRose(
         mydata = data,
@@ -120,7 +123,8 @@ gg_polar_pollrose <-
       ggplot2::geom_col(
         ggplot2::aes(y = .data$value, fill = .data$name),
         width = angle * width,
-        color = border
+        color = border,
+        alpha = alpha
       ) +
       ggplot2::coord_polar(start = (angle / 2) / 360 * 2 * pi, clip = "off") +
       ggplot2::scale_x_continuous(

@@ -64,7 +64,8 @@
 #' @param border_colour Border colour for shaded areas. Default is no border.
 #' @param alpha The transparency of the plot. This is mainly useful to
 #'   overlay the polar plot on a map.
-
+#' @export
+#' @family polar directional analysis plotting functions
 gg_polar_windrose <-
   function(data,
            ws = "ws",

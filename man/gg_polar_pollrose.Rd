@@ -85,3 +85,12 @@ makes them disappear entirely. Defaults to \code{0.9}.}
 \description{
 Traditional wind rose plot and pollution rose variation
 }
+\seealso{
+Other polar directional analysis plotting functions: 
+\code{\link{gg_polar_annulus}()},
+\code{\link{gg_polar_freq}()},
+\code{\link{gg_polar_percentile}()},
+\code{\link{gg_polar_plot}()},
+\code{\link{gg_polar_windrose}()}
+}
+\concept{polar directional analysis plotting functions}

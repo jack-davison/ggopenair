@@ -54,7 +54,8 @@
 #'   \code{width = 1} makes all bars meet at their edges and \code{width = 0}
 #'   makes them disappear entirely. Defaults to \code{0.9}.
 #' @param border Border colour for shaded areas. Default is no border.
-
+#' @export
+#' @family polar directional analysis plotting functions
 gg_polar_pollrose <-
   function(data,
            pollutant,

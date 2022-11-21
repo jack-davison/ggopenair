@@ -46,7 +46,7 @@
 #' @param mean_width Line width for mean line.
 #' @param mean_colour Line colour for mean line.
 #' @export
-
+#' @family polar directional analysis plotting functions
 gg_polar_percentile <- function(data, pollutant,
                                 type = "default",
                                 percentile = c(25, 50, 75, 90, 95),

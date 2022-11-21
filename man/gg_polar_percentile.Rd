@@ -78,3 +78,12 @@ number of samples in the same wind sector (see Ashbaugh et al.,
 \description{
 Function to plot percentiles by wind direction
 }
+\seealso{
+Other polar directional analysis plotting functions: 
+\code{\link{gg_polar_annulus}()},
+\code{\link{gg_polar_freq}()},
+\code{\link{gg_polar_plot}()},
+\code{\link{gg_polar_pollrose}()},
+\code{\link{gg_polar_windrose}()}
+}
+\concept{polar directional analysis plotting functions}

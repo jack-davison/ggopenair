@@ -196,4 +196,12 @@ the subset compared with the full data set. This allows users to investigate
 specific periods in more detail. Full flexibility is given through the
 smoothing parameter \code{k}.
 }
-\keyword{methods}
+\seealso{
+Other polar directional analysis plotting functions: 
+\code{\link{gg_polar_freq}()},
+\code{\link{gg_polar_percentile}()},
+\code{\link{gg_polar_plot}()},
+\code{\link{gg_polar_pollrose}()},
+\code{\link{gg_polar_windrose}()}
+}
+\concept{polar directional analysis plotting functions}

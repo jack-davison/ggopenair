@@ -158,7 +158,7 @@
 #'
 #'   An openair output can be manipulated using a number of generic operations,
 #'   including \code{print}, \code{plot} and \code{summary}.
-#' @keywords methods
+#' @family polar directional analysis plotting functions
 
 gg_polar_annulus <- function(data,
                              pollutant,

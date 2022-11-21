@@ -368,6 +368,12 @@ advances with bivariate polar plots, correlation, and regression techniques.
 Atmospheric Environment. 145, 128-134.
 \url{https://www.sciencedirect.com/science/article/pii/S1352231016307166}
 }
-\author{
-David Carslaw
+\seealso{
+Other polar directional analysis plotting functions: 
+\code{\link{gg_polar_annulus}()},
+\code{\link{gg_polar_freq}()},
+\code{\link{gg_polar_percentile}()},
+\code{\link{gg_polar_pollrose}()},
+\code{\link{gg_polar_windrose}()}
 }
+\concept{polar directional analysis plotting functions}

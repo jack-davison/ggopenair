@@ -294,8 +294,6 @@
 #'   translational vectors based on \code{ws} and \code{wd}; and the local
 #'   \code{pollutant} estimate.
 #'
-#' @author David Carslaw
-#'
 #' @references
 #'
 #' Ashbaugh, L.L., Malm, W.C., Sadeh, W.Z., 1985. A residence time probability
@@ -339,7 +337,7 @@
 #' \url{https://www.sciencedirect.com/science/article/pii/S1352231016307166}
 #'
 #' @export
-
+#' @family polar directional analysis plotting functions
 gg_polar_plot <-
   function(data,
            pollutant,

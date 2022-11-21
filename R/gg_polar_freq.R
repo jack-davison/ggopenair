@@ -53,7 +53,7 @@
 #' @param alpha The transparency of the plot. This is mainly useful to
 #'   overlay the polar plot on a map.
 #' @export
-
+#' @family polar directional analysis plotting functions
 gg_polar_freq <-
   function(data,
            pollutant = NULL,

@@ -23,7 +23,7 @@
 #' gg_polar_plot(mydata, "nox") + scale_opencolours()
 #' }
 #'
-scale_opencolours <-
+scale_opencolours_c <-
   function(colours = "default",
            na.value = "grey50",
            aes = c("colour", "fill"),

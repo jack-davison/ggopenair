@@ -57,23 +57,29 @@ gg_calendar <-
         sep = "-",
         convert = TRUE
       ) %>%
-      dplyr::mutate(month = forcats::fct_reorder(.data$month, match(.data$month, month.name)))
+      dplyr::mutate(
+        month = forcats::fct_reorder(
+          .data$month,
+          match(.data$month, month.name)
+        )
+      )
 
     plt <-
       ggplot2::ggplot(plot_data) +
-      ggplot2::geom_tile(ggplot2::aes(
-        x = .data$x,
-        y = .data$y,
-        fill = .data$conc.mat
-      ),
-      colour = border_colour
+      ggplot2::geom_tile(
+        ggplot2::aes(
+          x = .data$x,
+          y = .data$y,
+          fill = .data$conc.mat
+        ),
+        colour = border_colour
       ) +
       ggplot2::scale_y_continuous(breaks = NULL, name = NULL) +
       ggplot2::scale_x_continuous(
         breaks = 1:7, name = NULL,
         labels = c("S", "S", "M", "T", "W", "T", "F")
       ) +
-      ggplot2::coord_equal(expand = F, clip = "off") +
+      ggplot2::coord_equal(expand = FALSE, clip = "off") +
       ggplot2::labs(fill = openair::quickText(pollutant)) +
       ggplot2::theme_minimal()
 

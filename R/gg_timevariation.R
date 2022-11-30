@@ -213,7 +213,13 @@ gg_timevariation <- function(mydata,
   }
 
   # day hour plot
-  plt_day_hour <- tv_panel_line(oa_data$day.hour, ci_check = ci, drop_legend = T, alpha = alpha) +
+  plt_day_hour <-
+    tv_panel_line(
+      oa_data$day.hour,
+      ci_check = ci,
+      drop_legend = TRUE,
+      alpha = alpha
+    ) +
     ggplot2::labs(y = ylab)
 
   if (type != "default") {

@@ -96,11 +96,16 @@ gg_polar_freq <-
       dplyr::filter(.data$wd != 0) %>%
       dplyr::mutate(
         wd = .data$wd - (360 / wd_nint),
-        wd = dplyr::if_else(.data$wd == max(.data$wd), 0, .data$wd + (360 / wd_nint)),
-        ws = .data$ws - (ws_int/2)
+        wd = dplyr::if_else(.data$wd == max(.data$wd),
+          0, .data$wd + (360 / wd_nint)
+        ),
+        ws = .data$ws - (ws_int / 2)
       ) %>%
       ggplot2::ggplot(ggplot2::aes(x = .data$wd, y = .data$ws)) +
-      ggplot2::geom_tile(alpha = alpha, colour = border_colour, ggplot2::aes(fill = .data$weights)) +
+      ggplot2::geom_tile(
+        alpha = alpha, colour = border_colour,
+        ggplot2::aes(fill = .data$weights)
+      ) +
       ggplot2::coord_polar(start = -pi / wd_nint) +
       ggplot2::expand_limits(y = -2.5) +
       ggplot2::scale_x_continuous(

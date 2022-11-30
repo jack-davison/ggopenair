@@ -179,24 +179,24 @@ gg_polar_annulus <- function(data,
                              alpha = 1) {
   # respond to period
   scale <- switch(period,
-                  hour = c(0, 23),
-                  season = c(0, 12),
-                  weekday = c(0, 7),
-                  trend = c(0, 10)
+    hour = c(0, 23),
+    season = c(0, 12),
+    weekday = c(0, 7),
+    trend = c(0, 10)
   )
 
   breaks <- switch(period,
-                   hour = c(23, seq(0, 24, 6)),
-                   season = scale,
-                   weekday = scale,
-                   trend = c()
+    hour = c(23, seq(0, 24, 6)),
+    season = scale,
+    weekday = scale,
+    trend = c()
   )
 
   labels <- switch(period,
-                   hour = breaks,
-                   season = c("Jan", "Dec"),
-                   weekday = c("Sun", "Sat"),
-                   trend = c()
+    hour = breaks,
+    season = c("Jan", "Dec"),
+    weekday = c("Sun", "Sat"),
+    trend = c()
   )
 
   # run openair
@@ -224,7 +224,10 @@ gg_polar_annulus <- function(data,
     tidyr::drop_na("z", "u", "v") %>%
     dplyr::mutate(
       r = sqrt(.data$u^2 + (.data$v * -1)^2),
-      t = dplyr::if_else(.data$u < 0, atan((.data$v * -1) / .data$u) + pi, atan((.data$v * -1) / .data$u)),
+      t = dplyr::if_else(.data$u < 0,
+        atan((.data$v * -1) / .data$u) + pi,
+        atan((.data$v * -1) / .data$u)
+      ),
       t = (.data$t * (180 / pi)) + 90
     ) %>%
     dplyr::arrange("z")
@@ -235,17 +238,19 @@ gg_polar_annulus <- function(data,
 
   # sort out point size
   ps <- 1
-  if (alpha < 1) {ps <- 0}
+  if (alpha < 1) {
+    ps <- 0
+  }
 
   # construct plot
   plt <-
     ggplot2::ggplot(plot_dat, ggplot2::aes(.data$t, .data$r)) +
     ggplot2::coord_polar() +
     scattermore::geom_scattermore(
-      interpolate = T,
+      interpolate = TRUE,
       pointsize = ps,
       ggplot2::aes(color = .data$z),
-      na.rm = T,
+      na.rm = TRUE,
       alpha = alpha
     ) +
     ggplot2::expand_limits(y = -max(plot_dat$r) * (1 / width)) +

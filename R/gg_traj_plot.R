@@ -43,26 +43,26 @@ gg_traj_plot <- function(data,
                          projection = "mercator",
                          ...) {
   londiff <-
-    (max(data[[lon]], na.rm = T) - min(data[[lon]], na.rm = T))
+    (max(data[[lon]], na.rm = TRUE) - min(data[[lon]], na.rm = TRUE))
   lonrange <-
     c(
-      min(data[[lon]], na.rm = T) - londiff * 0.1,
-      max(data[[lon]], na.rm = T) + londiff * 0.1
+      min(data[[lon]], na.rm = TRUE) - londiff * 0.1,
+      max(data[[lon]], na.rm = TRUE) + londiff * 0.1
     )
   biglonrange <-
-    c(min(data[[lon]], na.rm = T) - londiff * 2, max(data[[lon]], na.rm = T) + londiff * 2)
+    c(min(data[[lon]], na.rm = TRUE) - londiff * 2, max(data[[lon]], na.rm = TRUE) + londiff * 2)
 
   latdiff <-
-    (max(data[[lat]], na.rm = T) - min(data[[lat]], na.rm = T)) * 0.1
+    (max(data[[lat]], na.rm = TRUE) - min(data[[lat]], na.rm = TRUE)) * 0.1
   latrange <-
     c(
-      min(data[[lat]], na.rm = T) - latdiff * 0.1,
-      max(data[[lat]], na.rm = T) + latdiff * 0.1
+      min(data[[lat]], na.rm = TRUE) - latdiff * 0.1,
+      max(data[[lat]], na.rm = TRUE) + latdiff * 0.1
     )
   biglatrange <-
     c(
-      min(data[[lat]], na.rm = T) - latdiff * 2,
-      max(data[[lat]], na.rm = T) + latdiff * 2
+      min(data[[lat]], na.rm = TRUE) - latdiff * 2,
+      max(data[[lat]], na.rm = TRUE) + latdiff * 2
     )
 
   world <- maps::map("world", plot = FALSE, fill = TRUE) %>%

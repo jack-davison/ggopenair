@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/readme-",
-  fig.height = 4.5, 
+  fig.height = 4.5,
   fig.align = "center"
 )
 ```
@@ -81,9 +81,11 @@ Use any `ggplot2` scale function to change how the plot behaves. For example, us
 ```{r scales}
 gg_polar_plot(marylebone, "nox") +
   theme_polar() +
-  scale_color_steps(low = "black",
-                             high = "goldenrod",
-                             breaks = seq(0, 1000, 40))
+  scale_color_steps(
+    low = "black",
+    high = "goldenrod",
+    breaks = seq(0, 1000, 40)
+  )
 ```
 
 Alternatively, one could use the "trans" argument to shift the colour scale. This could be particularly useful for `gg_polar_freq()`, which had its own "trans" argument in `openair`.
@@ -92,14 +94,18 @@ Alternatively, one could use the "trans" argument to shift the colour scale. Thi
 shift_axis <- function(trans) {
   gg_polar_freq(marylebone, "nox") +
     theme_polar() +
-    scale_fill_gradientn(colours = c("darkgreen", "hotpink"),
-                                   trans = trans) +
+    scale_fill_gradientn(
+      colours = c("darkgreen", "hotpink"),
+      trans = trans
+    ) +
     labs(title = trans)
 }
 
-patchwork::wrap_plots(shift_axis("identity"),
-                      shift_axis("sqrt"),
-                      shift_axis("log10"))
+patchwork::wrap_plots(
+  shift_axis("identity"),
+  shift_axis("sqrt"),
+  shift_axis("log10")
+)
 ```
 
 ### Annotations
@@ -133,13 +139,13 @@ Use any of the `ggplot2` extension packages out there, such as `patchwork`. For 
 library(patchwork)
 
 polar <-
-  gg_polar_plot(marylebone, "nox") + 
-  theme_polar() + 
+  gg_polar_plot(marylebone, "nox") +
+  theme_polar() +
   theme(panel.border = element_rect(fill = NA, color = "black")) +
   scale_opencolours()
 
 tv <- gg_timevariation(marylebone, "nox", return = "list")
-tv <- purrr::map(tv, ~.x + theme_classic() + theme(legend.position = "none", panel.border = element_rect(fill = NA)))
+tv <- purrr::map(tv, ~ .x + theme_classic() + theme(legend.position = "none", panel.border = element_rect(fill = NA)))
 
 tv$day_hour / (tv$month | tv$day | polar) +
   plot_layout(heights = c(.8, 1), guides = "collect")

@@ -78,7 +78,7 @@ gg_polar_pollrose <-
         type = type,
         bias.corr = bias_corr,
         breaks = breaks,
-        plot = F,
+        plot = FALSE,
         normalise = normalise,
         statistic = statistic
       )$data
@@ -91,7 +91,8 @@ gg_polar_pollrose <-
       oa_data %>%
       dplyr::filter(.data$wd >= 0) %>%
       tidyr::pivot_longer(dplyr::contains(" to ")) %>%
-      dplyr::mutate(name = forcats::fct_inorder(.data$name) |> forcats::fct_rev())
+      dplyr::mutate(name = forcats::fct_inorder(.data$name) %>%
+        forcats::fct_rev())
 
     axis_extend <-
       data_long %>%
@@ -116,7 +117,9 @@ gg_polar_pollrose <-
         .data$value
       )) %>%
       dplyr::ungroup("wd") %>%
-      dplyr::mutate(lab = stringr::str_glue("mean = {panel.fun}\ncalm = {calm}%"))
+      dplyr::mutate(
+        lab = stringr::str_glue("mean = {panel.fun}\ncalm = {calm}%")
+      )
 
     plt <-
       ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$wd)) +

@@ -94,7 +94,7 @@ gg_polar_windrose <-
         type = type,
         bias.corr = bias_corr,
         breaks = breaks,
-        plot = F,
+        plot = FALSE,
         normalise = normalise,
         statistic = statistic
       )$data

@@ -64,7 +64,6 @@
 #'   plot in polar coordinates (the default is a column \dQuote{ws} --- wind
 #'   speed) and a pollutant. Should also contain \code{date} if plots by time
 #'   period are required.
-#'
 #' @param pollutant Mandatory. A pollutant name corresponding to a variable in a
 #'   data frame should be supplied e.g. \code{pollutant = "nox"}. There can also
 #'   be more than one pollutant specified e.g. \code{pollutant = c("nox",
@@ -77,18 +76,14 @@
 #'   Pearson correlation and regression techniques are to be plotted,
 #'   \code{pollutant} takes two elements too. For example, \code{pollutant =
 #'   c("bc", "pm25")} where \code{"bc"} is a function of \code{"pm25"}.
-#'
 #' @param x Name of variable to plot against wind direction in polar
 #'   coordinates, the default is wind speed, \dQuote{ws}.
-#'
 #' @param wd Name of wind direction field.
-#'
-#' @param type \code{type} determines how the data are split i.e. conditioned,
-#'   and then plotted. The default is will produce a single plot using the
-#'   entire data. Type can be one of the built-in types as detailed in
-#'   \code{cutData} e.g. \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so
-#'   on. For example, \code{type = "season"} will produce four plots --- one for
-#'   each season.
+#' @param facet \code{facet} determines how the data are split and then plotted.
+#'   The default is will produce a single plot using the entire data. Type can
+#'   be one of the built-in types as detailed in \code{cutData} e.g.
+#'   \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so on. For example,
+#'   \code{type = "season"} will produce four plots --- one for each season.
 #'
 #'   It is also possible to choose \code{type} as another variable in the data
 #'   frame. If that variable is numeric, then the data will be split into four
@@ -100,7 +95,6 @@
 #'   Type can be up length two e.g. \code{type = c("season", "weekday")} will
 #'   produce a 2x2 plot split by season and day of the week. Note, when two
 #'   types are provided the first forms the columns and the second the rows.
-#'
 #' @param statistic The statistic that should be applied to each wind
 #'   speed/direction bin. Because of the smoothing involved, the colour scale
 #'   for some of these statistics is only to provide an indication of overall
@@ -159,14 +153,12 @@
 #'   method the uncertainties in \code{x} and \code{y} are used in the
 #'   determination of the slope. The uncertainties are provided by
 #'   \code{x_error} and \code{y_error} --- see below.}
-#'
 #' @param exclude_missing Setting this option to \code{TRUE} (the default)
 #'   removes points from the plot that are too far from the original data. The
 #'   smoothing routines will produce predictions at points where no data exist
 #'   i.e. they predict. By removing the points too far from the original data
 #'   produces a plot where it is clear where the original data lie. If set to
 #'   \code{FALSE} missing data will be interpolated.
-#'
 #' @param uncertainty Should the uncertainty in the calculated surface be shown?
 #'   If \code{TRUE} three plots are produced on the same scale showing the
 #'   predicted surface together with the estimated lower and upper uncertainties
@@ -177,7 +169,6 @@
 #'   weighting is done by the frequency of measurements in each wind
 #'   speed-direction bin. Note that if uncertainties are calculated then the
 #'   type is set to "default".
-#'
 #' @param percentile If \code{statistic = "percentile"} then \code{percentile}
 #'   is used, expressed from 0 to 100. Note that the percentile value is
 #'   calculated in the wind speed, wind direction \sQuote{bins}. For this reason
@@ -199,7 +190,6 @@
 #'   from many source signatures. See the manual for examples. Finally, if the
 #'   trim value is less than zero the percentile range is interpreted as
 #'   absolute concentration values and subsetting is carried out directly.
-#'
 #' @param weights At the edges of the plot there may only be a few data points
 #'   in each wind speed-direction interval, which could in some situations
 #'   distort the plot if the concentrations are high. \code{weights} applies a
@@ -208,7 +198,6 @@
 #'   points 0.5. To not apply any weighting and use the data as is, use
 #'   \code{weights = c(1, 1, 1)}. An alternative to down-weighting these points
 #'   they can be removed altogether using \code{min_bin}.
-#'
 #' @param min_bin The minimum number of points allowed in a wind speed/wind
 #'   direction bin.  The default is 1. A value of two requires at least 2 valid
 #'   records in each bin an so on; bins with less than 2 valid records are set
@@ -216,7 +205,6 @@
 #'   removing real data points. It is recommended to consider your data with
 #'   care. Also, the \code{polarFreq} function can be of use in such
 #'   circumstances.
-#'
 #' @param force_positive The default is \code{TRUE}. Sometimes if smoothing data
 #'   with steep gradients it is possible for predicted values to be negative.
 #'   \code{force_positive = TRUE} ensures that predictions remain positive. This
@@ -229,7 +217,6 @@
 #'   first subtracted resulting in data that is legitimately negative. For the
 #'   vast majority of situations it is expected that the user will not need to
 #'   alter the default option.
-#'
 #' @param k This is the smoothing parameter used by the \code{gam} function in
 #'   package \code{mgcv}. Typically, value of around 100 (the default) seems to
 #'   be suitable and will resolve important features in the plot. The most
@@ -240,42 +227,29 @@
 #'   time. Lower values of \code{k} will increase smoothing. Sometimes with few
 #'   data to plot \code{polarPlot} will fail. Under these circumstances it can
 #'   be worth lowering the value of \code{k}.
-#'
 #' @param normalise If \code{TRUE} concentrations are normalised by dividing by
 #'   their mean value. This is done \emph{after} fitting the smooth surface.
 #'   This option is particularly useful if one is interested in the patterns of
 #'   concentrations for several pollutants on different scales e.g. NOx and CO.
 #'   Often useful if more than one \code{pollutant} is chosen.
-#'
 #' @param ws_spread The value of sigma used for Gaussian kernel weighting of
 #'   wind speed when \code{statistic = "nwr"} or when correlation and regression
 #'   statistics are used such as \emph{r}. Default is \code{0.5}.
-#'
 #' @param wd_spread The value of sigma used for Gaussian kernel weighting of
 #'   wind direction when \code{statistic = "nwr"} or when correlation and
 #'   regression statistics are used such as \emph{r}. Default is \code{4}.
-#'
 #' @param x_error The \code{x} error / uncertainty used when \code{statistic =
 #'   "york_slope"}.
-#'
 #' @param y_error The \code{y} error / uncertainty used when \code{statistic =
 #'   "york_slope"}.
-#'
 #' @param kernel Type of kernel used for the weighting procedure for when
 #'   correlation or regression techniques are used. Only \code{"gaussian"} is
 #'   supported but this may be enhanced in the future.
-#'
 #' @param tau The quantile to be estimated when \code{statistic} is set to
 #'   \code{"quantile.slope"}. Default is \code{0.5} which is equal to the median
 #'   and will be ignored if \code{"quantile.slope"} is not used.
-#'
-#' @param return What should the function return? One of:
-#' * "plot" --- a minimal plot with default theme, colours and scales (default).
-#' * "data" --- the raw data used to create the polar plot.
-#'
 #' @param alpha The transparency of the polar plot. This is mainly useful to
 #'   overlay the polar plot on a map.
-#'
 #' @return As well as generating the plot itself, \code{polarPlot} also returns
 #'   an object of class ``openair''. The object includes three main components:
 #'   \code{call}, the command used to generate the plot; \code{data}, the data
@@ -343,7 +317,7 @@ gg_polar_plot <-
            pollutant,
            x = "ws",
            wd = "wd",
-           type = "default",
+           facet = NULL,
            statistic = "mean",
            exclude_missing = TRUE,
            uncertainty = FALSE,
@@ -359,16 +333,16 @@ gg_polar_plot <-
            y_error = NA,
            kernel = "gaussian",
            tau = 0.5,
-           return = "plot",
            alpha = 1) {
     # run original openair
+    if (is.null(facet)) facet <- "default"
     oa_data <-
       openair::polarPlot(
         mydata = data,
         pollutant = pollutant,
         x = x,
         wd = wd,
-        type = type,
+        type = facet,
         statistic = statistic,
         exclude_missing = exclude_missing,
         uncertainty = uncertainty,
@@ -396,7 +370,10 @@ gg_polar_plot <-
       tidyr::drop_na("miss", "u", "v") %>%
       dplyr::mutate(
         r = sqrt(.data$u^2 + (.data$v * -1)^2),
-        t = dplyr::if_else(.data$u < 0, atan((.data$v * -1) / .data$u) + pi, atan((.data$v * -1) / .data$u)),
+        t = dplyr::if_else(.data$u < 0,
+          atan((.data$v * -1) / .data$u) + pi,
+          atan((.data$v * -1) / .data$u)
+        ),
         t = (.data$t * (180 / pi)) + 90
       ) %>%
       dplyr::arrange("z")
@@ -408,10 +385,10 @@ gg_polar_plot <-
       ggplot2::ggplot(dat, ggplot2::aes(.data$t, .data$r)) +
       ggplot2::coord_polar() +
       scattermore::geom_scattermore(
-        interpolate = T,
+        interpolate = TRUE,
         pointsize = 1,
         ggplot2::aes(color = .data$z),
-        na.rm = T,
+        na.rm = TRUE,
         alpha = alpha
       ) +
       ggplot2::scale_x_continuous(
@@ -427,26 +404,19 @@ gg_polar_plot <-
       ) +
       ggplot2::expand_limits(y = 0)
 
-    if (uncertainty | any(type != "default")) {
-      if (uncertainty) {
-        type <- "default"
-      }
-      if (length(type) == 1) {
+    facet <- dplyr::group_vars(dat)
+    if (any(facet != "default")) {
+      if (length(facet) == 1) {
         plt <-
-          plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
+          plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
       } else {
         plt <-
           plt + ggplot2::facet_grid(
-            cols = ggplot2::vars(.data[[type[1]]]),
-            rows = ggplot2::vars(.data[[type[2]]])
+            cols = ggplot2::vars(.data[[facet[1]]]),
+            rows = ggplot2::vars(.data[[facet[2]]])
           )
       }
     }
 
-    if (return == "plot") {
-      return(plt)
-    }
-    if (return == "data") {
-      return(dat)
-    }
+    return(plt)
   }

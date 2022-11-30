@@ -6,7 +6,7 @@
 #'
 #' @param colours The openair colour scheme to use. See [openair::openColours()]
 #'   for more information.
-#' @param na.value The aesthetic value to use for missing (NA) values. Defaults
+#' @param na_value The aesthetic value to use for missing (NA) values. Defaults
 #'   to "grey50".
 #' @param aes Character string or vector of character strings listing the
 #'   name(s) of the aesthetic(s) that this scale works with. The default,
@@ -25,12 +25,12 @@
 #'
 scale_opencolours_c <-
   function(colours = "default",
-           na.value = "grey50",
+           na_value = "grey50",
            aes = c("colour", "fill"),
            ...) {
     ggplot2::scale_color_gradientn(
       colours = openair::openColours(scheme = colours, n = 100),
-      na.value = na.value,
+      na.value = na_value,
       aesthetics = aes,
       ...
     )

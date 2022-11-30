@@ -23,33 +23,39 @@
 #' gg_polar_plot(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
 #' }
 #'
-annotate_polar_wedge <- function(start, end, fill = "red", colour = NA, alpha = .25, ...) {
-  if (is.character(start)) start <- str_to_angle(start)
-  if (is.character(end)) end <- str_to_angle(end)
+annotate_polar_wedge <-
+  function(start,
+           end,
+           fill = "red",
+           colour = NA,
+           alpha = .25,
+           ...) {
+    if (is.character(start)) start <- str_to_angle(start)
+    if (is.character(end)) end <- str_to_angle(end)
 
-  annot_func <- function(start, end) {
-    ggplot2::annotate(
-      geom = "rect",
-      xmin = start,
-      xmax = end,
-      ymin = 0,
-      ymax = Inf,
-      alpha = alpha,
-      fill = fill,
-      color = colour,
-      ...
-    )
-  }
+    annot_func <- function(start, end) {
+      ggplot2::annotate(
+        geom = "rect",
+        xmin = start,
+        xmax = end,
+        ymin = 0,
+        ymax = Inf,
+        alpha = alpha,
+        fill = fill,
+        color = colour,
+        ...
+      )
+    }
 
-  if (end > start) {
-    annot_func(start, end)
-  } else {
-    list(
-      annot_func(start, 360),
-      annot_func(0, end)
-    )
+    if (end > start) {
+      annot_func(start, end)
+    } else {
+      list(
+        annot_func(start, 360),
+        annot_func(0, end)
+      )
+    }
   }
-}
 
 #' Annotate a Polar Plot with Axis Labels
 #'
@@ -57,7 +63,8 @@ annotate_polar_wedge <- function(start, end, fill = "red", colour = NA, alpha = 
 #' directly on the plot, and optionally drops the labels at the side. Note that,
 #' owing to the way [ggplot2::geom_col()] interacts with
 #' [ggplot2::coord_polar()], the "direction" argument may require more
-#' trial-and-error when used with [gg_polar_pollrose()] and [gg_polar_windrose()].
+#' trial-and-error when used with [gg_polar_pollrose()] and
+#' [gg_polar_windrose()].
 #'
 #' @param breaks The axis breaks to label on the plot. It may be appropriate to
 #'   use [seq()] to obtain equally spaced labels.

@@ -41,21 +41,25 @@ scale_y_limitval <-
            trans = "identity",
            ...) {
     out <-
-      purrr::map2(.x = marker_values,
-                  .y = marker_colours,
-                  ~ ggplot2::geom_hline(yintercept = .x, colour = .y))
+      purrr::map2(
+        .x = marker_values,
+        .y = marker_colours,
+        ~ ggplot2::geom_hline(yintercept = .x, colour = .y)
+      )
 
-    out <- append(out,
-                  ggplot2::scale_y_continuous(
-                    trans = trans,
-                    ...,
-                    sec.axis = ggplot2::sec_axis(
-                      ~ .,
-                      breaks = marker_values,
-                      labels = marker_labels,
-                      trans = trans
-                    )
-                  ))
+    out <- append(
+      out,
+      ggplot2::scale_y_continuous(
+        trans = trans,
+        ...,
+        sec.axis = ggplot2::sec_axis(
+          ~.,
+          breaks = marker_values,
+          labels = marker_labels,
+          trans = trans
+        )
+      )
+    )
 
     out
   }
@@ -69,21 +73,25 @@ scale_x_limitval <-
            trans = "identity",
            ...) {
     out <-
-      purrr::map2(.x = marker_values,
-                  .y = marker_colours,
-                  ~ ggplot2::geom_vline(xintercept = .x, colour = .y))
+      purrr::map2(
+        .x = marker_values,
+        .y = marker_colours,
+        ~ ggplot2::geom_vline(xintercept = .x, colour = .y)
+      )
 
-    out <- append(out,
-                  ggplot2::scale_x_continuous(
-                    trans = trans,
-                    ...,
-                    sec.axis = ggplot2::sec_axis(
-                      ~ .,
-                      breaks = marker_values,
-                      labels = marker_labels,
-                      trans = trans
-                    )
-                  ))
+    out <- append(
+      out,
+      ggplot2::scale_x_continuous(
+        trans = trans,
+        ...,
+        sec.axis = ggplot2::sec_axis(
+          ~.,
+          breaks = marker_values,
+          labels = marker_labels,
+          trans = trans
+        )
+      )
+    )
 
     out
   }

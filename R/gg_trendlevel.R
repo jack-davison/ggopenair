@@ -101,6 +101,4 @@ gg_trendlevel <-
     }
 
     return(plt)
-
   }
-

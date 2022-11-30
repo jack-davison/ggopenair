@@ -9,7 +9,7 @@ gg_polar_plot(
   pollutant,
   x = "ws",
   wd = "wd",
-  type = "default",
+  facet = NULL,
   statistic = "mean",
   exclude_missing = TRUE,
   uncertainty = FALSE,
@@ -25,7 +25,6 @@ gg_polar_plot(
   y_error = NA,
   kernel = "gaussian",
   tau = 0.5,
-  return = "plot",
   alpha = 1
 )
 }
@@ -53,12 +52,11 @@ coordinates, the default is wind speed, \dQuote{ws}.}
 
 \item{wd}{Name of wind direction field.}
 
-\item{type}{\code{type} determines how the data are split i.e. conditioned,
-  and then plotted. The default is will produce a single plot using the
-  entire data. Type can be one of the built-in types as detailed in
-  \code{cutData} e.g. \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so
-  on. For example, \code{type = "season"} will produce four plots --- one for
-  each season.
+\item{facet}{\code{facet} determines how the data are split and then plotted.
+  The default is will produce a single plot using the entire data. Type can
+  be one of the built-in types as detailed in \code{cutData} e.g.
+  \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so on. For example,
+  \code{type = "season"} will produce four plots --- one for each season.
 
   It is also possible to choose \code{type} as another variable in the data
   frame. If that variable is numeric, then the data will be split into four
@@ -238,10 +236,6 @@ supported but this may be enhanced in the future.}
 \item{tau}{The quantile to be estimated when \code{statistic} is set to
 \code{"quantile.slope"}. Default is \code{0.5} which is equal to the median
 and will be ignored if \code{"quantile.slope"} is not used.}
-
-\item{return}{What should the function return? One of:
-* "plot" --- a minimal plot with default theme, colours and scales (default).
-* "data" --- the raw data used to create the polar plot.}
 
 \item{alpha}{The transparency of the polar plot. This is mainly useful to
 overlay the polar plot on a map.}

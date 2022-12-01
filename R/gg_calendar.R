@@ -1,14 +1,32 @@
-#' Plot time series values in convential calendar format
+#' Plot time series values in a conventional calendar format
+#'
+#' With a single year of data, [gg_calendar()] will plot data in a conventional
+#' calendar format, i.e., by month and day of the week. With multiple years of
+#' data, a year-month matrix of panels will instead be plotted. Daily statistics
+#' are calculated using [time_average()], which by default will calculate the
+#' daily mean concentration.
+#'
+#' [gg_calendar()] has two accompanying annotation functions.
+#' [annotate_calendar_text()] can write either the day of the month or the
+#' average pollutant concentration on the calendar. [annotate_calendar_wd()]
+#' will draw wind speed and direction arrows onto the calendar, assuming columns
+#' labelled "ws" and "wd" were present in the original data.
+#'
+#' Note that is is possible to pre-calculate concentrations in some way before
+#' passing the data to [gg_calendar()]. For example [openair::rollingMean()]
+#' could be used to calculate rolling 8-hour mean concentrations. The data can
+#' then be passed to [gg_calendar()] and \code{statistic = "max"} chosen, which
+#' will plot maximum daily 8-hour mean concentrations.
 #'
 #' @param data A data frame minimally containing \code{date} and at least one
 #'   other numeric variable. The date should be in either \code{Date} format or
 #'   class \code{POSIXct}.
 #' @param pollutant Mandatory. A pollutant name corresponding to a variable in a
 #'   data frame should be supplied e.g. \code{pollutant = "nox".}
-#' @param statistic Statistic passed to [openair::timeAverage()].
-#' @param data_thresh Data capture threshold passed to [openair::timeAverage()].
-#'   For example, \code{data_thresh = 75} means that at least 75\% of the data
-#'   must be available in a day for the value to be calculate, else the data is
+#' @param statistic Statistic passed to [time_average()].
+#' @param data_thresh Data capture threshold passed to [time_average()]. For
+#'   example, \code{data_thresh = 75} means that at least 75\% of the data must
+#'   be available in a day for the value to be calculate, else the data is
 #'   removed.
 #' @param border_colour The colour to use for the border of each tile. Defaults
 #'   to "white". `NA` removes the border.
@@ -16,6 +34,8 @@
 #'   plot shows Saturday first (\code{w_shift = 0}). To change this so that it
 #'   starts on a Monday for example, set \code{w_shift = 2}, and so on.
 #' @export
+#' @seealso [annotate_calendar_wd()] and [annotate_calendar_text()] for
+#'   annotating calendar plots.
 #' @examples
 #' \dontrun{
 #' marylebone %>%
@@ -77,7 +97,7 @@ gg_calendar <-
       ggplot2::scale_y_continuous(breaks = NULL, name = NULL) +
       ggplot2::scale_x_continuous(
         breaks = 1:7, name = NULL,
-        labels = c("S", "S", "M", "T", "W", "T", "F")
+        labels = wshift(c("S", "S", "M", "T", "W", "T", "F"), w_shift)
       ) +
       ggplot2::coord_equal(expand = FALSE, clip = "off") +
       ggplot2::labs(fill = openair::quickText(pollutant)) +
@@ -96,8 +116,6 @@ gg_calendar <-
 
     plt
   }
-
-
 
 #' Annotate a Calendar Plot with Text
 #'
@@ -189,4 +207,12 @@ annotate_calendar_wd <- function(size = 1, colour = "black", ...) {
     metR::scale_mag(max_size = size),
     ggplot2::guides(mag = ggplot2::guide_none())
   )
+}
+
+#' shift vector around (for days of week)
+#' @param x vector
+#' @param n number
+#' @noRd
+wshift <- function(x, n = 0) {
+  if (n == 0) x else c(tail(x, -n), head(x, n))
 }

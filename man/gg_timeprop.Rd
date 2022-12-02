@@ -60,6 +60,9 @@ variable then the categories are used directly.}
 interval is scaled to 100. This is helpful to show the relative
 (percentage) contribution of the proportions.}
 }
+\value{
+A [ggplot2::ggplot2] figure
+}
 \description{
 This function shows time series plots as stacked bar charts. The
 different categories in the bar chart are made up from a character
@@ -80,13 +83,4 @@ The plot shows the value of \code{pollutant} on the y-axis
 made up of bars split according to \code{proportion}. The bars
 therefore show how the total value of \code{pollutant} is made up
 for any time interval.
-}
-\seealso{
-See \code{\link{timePlot}} for time series plotting,
-  \code{\link{polarCluster}} for cluster analysis of bivariate
-  polar plots and \code{\link{trajCluster}} for cluster analysis
-  of HYSPLIT back trajectories.
-}
-\author{
-David Carslaw
 }

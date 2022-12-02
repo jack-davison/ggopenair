@@ -60,54 +60,56 @@
 #'   interval is scaled to 100. This is helpful to show the relative
 #'   (percentage) contribution of the proportions.
 #' @export
-#' @author David Carslaw
-#' @seealso See \code{\link{timePlot}} for time series plotting,
-#'   \code{\link{polarCluster}} for cluster analysis of bivariate
-#'   polar plots and \code{\link{trajCluster}} for cluster analysis
-#'   of HYSPLIT back trajectories.
+#' @return A [ggplot2::ggplot2] figure
 
-gg_timeprop <- function(data, pollutant, proportion, avg_time = "day", facet = "default", normalise = FALSE) {
-  # run openair
-  oa_data <-
-    openair::timeProp(
-      mydata = data,
-      pollutant = pollutant,
-      proportion = "wd",
-      avg.time = avg_time,
-      type = facet,
-      plot = FALSE,
-      normalise = normalise
-    )$data
+gg_timeprop <-
+  function(data,
+           pollutant,
+           proportion,
+           avg_time = "day",
+           facet = "default",
+           normalise = FALSE) {
+    # run openair
+    oa_data <-
+      openair::timeProp(
+        mydata = data,
+        pollutant = pollutant,
+        proportion = "wd",
+        avg.time = avg_time,
+        type = facet,
+        plot = FALSE,
+        normalise = normalise
+      )$data
 
-  # create plot
-  plt <-
-    oa_data %>%
-    tidyr::drop_na(.data$var2) %>%
-    dplyr::mutate(
-      fill = forcats::fct_rev(.data[[proportion]]),
-      Var1 = dplyr::lag(.data$var2) %>% tidyr::replace_na(0)
-    ) %>%
-    ggplot2::ggplot(ggplot2::aes(
-      xmin = .data$xleft,
-      xmax = .data$xright,
-      ymin = .data$Var1,
-      ymax = .data$var2
-    )) +
-    ggplot2::geom_rect(ggplot2::aes(fill = .data$fill)) +
-    ggplot2::coord_cartesian(expand = FALSE) +
-    ggplot2::labs(
-      x = "date", y = openair::quickText(pollutant),
-      fill = openair::quickText(proportion)
-    )
-
-  # sort out facets
-  facet <- dplyr::group_vars(oa_data)
-  facet <- facet[!facet %in% c("xleft", "xright", "date")]
-  if (facet != "default") {
+    # create plot
     plt <-
-      plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
-  }
+      oa_data %>%
+      tidyr::drop_na(.data$var2) %>%
+      dplyr::mutate(
+        fill = forcats::fct_rev(.data[[proportion]]),
+        Var1 = dplyr::lag(.data$var2) %>% tidyr::replace_na(0)
+      ) %>%
+      ggplot2::ggplot(ggplot2::aes(
+        xmin = .data$xleft,
+        xmax = .data$xright,
+        ymin = .data$Var1,
+        ymax = .data$var2
+      )) +
+      ggplot2::geom_rect(ggplot2::aes(fill = .data$fill)) +
+      ggplot2::coord_cartesian(expand = FALSE) +
+      ggplot2::labs(
+        x = "date", y = openair::quickText(pollutant),
+        fill = openair::quickText(proportion)
+      )
 
-  # return plot
-  return(plt)
-}
+    # sort out facets
+    facet <- dplyr::group_vars(oa_data)
+    facet <- facet[!facet %in% c("xleft", "xright", "date")]
+    if (facet != "default") {
+      plt <-
+        plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
+    }
+
+    # return plot
+    return(plt)
+  }

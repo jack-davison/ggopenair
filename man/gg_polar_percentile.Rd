@@ -7,7 +7,7 @@
 gg_polar_percentile(
   data,
   pollutant,
-  type = "default",
+  facet = NULL,
   percentile = c(25, 50, 75, 90, 95),
   method = "default",
   line_lty = 1,
@@ -20,35 +20,21 @@ gg_polar_percentile(
 )
 }
 \arguments{
-\item{data}{A data frame minimally containing \code{wd} and a
-numeric field to plot --- \code{pollutant}.}
+\item{data}{A data frame containing wind direction, wind speed, and pollutant
+concentrations.}
 
-\item{pollutant}{Mandatory. A pollutant name corresponding to a
-variable in a data frame should be supplied e.g. \code{pollutant
-= "nox"}. More than one pollutant can be supplied e.g.
-\code{pollutant = c("no2", "o3")} provided there is only one
-\code{type}.}
+\item{pollutant}{One or more column names identifying pollutant
+concentrations. When multiple pollutants are specified for a
+single-pollutant \code{statistic} (e.g., "mean"), a faceted plot will be
+returned. Two pollutants must be provided for certain \code{statistic}
+options (e.g., "Pearson" in [gg_polar_plot()]).}
 
-\item{type}{\code{type} determines how the data are split i.e.
-  conditioned, and then plotted. The default is will produce a
-  single plot using the entire data. Type can be one of the
-  built-in types as detailed in \code{cutData} e.g.
-  \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so on. For
-  example, \code{type = "season"} will produce four plots --- one
-  for each season.
-
-  It is also possible to choose \code{type} as another variable in
-  the data frame. If that variable is numeric, then the data will
-  be split into four quantiles (if possible) and labelled
-  accordingly. If type is an existing character or factor
-  variable, then those categories/levels will be used directly.
-  This offers great flexibility for understanding the variation of
-  different variables and how they depend on one another.
-
-  Type can be up length two e.g. \code{type = c("season",
-  "weekday")} will produce a 2x2 plot split by season and day of
-  the week. Note, when two types are provided the first forms the
-  columns and the second the rows.}
+\item{facet}{One or two faceting columns. \code{facet} determines how the
+data are split and then plotted. When \code{facet} is length 1 it is passed
+to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
+[ggplot2::facet_grid()] with the first element being used as columns and
+the second rows. Some other options (e.g., multiple \code{pollutant}
+columns) can limit the the number of faceting columns to 1.}
 
 \item{percentile}{The percentile value(s) to plot. Must be between
 0--100. If \code{percentile = NA} then only a mean line will be
@@ -64,20 +50,20 @@ in the wind sector y with mixing ratios greater than the
 number of samples in the same wind sector (see Ashbaugh et al.,
 1985).}
 
-\item{line_lty}{Line type for the percentile lines.}
+\item{line_lty}{Line type for the percentile lines (see [ggplot2::linetype]).}
 
 \item{line_width}{Line width for the percentile lines.}
 
 \item{mean}{Show the mean by wind direction as a line?}
 
-\item{mean_lty}{Line type for mean line.}
+\item{mean_lty}{Line type for mean line (see [ggplot2::linetype]).}
 
 \item{mean_width}{Line width for mean line.}
 
 \item{mean_colour}{Line colour for mean line.}
 
-\item{alpha}{The transparency of the plot. This is mainly useful to
-overlay the polar plot on a map.}
+\item{alpha}{The transparency of the plot. This is mainly useful to overlay
+it on a map.}
 }
 \description{
 Function to plot percentiles by wind direction
@@ -87,7 +73,7 @@ Other polar directional analysis plotting functions:
 \code{\link{gg_polar_annulus}()},
 \code{\link{gg_polar_freq}()},
 \code{\link{gg_polar_plot}()},
-\code{\link{gg_polar_pollrose}()},
-\code{\link{gg_polar_windrose}()}
+\code{\link{gg_pollutionrose}()},
+\code{\link{gg_windrose}()}
 }
 \concept{polar directional analysis plotting functions}

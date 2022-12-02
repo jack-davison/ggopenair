@@ -9,7 +9,7 @@ gg_polar_annulus(
   pollutant,
   local_tz = NULL,
   period = "hour",
-  type = "default",
+  facet = NULL,
   statistic = "mean",
   percentile = NA,
   width = 1,
@@ -23,18 +23,14 @@ gg_polar_annulus(
 )
 }
 \arguments{
-\item{data}{A data frame minimally containing \code{date}, \code{wd} and a
-pollutant.}
+\item{data}{A data frame containing wind direction, wind speed, and pollutant
+concentrations.}
 
-\item{pollutant}{Mandatory. A pollutant name corresponding to a variable in a
-data frame should be supplied e.g. \code{pollutant = "nox"}. There can also
-be more than one pollutant specified e.g. \code{pollutant = c("nox",
-"no2")}. The main use of using two or more pollutants is for model
-evaluation where two species would be expected to have similar
-concentrations. This saves the user stacking the data and it is possible to
-work with columns of data directly. A typical use would be \code{pollutant
-= c("obs", "mod")} to compare two columns \dQuote{obs} (the observations)
-and \dQuote{mod} (modelled values).}
+\item{pollutant}{One or more column names identifying pollutant
+concentrations. When multiple pollutants are specified for a
+single-pollutant \code{statistic} (e.g., "mean"), a faceted plot will be
+returned. Two pollutants must be provided for certain \code{statistic}
+options (e.g., "Pearson" in [gg_polar_plot()]).}
 
 \item{local_tz}{Should the results be calculated in local time that includes
 a treatment of daylight savings time (DST)? The default is not to consider
@@ -56,30 +52,12 @@ to \code{FALSE} then GMT is used. Examples of usage include \code{local_tz
 plot variation throughout the year, \dQuote{weekday} to plot day of the
 week variation and \dQuote{trend} to plot the trend by wind direction.}
 
-\item{type}{\code{type} determines how the data are split i.e. conditioned,
-  and then plotted. The default is will produce a single plot using the
-  entire data. Type can be one of the built-in types as detailed in
-  \code{cutData} e.g. \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so
-  on. For example, \code{type = "season"} will produce four plots --- one for
-  each season.
-
-  It is also possible to choose \code{type} as another variable in the data
-  frame. If that variable is numeric, then the data will be split into four
-  quantiles (if possible) and labelled accordingly. If type is an existing
-  character or factor variable, then those categories/levels will be used
-  directly. This offers great flexibility for understanding the variation of
-  different variables and how they depend on one another.
-
-  Type can be up length two e.g. \code{type = c("season", "site")} will
-  produce a 2x2 plot split by season and site. The use of two types is mostly
-  meant for situations where there are several sites. Note, when two types
-  are provided the first forms the columns and the second the rows.
-
-  Also note that for the \code{polarAnnulus} function some type/period
-  combinations are forbidden or make little sense. For example, \code{type =
-  "season"} and \code{period = "trend"} (which would result in a plot with
-  too many gaps in it for sensible smoothing), or \code{type = "weekday"} and
-  \code{period = "weekday"}.}
+\item{facet}{One or two faceting columns. \code{facet} determines how the
+data are split and then plotted. When \code{facet} is length 1 it is passed
+to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
+[ggplot2::facet_grid()] with the first element being used as columns and
+the second rows. Some other options (e.g., multiple \code{pollutant}
+columns) can limit the the number of faceting columns to 1.}
 
 \item{statistic}{The statistic that should be applied to each wind
 speed/direction bin. Can be \dQuote{mean} (default), \dQuote{median},
@@ -112,9 +90,7 @@ circle. Defaults to `1`.}
 direction bin.  The default is 1. A value of two requires at least 2 valid
 records in each bin an so on; bins with less than 2 valid records are set
 to NA. Care should be taken when using a value > 1 because of the risk of
-removing real data points. It is recommended to consider your data with
-care. Also, the \code{polarFreq} function can be of use in such
-circumstances.}
+removing real data points.}
 
 \item{exclude_missing}{Setting this option to \code{TRUE} (the default)
 removes points from the plot that are too far from the original data. The
@@ -130,11 +106,11 @@ at the beginning or end of year.}
 
 \item{force_positive}{The default is \code{TRUE}. Sometimes if smoothing data
 with steep gradients it is possible for predicted values to be negative.
-\code{force_positive = TRUE} ensures that predictions remain postive. This
+\code{force_positive = TRUE} ensures that predictions remain positive. This
 is useful for several reasons. First, with lots of missing data more
 interpolation is needed and this can result in artifacts because the
 predictions are too far from the original data. Second, if it is known
-beforehand that the data are all postive, then this option carries that
+beforehand that the data are all positive, then this option carries that
 assumption through to the prediction. The only likely time where setting
 \code{force_positive = FALSE} would be if background concentrations were
 first subtracted resulting in data that is legitimately negative. For the
@@ -153,8 +129,8 @@ This option is particularly useful if one is interested in the patterns of
 concentrations for several pollutants on different scales e.g. NOx and CO.
 Often useful if more than one \code{pollutant} is chosen.}
 
-\item{alpha}{The transparency of the polar plot. This is mainly useful to
-overlay the polar plot on a map.}
+\item{alpha}{The transparency of the plot. This is mainly useful to overlay
+it on a map.}
 }
 \value{
 As well as generating the plot itself, \code{polarAnnulus} also
@@ -172,17 +148,17 @@ As well as generating the plot itself, \code{polarAnnulus} also
 \description{
 Typically plots the concentration of a pollutant by wind direction and as a
 function of time as an annulus. The function is good for visualising how
-concentrations of pollutants vary by wind direction and a time period e.g. by
-month, day of week.
+concentrations of pollutants vary by wind direction and a time period, e.g.,
+by month, day of week, etc.
 }
 \details{
-The \code{polarAnnulus} function shares many of the properties of the
-\code{polarPlot}. However, \code{polarAnnulus} is focussed on displaying
-information on how concentrations of a pollutant (values of another variable)
-vary with wind direction and time. Plotting as an annulus helps to reduce
-compression of information towards the centre of the plot. The circular plot
-is easy to interpret because wind direction is most easily understood in
-polar rather than Cartesian coordinates.
+[gg_polar_annulus()] shares many of the properties of the [gg_polar_plot()].
+However, [gg_polar_annulus()] is focussed on displaying information on how
+concentrations of a pollutant (values of another variable) vary with wind
+direction and time. Plotting as an annulus helps to reduce compression of
+information towards the centre of the plot. The circular plot is easy to
+interpret because wind direction is most easily understood in polar rather
+than Cartesian coordinates.
 
 The inner part of the annulus represents the earliest time and the outer part
 of the annulus the latest time. The time dimension can be shown in many ways
@@ -193,7 +169,7 @@ be very useful for understanding how different source influences affect a
 location.
 
 For \code{type = "trend"} the amount of smoothing does not vary linearly with
-the length of the time series i.e. a certain amount of smoothing per unit
+the length of the time series, i.e., a certain amount of smoothing per unit
 interval in time. This is a deliberate choice because should one be
 interested in a subset (in time) of data, more detail will be provided for
 the subset compared with the full data set. This allows users to investigate
@@ -205,7 +181,7 @@ Other polar directional analysis plotting functions:
 \code{\link{gg_polar_freq}()},
 \code{\link{gg_polar_percentile}()},
 \code{\link{gg_polar_plot}()},
-\code{\link{gg_polar_pollrose}()},
-\code{\link{gg_polar_windrose}()}
+\code{\link{gg_pollutionrose}()},
+\code{\link{gg_windrose}()}
 }
 \concept{polar directional analysis plotting functions}

@@ -37,6 +37,16 @@
 #' \code{statistic = "max"} is often useful for revealing sources. Pair-wise
 #' statistics between two pollutants can also be calculated.
 #'
+#' Because of the smoothing involved, the colour scale for some of these
+#' statistics is only to provide an indication of overall pattern and should not
+#' be interpreted in concentration units, e.g., for \code{statistic =
+#' "weighted.mean"} where the bin mean is multiplied by the bin frequency and
+#' divided by the total frequency. In many cases using \code{polarFreq} will be
+#' better. Setting \code{statistic = "weighted.mean"} can be useful because it
+#' provides an indication of the concentration * frequency of occurrence and
+#' will highlight the wind speed/direction conditions that dominate the overall
+#' mean.
+#'
 #' The function can also be used to compare two pollutant species through a
 #' range of pair-wise statistics (see help on \code{statistic}) and Grange et
 #' al. (2016) (open-access publication link below).
@@ -60,51 +70,24 @@
 #' predicted surface together with upper and lower 95% confidence intervals,
 #' which take account of the frequency of measurements.
 #'
-#' @param data A data frame minimally containing \code{wd}, another variable to
-#'   plot in polar coordinates (the default is a column \dQuote{ws} --- wind
-#'   speed) and a pollutant. Should also contain \code{date} if plots by time
-#'   period are required.
-#' @param pollutant Mandatory. A pollutant name corresponding to a variable in a
-#'   data frame should be supplied e.g. \code{pollutant = "nox"}. There can also
-#'   be more than one pollutant specified e.g. \code{pollutant = c("nox",
-#'   "no2")}. The main use of using two or more pollutants is for model
-#'   evaluation where two species would be expected to have similar
-#'   concentrations. This saves the user stacking the data and it is possible to
-#'   work with columns of data directly. A typical use would be \code{pollutant
-#'   = c("obs", "mod")} to compare two columns \dQuote{obs} (the observations)
-#'   and \dQuote{mod} (modelled values). When pair-wise statistics such as
-#'   Pearson correlation and regression techniques are to be plotted,
-#'   \code{pollutant} takes two elements too. For example, \code{pollutant =
-#'   c("bc", "pm25")} where \code{"bc"} is a function of \code{"pm25"}.
+#' @param data A data frame containing wind direction, wind speed, and pollutant
+#'   concentrations.
+#' @param pollutant One or more column names identifying pollutant
+#'   concentrations. When multiple pollutants are specified for a
+#'   single-pollutant \code{statistic} (e.g., "mean"), a faceted plot will be
+#'   returned. Two pollutants must be provided for certain \code{statistic}
+#'   options (e.g., "Pearson" in [gg_polar_plot()]).
 #' @param x Name of variable to plot against wind direction in polar
 #'   coordinates, the default is wind speed, \dQuote{ws}.
 #' @param wd Name of wind direction field.
-#' @param facet \code{facet} determines how the data are split and then plotted.
-#'   The default is will produce a single plot using the entire data. Type can
-#'   be one of the built-in types as detailed in \code{cutData} e.g.
-#'   \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so on. For example,
-#'   \code{type = "season"} will produce four plots --- one for each season.
-#'
-#'   It is also possible to choose \code{type} as another variable in the data
-#'   frame. If that variable is numeric, then the data will be split into four
-#'   quantiles (if possible) and labelled accordingly. If type is an existing
-#'   character or factor variable, then those categories/levels will be used
-#'   directly. This offers great flexibility for understanding the variation of
-#'   different variables and how they depend on one another.
-#'
-#'   Type can be up length two e.g. \code{type = c("season", "weekday")} will
-#'   produce a 2x2 plot split by season and day of the week. Note, when two
-#'   types are provided the first forms the columns and the second the rows.
+#' @param facet One or two faceting columns. \code{facet} determines how the
+#'   data are split and then plotted. When \code{facet} is length 1 it is passed
+#'   to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
+#'   [ggplot2::facet_grid()] with the first element being used as columns and
+#'   the second rows. Some other options (e.g., multiple \code{pollutant}
+#'   columns) can limit the the number of faceting columns to 1.
 #' @param statistic The statistic that should be applied to each wind
-#'   speed/direction bin. Because of the smoothing involved, the colour scale
-#'   for some of these statistics is only to provide an indication of overall
-#'   pattern and should not be interpreted in concentration units e.g. for
-#'   \code{statistic = "weighted.mean"} where the bin mean is multiplied by the
-#'   bin frequency and divided by the total frequency. In many cases using
-#'   \code{polarFreq} will be better. Setting \code{statistic = "weighted.mean"}
-#'   can be useful because it provides an indication of the concentration *
-#'   frequency of occurrence and will highlight the wind speed/direction
-#'   conditions that dominate the overall mean. Can be:
+#'   speed/direction bin. Can be:
 #'
 #'   \itemize{ \item  \dQuote{mean} (default), \dQuote{median}, \dQuote{max}
 #'   (maximum), \dQuote{frequency}. \dQuote{stdev} (standard deviation),
@@ -155,8 +138,8 @@
 #'   \code{x_error} and \code{y_error} --- see below.}
 #' @param exclude_missing Setting this option to \code{TRUE} (the default)
 #'   removes points from the plot that are too far from the original data. The
-#'   smoothing routines will produce predictions at points where no data exist
-#'   i.e. they predict. By removing the points too far from the original data
+#'   smoothing routines will produce predictions at points where no data exist,
+#'   i.e., they predict by removing the points too far from the original data
 #'   produces a plot where it is clear where the original data lie. If set to
 #'   \code{FALSE} missing data will be interpolated.
 #' @param uncertainty Should the uncertainty in the calculated surface be shown?
@@ -202,9 +185,7 @@
 #'   direction bin.  The default is 1. A value of two requires at least 2 valid
 #'   records in each bin an so on; bins with less than 2 valid records are set
 #'   to NA. Care should be taken when using a value > 1 because of the risk of
-#'   removing real data points. It is recommended to consider your data with
-#'   care. Also, the \code{polarFreq} function can be of use in such
-#'   circumstances.
+#'   removing real data points.
 #' @param force_positive The default is \code{TRUE}. Sometimes if smoothing data
 #'   with steep gradients it is possible for predicted values to be negative.
 #'   \code{force_positive = TRUE} ensures that predictions remain positive. This
@@ -248,25 +229,9 @@
 #' @param tau The quantile to be estimated when \code{statistic} is set to
 #'   \code{"quantile.slope"}. Default is \code{0.5} which is equal to the median
 #'   and will be ignored if \code{"quantile.slope"} is not used.
-#' @param alpha The transparency of the polar plot. This is mainly useful to
-#'   overlay the polar plot on a map.
-#' @return As well as generating the plot itself, \code{polarPlot} also returns
-#'   an object of class ``openair''. The object includes three main components:
-#'   \code{call}, the command used to generate the plot; \code{data}, the data
-#'   frame of summarised information used to make the plot; and \code{plot}, the
-#'   plot itself. If retained, e.g. using \code{output <- polarPlot(mydata,
-#'   "nox")}, this output can be used to recover the data, reproduce or rework
-#'   the original plot or undertake further analysis.
-#'
-#'   An openair output can be manipulated using a number of generic operations,
-#'   including \code{print}, \code{plot} and \code{summary}.
-#'
-#'   \code{polarPlot} surface data can also be extracted directly using the
-#'   \code{results}, e.g.  \code{results(object)} for \code{output <-
-#'   polarPlot(mydata, "nox")}. This returns a data frame with four set columns:
-#'   \code{cond}, conditioning based on \code{type}; \code{u} and \code{v}, the
-#'   translational vectors based on \code{ws} and \code{wd}; and the local
-#'   \code{pollutant} estimate.
+#' @param alpha The transparency of the plot. This is mainly useful to overlay
+#'   it on a map.
+#' @return A [ggplot2::ggplot2] figure
 #'
 #' @references
 #'
@@ -365,7 +330,7 @@ gg_polar_plot <-
       oa_data[["miss"]] <- oa_data[["z"]]
     }
 
-    dat <-
+    plot_data <-
       oa_data %>%
       tidyr::drop_na("miss", "u", "v") %>%
       dplyr::mutate(
@@ -382,7 +347,7 @@ gg_polar_plot <-
     pollutant <- paste(pollutant, collapse = ", ")
 
     plt <-
-      ggplot2::ggplot(dat, ggplot2::aes(.data$t, .data$r)) +
+      ggplot2::ggplot(plot_data, ggplot2::aes(.data$t, .data$r)) +
       ggplot2::coord_polar() +
       scattermore::geom_scattermore(
         interpolate = TRUE,
@@ -404,16 +369,18 @@ gg_polar_plot <-
       ) +
       ggplot2::expand_limits(y = 0)
 
-    facet <- dplyr::group_vars(dat)
+    facet <- dplyr::group_vars(plot_data)
     if (any(facet != "default")) {
       if (length(facet) == 1) {
         plt <-
-          plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
+          plt + ggplot2::facet_wrap(facets = ggplot2::vars(quick_text(.data[[facet]])),
+                                    labeller = ggplot2::label_parsed)
       } else {
         plt <-
           plt + ggplot2::facet_grid(
-            cols = ggplot2::vars(.data[[facet[1]]]),
-            rows = ggplot2::vars(.data[[facet[2]]])
+            cols = ggplot2::vars(quick_text(.data[[facet[1]]])),
+            rows = ggplot2::vars(quick_text(.data[[facet[2]]])),
+            labeller = ggplot2::label_parsed
           )
       }
     }

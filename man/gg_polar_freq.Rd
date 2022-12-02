@@ -10,73 +10,56 @@ gg_polar_freq(
   statistic = "frequency",
   ws_int = 1,
   wd_nint = 36,
-  type = "default",
+  facet = NULL,
   min_bin = 1,
   border_colour = NA,
   alpha = 1
 )
 }
 \arguments{
-\item{data}{A data frame minimally containing \code{ws}, \code{wd} and
-\code{date}.}
+\item{data}{A data frame containing wind direction, wind speed, and pollutant
+concentrations.}
 
-\item{pollutant}{Mandatory. A pollutant name corresponding to a variable in
-a data frame should be supplied e.g. \code{pollutant = "nox"}}
+\item{pollutant}{A column name identifying pollutant concentration.}
 
 \item{statistic}{The statistic that should be applied to each wind
 speed/direction bin. Can be \dQuote{frequency}, \dQuote{mean},
 \dQuote{median}, \dQuote{max} (maximum), \dQuote{stdev} (standard
-deviation) or \dQuote{weighted.mean}. The option
-\dQuote{frequency} (the default) is the simplest and plots the
-frequency of wind speed/direction in different bins. The scale
-therefore shows the counts in each bin. The option \dQuote{mean}
-will plot the mean concentration of a pollutant (see next point)
-in wind speed/direction bins, and so on.  Finally,
-\dQuote{weighted.mean} will plot the concentration of a pollutant
-weighted by wind speed/direction. Each segment therefore provides
-the percentage overall contribution to the total concentration.
-More information is given in the examples. Note that for options
-other than \dQuote{frequency}, it is necessary to also provide the
-name of a pollutant. See function \code{cutData} for further
-details.}
+deviation) or \dQuote{weighted.mean}. The option \dQuote{frequency} (the
+default) is the simplest and plots the frequency of wind speed/direction in
+different bins. The scale therefore shows the counts in each bin. The
+option \dQuote{mean} will plot the mean concentration of a pollutant (see
+next point) in wind speed/direction bins, and so on.  Finally,
+\dQuote{weighted.mean} will plot the concentration of a pollutant weighted
+by wind speed/direction. Each segment therefore provides the percentage
+overall contribution to the total concentration. More information is given
+in the examples. Note that for options other than \dQuote{frequency}, it is
+necessary to also provide the name of a pollutant. See function
+\code{cutData} for further details.}
 
-\item{ws_int}{Wind speed interval assumed. In some cases e.g. a low met
-mast, an interval of 0.5 may be more appropriate.}
+\item{ws_int}{Wind speed interval assumed. In some cases e.g. a low met mast,
+an interval of 0.5 may be more appropriate.}
 
 \item{wd_nint}{Number of intervals of wind direction.}
 
-\item{type}{\code{type} determines how the data are split
-i.e. conditioned, and then plotted. The default is will produce a
-single plot using the entire data. Type can be one of the built-in
-types as detailed in \code{cutData} e.g. \dQuote{season},
-\dQuote{year}, \dQuote{weekday} and so on. For example, \code{type
-= "season"} will produce four plots --- one for each season.
-
-It is also possible to choose \code{type} as another variable in
-the data frame. If that variable is numeric, then the data will be
-split into four quantiles (if possible) and labelled
-accordingly. If type is an existing character or factor variable,
-then those categories/levels will be used directly. This offers
-great flexibility for understanding the variation of different
-variables and how they depend on one another.
-
-Type can be up length two e.g. \code{type = c("season", "weekday")} will
-  produce a 2x2 plot split by season and day of the week. Note, when two
-  types are provided the first forms the columns and the second the rows.}
+\item{facet}{One or two faceting columns. \code{facet} determines how the
+data are split and then plotted. When \code{facet} is length 1 it is passed
+to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
+[ggplot2::facet_grid()] with the first element being used as columns and
+the second rows. Some other options (e.g., multiple \code{pollutant}
+columns) can limit the the number of faceting columns to 1.}
 
 \item{min_bin}{The minimum number of points allowed in a wind speed/wind
-direction bin.  The default is 1. A value of two requires at least 2
-valid records in each bin an so on; bins with less than 2 valid records
-are set to NA. Care should be taken when using a value > 1 because of the
-risk of removing real data points. It is recommended to consider your
-data with care. Also, the \code{polarPlot} function can be of use in such
-circumstances.}
+direction bin.  The default is 1. A value of two requires at least 2 valid
+records in each bin an so on; bins with less than 2 valid records are set
+to NA. Care should be taken when using a value > 1 because of the risk of
+removing real data points.}
 
 \item{border_colour}{The colour to use for the border of each tile. Defaults
 to `NA`, which removes the border.}
 
-\item{alpha}{The transparency of the plot. This is mainly useful to
-overlay the polar plot on a map.}
+\item{alpha}{The transparency of the plot. This is mainly useful to overlay
+it on a map.}
 }
 \description{
 Function to plot wind speed/direction frequencies and other statistics
@@ -86,7 +69,7 @@ Other polar directional analysis plotting functions:
 \code{\link{gg_polar_annulus}()},
 \code{\link{gg_polar_percentile}()},
 \code{\link{gg_polar_plot}()},
-\code{\link{gg_polar_pollrose}()},
-\code{\link{gg_polar_windrose}()}
+\code{\link{gg_pollutionrose}()},
+\code{\link{gg_windrose}()}
 }
 \concept{polar directional analysis plotting functions}

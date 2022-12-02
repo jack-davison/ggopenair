@@ -6,7 +6,7 @@
 \usage{
 scale_opencolours_c(
   colours = "default",
-  na.value = "grey50",
+  na_value = "grey50",
   aes = c("colour", "fill"),
   ...
 )
@@ -15,7 +15,7 @@ scale_opencolours_c(
 \item{colours}{The openair colour scheme to use. See [openair::openColours()]
 for more information.}
 
-\item{na.value}{The aesthetic value to use for missing (NA) values. Defaults
+\item{na_value}{The aesthetic value to use for missing (NA) values. Defaults
 to "grey50".}
 
 \item{aes}{Character string or vector of character strings listing the

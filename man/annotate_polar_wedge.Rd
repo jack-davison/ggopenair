@@ -4,7 +4,15 @@
 \alias{annotate_polar_wedge}
 \title{Annotate a Polar Plot with a Coloured Wedge}
 \usage{
-annotate_polar_wedge(start, end, fill = "red", colour = NA, alpha = 0.25, ...)
+annotate_polar_wedge(
+  start,
+  end,
+  fill = "red",
+  colour = NA,
+  alpha = 0.25,
+  ...,
+  .rose_angle = NULL
+)
 }
 \arguments{
 \item{start}{The angle at which to start the wedge. Can be expressed
@@ -22,6 +30,11 @@ no border is drawn.}
 completely transparent.}
 
 \item{...}{Arguments to pass to [ggplot2::annotate()].}
+
+\item{.rose_angle}{The number passed to the `angle` argument of
+[gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `start`
+and `end` when they are near to North/0 due to the way
+[ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].}
 }
 \value{
 An annotation to be added to [ggplot2::ggplot()].
@@ -37,3 +50,9 @@ gg_polar_plot(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
 }
 
 }
+\seealso{
+Other polar annotation functions: 
+\code{\link{annotate_polar_axis}()},
+\code{\link{annotate_rose_text}()}
+}
+\concept{polar annotation functions}

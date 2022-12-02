@@ -14,10 +14,14 @@
 #' @param alpha The transparency of the wedge. `1` is totally opaque and `0` is
 #'   completely transparent.
 #' @param ... Arguments to pass to [ggplot2::annotate()].
+#' @param .rose_angle The number passed to the `angle` argument of
+#'   [gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `start`
+#'   and `end` when they are near to North/0 due to the way
+#'   [ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].
 #'
 #' @return An annotation to be added to [ggplot2::ggplot()].
 #' @export
-#'
+#' @family polar annotation functions
 #' @examples
 #' \dontrun{
 #' gg_polar_plot(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
@@ -29,9 +33,25 @@ annotate_polar_wedge <-
            fill = "red",
            colour = NA,
            alpha = .25,
-           ...) {
-    if (is.character(start)) start <- str_to_angle(start)
-    if (is.character(end)) end <- str_to_angle(end)
+           ...,
+           .rose_angle = NULL) {
+    start <- str_to_angle(start)
+    end <- str_to_angle(end)
+
+    if (!is.null(.rose_angle)) {
+      ra = .rose_angle / 2
+      if (start >= 0 & start < ra) {
+        start <- start + 360
+      }
+      if (end >= 0 & end < ra) {
+        end <- end + 360
+      }
+      real0 = ra
+      real360 = ra + 360
+    } else {
+      real0 = 0
+      real360 = 360
+    }
 
     annot_func <- function(start, end) {
       ggplot2::annotate(
@@ -51,8 +71,8 @@ annotate_polar_wedge <-
       annot_func(start, end)
     } else {
       list(
-        annot_func(start, 360),
-        annot_func(0, end)
+        annot_func(start, real360),
+        annot_func(real0, end)
       )
     }
   }
@@ -75,17 +95,27 @@ annotate_polar_wedge <-
 #'   `TRUE`. Note that this option is overriden by complete themes such as
 #'   [ggplot2::theme_minimal()] or [theme_polar()].
 #' @param ... Arguments to pass to [ggplot2::annotate()].
-#'
+#' @param .rose_angle The number passed to the `angle` argument of
+#'   [gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `wd` when
+#'   it is near to North/0 due to the way [ggplot2::geom_col()] interacts with
+#'   [ggplot2::coord_polar()].
 #' @return An annotation to be added to [ggplot2::ggplot()].
 #' @export
-#'
+#' @family polar annotation functions
 #' @examples
 #' \dontrun{
 #' gg_polar_plot(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
 #' }
 #'
-annotate_polar_axis <- function(breaks, direction = "NW", drop = TRUE, ...) {
+annotate_polar_axis <- function(breaks, direction = "NW", drop = TRUE, ..., .rose_angle = NULL) {
   x <- str_to_angle(direction)
+
+  if (!is.null(.rose_angle)) {
+    ra = .rose_angle / 2
+    if (x >= 0 & x < ra) {
+      x <- x + 360
+    }
+  }
 
   func <- function(.x) {
     ggplot2::annotate(

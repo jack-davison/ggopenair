@@ -4,7 +4,13 @@
 \alias{annotate_polar_axis}
 \title{Annotate a Polar Plot with Axis Labels}
 \usage{
-annotate_polar_axis(breaks, direction = "NW", drop = TRUE, ...)
+annotate_polar_axis(
+  breaks,
+  direction = "NW",
+  drop = TRUE,
+  ...,
+  .rose_angle = NULL
+)
 }
 \arguments{
 \item{breaks}{The axis breaks to label on the plot. It may be appropriate to
@@ -19,6 +25,11 @@ numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
 [ggplot2::theme_minimal()] or [theme_polar()].}
 
 \item{...}{Arguments to pass to [ggplot2::annotate()].}
+
+\item{.rose_angle}{The number passed to the `angle` argument of
+[gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `wd` when
+it is near to North/0 due to the way [ggplot2::geom_col()] interacts with
+[ggplot2::coord_polar()].}
 }
 \value{
 An annotation to be added to [ggplot2::ggplot()].
@@ -28,7 +39,8 @@ This is a wrapper around [ggplot2::annotate()] which draws the y-axis labels
 directly on the plot, and optionally drops the labels at the side. Note that,
 owing to the way [ggplot2::geom_col()] interacts with
 [ggplot2::coord_polar()], the "direction" argument may require more
-trial-and-error when used with [gg_polar_pollrose()] and [gg_polar_windrose()].
+trial-and-error when used with [gg_polar_pollrose()] and
+[gg_polar_windrose()].
 }
 \examples{
 \dontrun{
@@ -36,3 +48,9 @@ gg_polar_plot(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
 }
 
 }
+\seealso{
+Other polar annotation functions: 
+\code{\link{annotate_polar_wedge}()},
+\code{\link{annotate_rose_text}()}
+}
+\concept{polar annotation functions}

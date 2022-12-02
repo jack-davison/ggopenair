@@ -15,6 +15,7 @@ theme_polar <- function(panel_ontop = TRUE) {
   theme <-
     ggplot2::theme_minimal() %+replace%
     ggplot2::theme(
+      plot.background = element_rect(fill = "white", color = NA),
       panel.ontop = panel_ontop,
       axis.line.x.top = ggplot2::element_blank(),
       panel.grid.minor.x = ggplot2::element_blank(),

@@ -2,30 +2,31 @@
 % Please edit documentation in R/gg_trendlevel.R
 \name{gg_trendlevel}
 \alias{gg_trendlevel}
-\title{trendLevel}
+\title{Trend Heat Map}
 \usage{
 gg_trendlevel(
   data,
   pollutant,
-  x = "month",
-  y = "hour",
-  facet = "default",
+  x,
+  y,
+  facet = NULL,
   statistic = c("mean", "max", "frequency"),
-  stat_args,
-  stat_safemode
+  stat_args = NULL,
+  stat_safemode = TRUE
 )
 }
 \arguments{
 \item{data}{The openair data frame to use to generate the \code{trendLevel}
 plot.}
 
-\item{pollutant}{The name of the data series in \code{mydata} to sample to
-produce the \code{trendLevel} plot.}
+\item{pollutant}{A column name identifying a pollutant concentration.}
 
 \item{x, y, facet}{The name of the data series with which to bin \code{mydata}.
 `x` and `y` form the x and y axes of the resulting plot, and `facet` is
 optionally used to separate the plot into separate panels. Duplication in
-\code{x}, \code{y} and \code{facet} are not permitted.}
+\code{x}, \code{y} and \code{facet} are not permitted. If not
+representative of column names, the three arguments are passed to
+[openair::cutData()].}
 
 \item{statistic}{The statistic method to be use to summarise locally binned
 \code{pollutant} measurements with. Three options are currently encoded:
@@ -48,24 +49,12 @@ missing entries, it might need to be set to \code{FALSE} (see Details
 below.)}
 }
 \value{
-As well as generating the plot itself, \code{trendLevel} also returns
-  an object of class ``openair''. The object includes three main components:
-  \code{call}, the command used to generate the plot; \code{data}, the data
-  frame of summarised information used to make the plot; and \code{plot}, the
-  plot itself. If retained, e.g. using \code{output <- trendLevel(mydata)},
-  this output can be used to recover the data, reproduce or rework the
-  original plot or undertake further analysis.
-
-  An openair output can be manipulated using a number of generic operations,
-  including \code{print}, \code{plot} and \code{summary}.
-
-  Summary statistics can also be extracted directly using \code{results},
-  e.g.  \code{results(object)} for \code{output <- trendLevel(mydata)}.
+A [ggplot2::ggplot2] figure
 }
 \description{
 The trendLevel function provides a way of rapidly showing a large amount of
 data in a condensed form. In one plot, the variation in the concentration of
-one pollutant can to shown as a function of three other categorical
+one pollutant can to shown as a function of up to three other categorical
 properties. The default version of the plot uses y = hour of day, x = month
 of year and type = year to provide information on trends, seasonal effects
 and diurnal variations. However, x, y and type and summarising statistics can

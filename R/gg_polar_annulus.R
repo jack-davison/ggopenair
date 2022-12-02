@@ -2,16 +2,16 @@
 #'
 #' Typically plots the concentration of a pollutant by wind direction and as a
 #' function of time as an annulus. The function is good for visualising how
-#' concentrations of pollutants vary by wind direction and a time period e.g. by
-#' month, day of week.
+#' concentrations of pollutants vary by wind direction and a time period, e.g.,
+#' by month, day of week, etc.
 #'
-#' The \code{polarAnnulus} function shares many of the properties of the
-#' \code{polarPlot}. However, \code{polarAnnulus} is focussed on displaying
-#' information on how concentrations of a pollutant (values of another variable)
-#' vary with wind direction and time. Plotting as an annulus helps to reduce
-#' compression of information towards the centre of the plot. The circular plot
-#' is easy to interpret because wind direction is most easily understood in
-#' polar rather than Cartesian coordinates.
+#' [gg_polar_annulus()] shares many of the properties of the [gg_polar_plot()].
+#' However, [gg_polar_annulus()] is focussed on displaying information on how
+#' concentrations of a pollutant (values of another variable) vary with wind
+#' direction and time. Plotting as an annulus helps to reduce compression of
+#' information towards the centre of the plot. The circular plot is easy to
+#' interpret because wind direction is most easily understood in polar rather
+#' than Cartesian coordinates.
 #'
 #' The inner part of the annulus represents the earliest time and the outer part
 #' of the annulus the latest time. The time dimension can be shown in many ways
@@ -22,24 +22,15 @@
 #' location.
 #'
 #' For \code{type = "trend"} the amount of smoothing does not vary linearly with
-#' the length of the time series i.e. a certain amount of smoothing per unit
+#' the length of the time series, i.e., a certain amount of smoothing per unit
 #' interval in time. This is a deliberate choice because should one be
 #' interested in a subset (in time) of data, more detail will be provided for
 #' the subset compared with the full data set. This allows users to investigate
 #' specific periods in more detail. Full flexibility is given through the
 #' smoothing parameter \code{k}.
 #'
-#' @param data A data frame minimally containing \code{date}, \code{wd} and a
-#'   pollutant.
-#' @param pollutant Mandatory. A pollutant name corresponding to a variable in a
-#'   data frame should be supplied e.g. \code{pollutant = "nox"}. There can also
-#'   be more than one pollutant specified e.g. \code{pollutant = c("nox",
-#'   "no2")}. The main use of using two or more pollutants is for model
-#'   evaluation where two species would be expected to have similar
-#'   concentrations. This saves the user stacking the data and it is possible to
-#'   work with columns of data directly. A typical use would be \code{pollutant
-#'   = c("obs", "mod")} to compare two columns \dQuote{obs} (the observations)
-#'   and \dQuote{mod} (modelled values).
+#' @inheritParams gg_polar_plot
+#'
 #' @param local_tz Should the results be calculated in local time that includes
 #'   a treatment of daylight savings time (DST)? The default is not to consider
 #'   DST issues, provided the data were imported without a DST offset. Emissions
@@ -58,31 +49,6 @@
 #'   \dQuote{hour} (the default, to plot diurnal variations), \dQuote{season} to
 #'   plot variation throughout the year, \dQuote{weekday} to plot day of the
 #'   week variation and \dQuote{trend} to plot the trend by wind direction.
-#' @param type \code{type} determines how the data are split i.e. conditioned,
-#'   and then plotted. The default is will produce a single plot using the
-#'   entire data. Type can be one of the built-in types as detailed in
-#'   \code{cutData} e.g. \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so
-#'   on. For example, \code{type = "season"} will produce four plots --- one for
-#'   each season.
-#'
-#'   It is also possible to choose \code{type} as another variable in the data
-#'   frame. If that variable is numeric, then the data will be split into four
-#'   quantiles (if possible) and labelled accordingly. If type is an existing
-#'   character or factor variable, then those categories/levels will be used
-#'   directly. This offers great flexibility for understanding the variation of
-#'   different variables and how they depend on one another.
-#'
-#'   Type can be up length two e.g. \code{type = c("season", "site")} will
-#'   produce a 2x2 plot split by season and site. The use of two types is mostly
-#'   meant for situations where there are several sites. Note, when two types
-#'   are provided the first forms the columns and the second the rows.
-#'
-#'   Also note that for the \code{polarAnnulus} function some type/period
-#'   combinations are forbidden or make little sense. For example, \code{type =
-#'   "season"} and \code{period = "trend"} (which would result in a plot with
-#'   too many gaps in it for sensible smoothing), or \code{type = "weekday"} and
-#'   \code{period = "weekday"}.
-#'
 #' @param statistic The statistic that should be applied to each wind
 #'   speed/direction bin. Can be \dQuote{mean} (default), \dQuote{median},
 #'   \dQuote{max} (maximum), \dQuote{frequency}. \dQuote{stdev} (standard
@@ -107,13 +73,6 @@
 #'   inner white space. `width = 2` makes the annulus twice as wide as the inner
 #'   circle, whereas `width = 0.5` makes the annulus half as wide as the inner
 #'   circle. Defaults to `1`.
-#' @param min_bin The minimum number of points allowed in a wind speed/wind
-#'   direction bin.  The default is 1. A value of two requires at least 2 valid
-#'   records in each bin an so on; bins with less than 2 valid records are set
-#'   to NA. Care should be taken when using a value > 1 because of the risk of
-#'   removing real data points. It is recommended to consider your data with
-#'   care. Also, the \code{polarFreq} function can be of use in such
-#'   circumstances.
 #' @param exclude_missing Setting this option to \code{TRUE} (the default)
 #'   removes points from the plot that are too far from the original data. The
 #'   smoothing routines will produce predictions at points where no data exist
@@ -124,30 +83,11 @@
 #'   will pad-out missing data to the beginning of the first year and the end of
 #'   the last year. The purpose is to ensure that the trend plot begins and ends
 #'   at the beginning or end of year.
-#' @param force_positive The default is \code{TRUE}. Sometimes if smoothing data
-#'   with steep gradients it is possible for predicted values to be negative.
-#'   \code{force_positive = TRUE} ensures that predictions remain postive. This
-#'   is useful for several reasons. First, with lots of missing data more
-#'   interpolation is needed and this can result in artifacts because the
-#'   predictions are too far from the original data. Second, if it is known
-#'   beforehand that the data are all postive, then this option carries that
-#'   assumption through to the prediction. The only likely time where setting
-#'   \code{force_positive = FALSE} would be if background concentrations were
-#'   first subtracted resulting in data that is legitimately negative. For the
-#'   vast majority of situations it is expected that the user will not need to
-#'   alter the default option.
 #' @param k The smoothing value supplied to \code{gam} for the temporal and wind
 #'   direction components, respectively. In some cases e.g. a trend plot with
 #'   less than 1-year of data the smoothing with the default values may become
 #'   too noisy and affected more by outliers. Choosing a lower value of \code{k}
 #'   (say 10) may help produce a better plot.
-#' @param normalise If \code{TRUE} concentrations are normalised by dividing by
-#'   their mean value. This is done \emph{after} fitting the smooth surface.
-#'   This option is particularly useful if one is interested in the patterns of
-#'   concentrations for several pollutants on different scales e.g. NOx and CO.
-#'   Often useful if more than one \code{pollutant} is chosen.
-#' @param alpha The transparency of the polar plot. This is mainly useful to
-#'   overlay the polar plot on a map.
 #' @export
 #' @return As well as generating the plot itself, \code{polarAnnulus} also
 #'   returns an object of class ``openair''. The object includes three main
@@ -166,7 +106,7 @@ gg_polar_annulus <- function(data,
                              pollutant,
                              local_tz = NULL,
                              period = "hour",
-                             type = "default",
+                             facet = NULL,
                              statistic = "mean",
                              percentile = NA,
                              width = 1,
@@ -200,13 +140,14 @@ gg_polar_annulus <- function(data,
   )
 
   # run openair
+  if (is.null(facet)) facet <- "default"
   oa_data <-
     openair::polarAnnulus(
       mydata = data,
       pollutant = pollutant,
       local.tz = local_tz,
       period = period,
-      type = type,
+      type = facet,
       statistic = statistic,
       percentile = percentile,
       min.bin = min_bin,
@@ -219,7 +160,7 @@ gg_polar_annulus <- function(data,
     )$data
 
   # process data
-  plot_dat <-
+  plot_data <-
     oa_data %>%
     tidyr::drop_na("z", "u", "v") %>%
     dplyr::mutate(
@@ -233,8 +174,8 @@ gg_polar_annulus <- function(data,
     dplyr::arrange("z")
 
   # sort out y axis
-  plot_dat <-
-    dplyr::mutate(plot_dat, r = scales::rescale(x = .data$r, to = scale))
+  plot_data <-
+    dplyr::mutate(plot_data, r = scales::rescale(x = .data$r, to = scale))
 
   # sort out point size
   ps <- 1
@@ -244,7 +185,7 @@ gg_polar_annulus <- function(data,
 
   # construct plot
   plt <-
-    ggplot2::ggplot(plot_dat, ggplot2::aes(.data$t, .data$r)) +
+    ggplot2::ggplot(plot_data, ggplot2::aes(.data$t, .data$r)) +
     ggplot2::coord_polar() +
     scattermore::geom_scattermore(
       interpolate = TRUE,
@@ -253,7 +194,7 @@ gg_polar_annulus <- function(data,
       na.rm = TRUE,
       alpha = alpha
     ) +
-    ggplot2::expand_limits(y = -max(plot_dat$r) * (1 / width)) +
+    ggplot2::expand_limits(y = -max(plot_data$r) * (1 / width)) +
     ggplot2::scale_x_continuous(
       breaks = seq(0, 270, 90),
       limits = c(0, 360),
@@ -266,15 +207,16 @@ gg_polar_annulus <- function(data,
     ggplot2::scale_y_continuous(breaks = breaks, labels = labels)
 
   # sort out type
-  if (any(type != "default")) {
-    if (length(type) == 1) {
+  facet <- dplyr::group_vars(plot_data)
+  if (any(facet != "default")) {
+    if (length(facet) == 1) {
       plt <-
-        plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[type]]))
+        plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
     } else {
       plt <-
         plt + ggplot2::facet_grid(
-          cols = ggplot2::vars(.data[[type[1]]]),
-          rows = ggplot2::vars(.data[[type[2]]])
+          cols = ggplot2::vars(.data[[facet[1]]]),
+          rows = ggplot2::vars(.data[[facet[2]]])
         )
     }
   }

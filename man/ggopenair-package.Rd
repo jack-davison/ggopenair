@@ -8,6 +8,13 @@
 \description{
 Recreate the air quality data visualisations of 'openair' using the popular 'ggplot2' plotting package.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://jack-davison.github.io/ggopenair/}
+}
+
+}
 \author{
 \strong{Maintainer}: Jack Davison \email{davison.jack.jd@gmail.com}
 

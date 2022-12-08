@@ -21,22 +21,22 @@ annotate_rose_text(
 numeric, where 0 is North and 180 is South, or a character representing a
 cardinal direction ("N", "NE", "E", etc.).}
 
-\item{rose_angle}{The number passed to the `angle` argument of
-[gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `wd` due
-to the way [ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].}
+\item{rose_angle}{The number passed to the \code{angle} argument of
+\code{\link[=gg_pollutionrose]{gg_pollutionrose()}}/\code{\link[=gg_windrose]{gg_windrose()}}. This is required to adjust \code{wd} due
+to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}.}
 
 \item{size}{Size of the annotation.}
 
 \item{alpha}{Alpha value of the annotation, where 1 is opaque and 0 is
 transparent.}
 
-\item{fun}{One of "label" or "text", which will use [ggplot2::geom_label()]
-or [ggplot2::geom_text()], respectively.}
+\item{fun}{One of "label" or "text", which will use \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}
+or \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}, respectively.}
 
-\item{...}{Other arguments to pass to `fun`.}
+\item{...}{Other arguments to pass to \code{fun}.}
 }
 \description{
-Add an annotation to a [gg_pollutionrose()] or [gg_windrose()] plot. This
+Add an annotation to a \code{\link[=gg_pollutionrose]{gg_pollutionrose()}} or \code{\link[=gg_windrose]{gg_windrose()}} plot. This
 annotation typically shows the mean pollutant or wind speed value, along with
 the percentage calm value.
 }

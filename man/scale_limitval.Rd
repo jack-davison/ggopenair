@@ -33,26 +33,26 @@ the same length as \code{marker_values}. Defaults to using the numeric
 values given in \code{marker_values}.}
 
 \item{trans}{The name of a transformation object. See
-[ggplot2::scale_continuous()] for more information.}
+\code{\link[ggplot2:scale_continuous]{ggplot2::scale_x_continuous()}} for more information.}
 
-\item{...}{Other arguments to pass to [ggplot2::scale_continuous()].}
+\item{...}{Other arguments to pass to
+\code{\link[ggplot2:scale_continuous]{ggplot2::scale_x_continuous()}}/\code{\link[ggplot2:scale_continuous]{ggplot2::scale_y_continuous()}}.}
 }
 \description{
-This function is a wrapper around [ggplot2::scale_continuous()] wich allows
-users to automatically draw labelled horizontal or vertical markers at
-specified points. In the air quality world, this may be particularly useful
-to display limit values, such as those defined in legislation or recommended
-by health authorities.
+This function is a wrapper around \code{\link[ggplot2:scale_continuous]{ggplot2::scale_x_continuous()}} or
+\code{\link[ggplot2:scale_continuous]{ggplot2::scale_y_continuous()}} which allows users to automatically draw
+labelled horizontal or vertical markers at specified points. In the air
+quality world, this may be particularly useful to display limit values, such
+as those defined in legislation or recommended by health authorities.
 }
 \details{
-This function uses [ggplot2::sec_axis()] to display the line labels. One can
-therefore not pass [ggplot2::sec_axis()] to \code{...}. If users wish to use
-[ggplot2::sec_axis()] it is recommended to use [ggplot2::geom_abline()] to
+This function uses \code{\link[ggplot2:sec_axis]{ggplot2::sec_axis()}} to display the line labels. One can
+therefore not pass \code{\link[ggplot2:sec_axis]{ggplot2::sec_axis()}} to \code{...}. If users wish to use
+\code{\link[ggplot2:sec_axis]{ggplot2::sec_axis()}} it is recommended to use \code{\link[ggplot2:geom_abline]{ggplot2::geom_abline()}} to
 draw lines manually.
 
-Unlike other "scales" functions, including [ggplot2::scale_continuous()], the
-order in which this function is added to the [ggplot2::ggplot()] object
-matters. Adding \code{scale_*_limitval()} *after* [ggplot2::geom_line()] will
-draw the line markers on top of the trend line, whereas adding it *before*
-will draw the markers below.
+Unlike other "scale" functions the order in which this function is added to
+the \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object matters. Adding \code{scale_*_limitval()}
+\emph{after} \code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} will draw the line markers on top of the trend
+line, whereas adding it \emph{before} will draw the markers below.
 }

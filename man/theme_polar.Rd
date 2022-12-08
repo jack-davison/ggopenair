@@ -8,14 +8,14 @@ theme_polar(panel_ontop = TRUE)
 }
 \arguments{
 \item{panel_ontop}{Place panel grids on top of the plot geometries? The
-default, `TRUE`, can make polar plots easier to interpret, but this
+default, \code{TRUE}, can make polar plots easier to interpret, but this
 behaviour may not always be desired.}
 }
 \value{
-A ggplot theme object defining for use with [ggplot2::ggplot()].
+A ggplot theme object defining for use with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
 This is a complete theme which attempts to recreate the styling of
-[openair::polarPlot()]. As an alternative to using this theme, you could use
-[ggplot2::theme()] or any of the in-built `ggplot2` themes.
+\code{\link[openair:polarPlot]{openair::polarPlot()}}. As an alternative to using this theme, you could use
+\code{\link[ggplot2:theme]{ggplot2::theme()}} or any of the in-built \code{ggplot2} themes.
 }

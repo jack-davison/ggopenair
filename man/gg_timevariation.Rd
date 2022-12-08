@@ -41,7 +41,7 @@ produce better-defined diurnal profiles of concentration (or other
 variables) and allows a better comparison to be made with
 emissions/activity data. If set to \code{FALSE} then GMT is used. Examples
 of usage include \code{local.tz = "Europe/London"}, \code{local.tz =
-"America/New_York"}. See \code{cutData} and \code{import} for more
+  "America/New_York"}. See \code{cutData} and \code{import} for more
 details.}
 
 \item{normalise}{Should variables be normalised? The default is
@@ -50,28 +50,28 @@ mean values. This helps to compare the shape of the diurnal trends for
 variables on very different scales.}
 
 \item{type}{\code{type} determines how the data are split i.e. conditioned,
-  and then plotted. The default is will produce a single plot using the
-  entire data. Type can be one of the built-in types as detailed in
-  \code{cutData} e.g. \dQuote{season}, \dQuote{year}, \dQuote{weekday} and
-  so on. For example, \code{type = "season"} will produce four plots --- one
-  for each season.
+and then plotted. The default is will produce a single plot using the
+entire data. Type can be one of the built-in types as detailed in
+\code{cutData} e.g. \dQuote{season}, \dQuote{year}, \dQuote{weekday} and
+so on. For example, \code{type = "season"} will produce four plots --- one
+for each season.
 
-  It is also possible to choose \code{type} as another variable in the data
-  frame. If that variable is numeric, then the data will be split into four
-  quantiles (if possible) and labelled accordingly. If type is an existing
-  character or factor variable, then those categories/levels will be used
-  directly. This offers great flexibility for understanding the variation of
-  different variables and how they depend on one another.
+It is also possible to choose \code{type} as another variable in the data
+frame. If that variable is numeric, then the data will be split into four
+quantiles (if possible) and labelled accordingly. If type is an existing
+character or factor variable, then those categories/levels will be used
+directly. This offers great flexibility for understanding the variation of
+different variables and how they depend on one another.
 
-  Only one \code{type} is allowed in\code{timeVariation}.}
+Only one \code{type} is allowed in\code{timeVariation}.}
 
 \item{group}{This sets the grouping variable to be used. For example, if a
 data frame had a column \code{site} setting \code{group = "site"} will
 plot all sites together in each panel. See examples below.}
 
 \item{difference}{If two pollutants are chosen then setting \code{difference
-= TRUE} will also plot the difference in means between the two variables
-as \code{pollutant[2] - pollutant[1]}. Bootstrap 95\% confidence intervals
+  = TRUE} will also plot the difference in means between the two variables
+as \code{pollutant[2] - pollutant[1]}. Bootstrap 95\\% confidence intervals
 of the difference in means are also calculated. A horizontal dashed line
 is shown at y = 0. The difference can also be calculated if there is a
 column that identifies two groups e.g. having used \code{splitByDate}. In
@@ -79,23 +79,23 @@ this case it is possible to call \code{timeVariation} with the option
 \code{group = "split.by"} and \code{difference = TRUE}.}
 
 \item{statistic}{Can be \dQuote{mean} (default) or \dQuote{median}. If the
-statistic is \sQuote{mean} then the mean line and the 95\% confidence
+statistic is \sQuote{mean} then the mean line and the 95\\% confidence
 interval in the mean are plotted by default. If the statistic is
 \sQuote{median} then the median line is plotted together with the 5/95 and
 25/75th quantiles are plotted. Users can control the confidence intervals
 with \code{conf.int}.}
 
 \item{conf_int}{The confidence intervals to be plotted. If \code{statistic =
-"mean"} then the confidence intervals in the mean are plotted. If
+  "mean"} then the confidence intervals in the mean are plotted. If
 \code{statistic = "median"} then the \code{conf.int} and \code{1 -
-conf.int} \emph{quantiles} are plotted. \code{conf.int} can be of length
+  conf.int} \emph{quantiles} are plotted. \code{conf.int} can be of length
 2, which is most useful for showing quantiles. For example \code{conf.int
-= c(0.75, 0.99)} will yield a plot showing the median, 25/75 and 5/95th
+  = c(0.75, 0.99)} will yield a plot showing the median, 25/75 and 5/95th
 quantiles.}
 
 \item{b}{Number of bootstrap replicates to use. Can be useful to reduce this
 value when there are a large number of observations available to increase
-the speed of the calculations without affecting the 95\% confidence
+the speed of the calculations without affecting the 95\\% confidence
 interval calculations by much.}
 
 \item{ci}{Should confidence intervals be shown? The default is \code{TRUE}.
@@ -106,11 +106,13 @@ chosen where over-lapping confidence intervals can over complicate plots.}
 0 is fully transparent and 1 is opaque. The default is 0.4}
 
 \item{return}{What should the function return? One of:
-* "ensemble" --- all four time variation panels assembled as a 'patchwork' object (default).
-* "day_hour", "day", "hour", "month" --- a single time variation panel.
-* "list" --- a list of the four time variation panels, which may be useful if
+\itemize{
+\item "ensemble" --- all four time variation panels assembled as a 'patchwork' object (default).
+\item "day_hour", "day", "hour", "month" --- a single time variation panel.
+\item "list" --- a list of the four time variation panels, which may be useful if
 users wish to assemble them in a different way or with other plots entirely.
-* "data" --- the raw data used to create the time variation panels.}
+\item "data" --- the raw data used to create the time variation panels.
+}}
 }
 \description{
 Plots the diurnal, day of the week and monthly variation for different
@@ -124,7 +126,7 @@ and meteorology. For traffic sources, there are often important differences
 in the way vehicles vary by vehicles type, e.g., less heavy vehicles at
 weekends.
 
-The plots also show the 95\% confidence intervals in the mean. The 95\%
+The plots also show the 95\\% confidence intervals in the mean. The 95\\%
 confidence intervals in the mean are calculated through bootstrap
 simulations, which will provide more robust estimates of the confidence
 intervals (particularly when there are relatively few data).
@@ -136,9 +138,9 @@ data are stacked. This will work in a similar way to having multiple
 pollutants in separate columns.
 
 The option \code{difference} will calculate the difference in means of two
-pollutants together with bootstrap estimates of the 95\% confidence
+pollutants together with bootstrap estimates of the 95\\% confidence
 intervals in the difference in the mean. This works in two ways: either two
-pollutants are supplied in separate columns, e.g., `pollutant = c("no2", "o3")`
+pollutants are supplied in separate columns, e.g., \code{pollutant = c("no2", "o3")}
 or there are two unique values of \code{group}. The difference is
 calculated as the second pollutant minus the first and is labelled as such.
 Considering differences in this way can provide many useful insights and is

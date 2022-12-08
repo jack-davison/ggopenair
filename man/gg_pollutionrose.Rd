@@ -29,8 +29,8 @@ divisible (see \code{bias_corr}).}
 
 \item{facet}{One or two faceting columns. \code{facet} determines how the
 data are split and then plotted. When \code{facet} is length 1 it is passed
-to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
-[ggplot2::facet_grid()] with the first element being used as columns and
+to \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, and when it is length 2 it is passed to
+\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}} with the first element being used as columns and
 the second rows. Some other options (e.g., multiple \code{pollutant}
 columns) can limit the the number of faceting columns to 1.}
 
@@ -45,7 +45,7 @@ frequencies.}
 \item{breaks}{The number of break points to use when binning the data, or a
 vector of specific break points. For example, \code{breaks = 6} will split
 the legend into roughly 6 equal bins, whereas \code{breaks = c(0, 1, 10,
-100)} breaks the data into four segments: <1, 1-10, 10-100, & >100.}
+  100)} breaks the data into four segments: <1, 1-10, 10-100, & >100.}
 
 \item{normalise}{If \code{TRUE} each wind direction segment is normalised to
 equal one. This is useful for showing how the concentrations (or other
@@ -74,8 +74,8 @@ it on a map.}
 Traditional wind rose plot and pollution rose variation
 }
 \seealso{
-[annotate_rose_text()] for adding an annotation of mean and calm
-  conditions to the figure.
+\code{\link[=annotate_rose_text]{annotate_rose_text()}} for adding an annotation of mean and calm
+conditions to the figure.
 
 Other polar directional analysis plotting functions: 
 \code{\link{gg_polar_annulus}()},

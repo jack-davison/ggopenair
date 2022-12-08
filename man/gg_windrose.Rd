@@ -36,8 +36,8 @@ divisible (see \code{bias_corr}).}
 
 \item{facet}{One or two faceting columns. \code{facet} determines how the
 data are split and then plotted. When \code{facet} is length 1 it is passed
-to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
-[ggplot2::facet_grid()] with the first element being used as columns and
+to \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, and when it is length 2 it is passed to
+\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}} with the first element being used as columns and
 the second rows. Some other options (e.g., multiple \code{pollutant}
 columns) can limit the the number of faceting columns to 1.}
 

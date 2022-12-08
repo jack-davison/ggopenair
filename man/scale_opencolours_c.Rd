@@ -12,7 +12,7 @@ scale_opencolours_c(
 )
 }
 \arguments{
-\item{colours}{The openair colour scheme to use. See [openair::openColours()]
+\item{colours}{The openair colour scheme to use. See \code{\link[openair:openColours]{openair::openColours()}}
 for more information.}
 
 \item{na_value}{The aesthetic value to use for missing (NA) values. Defaults
@@ -20,18 +20,18 @@ to "grey50".}
 
 \item{aes}{Character string or vector of character strings listing the
 name(s) of the aesthetic(s) that this scale works with. The default,
-`c("colour", "fill")`, applies colours to both the `colour` *and* `fill`
+\code{c("colour", "fill")}, applies colours to both the \code{colour} \emph{and} \code{fill}
 aesthetics.}
 
-\item{...}{Other arguments to pass to [ggplot2::scale_color_gradientn()].}
+\item{...}{Other arguments to pass to \code{\link[ggplot2:scale_gradient]{ggplot2::scale_color_gradientn()}}.}
 }
 \value{
 A ggproto object defining a continuous colour scale for use with
-  [ggplot2::ggplot()].
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
-This is a convenient wrapper around [ggplot2::scale_color_gradientn()] and
-[openair::openColours()] which creates colour gradients for `ggopenair`
+This is a convenient wrapper around \code{\link[ggplot2:scale_gradient]{ggplot2::scale_color_gradientn()}} and
+\code{\link[openair:openColours]{openair::openColours()}} which creates colour gradients for \code{ggopenair}
 plots, with helpful defaults.
 }
 \examples{

@@ -21,38 +21,38 @@ class \code{POSIXct}.}
 \item{pollutant}{Mandatory. A pollutant name corresponding to a variable in a
 data frame should be supplied e.g. \code{pollutant = "nox".}}
 
-\item{statistic}{Statistic passed to [time_average()].}
+\item{statistic}{Statistic passed to \code{\link[=time_average]{time_average()}}.}
 
-\item{data_thresh}{Data capture threshold passed to [time_average()]. For
-example, \code{data_thresh = 75} means that at least 75\% of the data must
+\item{data_thresh}{Data capture threshold passed to \code{\link[=time_average]{time_average()}}. For
+example, \code{data_thresh = 75} means that at least 75\\% of the data must
 be available in a day for the value to be calculate, else the data is
 removed.}
 
 \item{border_colour}{The colour to use for the border of each tile. Defaults
-to "white". `NA` removes the border.}
+to "white". \code{NA} removes the border.}
 
 \item{w_shift}{Controls the order of the days of the week. By default the
 plot shows Saturday first (\code{w_shift = 0}). To change this so that it
 starts on a Monday for example, set \code{w_shift = 2}, and so on.}
 }
 \description{
-With a single year of data, [gg_calendar()] will plot data in a conventional
+With a single year of data, \code{\link[=gg_calendar]{gg_calendar()}} will plot data in a conventional
 calendar format, i.e., by month and day of the week. With multiple years of
 data, a year-month matrix of panels will instead be plotted. Daily statistics
-are calculated using [time_average()], which by default will calculate the
+are calculated using \code{\link[=time_average]{time_average()}}, which by default will calculate the
 daily mean concentration.
 }
 \details{
-[gg_calendar()] has two accompanying annotation functions.
-[annotate_calendar_text()] can write either the day of the month or the
-average pollutant concentration on the calendar. [annotate_calendar_wd()]
+\code{\link[=gg_calendar]{gg_calendar()}} has two accompanying annotation functions.
+\code{\link[=annotate_calendar_text]{annotate_calendar_text()}} can write either the day of the month or the
+average pollutant concentration on the calendar. \code{\link[=annotate_calendar_wd]{annotate_calendar_wd()}}
 will draw wind speed and direction arrows onto the calendar, assuming columns
 labelled "ws" and "wd" were present in the original data.
 
 Note that is is possible to pre-calculate concentrations in some way before
-passing the data to [gg_calendar()]. For example [openair::rollingMean()]
+passing the data to \code{\link[=gg_calendar]{gg_calendar()}}. For example \code{\link[openair:rollingMean]{openair::rollingMean()}}
 could be used to calculate rolling 8-hour mean concentrations. The data can
-then be passed to [gg_calendar()] and \code{statistic = "max"} chosen, which
+then be passed to \code{\link[=gg_calendar]{gg_calendar()}} and \code{statistic = "max"} chosen, which
 will plot maximum daily 8-hour mean concentrations.
 }
 \examples{
@@ -65,6 +65,6 @@ marylebone \%>\%
 }
 }
 \seealso{
-[annotate_calendar_wd()] and [annotate_calendar_text()] for
-  annotating calendar plots.
+\code{\link[=annotate_calendar_wd]{annotate_calendar_wd()}} and \code{\link[=annotate_calendar_text]{annotate_calendar_text()}} for
+annotating calendar plots.
 }

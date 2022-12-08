@@ -20,7 +20,7 @@ default) or "southern".}
 a factor vector.
 }
 \description{
-[cut_date()] conveniently extracts useful features from a vector of date-time
+\code{\link[=cut_date]{cut_date()}} conveniently extracts useful features from a vector of date-time
 data, such as the year, season, whether or not it is a weekend, and so on.
 This may be useful
 }

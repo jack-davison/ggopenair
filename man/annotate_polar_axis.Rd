@@ -14,33 +14,33 @@ annotate_polar_axis(
 }
 \arguments{
 \item{breaks}{The axis breaks to label on the plot. It may be appropriate to
-use [seq()] to obtain equally spaced labels.}
+use \code{\link[=seq]{seq()}} to obtain equally spaced labels.}
 
 \item{direction}{The angles at which to write the labels. Can be expressed
 numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
 "ENE", etc.).}
 
 \item{drop}{Remove the y-axis labels to the side of the plot? Defaults to
-`TRUE`. Note that this option is overriden by complete themes such as
-[ggplot2::theme_minimal()] or [theme_polar()].}
+\code{TRUE}. Note that this option is overriden by complete themes such as
+\code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}} or \code{\link[=theme_polar]{theme_polar()}}.}
 
-\item{...}{Arguments to pass to [ggplot2::annotate()].}
+\item{...}{Arguments to pass to \code{\link[ggplot2:annotate]{ggplot2::annotate()}}.}
 
-\item{.rose_angle}{The number passed to the `angle` argument of
-[gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `wd` when
-it is near to North/0 due to the way [ggplot2::geom_col()] interacts with
-[ggplot2::coord_polar()].}
+\item{.rose_angle}{The number passed to the \code{angle} argument of
+\code{\link[=gg_pollutionrose]{gg_pollutionrose()}}/\code{\link[=gg_windrose]{gg_windrose()}}. This is required to adjust \code{wd} when
+it is near to North/0 due to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
+\code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}.}
 }
 \value{
-An annotation to be added to [ggplot2::ggplot()].
+An annotation to be added to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
-This is a wrapper around [ggplot2::annotate()] which draws the y-axis labels
+This is a wrapper around \code{\link[ggplot2:annotate]{ggplot2::annotate()}} which draws the y-axis labels
 directly on the plot, and optionally drops the labels at the side. Note that,
-owing to the way [ggplot2::geom_col()] interacts with
-[ggplot2::coord_polar()], the "direction" argument may require more
-trial-and-error when used with [gg_polar_pollrose()] and
-[gg_polar_windrose()].
+owing to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
+\code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}, the "direction" argument may require more
+trial-and-error when used with \code{\link[=gg_polar_pollrose]{gg_polar_pollrose()}} and
+\code{\link[=gg_polar_windrose]{gg_polar_windrose()}}.
 }
 \examples{
 \dontrun{

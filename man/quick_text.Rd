@@ -13,10 +13,10 @@ quick_text(text)
 A character vector.
 }
 \description{
-[quick_text()] is routine formatting lookup table which automatically
+\code{\link[=quick_text]{quick_text()}} is routine formatting lookup table which automatically
 prepares common pollutant names and units for parsing using
-[ggplot2::label_parsed()] or similar. It is automatically called by several
-\code{ggopenair} functions. Unlike [openair::quickText()], [quick_text()]
+\code{\link[ggplot2:labellers]{ggplot2::label_parsed()}} or similar. It is automatically called by several
+\code{ggopenair} functions. Unlike \code{\link[openair:quickText]{openair::quickText()}}, \code{\link[=quick_text]{quick_text()}}
 returns a character vector, which means its output can be stored in a data
-frame or [tibble::tibble()]
+frame or \code{\link[tibble:tibble]{tibble::tibble()}}
 }

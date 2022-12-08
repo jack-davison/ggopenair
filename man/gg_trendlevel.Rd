@@ -22,11 +22,11 @@ plot.}
 \item{pollutant}{A column name identifying a pollutant concentration.}
 
 \item{x, y, facet}{The name of the data series with which to bin \code{mydata}.
-`x` and `y` form the x and y axes of the resulting plot, and `facet` is
+\code{x} and \code{y} form the x and y axes of the resulting plot, and \code{facet} is
 optionally used to separate the plot into separate panels. Duplication in
 \code{x}, \code{y} and \code{facet} are not permitted. If not
 representative of column names, the three arguments are passed to
-[openair::cutData()].}
+\code{\link[openair:cutData]{openair::cutData()}}.}
 
 \item{statistic}{The statistic method to be use to summarise locally binned
 \code{pollutant} measurements with. Three options are currently encoded:
@@ -49,7 +49,7 @@ missing entries, it might need to be set to \code{FALSE} (see Details
 below.)}
 }
 \value{
-A [ggplot2::ggplot2] figure
+A \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} figure
 }
 \description{
 The trendLevel function provides a way of rapidly showing a large amount of

@@ -14,28 +14,28 @@ time_average(
 )
 }
 \arguments{
-\item{data}{A data frame containing a date field. Can be class `POSIXct` or
-`Date`.}
+\item{data}{A data frame containing a date field. Can be class \code{POSIXct} or
+\code{Date}.}
 
 \item{avg_time}{This defines the time period to average to. Can be “sec”,
-  “min”, “hour”, “day”, “DSTday”, “week”, “month”, “quarter” or “year”. For
-  much increased flexibility a number can precede these options followed by a
-  space. For example, a timeAverage of 2 months would be period = "2 month".
-  In addition, avg_time can equal “season”, in which case 3-month seasonal
-  values are calculated with spring defined as March, April, May and so on.
+“min”, “hour”, “day”, “DSTday”, “week”, “month”, “quarter” or “year”. For
+much increased flexibility a number can precede these options followed by a
+space. For example, a timeAverage of 2 months would be period = "2 month".
+In addition, avg_time can equal “season”, in which case 3-month seasonal
+values are calculated with spring defined as March, April, May and so on.
 
-  Note that avg_time can be less than the time interval of the original
-  series, in which case the series is expanded to the new time interval. This
-  is useful, for example, for calculating a 15-minute time series from an
-  hourly one where an hourly value is repeated for each new 15-minute period.
-  Note that when expanding data in this way it is necessary to ensure that
-  the time interval of the original series is an exact multiple of avg_time
-  e.g. hour to 10 minutes, day to hour. Also, the input time series must have
-  consistent time gaps between successive intervals so that timeAverage can
-  work out how much ‘padding’ to apply. To pad-out data in this way choose
-  fill = TRUE.}
+Note that avg_time can be less than the time interval of the original
+series, in which case the series is expanded to the new time interval. This
+is useful, for example, for calculating a 15-minute time series from an
+hourly one where an hourly value is repeated for each new 15-minute period.
+Note that when expanding data in this way it is necessary to ensure that
+the time interval of the original series is an exact multiple of avg_time
+e.g. hour to 10 minutes, day to hour. Also, the input time series must have
+consistent time gaps between successive intervals so that timeAverage can
+work out how much ‘padding’ to apply. To pad-out data in this way choose
+fill = TRUE.}
 
-\item{data_thresh}{The data capture threshold to use (%). A value of zero
+\item{data_thresh}{The data capture threshold to use (\%). A value of zero
 means that all available data will be used in a particular period
 regardless if of the number of values available. Conversely, a value of 100
 will mean that all data will need to be present for the average to be
@@ -46,19 +46,19 @@ end.date to see whether it is advisable to set these other options.}
 the mean. Can be one of “mean”, “max”, “min”, “median”, “frequency”, “sum”,
 “sd”, “percentile”. Note that “sd” is the standard deviation, “frequency”
 is the number (frequency) of valid records in the period and “data.cap” is
-the percentage data capture. “percentile” is the percentile level (%)
+the percentage data capture. “percentile” is the percentile level (\%)
 between 0-100, which can be set using the “percentile” option.}
 
-\item{...}{Other arguments to pass to [openair::timeAverage()].}
+\item{...}{Other arguments to pass to \code{\link[openair:timeAverage]{openair::timeAverage()}}.}
 
-\item{type}{Not used. Please use [dplyr::group_by()].}
+\item{type}{Not used. Please use \code{\link[dplyr:group_by]{dplyr::group_by()}}.}
 }
 \value{
-a [tibble][tibble::tibble-package]
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
-This function is similar to [openair::timeAverage()], but responds to grouped
-data frames (through [dplyr::group_by()]).
+This function is similar to \code{\link[openair:timeAverage]{openair::timeAverage()}}, but responds to grouped
+data frames (through \code{\link[dplyr:group_by]{dplyr::group_by()}}).
 }
 \examples{
 \dontrun{

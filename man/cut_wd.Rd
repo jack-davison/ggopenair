@@ -7,7 +7,7 @@
 cut_wd(x, resolution = "medium")
 }
 \arguments{
-\item{x}{numeric vector representing wind speed, where `0` is North.}
+\item{x}{numeric vector representing wind speed, where \code{0} is North.}
 
 \item{resolution}{A character string representing the number of sectors to
 split wind direction into. Can be `0}
@@ -16,7 +16,7 @@ split wind direction into. Can be `0}
 a character vector.
 }
 \description{
-[cut_wd()] cuts numeric wind speed into sectors. By default, the function
+\code{\link[=cut_wd]{cut_wd()}} cuts numeric wind speed into sectors. By default, the function
 splits wind direction into 8 sectors ("N", "NE", "E", "SE", "S", "SW", "W",
 "NW"), it can also be split into either 4 or 16.
 }

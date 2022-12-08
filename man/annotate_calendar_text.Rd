@@ -20,17 +20,22 @@ annotate_calendar_text(
 \item{colour}{The colour for the annotation text.}
 
 \item{na_colour}{The colour for the annotation text for days outside of a
-given month. Used when `type = "date"`.}
+given month. Used when \code{type = "date"}.}
 
 \item{size}{The size of the annotation text.}
 
 \item{digits}{The number of decimal places used for the annotation text when
-`type = "value"`.}
+\code{type = "value"}.}
 
-\item{...}{Other arguments passed to [ggplot2::geom_text()].}
+\item{...}{Other arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.}
 }
 \description{
-This function will add text to a [gg_calendar()] plot, which can either be
+This function will add text to a \code{\link[=gg_calendar]{gg_calendar()}} plot, which can either be
 the day of the month (like an ordinary calendar) or the pollutant
 concentration.
 }
+\seealso{
+Other calendarplot annotation functions: 
+\code{\link{annotate_calendar_wd}()}
+}
+\concept{calendarplot annotation functions}

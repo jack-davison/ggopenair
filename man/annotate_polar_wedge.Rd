@@ -19,30 +19,30 @@ annotate_polar_wedge(
 numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
 "ENE", etc.).}
 
-\item{end}{The angle at which to end the wedge. See `end` for more details.}
+\item{end}{The angle at which to end the wedge. See \code{end} for more details.}
 
 \item{fill}{The fill colour of the wedge. Defaults to "red".}
 
-\item{colour}{The border colour of the wedge. Defaults to `NA`, which means
+\item{colour}{The border colour of the wedge. Defaults to \code{NA}, which means
 no border is drawn.}
 
-\item{alpha}{The transparency of the wedge. `1` is totally opaque and `0` is
+\item{alpha}{The transparency of the wedge. \code{1} is totally opaque and \code{0} is
 completely transparent.}
 
-\item{...}{Arguments to pass to [ggplot2::annotate()].}
+\item{...}{Arguments to pass to \code{\link[ggplot2:annotate]{ggplot2::annotate()}}.}
 
-\item{.rose_angle}{The number passed to the `angle` argument of
-[gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `start`
-and `end` when they are near to North/0 due to the way
-[ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].}
+\item{.rose_angle}{The number passed to the \code{angle} argument of
+\code{\link[=gg_pollutionrose]{gg_pollutionrose()}}/\code{\link[=gg_windrose]{gg_windrose()}}. This is required to adjust \code{start}
+and \code{end} when they are near to North/0 due to the way
+\code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}.}
 }
 \value{
-An annotation to be added to [ggplot2::ggplot()].
+An annotation to be added to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
-This is a wrapper around [ggplot2::annotate()] which draws a semi-transparent
-wedge on a plot with continuous polar coordinates (any of [gg_polar_plot()],
-[gg_polar_annulus()], [gg_polar_freq()] or [gg_polar_percentile()]).
+This is a wrapper around \code{\link[ggplot2:annotate]{ggplot2::annotate()}} which draws a semi-transparent
+wedge on a plot with continuous polar coordinates (any of \code{\link[=gg_polar_plot]{gg_polar_plot()}},
+\code{\link[=gg_polar_annulus]{gg_polar_annulus()}}, \code{\link[=gg_polar_freq]{gg_polar_freq()}} or \code{\link[=gg_polar_percentile]{gg_polar_percentile()}}).
 }
 \examples{
 \dontrun{

@@ -27,12 +27,12 @@ concentrations.}
 concentrations. When multiple pollutants are specified for a
 single-pollutant \code{statistic} (e.g., "mean"), a faceted plot will be
 returned. Two pollutants must be provided for certain \code{statistic}
-options (e.g., "Pearson" in [gg_polar_plot()]).}
+options (e.g., "Pearson" in \code{\link[=gg_polar_plot]{gg_polar_plot()}}).}
 
 \item{facet}{One or two faceting columns. \code{facet} determines how the
 data are split and then plotted. When \code{facet} is length 1 it is passed
-to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
-[ggplot2::facet_grid()] with the first element being used as columns and
+to \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, and when it is length 2 it is passed to
+\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}} with the first element being used as columns and
 the second rows. Some other options (e.g., multiple \code{pollutant}
 columns) can limit the the number of faceting columns to 1.}
 
@@ -42,7 +42,7 @@ shown.}
 
 \item{method}{When \code{method = "default"} the supplied
 percentiles by wind direction are calculated. When \code{method
-= "cpf"} the conditional probability function (CPF) is plotted
+  = "cpf"} the conditional probability function (CPF) is plotted
 and a single (usually high) percentile level is supplied. The
 CPF is defined as CPF = my/ny, where my is the number of samples
 in the wind sector y with mixing ratios greater than the
@@ -50,13 +50,13 @@ in the wind sector y with mixing ratios greater than the
 number of samples in the same wind sector (see Ashbaugh et al.,
 1985).}
 
-\item{line_lty}{Line type for the percentile lines (see [ggplot2::linetype]).}
+\item{line_lty}{Line type for the percentile lines (see \link[ggplot2:aes_linetype_size_shape]{ggplot2::linetype}).}
 
 \item{line_width}{Line width for the percentile lines.}
 
 \item{mean}{Show the mean by wind direction as a line?}
 
-\item{mean_lty}{Line type for mean line (see [ggplot2::linetype]).}
+\item{mean_lty}{Line type for mean line (see \link[ggplot2:aes_linetype_size_shape]{ggplot2::linetype}).}
 
 \item{mean_width}{Line width for mean line.}
 

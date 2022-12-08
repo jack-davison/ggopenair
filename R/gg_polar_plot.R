@@ -336,8 +336,8 @@ gg_polar_plot <-
       dplyr::mutate(
         r = sqrt(.data$u^2 + (.data$v * -1)^2),
         t = dplyr::if_else(.data$u < 0,
-          atan((.data$v * -1) / .data$u) + pi,
-          atan((.data$v * -1) / .data$u)
+                           atan((.data$v * -1) / .data$u) + pi,
+                           atan((.data$v * -1) / .data$u)
         ),
         t = (.data$t * (180 / pi)) + 90
       ) %>%
@@ -373,8 +373,10 @@ gg_polar_plot <-
     if (any(facet != "default")) {
       if (length(facet) == 1) {
         plt <-
-          plt + ggplot2::facet_wrap(facets = ggplot2::vars(quick_text(.data[[facet]])),
-                                    labeller = ggplot2::label_parsed)
+          plt + ggplot2::facet_wrap(
+            facets = ggplot2::vars(quick_text(.data[[facet]])),
+            labeller = ggplot2::label_parsed
+          )
       } else {
         plt <-
           plt + ggplot2::facet_grid(

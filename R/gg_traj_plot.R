@@ -50,7 +50,8 @@ gg_traj_plot <- function(data,
       max(data[[lon]], na.rm = TRUE) + londiff * 0.1
     )
   biglonrange <-
-    c(min(data[[lon]], na.rm = TRUE) - londiff * 2, max(data[[lon]], na.rm = TRUE) + londiff * 2)
+    c(min(data[[lon]], na.rm = TRUE) - londiff * 2,
+      max(data[[lon]], na.rm = TRUE) + londiff * 2)
 
   latdiff <-
     (max(data[[lat]], na.rm = TRUE) - min(data[[lat]], na.rm = TRUE)) * 0.1
@@ -74,7 +75,8 @@ gg_traj_plot <- function(data,
       ggplot2::aes(.data[[lon]], .data[[lat]], group = .data$date)
   } else {
     aesthetics <-
-      ggplot2::aes(.data[[lon]], .data[[lat]], group = .data$date, colour = .data[[colour]])
+      ggplot2::aes(.data[[lon]], .data[[lat]],
+                   group = .data$date, colour = .data[[colour]])
     data <- dplyr::arrange(data, .data[[colour]])
   }
 

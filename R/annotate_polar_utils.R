@@ -42,18 +42,18 @@ annotate_polar_wedge <-
     end <- str_to_angle(end)
 
     if (!is.null(.rose_angle)) {
-      ra = .rose_angle / 2
-      if (start >= 0 & start < ra) {
+      ra <- .rose_angle / 2
+      if (start >= 0 && start < ra) {
         start <- start + 360
       }
-      if (end >= 0 & end < ra) {
+      if (end >= 0 && end < ra) {
         end <- end + 360
       }
-      real0 = ra
-      real360 = ra + 360
+      real0 <- ra
+      real360 <- ra + 360
     } else {
-      real0 = 0
-      real360 = 360
+      real0 <- 0
+      real360 <- 360
     }
 
     annot_func <- function(start, end) {
@@ -109,12 +109,17 @@ annotate_polar_wedge <-
 #' gg_polar_plot(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
 #' }
 #'
-annotate_polar_axis <- function(breaks, direction = "NW", drop = TRUE, ..., .rose_angle = NULL) {
-  x <- str_to_angle(direction)
+annotate_polar_axis <-
+  function(breaks,
+           direction = "NW",
+           drop = TRUE,
+           ...,
+           .rose_angle = NULL) {
+    x <- str_to_angle(direction)
 
   if (!is.null(.rose_angle)) {
-    ra = .rose_angle / 2
-    if (x >= 0 & x < ra) {
+    ra <- .rose_angle / 2
+    if (x >= 0 && x < ra) {
       x <- x + 360
     }
   }

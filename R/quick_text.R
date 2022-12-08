@@ -34,6 +34,8 @@ quick_text <- function(text) {
   text <- gsub("nv25|NV25|Nv25|nv2.5|NV2.5|Nv2.5", "NV[2.5]", text)
   text <- gsub("v25|V25|v2.5|V2.5", "V[2.5]", text)
   text <- gsub("nmhc", "NMHC", text)
+  text <- gsub("h2s", "H[2]S", text, ignore.case = TRUE)
+  text <- gsub("ch4", "CH[4]", text, ignore.case = TRUE)
 
   # units
   text <- gsub("ug/m3", "\u00B5g m^{-3}", text)
@@ -48,10 +50,6 @@ quick_text <- function(text) {
   # fix spaces
   text <- gsub(" ", "~", text)
 
-  # ans <- gsub("H2S", "' 'H' [2] * 'S''", ans)
-  # ans <- gsub("h2s", "' 'H' [2] * 'S''", ans)
-  # ans <- gsub("CH4", "' 'CH' [4] * '", ans)
-  # ans <- gsub("ch4", "' 'CH' [4] * '", ans)
   # ans <- gsub("dgrC", "' * degree * 'C' '", ans)
   # ans <- gsub("degreeC", "' * degree * 'C' '", ans)
   # ans <- gsub("deg. C", "' * degree * 'C' '", ans)

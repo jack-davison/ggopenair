@@ -50,7 +50,8 @@ gg_pollutionrose <-
            border_colour = NA,
            alpha = 1) {
     # run openair
-    if (is.null(facet)) facet <- "default"
+    if (is.null(facet))
+      facet <- "default"
     oa_data <-
       openair::pollutionRose(
         mydata = data,
@@ -85,7 +86,8 @@ gg_pollutionrose <-
 
     if (length(facet) == 2) {
       data_grouped <-
-        dplyr::group_by(data_long, .data[[facet[1]]], .data[[facet[2]]], .data$wd)
+        dplyr::group_by(data_long, .data[[facet[1]]],
+                        .data[[facet[2]]], .data$wd)
     } else {
       data_grouped <-
         dplyr::group_by(data_long, .data[[facet[1]]], .data$wd)
@@ -93,9 +95,10 @@ gg_pollutionrose <-
 
     plot_data <-
       data_grouped %>%
-      dplyr::mutate(value = dplyr::if_else(!is.na(dplyr::lag(.data$value)),
-                                           .data$value - dplyr::lag(.data$value),
-                                           .data$value
+      dplyr::mutate(value = dplyr::if_else(
+        !is.na(dplyr::lag(.data$value)),
+        .data$value - dplyr::lag(.data$value),
+        .data$value
       )) %>%
       dplyr::ungroup("wd") %>%
       dplyr::mutate(
@@ -116,7 +119,9 @@ gg_pollutionrose <-
         limits = c((angle / 2), 360 + (angle / 2)),
         labels = c("E", "S", "W", "N")
       ) +
-      ggplot2::labs(x = NULL, y = NULL, fill = openair::quickText(pollutant)) +
+      ggplot2::labs(x = NULL,
+                    y = NULL,
+                    fill = openair::quickText(pollutant)) +
       ggplot2::expand_limits(y = -axis_extend)
 
     if (any(facet != "default")) {
@@ -125,10 +130,8 @@ gg_pollutionrose <-
           plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
       } else {
         plt <-
-          plt + ggplot2::facet_grid(
-            cols = ggplot2::vars(.data[[facet[1]]]),
-            rows = ggplot2::vars(.data[[facet[2]]])
-          )
+          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[facet[1]]]),
+                                    rows = ggplot2::vars(.data[[facet[2]]]))
       }
     }
 
@@ -166,7 +169,8 @@ gg_windrose <-
            border_colour = NA,
            alpha = 1) {
     # run openair
-    if (is.null(facet)) facet <- "default"
+    if (is.null(facet))
+      facet <- "default"
     oa_data <-
       openair::windRose(
         data,
@@ -190,7 +194,10 @@ gg_windrose <-
       oa_data %>%
       dplyr::filter(wd >= 0) %>%
       tidyr::pivot_longer(dplyr::contains(" to ")) %>%
-      dplyr::mutate(name = forcats::fct_inorder(.data$name) |> forcats::fct_rev())
+      dplyr::mutate(
+        name = forcats::fct_inorder(.data$name),
+        name = forcats::fct_rev(.data$name)
+      )
 
     axis_extend <-
       data_long %>%
@@ -202,10 +209,12 @@ gg_windrose <-
 
     if (length(facet) == 2) {
       data_grouped <-
-        dplyr::group_by(data_long, .data[[facet[1]]], .data[[facet[2]]], .data$wd)
+        dplyr::group_by(data_long, .data[[facet[1]]],
+                        .data[[facet[2]]], .data$wd)
     } else {
       data_grouped <-
-        dplyr::group_by(data_long, .data[[facet[1]]], .data$wd)
+        dplyr::group_by(data_long,
+                        .data[[facet[1]]], .data$wd)
     }
 
     plot_data <-
@@ -216,7 +225,9 @@ gg_windrose <-
         .data$value
       )) %>%
       dplyr::ungroup("wd") %>%
-      dplyr::mutate(lab = stringr::str_glue("mean = {panel.fun}\ncalm = {calm}%"))
+      dplyr::mutate(
+        lab = stringr::str_glue("mean = {panel.fun}\ncalm = {calm}%")
+      )
 
     plt <-
       ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$wd)) +
@@ -232,7 +243,9 @@ gg_windrose <-
         limits = c((angle / 2), 360 + (angle / 2)),
         labels = c("E", "S", "W", "N")
       ) +
-      ggplot2::labs(x = NULL, y = NULL, fill = openair::quickText("ws")) +
+      ggplot2::labs(x = NULL,
+                    y = NULL,
+                    fill = openair::quickText("ws")) +
       ggplot2::expand_limits(y = -axis_extend)
 
     if (any(facet != "default")) {
@@ -241,10 +254,8 @@ gg_windrose <-
           plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
       } else {
         plt <-
-          plt + ggplot2::facet_grid(
-            cols = ggplot2::vars(.data[[facet[1]]]),
-            rows = ggplot2::vars(.data[[facet[2]]])
-          )
+          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[facet[1]]]),
+                                    rows = ggplot2::vars(.data[[facet[2]]]))
       }
     }
 
@@ -280,37 +291,42 @@ annotate_rose_text <-
            alpha = 1,
            fun = "label",
            ...) {
-
-    fun = match.arg(fun, c("label", "text"))
+    fun <- match.arg(fun, c("label", "text"))
 
     if (is.character(wd)) {
       wd <- str_to_angle(wd)
     }
 
-    x = rose_angle / 2
-    if (wd >= 0 & wd < x) {
+    x <- rose_angle / 2
+    if (wd >= 0 && wd < x) {
       wd <- wd + 360
     }
     wd2 <- wd
 
     if (fun == "label") {
-      ggplot2::geom_label(...,
-                          data = . %>% dplyr::slice_head(n = 1),
-                          size = size,
-                          alpha = alpha,
-                          ggplot2::aes(x = .data$wd2,
-                                       y = y,
-                                       label = .data$lab))
+      ggplot2::geom_label(
+        ...,
+        data = . %>% dplyr::slice_head(n = 1),
+        size = size,
+        alpha = alpha,
+        ggplot2::aes(
+          x = wd2,
+          y = y,
+          label = .data$lab
+        )
+      )
     } else if (fun == "text") {
       ggplot2::geom_text(
         ...,
         check_overlap = TRUE,
         size = size,
         alpha = alpha,
-        ggplot2::aes(x = .data$wd2,
-                     data = . %>% dplyr::slice_head(n = 1),
-                     y = y,
-                     label = .data$lab)
+        ggplot2::aes(
+          x = wd2,
+          data = . %>% dplyr::slice_head(n = 1),
+          y = y,
+          label = .data$lab
+        )
       )
     }
 

@@ -106,7 +106,14 @@ polar <-
   scale_opencolours_c()
 
 tv <- gg_timevariation(marylebone, "nox", return = "list")
-tv <- purrr::map(tv, ~ .x + theme_classic() + theme(legend.position = "none", panel.border = element_rect(fill = NA)))
+tv <-
+  purrr::map(
+    tv,
+    ~ .x + theme_classic() + theme(
+      legend.position = "none",
+      panel.border = element_rect(fill = NA)
+    )
+  )
 
 tv$day_hour / (tv$month | tv$day | polar) +
   plot_layout(heights = c(.8, 1), guides = "collect")

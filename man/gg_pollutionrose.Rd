@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg_polar_roses.R
 \name{gg_pollutionrose}
 \alias{gg_pollutionrose}
-\title{Traditional wind rose plot and pollution rose variation}
+\title{Traditional wind rose plot}
 \usage{
 gg_pollutionrose(
   data,
@@ -71,7 +71,7 @@ makes them disappear entirely. Defaults to \code{0.9}.}
 it on a map.}
 }
 \description{
-Traditional wind rose plot and pollution rose variation
+Traditional wind rose plot
 }
 \seealso{
 \code{\link[=annotate_rose_text]{annotate_rose_text()}} for adding an annotation of mean and calm

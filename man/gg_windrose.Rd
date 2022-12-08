@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg_polar_roses.R
 \name{gg_windrose}
 \alias{gg_windrose}
-\title{Traditional wind rose plot and pollution rose variation}
+\title{Pollution rose variation of the traditional wind rose}
 \usage{
 gg_windrose(
   data,
@@ -79,7 +79,7 @@ makes them disappear entirely. Defaults to \code{0.9}.}
 it on a map.}
 }
 \description{
-Traditional wind rose plot and pollution rose variation
+Pollution rose variation of the traditional wind rose
 }
 \seealso{
 Other polar directional analysis plotting functions: 

@@ -11,10 +11,15 @@ annotate_calendar_wd(size = 1, colour = "black", ...)
 
 \item{colour}{The colour for the arrows.}
 
-\item{...}{Other arguments passed to [metR::geom_arrow()].}
+\item{...}{Other arguments passed to \code{\link[metR:geom_arrow]{metR::geom_arrow()}}.}
 }
 \description{
-This function will add wind direction arrows to a [gg_calendar()] plot, sized
+This function will add wind direction arrows to a \code{\link[=gg_calendar]{gg_calendar()}} plot, sized
 based on wind speed. Note that this function can only be used if the original
 data contained numeric "ws" and "wd" columns.
 }
+\seealso{
+Other calendarplot annotation functions: 
+\code{\link{annotate_calendar_text}()}
+}
+\concept{calendarplot annotation functions}

@@ -132,6 +132,7 @@ gg_calendar <-
 #' @param digits The number of decimal places used for the annotation text when
 #'   `type = "value"`.
 #' @param ... Other arguments passed to [ggplot2::geom_text()].
+#' @family calendarplot annotation functions
 #' @export
 annotate_calendar_text <-
   function(type = "date",
@@ -188,6 +189,7 @@ annotate_calendar_text <-
 #' @param size The maximum size of the arrows.
 #' @param colour The colour for the arrows.
 #' @param ... Other arguments passed to [metR::geom_arrow()].
+#' @family calendarplot annotation functions
 #' @export
 annotate_calendar_wd <- function(size = 1, colour = "black", ...) {
   list(

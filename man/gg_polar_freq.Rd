@@ -44,8 +44,8 @@ an interval of 0.5 may be more appropriate.}
 
 \item{facet}{One or two faceting columns. \code{facet} determines how the
 data are split and then plotted. When \code{facet} is length 1 it is passed
-to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
-[ggplot2::facet_grid()] with the first element being used as columns and
+to \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, and when it is length 2 it is passed to
+\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}} with the first element being used as columns and
 the second rows. Some other options (e.g., multiple \code{pollutant}
 columns) can limit the the number of faceting columns to 1.}
 
@@ -56,7 +56,7 @@ to NA. Care should be taken when using a value > 1 because of the risk of
 removing real data points.}
 
 \item{border_colour}{The colour to use for the border of each tile. Defaults
-to `NA`, which removes the border.}
+to \code{NA}, which removes the border.}
 
 \item{alpha}{The transparency of the plot. This is mainly useful to overlay
 it on a map.}

@@ -22,7 +22,7 @@ gg_traj_plot(
 }
 \arguments{
 \item{data}{Data frame, the result of importing a trajectory file using
-[openair::importTraj()].}
+\code{\link[openair:importTraj]{openair::importTraj()}}.}
 
 \item{lon}{Column containing the longitude, as a decimal.}
 
@@ -32,8 +32,8 @@ gg_traj_plot(
 
 \item{facet}{How to facet the plot.}
 
-\item{alpha}{Transparency of the plots/lines, where `1` is completely opaque
-and `0` is completely transparent.}
+\item{alpha}{Transparency of the plots/lines, where \code{1} is completely opaque
+and \code{0} is completely transparent.}
 
 \item{n_points}{A dot is placed every \code{n_points} along each full
 trajectory. For hourly back trajectories points are plotted every
@@ -56,9 +56,9 @@ are possible through the \code{mapproj} package. See \code{?mapproject} for
 extensive details and information on setting other parameters and
 orientation (see below).}
 
-\item{...}{other arguments that are passed to [ggplot2::coord_map()].}
+\item{...}{other arguments that are passed to \code{\link[ggplot2:coord_map]{ggplot2::coord_map()}}.}
 }
 \description{
 This function plots back trajectories. This function requires that data are
-imported using the [openair::importTraj()] function.
+imported using the \code{\link[openair:importTraj]{openair::importTraj()}} function.
 }

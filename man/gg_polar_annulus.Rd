@@ -30,7 +30,7 @@ concentrations.}
 concentrations. When multiple pollutants are specified for a
 single-pollutant \code{statistic} (e.g., "mean"), a faceted plot will be
 returned. Two pollutants must be provided for certain \code{statistic}
-options (e.g., "Pearson" in [gg_polar_plot()]).}
+options (e.g., "Pearson" in \code{\link[=gg_polar_plot]{gg_polar_plot()}}).}
 
 \item{local_tz}{Should the results be calculated in local time that includes
 a treatment of daylight savings time (DST)? The default is not to consider
@@ -44,7 +44,7 @@ is to express time as local time. This correction tends to produce
 better-defined diurnal profiles of concentration (or other variables) and
 allows a better comparison to be made with emissions/activity data. If set
 to \code{FALSE} then GMT is used. Examples of usage include \code{local_tz
-= "Europe/London"}, \code{local_tz = "America/New_York"}. See
+  = "Europe/London"}, \code{local_tz = "America/New_York"}. See
 \code{cutData} and \code{import} for more details.}
 
 \item{period}{This determines the temporal period to consider. Options are
@@ -54,8 +54,8 @@ week variation and \dQuote{trend} to plot the trend by wind direction.}
 
 \item{facet}{One or two faceting columns. \code{facet} determines how the
 data are split and then plotted. When \code{facet} is length 1 it is passed
-to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
-[ggplot2::facet_grid()] with the first element being used as columns and
+to \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, and when it is length 2 it is passed to
+\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}} with the first element being used as columns and
 the second rows. Some other options (e.g., multiple \code{pollutant}
 columns) can limit the the number of faceting columns to 1.}
 
@@ -66,7 +66,7 @@ deviation), \dQuote{weighted.mean} or \dQuote{cpf} (Conditional Probability
 Function). Because of the smoothing involved, the colour scale for some of
 these statistics is only to provide an indication of overall pattern and
 should not be interpreted in concentration units e.g. for \code{statistic =
-"weighted.mean"} where the bin mean is multiplied by the bin frequency and
+  "weighted.mean"} where the bin mean is multiplied by the bin frequency and
 divided by the total frequency. In many cases using \code{polarFreq} will
 be better. Setting \code{statistic = "weighted.mean"} can be useful because
 it provides an indication of the concentration * frequency of occurrence
@@ -74,7 +74,7 @@ and will highlight the wind speed/direction conditions that dominate the
 overall mean.}
 
 \item{percentile}{If \code{statistic = "percentile"} or \code{statistic =
-"cpf"} then \code{percentile} is used, expressed from 0 to 100. Note that
+  "cpf"} then \code{percentile} is used, expressed from 0 to 100. Note that
 the percentile value is calculated in the wind speed, wind direction
 \sQuote{bins}. For this reason it can also be useful to set \code{min_bin}
 to ensure there are a sufficient number of points available to estimate a
@@ -82,9 +82,9 @@ percentile. See \code{quantile} for more details of how percentiles are
 calculated.}
 
 \item{width}{The relative width of the annulus compared to the width of the
-inner white space. `width = 2` makes the annulus twice as wide as the inner
-circle, whereas `width = 0.5` makes the annulus half as wide as the inner
-circle. Defaults to `1`.}
+inner white space. \code{width = 2} makes the annulus twice as wide as the inner
+circle, whereas \code{width = 0.5} makes the annulus half as wide as the inner
+circle. Defaults to \code{1}.}
 
 \item{min_bin}{The minimum number of points allowed in a wind speed/wind
 direction bin.  The default is 1. A value of two requires at least 2 valid
@@ -134,16 +134,16 @@ it on a map.}
 }
 \value{
 As well as generating the plot itself, \code{polarAnnulus} also
-  returns an object of class ``openair''. The object includes three main
-  components: \code{call}, the command used to generate the plot;
-  \code{data}, the data frame of summarised information used to make the
-  plot; and \code{plot}, the plot itself. If retained, e.g. using
-  \code{output <- polarAnnulus(mydata, "nox")}, this output can be used to
-  recover the data, reproduce or rework the original plot or undertake
-  further analysis.
+returns an object of class ``openair''. The object includes three main
+components: \code{call}, the command used to generate the plot;
+\code{data}, the data frame of summarised information used to make the
+plot; and \code{plot}, the plot itself. If retained, e.g. using
+\code{output <- polarAnnulus(mydata, "nox")}, this output can be used to
+recover the data, reproduce or rework the original plot or undertake
+further analysis.
 
-  An openair output can be manipulated using a number of generic operations,
-  including \code{print}, \code{plot} and \code{summary}.
+An openair output can be manipulated using a number of generic operations,
+including \code{print}, \code{plot} and \code{summary}.
 }
 \description{
 Typically plots the concentration of a pollutant by wind direction and as a
@@ -152,8 +152,8 @@ concentrations of pollutants vary by wind direction and a time period, e.g.,
 by month, day of week, etc.
 }
 \details{
-[gg_polar_annulus()] shares many of the properties of the [gg_polar_plot()].
-However, [gg_polar_annulus()] is focussed on displaying information on how
+\code{\link[=gg_polar_annulus]{gg_polar_annulus()}} shares many of the properties of the \code{\link[=gg_polar_plot]{gg_polar_plot()}}.
+However, \code{\link[=gg_polar_annulus]{gg_polar_annulus()}} is focussed on displaying information on how
 concentrations of a pollutant (values of another variable) vary with wind
 direction and time. Plotting as an annulus helps to reduce compression of
 information towards the centre of the plot. The circular plot is easy to

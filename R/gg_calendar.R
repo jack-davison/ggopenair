@@ -51,46 +51,126 @@ gg_calendar <-
            data_thresh = 0,
            border_colour = "white",
            w_shift = 0) {
-    # do annotate if the data is available
-    if ("ws" %in% names(data)) {
-      ann <- "ws"
-    } else {
-      ann <- "value"
+    if (w_shift < 0 || w_shift > 6) {
+      warning("w_shift should be between 0 and 6")
     }
 
-    # openair data
-    oa_data <-
-      openair::calendarPlot(
-        mydata = data,
-        pollutant = pollutant,
-        statistic = statistic,
-        data.thresh = data_thresh,
-        w.shift = w_shift,
-        annotate = ann,
-        plot = FALSE
-      )$data
+    if (nrow(data) == 0) stop("No data to plot - check year chosen")
 
-    plot_data <-
-      tidyr::separate(oa_data,
-        .data$cuts,
-        c("month", "year"),
+    ## all the days in the year
+    all.dates <- seq(lubridate::as_date(lubridate::floor_date(min(data$date), "month")),
+                     lubridate::as_date(lubridate::ceiling_date(max(data$date), "month")) - 1,
+                     by = "day")
+
+    prepare.grid <- function(mydata, pollutant) {
+
+      ## number of blank cells at beginning to get calendar format
+      pad.start <- (as.numeric(format(mydata$date[1], "%w")) - w_shift) %% 7 + 1
+
+      ## need to do in reverse to plot easily
+      conc <- rev(mydata[[pollutant]])
+      actual_date <- rev(mydata$date)
+
+      ## day of the month
+      theDates <- as.numeric(format(mydata$date, "%d"))
+      theDates <- rev(theDates)
+
+      daysAtEnd <- 42 - pad.start - nrow(mydata) ## 7x6 regular grid
+      conc <- c(rep(NA, daysAtEnd), conc)
+
+      actual_date <- c(rep(NA, daysAtEnd), actual_date)
+
+      ## get relevant days in previous and next month, like a real calendar
+      endDates <- mydata$date[nrow(mydata)] + (1:daysAtEnd)
+      endDates <- rev(as.numeric(format(endDates, "%d")))
+
+      theDates <- c(endDates, theDates)
+
+      beginDates <- -1 * (1:pad.start) + mydata$date[1]
+      beginDates <- as.numeric(format(beginDates, "%d"))
+
+      conc <- c(conc, rep(NA, pad.start))
+
+      actual_date <- c(actual_date, rep(NA, pad.start))
+
+      if (pad.start != 0) theDates <- c(theDates, beginDates)
+
+      ## convert to matrix
+      conc.mat <- matrix(conc, ncol = 7, byrow = TRUE)
+      date.mat <- matrix(theDates, ncol = 7, byrow = TRUE)
+      actual_date.mat <- matrix(actual_date, ncol = 7, byrow = TRUE)
+
+      ## need to reverse each row for calendar format
+      conc.mat <- as.vector(apply(conc.mat, 1, rev))
+      date.mat <- as.vector(apply(date.mat, 1, rev))
+      actual_date.mat <- as.vector(apply(actual_date.mat, 1, rev))
+
+      grid <- data.frame(expand.grid(x = 1:7, y = 1:6))
+      results <- tibble(
+        x = grid$x, y = grid$y, conc.mat,
+        date.mat = date.mat,
+        date = lubridate::as_date(actual_date.mat)
+      )
+
+      results
+    }
+
+    ## calculate daily means
+    mydata <-
+      time_average(
+        data = data,
+        avg_time = "day",
+        statistic = statistic,
+        data_thresh = data_thresh
+      )
+
+    mydata$date <- lubridate::as_date(mydata$date)
+
+    # make sure all days are available
+    mydata <- dplyr::left_join(dplyr::tibble(date = all.dates), mydata, by = "date")
+
+    # split by year-month
+    mydata <- dplyr::mutate(mydata,
+                            cuts = format(date, "%B-%Y"),
+                            cuts = ordered(.data$cuts, levels = unique(.data$cuts)))
+
+    baseData <- mydata # for use later
+
+    mydata <- mydata %>%
+      dplyr::group_by(.data$cuts) %>%
+      dplyr::do(prepare.grid(., pollutant)) %>%
+      dplyr::ungroup()
+
+    # combine data
+    newdata <-
+      dplyr::left_join(
+        mydata, dplyr::select(baseData, dplyr::any_of(c("date", "ws", "wd"))),
+        by = "date") %>%
+      tidyr::separate(
+        col = "cuts",
+        into = c("month", "year"),
         sep = "-",
         convert = TRUE
       ) %>%
-      dplyr::mutate(
-        month = forcats::fct_reorder(
-          .data$month,
-          match(.data$month, month.name)
-        )
-      )
+      dplyr::select(
+        "date",
+        "year",
+        "month",
+        "day" = "date.mat",
+        "value" = "conc.mat",
+        dplyr::any_of(c("wd", "ws")),
+        "x",
+        "y"
+      ) %>%
+      dplyr::mutate(month = factor(.data$month, month.name))
 
     plt <-
-      ggplot2::ggplot(plot_data) +
+      ggplot2::ggplot(newdata) +
       ggplot2::geom_tile(
         ggplot2::aes(
           x = .data$x,
           y = .data$y,
-          fill = .data$conc.mat
+          fill = .data$value
         ),
         colour = border_colour
       ) +
@@ -103,7 +183,7 @@ gg_calendar <-
       ggplot2::labs(fill = openair::quickText(pollutant)) +
       ggplot2::theme_minimal()
 
-    if (dplyr::n_distinct(plot_data$year) == 1) {
+    if (dplyr::n_distinct(newdata$year) == 1) {
       plt <- plt +
         ggplot2::facet_wrap(ggplot2::vars(.data$month))
     } else {
@@ -142,14 +222,13 @@ annotate_calendar_text <-
            digits = 0,
            ...) {
     type <- switch(type,
-      date = "date.mat",
-      value = "conc.mat"
-    )
+                   date = "day",
+                   value = "value")
 
     list(
       ggplot2::geom_text(
         data = function(x) {
-          dplyr::filter(x, is.na(.data$conc.mat))
+          dplyr::filter(x, is.na(.data$value))
         },
         na.rm = TRUE,
         show.legend = FALSE,
@@ -164,7 +243,7 @@ annotate_calendar_text <-
       ),
       ggplot2::geom_text(
         data = function(x) {
-          dplyr::filter(x, !is.na(.data$conc.mat))
+          dplyr::filter(x, !is.na(.data$value))
         },
         na.rm = TRUE,
         show.legend = FALSE,
@@ -218,3 +297,5 @@ annotate_calendar_wd <- function(size = 1, colour = "black", ...) {
 wshift <- function(x, n = 0) {
   if (n == 0) x else c(utils::tail(x, -n), utils::head(x, n))
 }
+
+

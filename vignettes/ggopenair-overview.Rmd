@@ -35,25 +35,6 @@ gg_polar_plot(marylebone, "nox") +
 
 This is more long winded, but the flexibility allows users to customise their outputs very closely. For example:
 
-# Custom Themes
-
-Use `ggplot2::theme()` or any theme package. For example, we can use the style from the Wall Street Journal:
-
-```{r themes}
-gg_polar_plot(marylebone, "nox") +
-  ggthemes::theme_wsj() +
-  scale_color_gradientn(colours = rev(ggthemes::wsj_pal()(2))) +
-  guides(color = guide_colorbar(barwidth = grid::unit(5, "cm")))
-```
-
-Or we could make our polar plot blend in with some other plots produced in Google Sheets:
-
-```{r gdocs}
-gg_polar_plot(marylebone, "nox") +
-  ggthemes::theme_gdocs() +
-  scale_color_gradientn(colours = ggthemes::gdocs_pal()(3))
-```
-
 # Scales
 
 Use any `ggplot2` scale function to change how the plot behaves. For example, use `scale_color_binned()` to bin the colour bar.

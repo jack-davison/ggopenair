@@ -42,7 +42,10 @@ An annotation to be added to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 \description{
 This is a wrapper around \code{\link[ggplot2:annotate]{ggplot2::annotate()}} which draws a semi-transparent
 wedge on a plot with continuous polar coordinates (any of \code{\link[=gg_polar_plot]{gg_polar_plot()}},
-\code{\link[=gg_polar_annulus]{gg_polar_annulus()}}, \code{\link[=gg_polar_freq]{gg_polar_freq()}} or \code{\link[=gg_polar_percentile]{gg_polar_percentile()}}).
+\code{\link[=gg_polar_annulus]{gg_polar_annulus()}}, \code{\link[=gg_polar_freq]{gg_polar_freq()}} or \code{\link[=gg_polar_percentile]{gg_polar_percentile()}}). Note
+that, owing to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
+\code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}, the \code{.rose_angle} argument should be used with
+\code{\link[=gg_pollutionrose]{gg_pollutionrose()}} and \code{\link[=gg_windrose]{gg_windrose()}}.
 }
 \examples{
 \dontrun{

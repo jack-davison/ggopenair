@@ -216,5 +216,5 @@ annotate_calendar_wd <- function(size = 1, colour = "black", ...) {
 #' @param n number
 #' @noRd
 wshift <- function(x, n = 0) {
-  if (n == 0) x else c(tail(x, -n), head(x, n))
+  if (n == 0) x else c(utils::tail(x, -n), utils::head(x, n))
 }

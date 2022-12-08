@@ -1,4 +1,6 @@
-#' Traditional wind rose plot and pollution rose variation
+utils::globalVariables(".")
+
+#' Traditional wind rose plot
 #'
 #' @inheritParams gg_polar_plot
 #' @param pollutant A column name identifying a pollutant concentration.
@@ -133,7 +135,7 @@ gg_pollutionrose <-
     plt
   }
 
-#' Traditional wind rose plot and pollution rose variation
+#' Pollution rose variation of the traditional wind rose
 #'
 #' @inheritParams gg_pollutionrose
 #' @param data A data frame containing fields \code{ws} and \code{wd}
@@ -170,8 +172,6 @@ gg_windrose <-
         data,
         ws = ws,
         wd = wd,
-        ws2 = ws2,
-        wd2 = wd2,
         ws.int = ws_int,
         angle = angle,
         type = facet,
@@ -298,7 +298,7 @@ annotate_rose_text <-
                           data = . %>% dplyr::slice_head(n = 1),
                           size = size,
                           alpha = alpha,
-                          ggplot2::aes(x = wd2,
+                          ggplot2::aes(x = .data$wd2,
                                        y = y,
                                        label = .data$lab))
     } else if (fun == "text") {
@@ -307,7 +307,7 @@ annotate_rose_text <-
         check_overlap = TRUE,
         size = size,
         alpha = alpha,
-        ggplot2::aes(x = wd2,
+        ggplot2::aes(x = .data$wd2,
                      data = . %>% dplyr::slice_head(n = 1),
                      y = y,
                      label = .data$lab)

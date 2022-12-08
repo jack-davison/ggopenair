@@ -38,9 +38,8 @@ An annotation to be added to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 This is a wrapper around \code{\link[ggplot2:annotate]{ggplot2::annotate()}} which draws the y-axis labels
 directly on the plot, and optionally drops the labels at the side. Note that,
 owing to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
-\code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}, the "direction" argument may require more
-trial-and-error when used with \code{\link[=gg_polar_pollrose]{gg_polar_pollrose()}} and
-\code{\link[=gg_polar_windrose]{gg_polar_windrose()}}.
+\code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}, the \code{.rose_angle} argument should be used with
+\code{\link[=gg_pollutionrose]{gg_pollutionrose()}} and \code{\link[=gg_windrose]{gg_windrose()}}.
 }
 \examples{
 \dontrun{

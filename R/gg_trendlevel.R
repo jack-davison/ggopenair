@@ -82,7 +82,9 @@ gg_trendlevel <-
     oa_names <- names(oa_data)
 
     plt <-
-      ggplot2::ggplot(oa_data, ggplot2::aes(x = .data[[oa_names[[1]]]], y = .data[[oa_names[[2]]]])) +
+      ggplot2::ggplot(oa_data,
+                      ggplot2::aes(x = .data[[oa_names[[1]]]],
+                                   y = .data[[oa_names[[2]]]])) +
       ggplot2::geom_tile(ggplot2::aes(fill = .data[[oa_names[[4]]]])) +
       ggplot2::coord_cartesian(expand = FALSE)
 

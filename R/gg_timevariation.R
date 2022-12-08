@@ -22,20 +22,20 @@
 #' pollutants in separate columns.
 #'
 #' The option \code{difference} will calculate the difference in means of two
-#' pollutants together with bootstrap estimates of the 95\% confidence
-#' intervals in the difference in the mean. This works in two ways: either two
-#' pollutants are supplied in separate columns, e.g., `pollutant = c("no2", "o3")`
-#' or there are two unique values of \code{group}. The difference is
-#' calculated as the second pollutant minus the first and is labelled as such.
-#' Considering differences in this way can provide many useful insights and is
-#' particularly useful for model evaluation when information is needed about
-#' where a model differs from observations by many different time scales. The
-#' manual contains various examples of using \code{difference = TRUE}.
+#' pollutants together with bootstrap estimates of the 95\% confidence intervals
+#' in the difference in the mean. This works in two ways: either two pollutants
+#' are supplied in separate columns, e.g., `pollutant = c("no2", "o3")` or there
+#' are two unique values of \code{group}. The difference is calculated as the
+#' second pollutant minus the first and is labelled as such. Considering
+#' differences in this way can provide many useful insights and is particularly
+#' useful for model evaluation when information is needed about where a model
+#' differs from observations by many different time scales. The manual contains
+#' various examples of using \code{difference = TRUE}.
 #'
 #' Note also that the \code{timeVariation} function works well on a subset of
 #' data and in conjunction with other plots. For example, a
-#' \code{\link{polarPlot}} may highlight an interesting feature for a
-#' particular wind speed/direction range. By filtering for those conditions
+#' \code{\link{polarPlot}} may highlight an interesting feature for a particular
+#' wind speed/direction range. By filtering for those conditions
 #' \code{timeVariation} can help determine whether the temporal variation of
 #' that feature differs from other features --- and help with source
 #' identification.
@@ -50,33 +50,32 @@
 #' @param mydata A data frame of hourly (or higher temporal resolution data).
 #'   Must include a \code{date} field and at least one variable to plot.
 #' @param pollutant Name of variable to plot. Two or more pollutants can be
-#'   plotted, in which case a form like \code{pollutant = c("nox", "co")}
-#'   should be used.
+#'   plotted, in which case a form like \code{pollutant = c("nox", "co")} should
+#'   be used.
 #' @param local_tz Should the results be calculated in local time that includes
 #'   a treatment of daylight savings time (DST)? The default is not to consider
-#'   DST issues, provided the data were imported without a DST offset.
-#'   Emissions activity tends to occur at local time e.g. rush hour is at 8 am
-#'   every day. When the clocks go forward in spring, the emissions are
-#'   effectively released into the atmosphere typically 1 hour earlier during
-#'   the summertime i.e. when DST applies. When plotting diurnal profiles, this
-#'   has the effect of \dQuote{smearing-out} the concentrations. Sometimes, a
-#'   useful approach is to express time as local time. This correction tends to
-#'   produce better-defined diurnal profiles of concentration (or other
-#'   variables) and allows a better comparison to be made with
-#'   emissions/activity data. If set to \code{FALSE} then GMT is used. Examples
-#'   of usage include \code{local.tz = "Europe/London"}, \code{local.tz =
-#'   "America/New_York"}. See \code{cutData} and \code{import} for more
-#'   details.
-#' @param normalise Should variables be normalised? The default is
-#'   \code{FALSE}. If \code{TRUE} then the variable(s) are divided by their
-#'   mean values. This helps to compare the shape of the diurnal trends for
-#'   variables on very different scales.
+#'   DST issues, provided the data were imported without a DST offset. Emissions
+#'   activity tends to occur at local time e.g. rush hour is at 8 am every day.
+#'   When the clocks go forward in spring, the emissions are effectively
+#'   released into the atmosphere typically 1 hour earlier during the summertime
+#'   i.e. when DST applies. When plotting diurnal profiles, this has the effect
+#'   of \dQuote{smearing-out} the concentrations. Sometimes, a useful approach
+#'   is to express time as local time. This correction tends to produce
+#'   better-defined diurnal profiles of concentration (or other variables) and
+#'   allows a better comparison to be made with emissions/activity data. If set
+#'   to \code{FALSE} then GMT is used. Examples of usage include \code{local.tz
+#'   = "Europe/London"}, \code{local.tz = "America/New_York"}. See
+#'   \code{cutData} and \code{import} for more details.
+#' @param normalise Should variables be normalised? The default is \code{FALSE}.
+#'   If \code{TRUE} then the variable(s) are divided by their mean values. This
+#'   helps to compare the shape of the diurnal trends for variables on very
+#'   different scales.
 #' @param type \code{type} determines how the data are split i.e. conditioned,
 #'   and then plotted. The default is will produce a single plot using the
 #'   entire data. Type can be one of the built-in types as detailed in
-#'   \code{cutData} e.g. \dQuote{season}, \dQuote{year}, \dQuote{weekday} and
-#'   so on. For example, \code{type = "season"} will produce four plots --- one
-#'   for each season.
+#'   \code{cutData} e.g. \dQuote{season}, \dQuote{year}, \dQuote{weekday} and so
+#'   on. For example, \code{type = "season"} will produce four plots --- one for
+#'   each season.
 #'
 #'   It is also possible to choose \code{type} as another variable in the data
 #'   frame. If that variable is numeric, then the data will be split into four
@@ -87,15 +86,15 @@
 #'
 #'   Only one \code{type} is allowed in\code{timeVariation}.
 #' @param group This sets the grouping variable to be used. For example, if a
-#'   data frame had a column \code{site} setting \code{group = "site"} will
-#'   plot all sites together in each panel. See examples below.
+#'   data frame had a column \code{site} setting \code{group = "site"} will plot
+#'   all sites together in each panel. See examples below.
 #' @param difference If two pollutants are chosen then setting \code{difference
-#'   = TRUE} will also plot the difference in means between the two variables
-#'   as \code{pollutant[2] - pollutant[1]}. Bootstrap 95\% confidence intervals
-#'   of the difference in means are also calculated. A horizontal dashed line
-#'   is shown at y = 0. The difference can also be calculated if there is a
-#'   column that identifies two groups e.g. having used \code{splitByDate}. In
-#'   this case it is possible to call \code{timeVariation} with the option
+#'   = TRUE} will also plot the difference in means between the two variables as
+#'   \code{pollutant[2] - pollutant[1]}. Bootstrap 95\% confidence intervals of
+#'   the difference in means are also calculated. A horizontal dashed line is
+#'   shown at y = 0. The difference can also be calculated if there is a column
+#'   that identifies two groups e.g. having used \code{splitByDate}. In this
+#'   case it is possible to call \code{timeVariation} with the option
 #'   \code{group = "split.by"} and \code{difference = TRUE}.
 #' @param statistic Can be \dQuote{mean} (default) or \dQuote{median}. If the
 #'   statistic is \sQuote{mean} then the mean line and the 95\% confidence
@@ -106,9 +105,9 @@
 #' @param conf_int The confidence intervals to be plotted. If \code{statistic =
 #'   "mean"} then the confidence intervals in the mean are plotted. If
 #'   \code{statistic = "median"} then the \code{conf.int} and \code{1 -
-#'   conf.int} \emph{quantiles} are plotted. \code{conf.int} can be of length
-#'   2, which is most useful for showing quantiles. For example \code{conf.int
-#'   = c(0.75, 0.99)} will yield a plot showing the median, 25/75 and 5/95th
+#'   conf.int} \emph{quantiles} are plotted. \code{conf.int} can be of length 2,
+#'   which is most useful for showing quantiles. For example \code{conf.int =
+#'   c(0.75, 0.99)} will yield a plot showing the median, 25/75 and 5/95th
 #'   quantiles.
 #' @param b Number of bootstrap replicates to use. Can be useful to reduce this
 #'   value when there are a large number of observations available to increase
@@ -117,14 +116,15 @@
 #' @param ci Should confidence intervals be shown? The default is \code{TRUE}.
 #'   Setting this to \code{FALSE} can be useful if multiple pollutants are
 #'   chosen where over-lapping confidence intervals can over complicate plots.
-#' @param alpha The alpha transparency used for plotting confidence intervals.
-#'   0 is fully transparent and 1 is opaque. The default is 0.4
-#' @param return What should the function return? One of:
-#' * "ensemble" --- all four time variation panels assembled as a 'patchwork' object (default).
-#' * "day_hour", "day", "hour", "month" --- a single time variation panel.
-#' * "list" --- a list of the four time variation panels, which may be useful if
-#' users wish to assemble them in a different way or with other plots entirely.
-#' * "data" --- the raw data used to create the time variation panels.
+#' @param alpha The alpha transparency used for plotting confidence intervals. 0
+#'   is fully transparent and 1 is opaque. The default is 0.4
+#' @param return What should the function return? One of: * "ensemble" --- all
+#'   four time variation panels assembled as a 'patchwork' object (default). *
+#'   "day_hour", "day", "hour", "month" --- a single time variation panel. *
+#'   "list" --- a list of the four time variation panels, which may be useful if
+#'   users wish to assemble them in a different way or with other plots
+#'   entirely. * "data" --- the raw data used to create the time variation
+#'   panels.
 #' @export
 #'
 gg_timevariation <- function(mydata,
@@ -200,7 +200,13 @@ gg_timevariation <- function(mydata,
   }
 
   # hour plot
-  plt_hour <- tv_panel_line(oa_data$hour, ci_check = ci, drop_legend = drop_legend, alpha = alpha) +
+  plt_hour <-
+    tv_panel_line(
+      oa_data$hour,
+      ci_check = ci,
+      drop_legend = drop_legend,
+      alpha = alpha
+    ) +
     ggplot2::labs(y = ylab)
 
   if (type != "default") {
@@ -239,7 +245,14 @@ gg_timevariation <- function(mydata,
 
   # day plot
   plt_day <-
-    tv_panel_crossbar(oa_data$day, "wkday", ci_check = ci, type = type, drop_legend = drop_legend, alpha = alpha) +
+    tv_panel_crossbar(
+      oa_data$day,
+      "wkday",
+      ci_check = ci,
+      type = type,
+      drop_legend = drop_legend,
+      alpha = alpha
+    ) +
     ggplot2::scale_x_continuous(
       breaks = 1:7,
       labels = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"),
@@ -253,7 +266,14 @@ gg_timevariation <- function(mydata,
 
   # month plot
   plt_month <-
-    tv_panel_crossbar(oa_data$month, "mnth", ci_check = ci, type = type, drop_legend = drop_legend, alpha = alpha) +
+    tv_panel_crossbar(
+      oa_data$month,
+      "mnth",
+      ci_check = ci,
+      type = type,
+      drop_legend = drop_legend,
+      alpha = alpha
+    ) +
     ggplot2::scale_x_continuous(
       breaks = 1:12,
       labels = c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"),

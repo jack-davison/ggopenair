@@ -29,6 +29,12 @@ gam smoothing is carried out using mgcv."><!-- mathjax --><script src="https://c
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/ggopenair-overview.html">ggopenair Overview</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -91,7 +97,7 @@ concentrations.</p></dd>
 concentrations. When multiple pollutants are specified for a
 single-pollutant <code>statistic</code> (e.g., "mean"), a faceted plot will be
 returned. Two pollutants must be provided for certain <code>statistic</code>
-options (e.g., "Pearson" in [gg_polar_plot()]).</p></dd>
+options (e.g., "Pearson" in <code>gg_polar_plot()</code>).</p></dd>
 
 
 <dt>x</dt>
@@ -106,56 +112,56 @@ coordinates, the default is wind speed, “ws”.</p></dd>
 <dt>facet</dt>
 <dd><p>One or two faceting columns. <code>facet</code> determines how the
 data are split and then plotted. When <code>facet</code> is length 1 it is passed
-to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
-[ggplot2::facet_grid()] with the first element being used as columns and
+to <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">ggplot2::facet_wrap()</a></code>, and when it is length 2 it is passed to
+<code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">ggplot2::facet_grid()</a></code> with the first element being used as columns and
 the second rows. Some other options (e.g., multiple <code>pollutant</code>
 columns) can limit the the number of faceting columns to 1.</p></dd>
 
 
 <dt>statistic</dt>
 <dd><p>The statistic that should be applied to each wind
-  speed/direction bin. Can be:</p>
-<p></p><ul><li><p>“mean” (default), “median”, “max”
-  (maximum), “frequency”. “stdev” (standard deviation),
-  “weighted.mean”.</p></li>
+speed/direction bin. Can be:</p>
+<ul><li><p>“mean” (default), “median”, “max”
+(maximum), “frequency”. “stdev” (standard deviation),
+“weighted.mean”.</p></li>
 <li><p><code>statistic = "nwr"</code> Implements the Non-parametric Wind
-  Regression approach of Henry et al. (2009) that uses kernel smoothers. The
-  <code>openair</code> implementation is not identical because Gaussian kernels are
-  used for both wind direction and speed. The smoothing is controlled by
-  <code>ws_spread</code> and <code>wd_spread</code>.</p></li>
+Regression approach of Henry et al. (2009) that uses kernel smoothers. The
+<code>openair</code> implementation is not identical because Gaussian kernels are
+used for both wind direction and speed. The smoothing is controlled by
+<code>ws_spread</code> and <code>wd_spread</code>.</p></li>
 <li><p><code>statistic = "cpf"</code> the conditional probability function (CPF)
-  is plotted and a single (usually high) percentile level is supplied. The
-  CPF is defined as CPF = my/ny, where my is the number of samples in the y
-  bin (by default a wind direction, wind speed interval) with mixing ratios
-  greater than the <em>overall</em> percentile concentration, and ny is the
-  total number of samples in the same wind sector (see Ashbaugh et al.,
-  1985). Note that percentile intervals can also be considered; see
-  <code>percentile</code> for details.</p></li>
+is plotted and a single (usually high) percentile level is supplied. The
+CPF is defined as CPF = my/ny, where my is the number of samples in the y
+bin (by default a wind direction, wind speed interval) with mixing ratios
+greater than the <em>overall</em> percentile concentration, and ny is the
+total number of samples in the same wind sector (see Ashbaugh et al.,
+1985). Note that percentile intervals can also be considered; see
+<code>percentile</code> for details.</p></li>
 <li><p>When <code>statistic = "r"</code> or <code>statistic = "Pearson"</code>, the
-  Pearson correlation coefficient is calculated for <em>two</em> pollutants.
-  The calculation involves a weighted Pearson correlation coefficient, which
-  is weighted by Gaussian kernels for wind direction an the radial variable
-  (by default wind speed). More weight is assigned to values close to a wind
-  speed-direction interval. Kernel weighting is used to ensure that all data
-  are used rather than relying on the potentially small number of values in a
-  wind speed-direction interval.</p></li>
+Pearson correlation coefficient is calculated for <em>two</em> pollutants.
+The calculation involves a weighted Pearson correlation coefficient, which
+is weighted by Gaussian kernels for wind direction an the radial variable
+(by default wind speed). More weight is assigned to values close to a wind
+speed-direction interval. Kernel weighting is used to ensure that all data
+are used rather than relying on the potentially small number of values in a
+wind speed-direction interval.</p></li>
 <li><p>When <code>statistic = "Spearman"</code>, the Spearman correlation
-  coefficient is calculated for <em>two</em> pollutants. The calculation
-  involves a weighted Spearman correlation coefficient, which is weighted by
-  Gaussian kernels for wind direction an the radial variable (by default wind
-  speed). More weight is assigned to values close to a wind speed-direction
-  interval. Kernel weighting is used to ensure that all data are used rather
-  than relying on the potentially small number of values in a wind
-  speed-direction interval.</p></li>
+coefficient is calculated for <em>two</em> pollutants. The calculation
+involves a weighted Spearman correlation coefficient, which is weighted by
+Gaussian kernels for wind direction an the radial variable (by default wind
+speed). More weight is assigned to values close to a wind speed-direction
+interval. Kernel weighting is used to ensure that all data are used rather
+than relying on the potentially small number of values in a wind
+speed-direction interval.</p></li>
 <li><p><code>"robust_slope"</code> is another option for pair-wise statistics and
-  <code>"quantile.slope"</code>, which uses quantile regression to estimate the
-  slope for a particular quantile level (see also <code>tau</code> for setting the
-  quantile level).</p></li>
+<code>"quantile.slope"</code>, which uses quantile regression to estimate the
+slope for a particular quantile level (see also <code>tau</code> for setting the
+quantile level).</p></li>
 <li><p><code>"york_slope"</code> is another option for pair-wise statistics which
-  uses the <em>York regression method</em> to estimate the slope. In this
-  method the uncertainties in <code>x</code> and <code>y</code> are used in the
-  determination of the slope. The uncertainties are provided by
-  <code>x_error</code> and <code>y_error</code> --- see below.</p></li>
+uses the <em>York regression method</em> to estimate the slope. In this
+method the uncertainties in <code>x</code> and <code>y</code> are used in the
+determination of the slope. The uncertainties are provided by
+<code>x_error</code> and <code>y_error</code> --- see below.</p></li>
 </ul></dd>
 
 
@@ -172,7 +178,7 @@ produces a plot where it is clear where the original data lie. If set to
 <dd><p>Should the uncertainty in the calculated surface be shown?
 If <code>TRUE</code> three plots are produced on the same scale showing the
 predicted surface together with the estimated lower and upper uncertainties
-at the 95<!-- % confidence interval. Calculating the uncertainties is useful to -->
+at the 95% confidence interval. Calculating the uncertainties is useful to
 understand whether features are real or not.  For example, at high wind
 speeds where there are few data there is greater uncertainty over the
 predicted values. The uncertainties are calculated using the GAM and
@@ -183,25 +189,25 @@ type is set to "default".</p></dd>
 
 <dt>percentile</dt>
 <dd><p>If <code>statistic = "percentile"</code> then <code>percentile</code>
-  is used, expressed from 0 to 100. Note that the percentile value is
-  calculated in the wind speed, wind direction ‘bins’. For this reason
-  it can also be useful to set <code>min_bin</code> to ensure there are a
-  sufficient number of points available to estimate a percentile. See
-  <code>quantile</code> for more details of how percentiles are calculated.</p>
+is used, expressed from 0 to 100. Note that the percentile value is
+calculated in the wind speed, wind direction ‘bins’. For this reason
+it can also be useful to set <code>min_bin</code> to ensure there are a
+sufficient number of points available to estimate a percentile. See
+<code>quantile</code> for more details of how percentiles are calculated.</p>
 <p><code>percentile</code> is also used for the Conditional Probability Function
-  (CPF) plots. <code>percentile</code> can be of length two, in which case the
-  percentile <em>interval</em> is considered for use with CPF. For example,
-  <code>percentile = c(90, 100)</code> will plot the CPF for concentrations between
-  the 90 and 100th percentiles. Percentile intervals can be useful for
-  identifying specific sources. In addition, <code>percentile</code> can also be of
-  length 3. The third value is the ‘trim’ value to be applied. When
-  calculating percentile intervals many can cover very low values where there
-  is no useful information. The trim value ensures that values greater than
-  or equal to the trim * mean value are considered <em>before</em> the
-  percentile intervals are calculated. The effect is to extract more detail
-  from many source signatures. See the manual for examples. Finally, if the
-  trim value is less than zero the percentile range is interpreted as
-  absolute concentration values and subsetting is carried out directly.</p></dd>
+(CPF) plots. <code>percentile</code> can be of length two, in which case the
+percentile <em>interval</em> is considered for use with CPF. For example,
+<code>percentile = c(90, 100)</code> will plot the CPF for concentrations between
+the 90 and 100th percentiles. Percentile intervals can be useful for
+identifying specific sources. In addition, <code>percentile</code> can also be of
+length 3. The third value is the ‘trim’ value to be applied. When
+calculating percentile intervals many can cover very low values where there
+is no useful information. The trim value ensures that values greater than
+or equal to the trim * mean value are considered <em>before</em> the
+percentile intervals are calculated. The effect is to extract more detail
+from many source signatures. See the manual for examples. Finally, if the
+trim value is less than zero the percentile range is interpreted as
+absolute concentration values and subsetting is carried out directly.</p></dd>
 
 
 <dt>weights</dt>
@@ -302,7 +308,7 @@ it on a map.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A [ggplot2::ggplot2] figure</p>
+<p>A <a href="https://ggplot2.tidyverse.org/reference/ggplot2-package.html" class="external-link">ggplot2::ggplot2</a> figure</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -360,7 +366,7 @@ conditions can strongly affect the surface prediction. Therefore, setting
 <code>min_bin = 3</code>, for example, will remove all wind speed-direction bins
 with fewer than 3 measurements <em>before</em> fitting the surface. Third,
 consider setting <code>uncertainty = TRUE</code>. This option will show the
-predicted surface together with upper and lower 95<!-- % confidence intervals, -->
+predicted surface together with upper and lower 95% confidence intervals,
 which take account of the frequency of measurements.</p>
     </div>
     <div class="section level2">

@@ -25,6 +25,12 @@ produced."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/ggopenair-overview.html">ggopenair Overview</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -92,7 +98,7 @@ produce better-defined diurnal profiles of concentration (or other
 variables) and allows a better comparison to be made with
 emissions/activity data. If set to <code>FALSE</code> then GMT is used. Examples
 of usage include <code>local.tz = "Europe/London"</code>, <code>local.tz =
-"America/New_York"</code>. See <code>cutData</code> and <code>import</code> for more
+  "America/New_York"</code>. See <code>cutData</code> and <code>import</code> for more
 details.</p></dd>
 
 
@@ -105,17 +111,17 @@ variables on very different scales.</p></dd>
 
 <dt>type</dt>
 <dd><p><code>type</code> determines how the data are split i.e. conditioned,
-  and then plotted. The default is will produce a single plot using the
-  entire data. Type can be one of the built-in types as detailed in
-  <code>cutData</code> e.g. “season”, “year”, “weekday” and
-  so on. For example, <code>type = "season"</code> will produce four plots --- one
-  for each season.</p>
+and then plotted. The default is will produce a single plot using the
+entire data. Type can be one of the built-in types as detailed in
+<code>cutData</code> e.g. “season”, “year”, “weekday” and
+so on. For example, <code>type = "season"</code> will produce four plots --- one
+for each season.</p>
 <p>It is also possible to choose <code>type</code> as another variable in the data
-  frame. If that variable is numeric, then the data will be split into four
-  quantiles (if possible) and labelled accordingly. If type is an existing
-  character or factor variable, then those categories/levels will be used
-  directly. This offers great flexibility for understanding the variation of
-  different variables and how they depend on one another.</p>
+frame. If that variable is numeric, then the data will be split into four
+quantiles (if possible) and labelled accordingly. If type is an existing
+character or factor variable, then those categories/levels will be used
+directly. This offers great flexibility for understanding the variation of
+different variables and how they depend on one another.</p>
 <p>Only one <code>type</code> is allowed in<code>timeVariation</code>.</p></dd>
 
 
@@ -127,8 +133,8 @@ plot all sites together in each panel. See examples below.</p></dd>
 
 <dt>difference</dt>
 <dd><p>If two pollutants are chosen then setting <code>difference
-= TRUE</code> will also plot the difference in means between the two variables
-as <code>pollutant[2] - pollutant[1]</code>. Bootstrap 95% confidence intervals
+  = TRUE</code> will also plot the difference in means between the two variables
+as <code>pollutant[2] - pollutant[1]</code>. Bootstrap 95\<!-- % confidence intervals -->
 of the difference in means are also calculated. A horizontal dashed line
 is shown at y = 0. The difference can also be calculated if there is a
 column that identifies two groups e.g. having used <code>splitByDate</code>. In
@@ -138,7 +144,7 @@ this case it is possible to call <code>timeVariation</code> with the option
 
 <dt>statistic</dt>
 <dd><p>Can be “mean” (default) or “median”. If the
-statistic is ‘mean’ then the mean line and the 95% confidence
+statistic is ‘mean’ then the mean line and the 95\<!-- % confidence -->
 interval in the mean are plotted by default. If the statistic is
 ‘median’ then the median line is plotted together with the 5/95 and
 25/75th quantiles are plotted. Users can control the confidence intervals
@@ -147,18 +153,18 @@ with <code>conf.int</code>.</p></dd>
 
 <dt>conf_int</dt>
 <dd><p>The confidence intervals to be plotted. If <code>statistic =
-"mean"</code> then the confidence intervals in the mean are plotted. If
+  "mean"</code> then the confidence intervals in the mean are plotted. If
 <code>statistic = "median"</code> then the <code>conf.int</code> and <code>1 -
-conf.int</code> <em>quantiles</em> are plotted. <code>conf.int</code> can be of length
+  conf.int</code> <em>quantiles</em> are plotted. <code>conf.int</code> can be of length
 2, which is most useful for showing quantiles. For example <code>conf.int
-= c(0.75, 0.99)</code> will yield a plot showing the median, 25/75 and 5/95th
+  = c(0.75, 0.99)</code> will yield a plot showing the median, 25/75 and 5/95th
 quantiles.</p></dd>
 
 
 <dt>b</dt>
 <dd><p>Number of bootstrap replicates to use. Can be useful to reduce this
 value when there are a large number of observations available to increase
-the speed of the calculations without affecting the 95% confidence
+the speed of the calculations without affecting the 95\<!-- % confidence -->
 interval calculations by much.</p></dd>
 
 
@@ -174,12 +180,12 @@ chosen where over-lapping confidence intervals can over complicate plots.</p></d
 
 
 <dt>return</dt>
-<dd><p>What should the function return? One of:
-* "ensemble" --- all four time variation panels assembled as a 'patchwork' object (default).
-* "day_hour", "day", "hour", "month" --- a single time variation panel.
-* "list" --- a list of the four time variation panels, which may be useful if
-users wish to assemble them in a different way or with other plots entirely.
-* "data" --- the raw data used to create the time variation panels.</p></dd>
+<dd><p>What should the function return? One of:</p><ul><li><p>"ensemble" --- all four time variation panels assembled as a 'patchwork' object (default).</p></li>
+<li><p>"day_hour", "day", "hour", "month" --- a single time variation panel.</p></li>
+<li><p>"list" --- a list of the four time variation panels, which may be useful if
+users wish to assemble them in a different way or with other plots entirely.</p></li>
+<li><p>"data" --- the raw data used to create the time variation panels.</p></li>
+</ul></dd>
 
 </dl></div>
     <div class="section level2">
@@ -189,7 +195,7 @@ week, etc., can reveal many interesting features that relate to source types
 and meteorology. For traffic sources, there are often important differences
 in the way vehicles vary by vehicles type, e.g., less heavy vehicles at
 weekends.</p>
-<p>The plots also show the 95% confidence intervals in the mean. The 95%
+<p>The plots also show the 95\<!-- % confidence intervals in the mean. The 95\\% -->
 confidence intervals in the mean are calculated through bootstrap
 simulations, which will provide more robust estimates of the confidence
 intervals (particularly when there are relatively few data).</p>
@@ -199,9 +205,9 @@ more details. It can also accept a <code>group</code> option which is useful if
 data are stacked. This will work in a similar way to having multiple
 pollutants in separate columns.</p>
 <p>The option <code>difference</code> will calculate the difference in means of two
-pollutants together with bootstrap estimates of the 95% confidence
+pollutants together with bootstrap estimates of the 95\<!-- % confidence -->
 intervals in the difference in the mean. This works in two ways: either two
-pollutants are supplied in separate columns, e.g., `pollutant = c("no2", "o3")`
+pollutants are supplied in separate columns, e.g., <code>pollutant = c("no2", "o3")</code>
 or there are two unique values of <code>group</code>. The difference is
 calculated as the second pollutant minus the first and is labelled as such.
 Considering differences in this way can provide many useful insights and is

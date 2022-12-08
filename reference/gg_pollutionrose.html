@@ -21,6 +21,12 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/ggopenair-overview.html">ggopenair Overview</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -76,8 +82,8 @@ divisible (see <code>bias_corr</code>).</p></dd>
 <dt>facet</dt>
 <dd><p>One or two faceting columns. <code>facet</code> determines how the
 data are split and then plotted. When <code>facet</code> is length 1 it is passed
-to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
-[ggplot2::facet_grid()] with the first element being used as columns and
+to <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">ggplot2::facet_wrap()</a></code>, and when it is length 2 it is passed to
+<code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">ggplot2::facet_grid()</a></code> with the first element being used as columns and
 the second rows. Some other options (e.g., multiple <code>pollutant</code>
 columns) can limit the the number of faceting columns to 1.</p></dd>
 
@@ -96,7 +102,7 @@ frequencies.</p></dd>
 <dd><p>The number of break points to use when binning the data, or a
 vector of specific break points. For example, <code>breaks = 6</code> will split
 the legend into roughly 6 equal bins, whereas <code>breaks = c(0, 1, 10,
-100)</code> breaks the data into four segments: &lt;1, 1-10, 10-100, &amp; &gt;100.</p></dd>
+  100)</code> breaks the data into four segments: &lt;1, 1-10, 10-100, &amp; &gt;100.</p></dd>
 
 
 <dt>normalise</dt>
@@ -134,8 +140,8 @@ it on a map.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>[annotate_rose_text()] for adding an annotation of mean and calm
-  conditions to the figure.</p>
+    <div class="dont-index"><p><code><a href="annotate_rose_text.html">annotate_rose_text()</a></code> for adding an annotation of mean and calm
+conditions to the figure.</p>
 <p>Other polar directional analysis plotting functions: 
 <code><a href="gg_polar_annulus.html">gg_polar_annulus</a>()</code>,
 <code><a href="gg_polar_freq.html">gg_polar_freq</a>()</code>,

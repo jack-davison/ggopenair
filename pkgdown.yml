@@ -1,8 +1,9 @@
 pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-12-07T11:22Z
+articles:
+  ggopenair-overview: ggopenair-overview.html
+last_built: 2022-12-08T13:56Z
 urls:
   reference: https://jack-davison.github.io/ggopenair/reference
   article: https://jack-davison.github.io/ggopenair/articles

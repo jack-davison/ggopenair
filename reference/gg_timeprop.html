@@ -35,6 +35,12 @@ understanding time series data."><!-- mathjax --><script src="https://cdnjs.clou
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/ggopenair-overview.html">ggopenair Overview</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -96,31 +102,31 @@ variable then the categories are used directly.</p></dd>
 
 <dt>avg_time</dt>
 <dd><p>This defines the time period to average to. Can be
-  “sec”, “min”, “hour”, “day”,
-  “DSTday”, “week”, “month”, “quarter”
-  or “year”. For much increased flexibility a number can
-  precede these options followed by a space. For example, a
-  timeAverage of 2 months would be <code>period = "2 month"</code>.</p>
+“sec”, “min”, “hour”, “day”,
+“DSTday”, “week”, “month”, “quarter”
+or “year”. For much increased flexibility a number can
+precede these options followed by a space. For example, a
+timeAverage of 2 months would be <code>period = "2 month"</code>.</p>
 <p>Note that <code>avg_time</code> when used in <code>timeProp</code> should be
-  greater than the time gap in the original data. For example,
-  <code>avg_time = "day"</code> for hourly data is OK, but
-  <code>avg_time = "hour"</code> for daily data is not.</p></dd>
+greater than the time gap in the original data. For example,
+<code>avg_time = "day"</code> for hourly data is OK, but
+<code>avg_time = "hour"</code> for daily data is not.</p></dd>
 
 
 <dt>facet</dt>
 <dd><p><code>facet</code> determines how the data are split i.e.
-  conditioned, and then plotted. The default is will produce a
-  single plot using the entire data. Type can be one of the
-  built-in types as detailed in <code>cutData</code> e.g. "season",
-  "year", "weekday" and so on. For example, <code>facet = "season"</code>
-  will produce four plots --- one for each season.</p>
+conditioned, and then plotted. The default is will produce a
+single plot using the entire data. Type can be one of the
+built-in types as detailed in <code>cutData</code> e.g. "season",
+"year", "weekday" and so on. For example, <code>facet = "season"</code>
+will produce four plots --- one for each season.</p>
 <p>It is also possible to choose <code>facet</code> as another variable in
-  the data frame. If that variable is numeric, then the data will
-  be split into four quantiles (if possible) and labelled
-  accordingly. If facet is an existing character or factor
-  variable, then those categories/levels will be used directly.
-  This offers great flexibility for understanding the variation of
-  different variables and how they depend on one another.</p>
+the data frame. If that variable is numeric, then the data will
+be split into four quantiles (if possible) and labelled
+accordingly. If facet is an existing character or factor
+variable, then those categories/levels will be used directly.
+This offers great flexibility for understanding the variation of
+different variables and how they depend on one another.</p>
 <p><code>facet</code> must be of length one.</p></dd>
 
 
@@ -134,7 +140,7 @@ interval is scaled to 100. This is helpful to show the relative
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A [ggplot2::ggplot2] figure</p>
+<p>A <a href="https://ggplot2.tidyverse.org/reference/ggplot2-package.html" class="external-link">ggplot2::ggplot2</a> figure</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

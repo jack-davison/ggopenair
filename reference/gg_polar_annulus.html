@@ -27,6 +27,12 @@ by month, day of week, etc."><!-- mathjax --><script src="https://cdnjs.cloudfla
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/ggopenair-overview.html">ggopenair Overview</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -82,7 +88,7 @@ concentrations.</p></dd>
 concentrations. When multiple pollutants are specified for a
 single-pollutant <code>statistic</code> (e.g., "mean"), a faceted plot will be
 returned. Two pollutants must be provided for certain <code>statistic</code>
-options (e.g., "Pearson" in [gg_polar_plot()]).</p></dd>
+options (e.g., "Pearson" in <code><a href="gg_polar_plot.html">gg_polar_plot()</a></code>).</p></dd>
 
 
 <dt>local_tz</dt>
@@ -98,7 +104,7 @@ is to express time as local time. This correction tends to produce
 better-defined diurnal profiles of concentration (or other variables) and
 allows a better comparison to be made with emissions/activity data. If set
 to <code>FALSE</code> then GMT is used. Examples of usage include <code>local_tz
-= "Europe/London"</code>, <code>local_tz = "America/New_York"</code>. See
+  = "Europe/London"</code>, <code>local_tz = "America/New_York"</code>. See
 <code>cutData</code> and <code>import</code> for more details.</p></dd>
 
 
@@ -112,8 +118,8 @@ week variation and “trend” to plot the trend by wind direction.</p></dd>
 <dt>facet</dt>
 <dd><p>One or two faceting columns. <code>facet</code> determines how the
 data are split and then plotted. When <code>facet</code> is length 1 it is passed
-to [ggplot2::facet_wrap()], and when it is length 2 it is passed to
-[ggplot2::facet_grid()] with the first element being used as columns and
+to <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">ggplot2::facet_wrap()</a></code>, and when it is length 2 it is passed to
+<code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">ggplot2::facet_grid()</a></code> with the first element being used as columns and
 the second rows. Some other options (e.g., multiple <code>pollutant</code>
 columns) can limit the the number of faceting columns to 1.</p></dd>
 
@@ -126,7 +132,7 @@ deviation), “weighted.mean” or “cpf” (Conditional Probability
 Function). Because of the smoothing involved, the colour scale for some of
 these statistics is only to provide an indication of overall pattern and
 should not be interpreted in concentration units e.g. for <code>statistic =
-"weighted.mean"</code> where the bin mean is multiplied by the bin frequency and
+  "weighted.mean"</code> where the bin mean is multiplied by the bin frequency and
 divided by the total frequency. In many cases using <code>polarFreq</code> will
 be better. Setting <code>statistic = "weighted.mean"</code> can be useful because
 it provides an indication of the concentration * frequency of occurrence
@@ -136,7 +142,7 @@ overall mean.</p></dd>
 
 <dt>percentile</dt>
 <dd><p>If <code>statistic = "percentile"</code> or <code>statistic =
-"cpf"</code> then <code>percentile</code> is used, expressed from 0 to 100. Note that
+  "cpf"</code> then <code>percentile</code> is used, expressed from 0 to 100. Note that
 the percentile value is calculated in the wind speed, wind direction
 ‘bins’. For this reason it can also be useful to set <code>min_bin</code>
 to ensure there are a sufficient number of points available to estimate a
@@ -146,9 +152,9 @@ calculated.</p></dd>
 
 <dt>width</dt>
 <dd><p>The relative width of the annulus compared to the width of the
-inner white space. `width = 2` makes the annulus twice as wide as the inner
-circle, whereas `width = 0.5` makes the annulus half as wide as the inner
-circle. Defaults to `1`.</p></dd>
+inner white space. <code>width = 2</code> makes the annulus twice as wide as the inner
+circle, whereas <code>width = 0.5</code> makes the annulus half as wide as the inner
+circle. Defaults to <code>1</code>.</p></dd>
 
 
 <dt>min_bin</dt>
@@ -216,24 +222,22 @@ it on a map.</p></dd>
     
 
 <p>As well as generating the plot itself, <code>polarAnnulus</code> also
-  returns an object of class ``openair''. The object includes three main
-  components: <code>call</code>, the command used to generate the plot;</p>
-<p></p>
-<p><code>data</code>, the data frame of summarised information used to make the
-  plot; and <code>plot</code>, the plot itself. If retained, e.g. using</p>
-<p></p>
-<p><code>output &lt;- polarAnnulus(mydata, "nox")</code>, this output can be used to
-  recover the data, reproduce or rework the original plot or undertake
-  further analysis.</p>
+returns an object of class ``openair''. The object includes three main
+components: <code>call</code>, the command used to generate the plot;
+<code>data</code>, the data frame of summarised information used to make the
+plot; and <code>plot</code>, the plot itself. If retained, e.g. using
+<code>output &lt;- polarAnnulus(mydata, "nox")</code>, this output can be used to
+recover the data, reproduce or rework the original plot or undertake
+further analysis.</p>
 
 
 <p>An openair output can be manipulated using a number of generic operations,
-  including <code>print</code>, <code>plot</code> and <code>summary</code>.</p>
+including <code>print</code>, <code>plot</code> and <code>summary</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>[gg_polar_annulus()] shares many of the properties of the [gg_polar_plot()].
-However, [gg_polar_annulus()] is focussed on displaying information on how
+    <p><code>gg_polar_annulus()</code> shares many of the properties of the <code><a href="gg_polar_plot.html">gg_polar_plot()</a></code>.
+However, <code>gg_polar_annulus()</code> is focussed on displaying information on how
 concentrations of a pollutant (values of another variable) vary with wind
 direction and time. Plotting as an annulus helps to reduce compression of
 information towards the centre of the plot. The circular plot is easy to

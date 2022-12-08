@@ -21,6 +21,12 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/ggopenair-overview.html">ggopenair Overview</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -35,9 +41,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
       
-      
+      <p class="section-desc"></p><p>In-built data to demonstrate ggopenair functions.</p>
 
       
     </div><div id="" class="section level2">
@@ -47,49 +53,36 @@
 
       <dl><dt>
           
-          <code><a href="annotate_calendar_text.html">annotate_calendar_text()</a></code> 
+          <code><a href="marylebone.html">marylebone</a></code> 
         </dt>
-        <dd>Annotate a Calendar Plot with Text</dd>
+        <dd>Hourly Air Quality and Met Data for Marylebone Road, London</dd>
+      </dl></div><div class="section level2">
+      <h2 id="directional-analysis">Directional Analysis<a class="anchor" aria-label="anchor" href="#directional-analysis"></a></h2>
+      
+      
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="polar-analysis">Polar Analysis<a class="anchor" aria-label="anchor" href="#polar-analysis"></a></h3>
+      <p class="section-desc"></p><p>Examine the relationship between wind speed, wind direction and pollutant concentrations.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="gg_windrose.html">gg_windrose()</a></code> 
+        </dt>
+        <dd>Traditional wind rose plot and pollution rose variation</dd>
       </dl><dl><dt>
           
-          <code><a href="annotate_calendar_wd.html">annotate_calendar_wd()</a></code> 
+          <code><a href="gg_pollutionrose.html">gg_pollutionrose()</a></code> 
         </dt>
-        <dd>Annotate a Calendar Plot with Wind Direction Arrows</dd>
-      </dl><dl><dt>
-          
-          <code><a href="annotate_polar_axis.html">annotate_polar_axis()</a></code> 
-        </dt>
-        <dd>Annotate a Polar Plot with Axis Labels</dd>
-      </dl><dl><dt>
-          
-          <code><a href="annotate_polar_wedge.html">annotate_polar_wedge()</a></code> 
-        </dt>
-        <dd>Annotate a Polar Plot with a Coloured Wedge</dd>
-      </dl><dl><dt>
-          
-          <code><a href="annotate_rose_text.html">annotate_rose_text()</a></code> 
-        </dt>
-        <dd>Annotate a wind or pollution rose with further information</dd>
-      </dl><dl><dt>
-          
-          <code><a href="cut_date.html">cut_date()</a></code> 
-        </dt>
-        <dd>Discretise date-times into categories</dd>
-      </dl><dl><dt>
-          
-          <code><a href="cut_wd.html">cut_wd()</a></code> 
-        </dt>
-        <dd>Discretise wind speed into sectors</dd>
-      </dl><dl><dt>
-          
-          <code><a href="gg_calendar.html">gg_calendar()</a></code> 
-        </dt>
-        <dd>Plot time series values in a conventional calendar format</dd>
-      </dl><dl><dt>
-          
-          <code><a href="gg_polar_annulus.html">gg_polar_annulus()</a></code> 
-        </dt>
-        <dd>Bivariate polarAnnulus plot</dd>
+        <dd>Traditional wind rose plot and pollution rose variation</dd>
       </dl><dl><dt>
           
           <code><a href="gg_polar_freq.html">gg_polar_freq()</a></code> 
@@ -107,9 +100,41 @@
         <dd>Function for plotting bivariate polar plots with smoothing.</dd>
       </dl><dl><dt>
           
-          <code><a href="gg_pollutionrose.html">gg_pollutionrose()</a></code> 
+          <code><a href="gg_polar_annulus.html">gg_polar_annulus()</a></code> 
         </dt>
-        <dd>Traditional wind rose plot and pollution rose variation</dd>
+        <dd>Bivariate polarAnnulus plot</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="trajectory-analysis">Trajectory Analysis<a class="anchor" aria-label="anchor" href="#trajectory-analysis"></a></h3>
+      <p class="section-desc"></p><p>Analyse and visualise HYSPLIT trajectory files.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="gg_traj_plot.html">gg_traj_plot()</a></code> 
+        </dt>
+        <dd>Trajectory line plots with conditioning</dd>
+      </dl></div><div class="section level2">
+      <h2 id="time-series-and-trends">Time Series and Trends<a class="anchor" aria-label="anchor" href="#time-series-and-trends"></a></h2>
+      
+      <p class="section-desc"></p><p>Examine how pollutant concentrations change with time.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="gg_timevariation.html">gg_timevariation()</a></code> 
+        </dt>
+        <dd>Diurnal, day of the week and monthly variation</dd>
       </dl><dl><dt>
           
           <code><a href="gg_timeprop.html">gg_timeprop()</a></code> 
@@ -117,57 +142,139 @@
         <dd>Time series plot with categories shown as a stacked bar chart</dd>
       </dl><dl><dt>
           
-          <code><a href="gg_timevariation.html">gg_timevariation()</a></code> 
-        </dt>
-        <dd>Diurnal, day of the week and monthly variation</dd>
-      </dl><dl><dt>
-          
-          <code><a href="gg_traj_plot.html">gg_traj_plot()</a></code> 
-        </dt>
-        <dd>Trajectory line plots with conditioning</dd>
-      </dl><dl><dt>
-          
           <code><a href="gg_trendlevel.html">gg_trendlevel()</a></code> 
         </dt>
         <dd>Trend Heat Map</dd>
       </dl><dl><dt>
           
-          <code><a href="gg_windrose.html">gg_windrose()</a></code> 
+          <code><a href="gg_calendar.html">gg_calendar()</a></code> 
         </dt>
-        <dd>Traditional wind rose plot and pollution rose variation</dd>
-      </dl><dl><dt>
+        <dd>Plot time series values in a conventional calendar format</dd>
+      </dl></div><div class="section level2">
+      <h2 id="plot-utilities">Plot Utilities<a class="anchor" aria-label="anchor" href="#plot-utilities"></a></h2>
+      
+      
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="themes">Themes<a class="anchor" aria-label="anchor" href="#themes"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
-          <code><a href="marylebone.html">marylebone</a></code> 
+          <code><a href="theme_polar.html">theme_polar()</a></code> 
         </dt>
-        <dd>Hourly Air Quality and Met Data for Marylebone Road, London</dd>
-      </dl><dl><dt>
-          
-          <code><a href="quick_text.html">quick_text()</a></code> 
-        </dt>
-        <dd>Automatic text formatting for ggopenair</dd>
-      </dl><dl><dt>
-          
-          <code><a href="scale_limitval.html">scale_y_limitval()</a></code> <code><a href="scale_limitval.html">scale_x_limitval()</a></code> 
-        </dt>
-        <dd>Position scales for continuous data (x &amp; y) with labelled vertical/horizontal
-markers</dd>
-      </dl><dl><dt>
+        <dd>Default Polar Plot Theme</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="scales">Scales<a class="anchor" aria-label="anchor" href="#scales"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="scale_opencolours_c.html">scale_opencolours_c()</a></code> 
         </dt>
         <dd>Plotting with openair palettes in ggplot2</dd>
       </dl><dl><dt>
           
-          <code><a href="theme_polar.html">theme_polar()</a></code> 
+          <code><a href="scale_limitval.html">scale_y_limitval()</a></code> <code><a href="scale_limitval.html">scale_x_limitval()</a></code> 
         </dt>
-        <dd>Default Polar Plot Theme</dd>
+        <dd>Position scales for continuous data (x &amp; y) with labelled vertical/horizontal
+markers</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="annotations">Annotations<a class="anchor" aria-label="anchor" href="#annotations"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="annotate_polar_axis.html">annotate_polar_axis()</a></code> 
+        </dt>
+        <dd>Annotate a Polar Plot with Axis Labels</dd>
       </dl><dl><dt>
+          
+          <code><a href="annotate_polar_wedge.html">annotate_polar_wedge()</a></code> 
+        </dt>
+        <dd>Annotate a Polar Plot with a Coloured Wedge</dd>
+      </dl><dl><dt>
+          
+          <code><a href="annotate_rose_text.html">annotate_rose_text()</a></code> 
+        </dt>
+        <dd>Annotate a wind or pollution rose with further information</dd>
+      </dl><dl><dt>
+          
+          <code><a href="annotate_calendar_text.html">annotate_calendar_text()</a></code> 
+        </dt>
+        <dd>Annotate a Calendar Plot with Text</dd>
+      </dl><dl><dt>
+          
+          <code><a href="annotate_calendar_wd.html">annotate_calendar_wd()</a></code> 
+        </dt>
+        <dd>Annotate a Calendar Plot with Wind Direction Arrows</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="other">Other<a class="anchor" aria-label="anchor" href="#other"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="quick_text.html">quick_text()</a></code> 
+        </dt>
+        <dd>Automatic text formatting for ggopenair</dd>
+      </dl></div><div class="section level2">
+      <h2 id="data-utilities">Data Utilities<a class="anchor" aria-label="anchor" href="#data-utilities"></a></h2>
+      
+      <p class="section-desc"></p><p>Tools for manipulating and summarising air quality data.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="time_average.html">time_average()</a></code> 
         </dt>
         <dd>Function to calculate time averages for data frames</dd>
+      </dl><dl><dt>
+          
+          <code><a href="cut_wd.html">cut_wd()</a></code> 
+        </dt>
+        <dd>Discretise wind speed into sectors</dd>
+      </dl><dl><dt>
+          
+          <code><a href="cut_date.html">cut_date()</a></code> 
+        </dt>
+        <dd>Discretise date-times into categories</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

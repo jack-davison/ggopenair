@@ -2,3 +2,84 @@ url: https://jack-davison.github.io/ggopenair/
 template:
   bootstrap: 5
 
+reference:
+- title: Data
+  desc: In-built data to demonstrate ggopenair functions.
+  contents:
+  - marylebone
+
+- title: Directional Analysis
+
+- subtitle: Polar Analysis
+  desc: Examine the relationship between wind speed, wind direction and pollutant concentrations.
+  contents:
+  - gg_windrose
+  - gg_pollutionrose
+  - gg_polar_freq
+  - gg_polar_percentile
+  - gg_polar_plot
+  - gg_polar_annulus
+  # - polarDiff
+  # - polarCluster
+
+- subtitle: Trajectory Analysis
+  desc:  Analyse and visualise HYSPLIT trajectory files.
+  contents:
+  # - importTraj
+  - gg_traj_plot
+  # - trajLevel
+  # - trajCluster
+
+- title: Time Series and Trends
+  desc:  Examine how pollutant concentrations change with time.
+  contents:
+  - gg_timevariation
+  - gg_timeprop
+  - gg_trendlevel
+  - gg_calendar
+  # - TheilSen
+
+# - title: Other Plots
+#   desc: Additional plotting functions for visualising air quality data.
+#   contents:
+#   - summaryPlot
+#   - scatterPlot
+#   - corPlot
+#   - linearRelation
+#   - kernelExceed
+#
+- title: Plot Utilities
+- subtitle: Themes
+  contents:
+  - theme_polar
+- subtitle: Scales
+  contents:
+  - scale_opencolours_c
+  - scale_x_limitval
+  - scale_y_limitval
+- subtitle: Annotations
+  contents:
+  - has_concept("polar annotation functions")
+  - has_concept("calendarplot annotation functions")
+- subtitle: Other
+  contents:
+  - quick_text
+
+- title: Data Utilities
+  desc: Tools for manipulating and summarising air quality data.
+  contents:
+  - time_average
+  - cut_wd
+  - cut_date
+  # - aqStats
+  # - binData
+  # - bootMeanDF
+  # - calcFno2
+  # - calcPercentile
+  # - cutData
+  # - rollingMean
+  # - selectByDate
+  # - selectRunning
+  # - splitByDate
+  # - timeAverage
+

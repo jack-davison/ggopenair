@@ -80,42 +80,41 @@ Must include a <code>date</code> field and at least one variable to plot.</p></d
 
 <dt>pollutant</dt>
 <dd><p>Name of variable to plot. Two or more pollutants can be
-plotted, in which case a form like <code>pollutant = c("nox", "co")</code>
-should be used.</p></dd>
+plotted, in which case a form like <code>pollutant = c("nox", "co")</code> should
+be used.</p></dd>
 
 
 <dt>local_tz</dt>
 <dd><p>Should the results be calculated in local time that includes
 a treatment of daylight savings time (DST)? The default is not to consider
-DST issues, provided the data were imported without a DST offset.
-Emissions activity tends to occur at local time e.g. rush hour is at 8 am
-every day. When the clocks go forward in spring, the emissions are
-effectively released into the atmosphere typically 1 hour earlier during
-the summertime i.e. when DST applies. When plotting diurnal profiles, this
-has the effect of “smearing-out” the concentrations. Sometimes, a
-useful approach is to express time as local time. This correction tends to
-produce better-defined diurnal profiles of concentration (or other
-variables) and allows a better comparison to be made with
-emissions/activity data. If set to <code>FALSE</code> then GMT is used. Examples
-of usage include <code>local.tz = "Europe/London"</code>, <code>local.tz =
-  "America/New_York"</code>. See <code>cutData</code> and <code>import</code> for more
-details.</p></dd>
+DST issues, provided the data were imported without a DST offset. Emissions
+activity tends to occur at local time e.g. rush hour is at 8 am every day.
+When the clocks go forward in spring, the emissions are effectively
+released into the atmosphere typically 1 hour earlier during the summertime
+i.e. when DST applies. When plotting diurnal profiles, this has the effect
+of “smearing-out” the concentrations. Sometimes, a useful approach
+is to express time as local time. This correction tends to produce
+better-defined diurnal profiles of concentration (or other variables) and
+allows a better comparison to be made with emissions/activity data. If set
+to <code>FALSE</code> then GMT is used. Examples of usage include <code>local.tz
+  = "Europe/London"</code>, <code>local.tz = "America/New_York"</code>. See
+<code>cutData</code> and <code>import</code> for more details.</p></dd>
 
 
 <dt>normalise</dt>
-<dd><p>Should variables be normalised? The default is
-<code>FALSE</code>. If <code>TRUE</code> then the variable(s) are divided by their
-mean values. This helps to compare the shape of the diurnal trends for
-variables on very different scales.</p></dd>
+<dd><p>Should variables be normalised? The default is <code>FALSE</code>.
+If <code>TRUE</code> then the variable(s) are divided by their mean values. This
+helps to compare the shape of the diurnal trends for variables on very
+different scales.</p></dd>
 
 
 <dt>type</dt>
 <dd><p><code>type</code> determines how the data are split i.e. conditioned,
 and then plotted. The default is will produce a single plot using the
 entire data. Type can be one of the built-in types as detailed in
-<code>cutData</code> e.g. “season”, “year”, “weekday” and
-so on. For example, <code>type = "season"</code> will produce four plots --- one
-for each season.</p>
+<code>cutData</code> e.g. “season”, “year”, “weekday” and so
+on. For example, <code>type = "season"</code> will produce four plots --- one for
+each season.</p>
 <p>It is also possible to choose <code>type</code> as another variable in the data
 frame. If that variable is numeric, then the data will be split into four
 quantiles (if possible) and labelled accordingly. If type is an existing
@@ -127,18 +126,18 @@ different variables and how they depend on one another.</p>
 
 <dt>group</dt>
 <dd><p>This sets the grouping variable to be used. For example, if a
-data frame had a column <code>site</code> setting <code>group = "site"</code> will
-plot all sites together in each panel. See examples below.</p></dd>
+data frame had a column <code>site</code> setting <code>group = "site"</code> will plot
+all sites together in each panel. See examples below.</p></dd>
 
 
 <dt>difference</dt>
 <dd><p>If two pollutants are chosen then setting <code>difference
-  = TRUE</code> will also plot the difference in means between the two variables
-as <code>pollutant[2] - pollutant[1]</code>. Bootstrap 95\<!-- % confidence intervals -->
-of the difference in means are also calculated. A horizontal dashed line
-is shown at y = 0. The difference can also be calculated if there is a
-column that identifies two groups e.g. having used <code>splitByDate</code>. In
-this case it is possible to call <code>timeVariation</code> with the option
+  = TRUE</code> will also plot the difference in means between the two variables as
+<code>pollutant[2] - pollutant[1]</code>. Bootstrap 95\<!-- % confidence intervals of -->
+the difference in means are also calculated. A horizontal dashed line is
+shown at y = 0. The difference can also be calculated if there is a column
+that identifies two groups e.g. having used <code>splitByDate</code>. In this
+case it is possible to call <code>timeVariation</code> with the option
 <code>group = "split.by"</code> and <code>difference = TRUE</code>.</p></dd>
 
 
@@ -155,9 +154,9 @@ with <code>conf.int</code>.</p></dd>
 <dd><p>The confidence intervals to be plotted. If <code>statistic =
   "mean"</code> then the confidence intervals in the mean are plotted. If
 <code>statistic = "median"</code> then the <code>conf.int</code> and <code>1 -
-  conf.int</code> <em>quantiles</em> are plotted. <code>conf.int</code> can be of length
-2, which is most useful for showing quantiles. For example <code>conf.int
-  = c(0.75, 0.99)</code> will yield a plot showing the median, 25/75 and 5/95th
+  conf.int</code> <em>quantiles</em> are plotted. <code>conf.int</code> can be of length 2,
+which is most useful for showing quantiles. For example <code>conf.int =
+  c(0.75, 0.99)</code> will yield a plot showing the median, 25/75 and 5/95th
 quantiles.</p></dd>
 
 
@@ -175,17 +174,18 @@ chosen where over-lapping confidence intervals can over complicate plots.</p></d
 
 
 <dt>alpha</dt>
-<dd><p>The alpha transparency used for plotting confidence intervals.
-0 is fully transparent and 1 is opaque. The default is 0.4</p></dd>
+<dd><p>The alpha transparency used for plotting confidence intervals. 0
+is fully transparent and 1 is opaque. The default is 0.4</p></dd>
 
 
 <dt>return</dt>
-<dd><p>What should the function return? One of:</p><ul><li><p>"ensemble" --- all four time variation panels assembled as a 'patchwork' object (default).</p></li>
-<li><p>"day_hour", "day", "hour", "month" --- a single time variation panel.</p></li>
-<li><p>"list" --- a list of the four time variation panels, which may be useful if
-users wish to assemble them in a different way or with other plots entirely.</p></li>
-<li><p>"data" --- the raw data used to create the time variation panels.</p></li>
-</ul></dd>
+<dd><p>What should the function return? One of: * "ensemble" --- all
+four time variation panels assembled as a 'patchwork' object (default). *
+"day_hour", "day", "hour", "month" --- a single time variation panel. *
+"list" --- a list of the four time variation panels, which may be useful if
+users wish to assemble them in a different way or with other plots
+entirely. * "data" --- the raw data used to create the time variation
+panels.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -205,19 +205,19 @@ more details. It can also accept a <code>group</code> option which is useful if
 data are stacked. This will work in a similar way to having multiple
 pollutants in separate columns.</p>
 <p>The option <code>difference</code> will calculate the difference in means of two
-pollutants together with bootstrap estimates of the 95\<!-- % confidence -->
-intervals in the difference in the mean. This works in two ways: either two
-pollutants are supplied in separate columns, e.g., <code>pollutant = c("no2", "o3")</code>
-or there are two unique values of <code>group</code>. The difference is
-calculated as the second pollutant minus the first and is labelled as such.
-Considering differences in this way can provide many useful insights and is
-particularly useful for model evaluation when information is needed about
-where a model differs from observations by many different time scales. The
-manual contains various examples of using <code>difference = TRUE</code>.</p>
+pollutants together with bootstrap estimates of the 95\<!-- % confidence intervals -->
+in the difference in the mean. This works in two ways: either two pollutants
+are supplied in separate columns, e.g., <code>pollutant = c("no2", "o3")</code> or there
+are two unique values of <code>group</code>. The difference is calculated as the
+second pollutant minus the first and is labelled as such. Considering
+differences in this way can provide many useful insights and is particularly
+useful for model evaluation when information is needed about where a model
+differs from observations by many different time scales. The manual contains
+various examples of using <code>difference = TRUE</code>.</p>
 <p>Note also that the <code>timeVariation</code> function works well on a subset of
 data and in conjunction with other plots. For example, a
-<code>polarPlot</code> may highlight an interesting feature for a
-particular wind speed/direction range. By filtering for those conditions
+<code>polarPlot</code> may highlight an interesting feature for a particular
+wind speed/direction range. By filtering for those conditions
 <code>timeVariation</code> can help determine whether the temporal variation of
 that feature differs from other features --- and help with source
 identification.</p>

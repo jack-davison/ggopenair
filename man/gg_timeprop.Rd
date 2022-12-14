@@ -8,7 +8,7 @@ gg_timeprop(
   data,
   pollutant,
   proportion,
-  avg_time = "day",
+  avg_time = "month",
   facet = "default",
   normalise = FALSE
 )

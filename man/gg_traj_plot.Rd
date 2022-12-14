@@ -39,7 +39,7 @@ and \code{0} is completely transparent.}
 trajectory. For hourly back trajectories points are plotted every
 \code{npoint} hours. This helps to understand where the air masses were at
 particular times and get a feel for the speed of the air (points closer
-togther correspond to slower moving air masses). If \code{n_points = NULL}
+together correspond to slower moving air masses). If \code{n_points = NULL}
 then no points are added.}
 
 \item{map}{Should a base map be drawn? If \code{TRUE} the world base map from
@@ -56,7 +56,17 @@ are possible through the \code{mapproj} package. See \code{?mapproject} for
 extensive details and information on setting other parameters and
 orientation (see below).}
 
-\item{...}{other arguments that are passed to \code{\link[ggplot2:coord_map]{ggplot2::coord_map()}}.}
+\item{...}{
+  Arguments passed on to \code{\link[ggplot2:coord_map]{ggplot2::coord_map}}
+  \describe{
+    \item{\code{orientation}}{projection orientation, which defaults to
+\code{c(90, 0, mean(range(x)))}.  This is not optimal for many
+projections, so you will have to supply your own. See
+\code{\link[mapproj:mapproject]{mapproj::mapproject()}} for more information.}
+    \item{\code{clip}}{Should drawing be clipped to the extent of the plot panel? A
+setting of \code{"on"} (the default) means yes, and a setting of \code{"off"}
+means no. For details, please see \code{\link[ggplot2:coord_cartesian]{coord_cartesian()}}.}
+  }}
 }
 \description{
 This function plots back trajectories. This function requires that data are

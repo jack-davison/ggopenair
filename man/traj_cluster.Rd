@@ -66,3 +66,9 @@ using the \code{\link[openair:importTraj]{openair::importTraj()}} function, whic
 back trajectories at specific receptor locations. Clustered trajectories can
 be visualised using \code{\link[=gg_traj_plot]{gg_traj_plot()}}.
 }
+\seealso{
+Other trajectory analysis functions: 
+\code{\link{gg_traj_level}()},
+\code{\link{gg_traj_plot}()}
+}
+\concept{trajectory analysis functions}

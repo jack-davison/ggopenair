@@ -28,7 +28,8 @@ gg_traj_plot(
 
 \item{lat}{Column containing the latitude, as a decimal.}
 
-\item{colour}{A column to colour the paths by.}
+\item{colour}{A column to colour the paths by (for example, \code{"date"} or a
+pollutant like \code{"pm2.5"}).}
 
 \item{facet}{How to facet the plot.}
 
@@ -72,3 +73,9 @@ means no. For details, please see \code{\link[ggplot2:coord_cartesian]{coord_car
 This function plots back trajectories. This function requires that data are
 imported using the \code{\link[openair:importTraj]{openair::importTraj()}} function.
 }
+\seealso{
+Other trajectory analysis functions: 
+\code{\link{gg_traj_level}()},
+\code{\link{traj_cluster}()}
+}
+\concept{trajectory analysis functions}

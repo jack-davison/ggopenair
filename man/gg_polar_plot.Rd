@@ -329,6 +329,7 @@ Atmospheric Environment. 145, 128-134.
 }
 \seealso{
 Other polar directional analysis plotting functions: 
+\code{\link{gg_biasrose}()},
 \code{\link{gg_polar_annulus}()},
 \code{\link{gg_polar_freq}()},
 \code{\link{gg_polar_percentile}()},

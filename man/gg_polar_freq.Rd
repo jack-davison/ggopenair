@@ -66,6 +66,7 @@ Function to plot wind speed/direction frequencies and other statistics
 }
 \seealso{
 Other polar directional analysis plotting functions: 
+\code{\link{gg_biasrose}()},
 \code{\link{gg_polar_annulus}()},
 \code{\link{gg_polar_percentile}()},
 \code{\link{gg_polar_plot}()},

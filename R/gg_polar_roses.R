@@ -262,6 +262,123 @@ gg_windrose <-
     plt
   }
 
+#' Bias Rose
+#'
+#' @inheritParams gg_windrose
+#' @param data A data frame containing fields \code{ws}, \code{wd}, \code{ws2}
+#'   and \code{wd2}.
+#' @param ws2 Name of the column representing wind speed (2).
+#' @param wd2 Name of the column representing wind direction (2).
+#' @export
+#' @family polar directional analysis plotting functions
+gg_biasrose <-
+  function(data,
+           ws = "ws",
+           wd = "wd",
+           ws2 = "ws2",
+           wd2 = "wd2",
+           angle = 10,
+           facet = NULL,
+           bias_corr = TRUE,
+           breaks = NA,
+           width = 1,
+           border_colour = NA,
+           alpha = 1) {
+    # run openair
+    if (is.null(facet))
+      facet <- "default"
+    oa_data <-
+      openair::pollutionRose(
+        data,
+        ws = ws,
+        wd = wd,
+        ws2 = ws2,
+        wd2 = wd2,
+        angle = angle,
+        type = facet,
+        bias.corr = bias_corr,
+        breaks = breaks,
+        plot = FALSE,
+        statistic = "prop.count"
+      )$data
+
+    if (width > 1) {
+      width <- 1
+    }
+
+    data_long <-
+      oa_data %>%
+      dplyr::filter(wd >= 0) %>%
+      tidyr::pivot_longer(dplyr::contains(" to ")) %>%
+      dplyr::mutate(
+        name = forcats::fct_inorder(.data$name),
+        name = forcats::fct_rev(.data$name)
+      )
+
+    axis_extend <-
+      data_long %>%
+      dplyr::pull(.data$value) %>%
+      pretty() %>%
+      diff() %>%
+      unique()
+    axis_extend <- axis_extend * 3 / 4
+
+    if (length(facet) == 2) {
+      data_grouped <-
+        dplyr::group_by(data_long, .data[[facet[1]]],
+                        .data[[facet[2]]], .data$wd)
+    } else {
+      data_grouped <-
+        dplyr::group_by(data_long,
+                        .data[[facet[1]]], .data$wd)
+    }
+
+    plot_data <-
+      data_grouped %>%
+      dplyr::mutate(value = dplyr::if_else(
+        !is.na(dplyr::lag(.data$value)),
+        .data$value - dplyr::lag(.data$value),
+        .data$value
+      )) %>%
+      dplyr::ungroup("wd") %>%
+      dplyr::mutate(
+        lab = stringr::str_glue("mean ws = {panel.fun}\nmean wd = {mean.wd}%")
+      )
+
+    plt <-
+      ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$wd)) +
+      ggplot2::geom_col(
+        alpha = alpha,
+        ggplot2::aes(y = .data$value, fill = .data$name),
+        width = angle * width,
+        color = border_colour
+      ) +
+      ggplot2::coord_polar(start = (angle / 2) / 360 * 2 * pi, clip = "off") +
+      ggplot2::scale_x_continuous(
+        breaks = c(90, 180, 270, 360),
+        limits = c((angle / 2), 360 + (angle / 2)),
+        labels = c("+90", "+/-180", "-90", "0")
+      ) +
+      ggplot2::labs(x = NULL,
+                    y = NULL,
+                    fill = openair::quickText("ws")) +
+      ggplot2::expand_limits(y = -axis_extend)
+
+    if (any(facet != "default")) {
+      if (length(facet) == 1) {
+        plt <-
+          plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
+      } else {
+        plt <-
+          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[facet[1]]]),
+                                    rows = ggplot2::vars(.data[[facet[2]]]))
+      }
+    }
+
+    plt
+  }
+
+
 #' Annotate a wind or pollution rose with further information
 #'
 #' Add an annotation to a [gg_pollutionrose()] or [gg_windrose()] plot. This

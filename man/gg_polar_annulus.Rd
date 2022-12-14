@@ -178,6 +178,7 @@ smoothing parameter \code{k}.
 }
 \seealso{
 Other polar directional analysis plotting functions: 
+\code{\link{gg_biasrose}()},
 \code{\link{gg_polar_freq}()},
 \code{\link{gg_polar_percentile}()},
 \code{\link{gg_polar_plot}()},

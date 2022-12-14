@@ -80,6 +80,9 @@ gg_trendlevel <-
       )$data
 
     oa_names <- names(oa_data)
+    oa_data <-
+      dplyr::mutate(oa_data,
+                    dplyr::across(dplyr::everything(), num.convert))
 
     plt <-
       ggplot2::ggplot(oa_data,
@@ -95,3 +98,15 @@ gg_trendlevel <-
 
     return(plt)
   }
+
+#' acts like type.convert but only converts if numeric/integer
+#' @param x vector
+#' @noRd
+num.convert <- function(x) {
+  y <- type.convert(x, as.is = TRUE)
+  if (class(y) %in% c("numeric", "integer")) {
+    return(y)
+  } else {
+    return(x)
+  }
+}

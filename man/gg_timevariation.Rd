@@ -105,12 +105,12 @@ chosen where over-lapping confidence intervals can over complicate plots.}
 is fully transparent and 1 is opaque. The default is 0.4}
 
 \item{return}{What should the function return? One of: * "ensemble" --- all
-four time variation panels assembled as a 'patchwork' object (default). *
-"day_hour", "day", "hour", "month" --- a single time variation panel. *
-"list" --- a list of the four time variation panels, which may be useful if
-users wish to assemble them in a different way or with other plots
-entirely. * "data" --- the raw data used to create the time variation
-panels.}
+four time variation panels assembled as a
+\link[patchwork:patchwork-package]{patchwork} object (default). * "day_hour",
+"day", "hour", "month" --- a single time variation panel. * "list" --- a
+list of the four time variation panels, which may be useful if users wish
+to assemble them in a different way or with other plots entirely. * "data"
+--- the raw data used to create the time variation panels.}
 }
 \description{
 Plots the diurnal, day of the week and monthly variation for different

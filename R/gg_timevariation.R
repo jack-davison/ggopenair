@@ -119,12 +119,12 @@
 #' @param alpha The alpha transparency used for plotting confidence intervals. 0
 #'   is fully transparent and 1 is opaque. The default is 0.4
 #' @param return What should the function return? One of: * "ensemble" --- all
-#'   four time variation panels assembled as a 'patchwork' object (default). *
-#'   "day_hour", "day", "hour", "month" --- a single time variation panel. *
-#'   "list" --- a list of the four time variation panels, which may be useful if
-#'   users wish to assemble them in a different way or with other plots
-#'   entirely. * "data" --- the raw data used to create the time variation
-#'   panels.
+#'   four time variation panels assembled as a
+#'   [patchwork][patchwork::patchwork-package] object (default). * "day_hour",
+#'   "day", "hour", "month" --- a single time variation panel. * "list" --- a
+#'   list of the four time variation panels, which may be useful if users wish
+#'   to assemble them in a different way or with other plots entirely. * "data"
+#'   --- the raw data used to create the time variation panels.
 #' @export
 #'
 gg_timevariation <- function(mydata,
@@ -299,7 +299,7 @@ gg_timevariation <- function(mydata,
   if (return == "ensemble") {
     bottom <- patchwork::wrap_plots(plt_hour, plt_day, plt_month)
     (patchwork::wrap_plots(plt_day_hour, bottom, ncol = 1) +
-      patchwork::plot_layout(guides = "collect")) &
+        patchwork::plot_layout(guides = "collect")) &
       ggplot2::labs(y = ylab)
   }
 }

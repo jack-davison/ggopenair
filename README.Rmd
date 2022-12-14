@@ -62,3 +62,6 @@ annotated <- classic + ggtitle("Annotated") +
 classic + sqrt_trans + steps + annotated
 ```
 
+## Code of Conduct
+
+Please note that the ggopenair project is released with a [Contributor Code of Conduct](https://jack-davison.github.io/ggopenair/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

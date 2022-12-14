@@ -7,7 +7,6 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggopenair)](https://CRAN.R-project.org/package=ggopenair)
-[![R-CMD-check](https://github.com/jack-davison/ggopenair/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jack-davison/ggopenair/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `ggopenair` is to bridge the gap between the data analysis
@@ -33,3 +32,10 @@ A more thorough overview of `{ggopenair}` can be found on the package
 website: <https://jack-davison.github.io/ggopenair/>.
 
 <img src="man/figures/readme-demo-1.png" style="display: block; margin: auto;" />
+
+## Code of Conduct
+
+Please note that the ggopenair project is released with a [Contributor
+Code of
+Conduct](https://jack-davison.github.io/ggopenair/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.

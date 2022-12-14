@@ -18,5 +18,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Jack Davison \email{davison.jack.jd@gmail.com}
 
+Authors:
+\itemize{
+  \item David Carslaw \email{david.carslaw@ricardo.com}
+}
+
 }
 \keyword{internal}

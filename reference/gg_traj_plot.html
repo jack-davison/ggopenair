@@ -84,7 +84,8 @@ imported using the <code><a href="https://davidcarslaw.github.io/openair/referen
 
 
 <dt>colour</dt>
-<dd><p>A column to colour the paths by.</p></dd>
+<dd><p>A column to colour the paths by (for example, <code>"date"</code> or a
+pollutant like <code>"pm2.5"</code>).</p></dd>
 
 
 <dt>facet</dt>
@@ -101,7 +102,7 @@ and <code>0</code> is completely transparent.</p></dd>
 trajectory. For hourly back trajectories points are plotted every
 <code>npoint</code> hours. This helps to understand where the air masses were at
 particular times and get a feel for the speed of the air (points closer
-togther correspond to slower moving air masses). If <code>n_points = NULL</code>
+together correspond to slower moving air masses). If <code>n_points = NULL</code>
 then no points are added.</p></dd>
 
 
@@ -130,9 +131,27 @@ orientation (see below).</p></dd>
 
 
 <dt>...</dt>
-<dd><p>other arguments that are passed to <code><a href="https://ggplot2.tidyverse.org/reference/coord_map.html" class="external-link">ggplot2::coord_map()</a></code>.</p></dd>
+<dd><p>Arguments passed on to <code><a href="https://ggplot2.tidyverse.org/reference/coord_map.html" class="external-link">ggplot2::coord_map</a></code></p><dl><dt><code>orientation</code></dt>
+<dd><p>projection orientation, which defaults to
+<code>c(90, 0, mean(range(x)))</code>.  This is not optimal for many
+projections, so you will have to supply your own. See
+<code><a href="https://rdrr.io/pkg/mapproj/man/mapproject.html" class="external-link">mapproj::mapproject()</a></code> for more information.</p></dd>
+
+    <dt><code>clip</code></dt>
+<dd><p>Should drawing be clipped to the extent of the plot panel? A
+setting of <code>"on"</code> (the default) means yes, and a setting of <code>"off"</code>
+means no. For details, please see <code><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian()</a></code>.</p></dd>
+
+  
+</dl></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other trajectory analysis functions: 
+<code><a href="gg_traj_level.html">gg_traj_level</a>()</code>,
+<code><a href="traj_cluster.html">traj_cluster</a>()</code></p></div>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

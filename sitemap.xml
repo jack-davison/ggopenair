@@ -70,6 +70,9 @@
     <loc>https://jack-davison.github.io/ggopenair/reference/gg_timevariation.html</loc>
   </url>
   <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/gg_traj_level.html</loc>
+  </url>
+  <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/gg_traj_plot.html</loc>
   </url>
   <url>
@@ -104,5 +107,8 @@
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/time_average.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/traj_cluster.html</loc>
   </url>
 </urlset>

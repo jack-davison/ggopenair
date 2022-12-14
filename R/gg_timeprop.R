@@ -66,7 +66,7 @@ gg_timeprop <-
   function(data,
            pollutant,
            proportion,
-           avg_time = "day",
+           avg_time = "month",
            facet = "default",
            normalise = FALSE) {
     # run openair
@@ -74,7 +74,7 @@ gg_timeprop <-
       openair::timeProp(
         mydata = data,
         pollutant = pollutant,
-        proportion = "wd",
+        proportion = proportion,
         avg.time = avg_time,
         type = facet,
         plot = FALSE,

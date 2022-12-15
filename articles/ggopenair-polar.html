@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="ggopenair">
-<title>Polar Plots • ggopenair</title>
+<title>Polar Analysis • ggopenair</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Polar Plots">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Polar Analysis">
 <meta property="og:description" content="ggopenair">
 <meta property="og:image" content="https://jack-davison.github.io/ggopenair/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -48,7 +48,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/ggopenair-polar.html">Polar Plots</a>
+    <a class="dropdown-item" href="../articles/ggopenair-polar.html">Polar Analysis</a>
     <a class="dropdown-item" href="../articles/ggopenair-traj.html">Trajectory Analysis</a>
     <a class="dropdown-item" href="../articles/ggopenair-trends.html">Time Series and Trends</a>
   </div>
@@ -70,7 +70,9 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Polar Plots</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Polar Analysis</h1>
+            <h3 data-toc-skip class="subtitle">Examine the relationship
+between wind speed, wind direction and pollutant concentrations.</h3>
             
       
       
@@ -92,7 +94,7 @@ write:</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jack-davison.github.io/ggopenair/">ggopenair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/gg_polar_plot.html">gg_polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-polar_files/figure-html/ggpolar-1.png" width="700"></p>
@@ -106,7 +108,7 @@ customise their outputs very closely. For example:</p>
 behaves. For example, use <code><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html" class="external-link">scale_color_binned()</a></code> to bin the
 colour bar.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_polar_plot.html">gg_polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_steps.html" class="external-link">scale_color_steps</a></span><span class="op">(</span></span>
 <span>    low <span class="op">=</span> <span class="st">"black"</span>,</span>
@@ -115,12 +117,11 @@ colour bar.</p>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-polar_files/figure-html/scales-1.png" width="700"></p>
 <p>Alternatively, one could use the “trans” argument to shift the colour
-scale. This could be particularly useful for
-<code><a href="../reference/gg_polar_freq.html">gg_polar_freq()</a></code>, which had its own “trans” argument in
-<code>openair</code>.</p>
+scale. This could be particularly useful for <code><a href="../reference/polar_freq.html">polar_freq()</a></code>,
+which had its own “trans” argument in <code>openair</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">shift_axis</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">trans</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="../reference/gg_polar_freq.html">gg_polar_freq</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/polar_freq.html">polar_freq</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></span><span class="op">(</span></span>
 <span>      colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"hotpink"</span><span class="op">)</span>,</span>
@@ -144,7 +145,7 @@ draw attention to certain aspects. In-built annotation functions make it
 easy to, for example, draw a highlighting wedge or direct axis
 labels.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_polar_plot.html">gg_polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="st">"inferno"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/annotate_polar_wedge.html">annotate_polar_wedge</a></span><span class="op">(</span><span class="st">"S"</span>, <span class="st">"W"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -161,12 +162,12 @@ inserted into a time variation plot.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">polar</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/gg_polar_plot.html">gg_polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">tv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gg_timevariation.html">gg_timevariation</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span>, return <span class="op">=</span> <span class="st">"list"</span><span class="op">)</span></span>
+<span><span class="va">tv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trend_variation.html">trend_variation</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span>, return <span class="op">=</span> <span class="st">"list"</span><span class="op">)</span></span>
 <span><span class="va">tv</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span></span>
 <span>    <span class="va">tv</span>,</span>
@@ -187,17 +188,17 @@ inserted into a time variation plot.</p>
 implemented in <a href="https://jack-davison.github.io/ggopenair/">ggopenair</a>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">polarplot</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/gg_polar_plot.html">gg_polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">polarannulus</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/gg_polar_annulus.html">gg_polar_annulus</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/polar_annulus.html">polar_annulus</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">polarfreq</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/gg_polar_freq.html">gg_polar_freq</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"sqrt"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/polar_freq.html">polar_freq</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"sqrt"</span><span class="op">)</span></span>
 <span><span class="va">polarperc</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/gg_polar_percentile.html">gg_polar_percentile</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/openColours.html" class="external-link">openColours</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/polar_percentile.html">polar_percentile</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/openColours.html" class="external-link">openColours</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># pollrose &lt;-</span></span>
-<span><span class="co">#   gg_pollutionrose(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))</span></span>
+<span><span class="co">#   pollutionrose(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))</span></span>
 <span><span class="co"># windrose &lt;-</span></span>
-<span><span class="co">#   gg_windrose(marylebone) + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 4)))</span></span>
+<span><span class="co">#   windrose(marylebone) + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 4)))</span></span>
 <span></span>
 <span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">polarplot</span>, <span class="va">polarannulus</span>, <span class="va">polarfreq</span>, <span class="va">polarperc</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-polar_files/figure-html/allpolar-1.png" width="672"></p>
@@ -208,11 +209,11 @@ itself.</p>
 <!-- # The Three Roses -->
 <!-- Note that the two "roses" above - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/pollutionrose due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North. -->
 <!-- ```{r} -->
-<!-- gg_windrose(marylebone, facet = "daylight") + -->
+<!-- windrose(marylebone, facet = "daylight") + -->
 <!--   theme_polar(panel_ontop = FALSE) + -->
 <!--   annotate_rose_text(y = 15, wd = "SE", size = 2.5) -->
 <!-- ``` -->
-<!-- The functionality to compare two sets of ws/wd data felt a bit misplaced in `pollutionRose()`, so `{ggopenair}` exports a separate `gg_biasrose()` function. This also lets the plot better reflect what it is actually representing (no more N/S/E/W axis labels). -->
+<!-- The functionality to compare two sets of ws/wd data felt a bit misplaced in `pollutionRose()`, so `{ggopenair}` exports a separate `biasrose()` function. This also lets the plot better reflect what it is actually representing (no more N/S/E/W axis labels). -->
 <!-- ```{r} -->
 <!-- mydata <- dplyr::mutate(marylebone, -->
 <!--                         ws2 = ws + 2 * rnorm(nrow(marylebone)) + 1, -->
@@ -222,7 +223,7 @@ itself.</p>
 <!-- id <- which(mydata$wd2 < 0) -->
 <!-- mydata$wd2[id] <- mydata$wd2[id] + 360 -->
 <!-- ## results show postive bias in wd and ws -->
-<!-- gg_biasrose( -->
+<!-- biasrose( -->
 <!--   mydata, -->
 <!--   ws = "ws", -->
 <!--   wd = "wd", -->

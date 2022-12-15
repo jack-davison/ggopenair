@@ -48,7 +48,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/ggopenair-polar.html">Polar Plots</a>
+    <a class="dropdown-item" href="../articles/ggopenair-polar.html">Polar Analysis</a>
     <a class="dropdown-item" href="../articles/ggopenair-traj.html">Trajectory Analysis</a>
     <a class="dropdown-item" href="../articles/ggopenair-trends.html">Time Series and Trends</a>
   </div>
@@ -71,6 +71,8 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Trajectory Analysis</h1>
+            <h3 data-toc-skip class="subtitle">Analyse and visualise
+HYSPLIT trajectory files.</h3>
             
       
       
@@ -110,25 +112,27 @@
 <div class="section level2">
 <h2 id="path-plots">Path Plots<a class="anchor" aria-label="anchor" href="#path-plots"></a>
 </h2>
-<p><a href="https://jack-davison.github.io/ggopenair/">ggopenair</a> exports <code><a href="../reference/gg_traj_plot.html">gg_traj_plot()</a></code>, which
-is extremely similar to <code>trajPlot()</code>.</p>
+<p><a href="https://jack-davison.github.io/ggopenair/">ggopenair</a> exports <code><a href="../reference/traj_plot.html">traj_plot()</a></code>, which is
+extremely similar to <code>trajPlot()</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_traj_plot.html">gg_traj_plot</a></span><span class="op">(</span><span class="va">traj_red</span>, colour <span class="op">=</span> <span class="st">"pm2.5"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/traj_plot.html">traj_plot</a></span><span class="op">(</span><span class="va">traj_red</span>, colour <span class="op">=</span> <span class="st">"pm2.5"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-traj_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="binned-plots">Binned Plots<a class="anchor" aria-label="anchor" href="#binned-plots"></a>
 </h2>
-<p><code><a href="../reference/gg_traj_level.html">gg_traj_level()</a></code> is also exported, which again behaves
+<p><code><a href="../reference/traj_level.html">traj_level()</a></code> is also exported, which again behaves
 almost identically to <code>trajLevel()</code>. All statistic types are
 supported. Note that using scale transforms on the “fill” aesthetic is
 almost always recommended.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_traj_level.html">gg_traj_level</a></span><span class="op">(</span><span class="va">traj_red</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"sqrt"</span>,</span>
-<span>                      label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/traj_level.html">traj_level</a></span><span class="op">(</span><span class="va">traj_red</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span></span>
+<span>    trans <span class="op">=</span> <span class="st">"sqrt"</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"% Trajectories\n(sqrt scale)\n"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-traj_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
@@ -173,11 +177,11 @@ returns clustered data by default.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> C1           -<span style="color: #BB0000;">88</span> 15 April 2010 to 21 April 2…  63.2 -<span style="color: #BB0000;">25.5</span> 2010-04-16 <span style="color: #949494;">18:16:21</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> C1           -<span style="color: #BB0000;">87</span> 15 April 2010 to 21 April 2…  63.4 -<span style="color: #BB0000;">24.5</span> 2010-04-16 <span style="color: #949494;">18:16:21</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 475 more rows</span></span></span></code></pre></div>
-<p>This can be inserted directly into <code><a href="../reference/gg_traj_plot.html">gg_traj_plot()</a></code> to
+<p>This can be inserted directly into <code><a href="../reference/traj_plot.html">traj_plot()</a></code> to
 visualise the clusters.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/traj_cluster.html">traj_cluster</a></span><span class="op">(</span><span class="va">traj_red</span><span class="op">)</span><span class="op">$</span><span class="va">traj</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/gg_traj_plot.html">gg_traj_plot</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"cluster"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/traj_plot.html">traj_plot</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"cluster"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-traj_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>However, if you prefer the behaviour of <code>trajCluster()</code>,

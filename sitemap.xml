@@ -43,49 +43,13 @@
     <loc>https://jack-davison.github.io/ggopenair/reference/annotate_rose_text.html</loc>
   </url>
   <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/biasrose.html</loc>
+  </url>
+  <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/cut_date.html</loc>
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/cut_wd.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_biasrose.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_calendar.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_polar_annulus.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_polar_freq.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_polar_percentile.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_polar_plot.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_pollutionrose.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_timeprop.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_timevariation.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_traj_level.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_traj_plot.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_trendlevel.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/gg_windrose.html</loc>
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/ggopenair-package.html</loc>
@@ -98,6 +62,21 @@
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/polar_annulus.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/polar_freq.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/polar_percentile.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/polar_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/pollutionrose.html</loc>
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/quick_text.html</loc>
@@ -116,5 +95,26 @@
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/traj_cluster.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/traj_level.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/traj_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/trend_calendar.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/trend_level.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/trend_prop.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/trend_variation.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/windrose.html</loc>
   </url>
 </urlset>

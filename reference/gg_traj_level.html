@@ -57,6 +57,7 @@ data are imported using the <code><a href="https://davidcarslaw.github.io/openai
 <span>  lat <span class="op">=</span> <span class="st">"lat"</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"frequency"</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"height"</span>,</span>
+<span>  facet <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lat_inc <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  lon_inc <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  min_bin <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -109,6 +110,10 @@ approach is used. See details.</p></dd>
 <dd><p>By default, the trajectory height is summarised. <code>pollutant</code>
 overrides this, which is useful when <code>statistic</code> is something other than
 <code>"frequency"</code>.</p></dd>
+
+
+<dt>facet</dt>
+<dd><p>How to facet the plot.</p></dd>
 
 
 <dt>lat_inc, lon_inc</dt>
@@ -169,6 +174,22 @@ the <code>maps</code> package is used.</p></dd>
 are possible through the <code>mapproj</code> package. See <code>?mapproject</code> for
 extensive details and information on setting other parameters and
 orientation (see below).</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Arguments passed on to <code><a href="https://ggplot2.tidyverse.org/reference/coord_map.html" class="external-link">ggplot2::coord_map</a></code></p><dl><dt><code>orientation</code></dt>
+<dd><p>projection orientation, which defaults to
+<code>c(90, 0, mean(range(x)))</code>.  This is not optimal for many
+projections, so you will have to supply your own. See
+<code><a href="https://rdrr.io/pkg/mapproj/man/mapproject.html" class="external-link">mapproj::mapproject()</a></code> for more information.</p></dd>
+
+    <dt><code>clip</code></dt>
+<dd><p>Should drawing be clipped to the extent of the plot panel? A
+setting of <code>"on"</code> (the default) means yes, and a setting of <code>"off"</code>
+means no. For details, please see <code><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian()</a></code>.</p></dd>
+
+  
+</dl></dd>
 
 </dl></div>
     <div class="section level2">

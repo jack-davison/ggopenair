@@ -1,6 +1,6 @@
 #' Function to plot percentiles by wind direction
 #'
-#' @inheritParams gg_polar_plot
+#' @inheritParams polar_plot
 #' @param percentile The percentile value(s) to plot. Must be between
 #'   0--100. If \code{percentile = NA} then only a mean line will be
 #'   shown.
@@ -20,18 +20,18 @@
 #' @param mean_width Line width for mean line.
 #' @param mean_colour Line colour for mean line.
 #' @export
-#' @family polar directional analysis plotting functions
-gg_polar_percentile <- function(data, pollutant,
-                                facet = NULL,
-                                percentile = c(25, 50, 75, 90, 95),
-                                method = "default",
-                                line_lty = 1,
-                                line_width = 1,
-                                mean = TRUE,
-                                mean_lty = 1,
-                                mean_width = 1,
-                                mean_colour = "grey",
-                                alpha = 1) {
+#' @family polar directional analysis functions
+polar_percentile <- function(data, pollutant,
+                             facet = NULL,
+                             percentile = c(25, 50, 75, 90, 95),
+                             method = "default",
+                             line_lty = 1,
+                             line_width = 1,
+                             mean = TRUE,
+                             mean_lty = 1,
+                             mean_width = 1,
+                             mean_colour = "grey",
+                             alpha = 1) {
   # run openair
   if (is.null(facet)) facet <- "default"
   oa_data <- openair::percentileRose(

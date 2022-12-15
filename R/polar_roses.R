@@ -2,7 +2,7 @@ utils::globalVariables(".")
 
 #' Traditional wind rose plot
 #'
-#' @inheritParams gg_polar_plot
+#' @inheritParams polar_plot
 #' @param pollutant A column name identifying a pollutant concentration.
 #' @param angle Angle of the spokes. Ideally a number by which 360 is evenly
 #'   divisible (see \code{bias_corr}).
@@ -34,10 +34,10 @@ utils::globalVariables(".")
 #'   makes them disappear entirely. Defaults to \code{0.9}.
 #' @param border_colour Border colour for shaded areas. Default is no border.
 #' @export
-#' @family polar directional analysis plotting functions
+#' @family polar directional analysis functions
 #' @seealso [annotate_rose_text()] for adding an annotation of mean and calm
 #'   conditions to the figure.
-gg_pollutionrose <-
+pollutionrose <-
   function(data,
            pollutant,
            angle = 30,
@@ -50,8 +50,9 @@ gg_pollutionrose <-
            border_colour = NA,
            alpha = 1) {
     # run openair
-    if (is.null(facet))
+    if (is.null(facet)) {
       facet <- "default"
+    }
     oa_data <-
       openair::pollutionRose(
         mydata = data,
@@ -74,7 +75,7 @@ gg_pollutionrose <-
       dplyr::filter(.data$wd >= 0) %>%
       tidyr::pivot_longer(dplyr::contains(" to ")) %>%
       dplyr::mutate(name = forcats::fct_inorder(.data$name) %>%
-                      forcats::fct_rev())
+        forcats::fct_rev())
 
     axis_extend <-
       data_long %>%
@@ -86,8 +87,10 @@ gg_pollutionrose <-
 
     if (length(facet) == 2) {
       data_grouped <-
-        dplyr::group_by(data_long, .data[[facet[1]]],
-                        .data[[facet[2]]], .data$wd)
+        dplyr::group_by(
+          data_long, .data[[facet[1]]],
+          .data[[facet[2]]], .data$wd
+        )
     } else {
       data_grouped <-
         dplyr::group_by(data_long, .data[[facet[1]]], .data$wd)
@@ -119,9 +122,11 @@ gg_pollutionrose <-
         limits = c((angle / 2), 360 + (angle / 2)),
         labels = c("E", "S", "W", "N")
       ) +
-      ggplot2::labs(x = NULL,
-                    y = NULL,
-                    fill = openair::quickText(pollutant)) +
+      ggplot2::labs(
+        x = NULL,
+        y = NULL,
+        fill = openair::quickText(pollutant)
+      ) +
       ggplot2::expand_limits(y = -axis_extend)
 
     if (any(facet != "default")) {
@@ -130,8 +135,10 @@ gg_pollutionrose <-
           plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
       } else {
         plt <-
-          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[facet[1]]]),
-                                    rows = ggplot2::vars(.data[[facet[2]]]))
+          plt + ggplot2::facet_grid(
+            cols = ggplot2::vars(.data[[facet[1]]]),
+            rows = ggplot2::vars(.data[[facet[2]]])
+          )
       }
     }
 
@@ -140,7 +147,7 @@ gg_pollutionrose <-
 
 #' Pollution rose variation of the traditional wind rose
 #'
-#' @inheritParams gg_pollutionrose
+#' @inheritParams pollutionrose
 #' @param data A data frame containing fields \code{ws} and \code{wd}
 #' @param ws Name of the column representing wind speed.
 #' @param wd Name of the column representing wind direction.
@@ -153,8 +160,8 @@ gg_pollutionrose <-
 #'   2, 4, 6 & 8 m/s, whereas \code{breaks = c(0, 1, 10, 100)} breaks the data
 #'   into four segments: <1, 1-10, 10-100, & >100.
 #' @export
-#' @family polar directional analysis plotting functions
-gg_windrose <-
+#' @family polar directional analysis functions
+windrose <-
   function(data,
            ws = "ws",
            wd = "wd",
@@ -169,8 +176,9 @@ gg_windrose <-
            border_colour = NA,
            alpha = 1) {
     # run openair
-    if (is.null(facet))
+    if (is.null(facet)) {
       facet <- "default"
+    }
     oa_data <-
       openair::windRose(
         data,
@@ -209,12 +217,16 @@ gg_windrose <-
 
     if (length(facet) == 2) {
       data_grouped <-
-        dplyr::group_by(data_long, .data[[facet[1]]],
-                        .data[[facet[2]]], .data$wd)
+        dplyr::group_by(
+          data_long, .data[[facet[1]]],
+          .data[[facet[2]]], .data$wd
+        )
     } else {
       data_grouped <-
-        dplyr::group_by(data_long,
-                        .data[[facet[1]]], .data$wd)
+        dplyr::group_by(
+          data_long,
+          .data[[facet[1]]], .data$wd
+        )
     }
 
     plot_data <-
@@ -243,9 +255,11 @@ gg_windrose <-
         limits = c((angle / 2), 360 + (angle / 2)),
         labels = c("E", "S", "W", "N")
       ) +
-      ggplot2::labs(x = NULL,
-                    y = NULL,
-                    fill = openair::quickText("ws")) +
+      ggplot2::labs(
+        x = NULL,
+        y = NULL,
+        fill = openair::quickText("ws")
+      ) +
       ggplot2::expand_limits(y = -axis_extend)
 
     if (any(facet != "default")) {
@@ -254,8 +268,10 @@ gg_windrose <-
           plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
       } else {
         plt <-
-          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[facet[1]]]),
-                                    rows = ggplot2::vars(.data[[facet[2]]]))
+          plt + ggplot2::facet_grid(
+            cols = ggplot2::vars(.data[[facet[1]]]),
+            rows = ggplot2::vars(.data[[facet[2]]])
+          )
       }
     }
 
@@ -264,14 +280,14 @@ gg_windrose <-
 
 #' Bias Rose
 #'
-#' @inheritParams gg_windrose
+#' @inheritParams windrose
 #' @param data A data frame containing fields \code{ws}, \code{wd}, \code{ws2}
 #'   and \code{wd2}.
 #' @param ws2 Name of the column representing wind speed (2).
 #' @param wd2 Name of the column representing wind direction (2).
 #' @export
-#' @family polar directional analysis plotting functions
-gg_biasrose <-
+#' @family polar directional analysis functions
+biasrose <-
   function(data,
            ws = "ws",
            wd = "wd",
@@ -285,8 +301,9 @@ gg_biasrose <-
            border_colour = NA,
            alpha = 1) {
     # run openair
-    if (is.null(facet))
+    if (is.null(facet)) {
       facet <- "default"
+    }
     oa_data <-
       openair::pollutionRose(
         data,
@@ -325,12 +342,16 @@ gg_biasrose <-
 
     if (length(facet) == 2) {
       data_grouped <-
-        dplyr::group_by(data_long, .data[[facet[1]]],
-                        .data[[facet[2]]], .data$wd)
+        dplyr::group_by(
+          data_long, .data[[facet[1]]],
+          .data[[facet[2]]], .data$wd
+        )
     } else {
       data_grouped <-
-        dplyr::group_by(data_long,
-                        .data[[facet[1]]], .data$wd)
+        dplyr::group_by(
+          data_long,
+          .data[[facet[1]]], .data$wd
+        )
     }
 
     plot_data <-
@@ -359,9 +380,11 @@ gg_biasrose <-
         limits = c((angle / 2), 360 + (angle / 2)),
         labels = c("+90", "+/-180", "-90", "0")
       ) +
-      ggplot2::labs(x = NULL,
-                    y = NULL,
-                    fill = openair::quickText("ws")) +
+      ggplot2::labs(
+        x = NULL,
+        y = NULL,
+        fill = openair::quickText("ws")
+      ) +
       ggplot2::expand_limits(y = -axis_extend)
 
     if (any(facet != "default")) {
@@ -370,8 +393,10 @@ gg_biasrose <-
           plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]))
       } else {
         plt <-
-          plt + ggplot2::facet_grid(cols = ggplot2::vars(.data[[facet[1]]]),
-                                    rows = ggplot2::vars(.data[[facet[2]]]))
+          plt + ggplot2::facet_grid(
+            cols = ggplot2::vars(.data[[facet[1]]]),
+            rows = ggplot2::vars(.data[[facet[2]]])
+          )
       }
     }
 
@@ -381,7 +406,7 @@ gg_biasrose <-
 
 #' Annotate a wind or pollution rose with further information
 #'
-#' Add an annotation to a [gg_pollutionrose()] or [gg_windrose()] plot. This
+#' Add an annotation to a [pollutionrose()] or [windrose()] plot. This
 #' annotation typically shows the mean pollutant or wind speed value, along with
 #' the percentage calm value.
 #'
@@ -390,7 +415,7 @@ gg_biasrose <-
 #'   numeric, where 0 is North and 180 is South, or a character representing a
 #'   cardinal direction ("N", "NE", "E", etc.).
 #' @param rose_angle The number passed to the `angle` argument of
-#'   [gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `wd` due
+#'   [pollutionrose()]/[windrose()]. This is required to adjust `wd` due
 #'   to the way [ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].
 #' @param size Size of the annotation.
 #' @param alpha Alpha value of the annotation, where 1 is opaque and 0 is
@@ -446,6 +471,4 @@ annotate_rose_text <-
         )
       )
     }
-
-
   }

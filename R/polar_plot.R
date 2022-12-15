@@ -76,7 +76,7 @@
 #'   concentrations. When multiple pollutants are specified for a
 #'   single-pollutant \code{statistic} (e.g., "mean"), a faceted plot will be
 #'   returned. Two pollutants must be provided for certain \code{statistic}
-#'   options (e.g., "Pearson" in [gg_polar_plot()]).
+#'   options (e.g., "Pearson" in [polar_plot()]).
 #' @param x Name of variable to plot against wind direction in polar
 #'   coordinates, the default is wind speed, \dQuote{ws}.
 #' @param wd Name of wind direction field.
@@ -276,8 +276,8 @@
 #' \url{https://www.sciencedirect.com/science/article/pii/S1352231016307166}
 #'
 #' @export
-#' @family polar directional analysis plotting functions
-gg_polar_plot <-
+#' @family polar directional analysis functions
+polar_plot <-
   function(data,
            pollutant,
            x = "ws",
@@ -336,8 +336,8 @@ gg_polar_plot <-
       dplyr::mutate(
         r = sqrt(.data$u^2 + (.data$v * -1)^2),
         t = dplyr::if_else(.data$u < 0,
-                           atan((.data$v * -1) / .data$u) + pi,
-                           atan((.data$v * -1) / .data$u)
+          atan((.data$v * -1) / .data$u) + pi,
+          atan((.data$v * -1) / .data$u)
         ),
         t = (.data$t * (180 / pi)) + 90
       ) %>%

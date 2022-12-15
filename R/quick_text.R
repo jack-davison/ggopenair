@@ -12,7 +12,6 @@
 #' @return A character vector.
 
 quick_text <- function(text) {
-
   # pollutants
   text <- gsub("NO2|no2|No2", "NO[2]", text)
   text <- gsub("\\bnox\\b|\\bNOx\\b|\\bNox\\b|\\bNOX\\b", "NO[x]", text)

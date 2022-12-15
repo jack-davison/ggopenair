@@ -13,8 +13,9 @@ The goal of `ggopenair` is to bridge the gap between the data analysis
 functions of `openair` and the flexibility of `ggplot2`. One of the key
 strengths of `ggplot2` over `lattice` is that it allows plots to be
 manipulated *after* they are created, which allows for a much more
-flexible plotting experience. `ggplot2` is also being actively developed
-and extended, which `ggopenair` can take advantage of.
+flexible plotting experience. Unlike `lattice`, `ggplot2` is also being
+actively developed and extended, which `ggopenair` can take advantage
+of.
 
 ## Installation
 

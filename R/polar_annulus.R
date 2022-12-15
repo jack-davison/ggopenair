@@ -5,8 +5,8 @@
 #' concentrations of pollutants vary by wind direction and a time period, e.g.,
 #' by month, day of week, etc.
 #'
-#' [gg_polar_annulus()] shares many of the properties of the [gg_polar_plot()].
-#' However, [gg_polar_annulus()] is focussed on displaying information on how
+#' [polar_annulus()] shares many of the properties of the [polar_plot()].
+#' However, [polar_annulus()] is focussed on displaying information on how
 #' concentrations of a pollutant (values of another variable) vary with wind
 #' direction and time. Plotting as an annulus helps to reduce compression of
 #' information towards the centre of the plot. The circular plot is easy to
@@ -29,7 +29,7 @@
 #' specific periods in more detail. Full flexibility is given through the
 #' smoothing parameter \code{k}.
 #'
-#' @inheritParams gg_polar_plot
+#' @inheritParams polar_plot
 #'
 #' @param local_tz Should the results be calculated in local time that includes
 #'   a treatment of daylight savings time (DST)? The default is not to consider
@@ -100,23 +100,23 @@
 #'
 #'   An openair output can be manipulated using a number of generic operations,
 #'   including \code{print}, \code{plot} and \code{summary}.
-#' @family polar directional analysis plotting functions
+#' @family polar directional analysis functions
 
-gg_polar_annulus <- function(data,
-                             pollutant,
-                             local_tz = NULL,
-                             period = "hour",
-                             facet = NULL,
-                             statistic = "mean",
-                             percentile = NA,
-                             width = 1,
-                             min_bin = 1,
-                             exclude_missing = TRUE,
-                             pad_date = FALSE,
-                             force_positive = TRUE,
-                             k = c(20, 10),
-                             normalise = FALSE,
-                             alpha = 1) {
+polar_annulus <- function(data,
+                          pollutant,
+                          local_tz = NULL,
+                          period = "hour",
+                          facet = NULL,
+                          statistic = "mean",
+                          percentile = NA,
+                          width = 1,
+                          min_bin = 1,
+                          exclude_missing = TRUE,
+                          pad_date = FALSE,
+                          force_positive = TRUE,
+                          k = c(20, 10),
+                          normalise = FALSE,
+                          alpha = 1) {
   # respond to period
   scale <- switch(period,
     hour = c(0, 23),

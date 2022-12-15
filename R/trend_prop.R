@@ -60,9 +60,9 @@
 #'   interval is scaled to 100. This is helpful to show the relative
 #'   (percentage) contribution of the proportions.
 #' @export
+#' @family time series and trend functions
 #' @return A [ggplot2::ggplot2] figure
-
-gg_timeprop <-
+trend_prop <-
   function(data,
            pollutant,
            proportion,

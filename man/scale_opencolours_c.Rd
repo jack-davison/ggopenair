@@ -36,7 +36,7 @@ plots, with helpful defaults.
 }
 \examples{
 \dontrun{
-gg_polar_plot(mydata, "nox") + scale_opencolours()
+polar_plot(mydata, "nox") + scale_opencolours()
 }
 
 }

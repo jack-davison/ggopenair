@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' gg_polar_plot(mydata, "nox") + scale_opencolours()
+#' polar_plot(mydata, "nox") + scale_opencolours()
 #' }
 #'
 scale_opencolours_c <-

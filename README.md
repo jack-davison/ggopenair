@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggopenair
+# ggopenair: open source air quality data analysis using ggplot2
 
 <!-- badges: start -->
 

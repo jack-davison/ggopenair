@@ -103,7 +103,7 @@ gg_trendlevel <-
 #' @param x vector
 #' @noRd
 num.convert <- function(x) {
-  y <- type.convert(x, as.is = TRUE)
+  y <- utils::type.convert(x, as.is = TRUE)
   if (class(y) %in% c("numeric", "integer")) {
     return(y)
   } else {

@@ -163,6 +163,7 @@ gg_traj_plot <- function(data,
 #'   too much noise.
 #' @param border_colour The colour to use for the border of each tile. Defaults
 #'   to `NA`, which removes the border.
+#' @inheritDotParams ggplot2::coord_map -projection -xlim -ylim
 #' @family trajectory analysis functions
 #' @export
 gg_traj_level <-

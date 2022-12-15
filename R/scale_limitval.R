@@ -23,6 +23,8 @@
 #' @param marker_labels Character vector of labels for marker lines. Should be
 #'   the same length as \code{marker_values}. Defaults to using the numeric
 #'   values given in \code{marker_values}.
+#' @param marker_linetypes Vector of values for marker linetypes. Should be the
+#'   same length as \code{marker_values}. Defaults to dashed lines (2).
 #' @param trans The name of a transformation object. See
 #'   [ggplot2::scale_x_continuous()] for more information.
 #' @param ... Other arguments to pass to
@@ -38,13 +40,13 @@ scale_y_limitval <-
   function(marker_values,
            marker_colours = "black",
            marker_labels = marker_values,
+           marker_linetypes = 2,
            trans = "identity",
            ...) {
     out <-
-      purrr::map2(
-        .x = marker_values,
-        .y = marker_colours,
-        ~ ggplot2::geom_hline(yintercept = .x, colour = .y)
+      purrr::pmap(
+        list(marker_values, marker_colours, marker_linetypes),
+        ~ ggplot2::geom_hline(yintercept = ..1, colour = ..2, lty = ..3)
       )
 
     out <- append(
@@ -55,8 +57,7 @@ scale_y_limitval <-
         sec.axis = ggplot2::sec_axis(
           ~.,
           breaks = marker_values,
-          labels = marker_labels,
-          trans = trans
+          labels = marker_labels
         )
       )
     )
@@ -70,13 +71,13 @@ scale_x_limitval <-
   function(marker_values,
            marker_colours = "black",
            marker_labels = marker_values,
+           marker_linetypes = 2,
            trans = "identity",
            ...) {
     out <-
-      purrr::map2(
-        .x = marker_values,
-        .y = marker_colours,
-        ~ ggplot2::geom_vline(xintercept = .x, colour = .y)
+      purrr::pmap(
+        list(marker_values, marker_colours, marker_linetypes),
+        ~ ggplot2::geom_hline(xintercept = ..1, colour = ..2, lty = ..3)
       )
 
     out <- append(
@@ -87,8 +88,7 @@ scale_x_limitval <-
         sec.axis = ggplot2::sec_axis(
           ~.,
           breaks = marker_values,
-          labels = marker_labels,
-          trans = trans
+          labels = marker_labels
         )
       )
     )

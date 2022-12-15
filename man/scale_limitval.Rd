@@ -10,6 +10,7 @@ scale_y_limitval(
   marker_values,
   marker_colours = "black",
   marker_labels = marker_values,
+  marker_linetypes = 2,
   trans = "identity",
   ...
 )
@@ -18,6 +19,7 @@ scale_x_limitval(
   marker_values,
   marker_colours = "black",
   marker_labels = marker_values,
+  marker_linetypes = 2,
   trans = "identity",
   ...
 )
@@ -31,6 +33,9 @@ the same length as \code{marker_values}.}
 \item{marker_labels}{Character vector of labels for marker lines. Should be
 the same length as \code{marker_values}. Defaults to using the numeric
 values given in \code{marker_values}.}
+
+\item{marker_linetypes}{Vector of values for marker linetypes. Should be the
+same length as \code{marker_values}. Defaults to dashed lines (2).}
 
 \item{trans}{The name of a transformation object. See
 \code{\link[ggplot2:scale_continuous]{ggplot2::scale_x_continuous()}} for more information.}

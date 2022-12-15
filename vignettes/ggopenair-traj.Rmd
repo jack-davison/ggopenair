@@ -1,0 +1,91 @@
+---
+title: "Trajectory Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Trajectory Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ggopenair)
+library(ggplot2)
+```
+
+# Importing Data
+
+Currently, trajectories should be imported using `{openair}` as this functionality hasn't yet been ported to `{ggopenair}`.
+
+```{r}
+# import trajectories
+traj <- openair::importTraj(site = "london", year = 2010)
+
+# import data for North Kensington
+kc1 <- openair::importAURN("kc1", year = 2010)
+
+kc1 <- dplyr::select(kc1, date, nox, no2, o3, pm2.5, pm10)
+
+# now merge with trajectory data by 'date'
+traj <- dplyr::left_join(traj, kc1, by = "date")
+
+traj_red <-
+  openair::selectByDate(
+    traj,
+    start = "15/4/2010",
+    end = "21/4/2010"
+  )
+```
+
+# Path Plots
+
+`{ggopenair}` exports `gg_traj_plot()`, which is extremely similar to `trajPlot()`.
+
+```{r}
+gg_traj_plot(traj_red, colour = "pm2.5") +
+  scale_opencolours_c() + 
+  theme_classic()
+```
+
+# Binned Plots
+
+`gg_traj_level()` is also exported, which again behaves almost identically to `trajLevel()`. All statistic types are supported. Note that using scale transforms on the "fill" aesthetic is almost always recommended.
+
+```{r}
+gg_traj_level(traj_red) +
+  scale_opencolours_c(trans = "sqrt",
+                      label = scales::label_percent(scale = 1)) +
+  labs(fill = "% Trajectories\n(sqrt scale)\n") +
+  theme_classic()
+```
+
+# Traj Clustering
+
+Unlike `trajCluster()`, `traj_cluster()` only returns clustered data by default.
+
+```{r}
+traj_cluster(traj_red)
+```
+
+This can be inserted directly into `gg_traj_plot()` to visualise the clusters. 
+
+```{r}
+traj_cluster(traj_red)$traj %>%
+  gg_traj_plot(colour = "cluster") +
+  theme_classic()
+```
+
+However, if you prefer the behaviour of `trajCluster()`, you can use the `plot` argument. This creates a `patchwork` object with two panels and a shared legend --- one showing all of the data, and another showing the average trajectories per cluster.
+
+```{r}
+traj_cluster(traj_red, plot = TRUE) &
+  theme_classic() &
+  theme(legend.position = "top")
+```
+

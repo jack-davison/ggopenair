@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ggopenair
+# ggopenair: open source air quality data analysis using ggplot2
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/ggopenair)](https://CRAN.R-project.org/package=ggopenair)

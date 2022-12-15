@@ -20,8 +20,10 @@ theme_polar <- function(panel_ontop = TRUE) {
       axis.line.x.top = ggplot2::element_blank(),
       panel.grid.minor.x = ggplot2::element_blank(),
       panel.grid.major.x = ggplot2::element_line(color = "grey75"),
-      panel.grid.major.y = ggplot2::element_line(linetype = 3,
-                                                 color = "grey75"),
+      panel.grid.major.y = ggplot2::element_line(
+        linetype = 3,
+        color = "grey75"
+      ),
       axis.text.x = ggplot2::element_text(face = "bold", size = 12)
     )
 

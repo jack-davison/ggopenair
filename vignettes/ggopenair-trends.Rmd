@@ -1,5 +1,6 @@
 ---
 title: "Time Series and Trends"
+subtitle: "Examine how pollutant concentrations change with time."
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Time Series and Trends}
@@ -34,7 +35,7 @@ timePlot(marylebone, pollutant = "nox", avg.time = "month")
 The equivalent in `{ggplot2}` is shown below.
 
 ```{r newtimeplot, fig.cap="A time plot created using ggplot2."}
-plt <- 
+plt <-
   marylebone %>%
   time_average(avg_time = "month") %>%
   ggplot(aes(x = date, y = nox)) +
@@ -47,7 +48,7 @@ While there are more lines of code to achieve the same thing, a `{ggplot2}` plot
 
 ```{r}
 plt +
-  scale_y_limitval(c(150, 350), "red", c("Getting\nHigher", "Too high!"), c(2,1))
+  scale_y_limitval(c(150, 350), "red", c("Getting\nHigher", "Too high!"), c(2, 1))
 ```
 
 There is also no equivalent for `smoothPlot()` as that is already well served by `geom_smooth()`.
@@ -58,10 +59,10 @@ plt + geom_smooth()
 
 # Temporal Variations
 
-`gg_timevariation` works much the same way as `timeVariation()`, but returns a patchwork assemblage. These can be treated similarly to a `{ggplot2}` object, but the ampersand (`&`) symbol is used to style all plots together.
+`trend_variation()` works much the same way as `timeVariation()`, but returns a patchwork assemblage. These can be treated similarly to a `{ggplot2}` object, but the ampersand (`&`) symbol is used to style all plots together.
 
 ```{r timevar, fig.width=10}
-gg_timevariation(marylebone, c("no2", "pm2.5"), normalise = TRUE) &
+trend_variation(marylebone, c("no2", "pm2.5"), normalise = TRUE) &
   theme_bw() &
   scale_fill_discrete(
     aesthetics = c("colour", "fill"),
@@ -72,9 +73,9 @@ gg_timevariation(marylebone, c("no2", "pm2.5"), normalise = TRUE) &
 The `return` argument can be used to obtain specific panels. This could be useful if not all panels are meaninful for your data, or you want to customise individual panels.
 
 ```{r}
-hour_panel <- gg_timevariation(marylebone, "o3", return = "hour")
+hour_panel <- trend_variation(marylebone, "o3", return = "hour")
 
-avg = mean(hour_panel$data$Mean)
+avg <- mean(hour_panel$data$Mean)
 
 hour_panel +
   theme_classic() +
@@ -85,14 +86,16 @@ hour_panel +
 
 # Time Proportion Plots
 
-`gg_timeprop()` behaves almost identically to `timeProp()`, albeit with fewer arguments as more can be controlled using `labs()`, `scales_*_*()`, and so on.
+`trend_prop()` behaves almost identically to `timeProp()`, albeit with fewer arguments as more can be controlled using `labs()`, `scales_*_*()`, and so on.
 
 ```{r}
 marylebone %>%
   filter(format(date, "%Y") == 2019) %>%
-  gg_timeprop(pollutant = "pm10", 
-              avg_time = "3 day",
-              proportion = "wd") +
+  trend_prop(
+    pollutant = "pm10",
+    avg_time = "3 day",
+    proportion = "wd"
+  ) +
   theme_bw() +
   scale_fill_brewer(palette = "Dark2")
 ```
@@ -102,22 +105,26 @@ marylebone %>%
 ```{r}
 marylebone %>%
   mutate(wd = cut_wd(wd, "low")) %>%
-  filter(format(date, "%Y") == 2019,
-         !is.na(wd)) %>%
-  gg_timeprop(pollutant = "pm10", 
-              avg_time = "3 day",
-              proportion = "wd") +
+  filter(
+    format(date, "%Y") == 2019,
+    !is.na(wd)
+  ) %>%
+  trend_prop(
+    pollutant = "pm10",
+    avg_time = "3 day",
+    proportion = "wd"
+  ) +
   theme_bw() +
   scale_fill_brewer(palette = "Dark2")
 ```
 
 # Trend Heat Maps
 
-Much like with the time proportion plots, `gg_trendlevel()` is very similar to `trendLevel()`.
+Much like with the time proportion plots, `trend_level()` is very similar to `trendLevel()`.
 
 ```{r}
-plt <- 
-  gg_trendlevel(marylebone, "nox", "hour", "month", "year") +
+plt <-
+  trend_level(marylebone, "nox", "hour", "month", "year") +
   scale_opencolours_c() +
   theme_minimal() +
   labs(fill = quickText("Mean NOx"), y = NULL)
@@ -128,7 +135,7 @@ plt
 A minor exception is that, when possible, axes are automatically parsed as numeric/integer rather than always being factors. This avoids label overlap, and allows users to use continuous scales for further transformations and annotations. For example, here each day is split into four, 6-hour segments.
 
 ```{r}
-plt + 
+plt +
   scale_x_continuous(breaks = seq(0, 24, 6)) +
   geom_vline(xintercept = c(6, 12, 18))
 ```
@@ -140,21 +147,21 @@ Calendar plots once again behave similarly, but the annotations are dealt with u
 ```{r calendar, fig.width=10}
 marylebone |>
   openair::selectByDate(year = 2019) |>
-  gg_calendar("nox") +
+  trend_calendar("nox") +
   annotate_calendar_text("date") +
   annotate_calendar_wd(colour = "black") +
   scale_opencolours_c()
 ```
 
-An extra feature of `gg_calendar()` is that multiple years can now be easily plotted. Instead of a normal calendar, a year-month matrix is produced.
+An extra feature of `trend_calendar()` is that multiple years can now be easily plotted. Instead of a normal calendar, a year-month matrix is produced.
 
 ```{r calendaryears, fig.width=10}
 library(scales)
 marylebone |>
-  gg_calendar("nox") +
+  trend_calendar("nox") +
   scale_opencolours_c(limits = c(0, 600), oob = squish)
 ```
 
 # TheilSen
 
-There is currently no version of theilSen in `{ggopenair}`. This is open for discussion, but it will either take the form of an `openair`-like function (e.g., `gg_theilsen()`) *or* a more `{ggplot2}`-esque `geom_theil()`. Until this functionality has been developed, feel free to use `openair::theilSen()`, optionally re-plotting in `{ggplot2}` if desired.
+There is currently no version of theilSen in `{ggopenair}`. This is open for discussion, but it will either take the form of an `openair`-like function (e.g., `trend_theilsen()`) *or* a more `{ggplot2}`-esque `geom_theil()`. Until this functionality has been developed, feel free to use `openair::theilSen()`, optionally re-plotting in `{ggplot2}` if desired.

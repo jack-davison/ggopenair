@@ -1,21 +1,21 @@
 #' Plot time series values in a conventional calendar format
 #'
-#' With a single year of data, [gg_calendar()] will plot data in a conventional
+#' With a single year of data, [trend_calendar()] will plot data in a conventional
 #' calendar format, i.e., by month and day of the week. With multiple years of
 #' data, a year-month matrix of panels will instead be plotted. Daily statistics
 #' are calculated using [time_average()], which by default will calculate the
 #' daily mean concentration.
 #'
-#' [gg_calendar()] has two accompanying annotation functions.
+#' [trend_calendar()] has two accompanying annotation functions.
 #' [annotate_calendar_text()] can write either the day of the month or the
 #' average pollutant concentration on the calendar. [annotate_calendar_wd()]
 #' will draw wind speed and direction arrows onto the calendar, assuming columns
 #' labelled "ws" and "wd" were present in the original data.
 #'
 #' Note that is is possible to pre-calculate concentrations in some way before
-#' passing the data to [gg_calendar()]. For example [openair::rollingMean()]
+#' passing the data to [trend_calendar()]. For example [openair::rollingMean()]
 #' could be used to calculate rolling 8-hour mean concentrations. The data can
-#' then be passed to [gg_calendar()] and \code{statistic = "max"} chosen, which
+#' then be passed to [trend_calendar()] and \code{statistic = "max"} chosen, which
 #' will plot maximum daily 8-hour mean concentrations.
 #'
 #' @param data A data frame minimally containing \code{date} and at least one
@@ -34,17 +34,18 @@
 #'   plot shows Saturday first (\code{w_shift = 0}). To change this so that it
 #'   starts on a Monday for example, set \code{w_shift = 2}, and so on.
 #' @export
+#' @family time series and trend functions
 #' @seealso [annotate_calendar_wd()] and [annotate_calendar_text()] for
 #'   annotating calendar plots.
 #' @examples
 #' \dontrun{
 #' marylebone %>%
 #'   selectByDate(year = 2019) %>%
-#'   gg_calendar("nox") +
+#'   trend_calendar("nox") +
 #'   annotate_calendar_text(colour = "white", size = 5, type = "date") +
 #'   annotate_calendar_wd(colour = "black")
 #' }
-gg_calendar <-
+trend_calendar <-
   function(data,
            pollutant,
            statistic = "mean",
@@ -59,11 +60,11 @@ gg_calendar <-
 
     ## all the days in the year
     all.dates <- seq(lubridate::as_date(lubridate::floor_date(min(data$date), "month")),
-                     lubridate::as_date(lubridate::ceiling_date(max(data$date), "month")) - 1,
-                     by = "day")
+      lubridate::as_date(lubridate::ceiling_date(max(data$date), "month")) - 1,
+      by = "day"
+    )
 
     prepare.grid <- function(mydata, pollutant) {
-
       ## number of blank cells at beginning to get calendar format
       pad.start <- (as.numeric(format(mydata$date[1], "%w")) - w_shift) %% 7 + 1
 
@@ -131,8 +132,9 @@ gg_calendar <-
 
     # split by year-month
     mydata <- dplyr::mutate(mydata,
-                            cuts = format(date, "%B-%Y"),
-                            cuts = ordered(.data$cuts, levels = unique(.data$cuts)))
+      cuts = format(date, "%B-%Y"),
+      cuts = ordered(.data$cuts, levels = unique(.data$cuts))
+    )
 
     baseData <- mydata # for use later
 
@@ -145,7 +147,8 @@ gg_calendar <-
     newdata <-
       dplyr::left_join(
         mydata, dplyr::select(baseData, dplyr::any_of(c("date", "ws", "wd"))),
-        by = "date") %>%
+        by = "date"
+      ) %>%
       tidyr::separate(
         col = "cuts",
         into = c("month", "year"),
@@ -199,7 +202,7 @@ gg_calendar <-
 
 #' Annotate a Calendar Plot with Text
 #'
-#' This function will add text to a [gg_calendar()] plot, which can either be
+#' This function will add text to a [trend_calendar()] plot, which can either be
 #' the day of the month (like an ordinary calendar) or the pollutant
 #' concentration.
 #'
@@ -222,8 +225,9 @@ annotate_calendar_text <-
            digits = 0,
            ...) {
     type <- switch(type,
-                   date = "day",
-                   value = "value")
+      date = "day",
+      value = "value"
+    )
 
     list(
       ggplot2::geom_text(
@@ -261,7 +265,7 @@ annotate_calendar_text <-
 
 #' Annotate a Calendar Plot with Wind Direction Arrows
 #'
-#' This function will add wind direction arrows to a [gg_calendar()] plot, sized
+#' This function will add wind direction arrows to a [trend_calendar()] plot, sized
 #' based on wind speed. Note that this function can only be used if the original
 #' data contained numeric "ws" and "wd" columns.
 #'
@@ -297,5 +301,3 @@ annotate_calendar_wd <- function(size = 1, colour = "black", ...) {
 wshift <- function(x, n = 0) {
   if (n == 0) x else c(utils::tail(x, -n), utils::head(x, n))
 }
-
-

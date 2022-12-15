@@ -31,36 +31,44 @@
 #' @family trajectory analysis functions
 #' @export
 
-gg_traj_plot <- function(data,
-                         lon = "lon",
-                         lat = "lat",
-                         colour = NULL,
-                         facet = NULL,
-                         alpha = 1,
-                         n_points = 12,
-                         map = TRUE,
-                         map_fill = "grey95",
-                         map_colour = "grey85",
-                         map_alpha = .5,
-                         projection = "mercator",
-                         ...) {
+traj_plot <- function(data,
+                      lon = "lon",
+                      lat = "lat",
+                      colour = NULL,
+                      facet = NULL,
+                      alpha = 1,
+                      n_points = 12,
+                      map = TRUE,
+                      map_fill = "grey95",
+                      map_colour = "grey85",
+                      map_alpha = .5,
+                      projection = "mercator",
+                      ...) {
   londiff <-
     (max(data[[lon]], na.rm = TRUE) - min(data[[lon]], na.rm = TRUE))
   lonrange <-
-    c(min(data[[lon]], na.rm = TRUE) - londiff * 0.1,
-      max(data[[lon]], na.rm = TRUE) + londiff * 0.1)
+    c(
+      min(data[[lon]], na.rm = TRUE) - londiff * 0.1,
+      max(data[[lon]], na.rm = TRUE) + londiff * 0.1
+    )
   biglonrange <-
-    c(min(data[[lon]], na.rm = TRUE) - londiff * 2,
-      max(data[[lon]], na.rm = TRUE) + londiff * 2)
+    c(
+      min(data[[lon]], na.rm = TRUE) - londiff * 2,
+      max(data[[lon]], na.rm = TRUE) + londiff * 2
+    )
 
   latdiff <-
     (max(data[[lat]], na.rm = TRUE) - min(data[[lat]], na.rm = TRUE)) * 0.1
   latrange <-
-    c(min(data[[lat]], na.rm = TRUE) - latdiff * 0.1,
-      max(data[[lat]], na.rm = TRUE) + latdiff * 0.1)
+    c(
+      min(data[[lat]], na.rm = TRUE) - latdiff * 0.1,
+      max(data[[lat]], na.rm = TRUE) + latdiff * 0.1
+    )
   biglatrange <-
-    c(min(data[[lat]], na.rm = TRUE) - latdiff * 2,
-      max(data[[lat]], na.rm = TRUE) + latdiff * 2)
+    c(
+      min(data[[lat]], na.rm = TRUE) - latdiff * 2,
+      max(data[[lat]], na.rm = TRUE) + latdiff * 2
+    )
 
   world <- maps::map("world", plot = FALSE, fill = TRUE) %>%
     maptools::pruneMap(xlim = biglonrange, ylim = biglatrange) %>%
@@ -72,7 +80,8 @@ gg_traj_plot <- function(data,
   } else {
     aesthetics <-
       ggplot2::aes(.data[[lon]], .data[[lat]],
-                   group = .data$date, colour = .data[[colour]])
+        group = .data$date, colour = .data[[colour]]
+      )
     data <- dplyr::arrange(data, .data[[colour]])
   }
 
@@ -103,8 +112,10 @@ gg_traj_plot <- function(data,
 
   if (!is.null(facet)) {
     if (length(facet) == 2) {
-      plt <- plt + ggplot2::facet_grid(rows = ggplot2::vars(.data[[facet[1]]]),
-                                       cols = ggplot2::vars(.data[[facet[2]]]))
+      plt <- plt + ggplot2::facet_grid(
+        rows = ggplot2::vars(.data[[facet[1]]]),
+        cols = ggplot2::vars(.data[[facet[2]]])
+      )
     }
     if (length(facet) == 1) {
       plt <-
@@ -113,10 +124,12 @@ gg_traj_plot <- function(data,
   }
 
   plt +
-    ggplot2::coord_map(projection = projection,
-                       xlim = lonrange,
-                       ylim = latrange,
-                       ...) +
+    ggplot2::coord_map(
+      projection = projection,
+      xlim = lonrange,
+      ylim = latrange,
+      ...
+    ) +
     ggplot2::labs(x = NULL, y = NULL)
 }
 
@@ -124,7 +137,7 @@ gg_traj_plot <- function(data,
 #'
 #' This function plots grided back trajectories. This function requires that
 #' data are imported using the [openair::importTraj()] function.
-#' @inheritParams gg_traj_plot
+#' @inheritParams traj_plot
 #' @param statistic By default the function will plot the trajectory
 #'   frequencies. There are also various ways of plotting concentrations.
 #'
@@ -166,7 +179,7 @@ gg_traj_plot <- function(data,
 #' @inheritDotParams ggplot2::coord_map -projection -xlim -ylim
 #' @family trajectory analysis functions
 #' @export
-gg_traj_level <-
+traj_level <-
   function(data,
            lon = "lon",
            lat = "lat",
@@ -185,28 +198,34 @@ gg_traj_level <-
            map_colour = "grey85",
            map_alpha = .5,
            projection = "mercator",
-           ...
-  ) {
-
+           ...) {
     if (is.null(facet)) facet <- "default"
 
     londiff <-
       (max(data[[lon]], na.rm = TRUE) - min(data[[lon]], na.rm = TRUE))
     lonrange <-
-      c(min(data[[lon]], na.rm = TRUE) - londiff * 0.1,
-        max(data[[lon]], na.rm = TRUE) + londiff * 0.1)
+      c(
+        min(data[[lon]], na.rm = TRUE) - londiff * 0.1,
+        max(data[[lon]], na.rm = TRUE) + londiff * 0.1
+      )
     biglonrange <-
-      c(min(data[[lon]], na.rm = TRUE) - londiff * 2,
-        max(data[[lon]], na.rm = TRUE) + londiff * 2)
+      c(
+        min(data[[lon]], na.rm = TRUE) - londiff * 2,
+        max(data[[lon]], na.rm = TRUE) + londiff * 2
+      )
 
     latdiff <-
       (max(data[[lat]], na.rm = TRUE) - min(data[[lat]], na.rm = TRUE)) * 0.1
     latrange <-
-      c(min(data[[lat]], na.rm = TRUE) - latdiff * 0.1,
-        max(data[[lat]], na.rm = TRUE) + latdiff * 0.1)
+      c(
+        min(data[[lat]], na.rm = TRUE) - latdiff * 0.1,
+        max(data[[lat]], na.rm = TRUE) + latdiff * 0.1
+      )
     biglatrange <-
-      c(min(data[[lat]], na.rm = TRUE) - latdiff * 4,
-        max(data[[lat]], na.rm = TRUE) + latdiff * 4)
+      c(
+        min(data[[lat]], na.rm = TRUE) - latdiff * 4,
+        max(data[[lat]], na.rm = TRUE) + latdiff * 4
+      )
 
     world <- maps::map("world", plot = FALSE, fill = TRUE) %>%
       maptools::pruneMap(xlim = biglonrange, ylim = biglatrange) %>%
@@ -220,22 +239,28 @@ gg_traj_level <-
     if (statistic == "difference") {
       lastnum <- stringr::str_sub(percentile, 2, 2)
       suff <- "th"
-      if (lastnum == "1")
+      if (lastnum == "1") {
         suff <- "st"
-      if (lastnum == "2")
+      }
+      if (lastnum == "2") {
         suff <- "nd"
-      if (lastnum == "3")
+      }
+      if (lastnum == "3") {
         suff <- "rd"
+      }
       title <-
         stringr::str_glue("gridded\ndifferences\n({percentile}{suff} percentile)")
     }
 
-    if (statistic == "pscf")
+    if (statistic == "pscf") {
       title <- "PSCF\nprobability"
-    if (statistic == "cwt")
+    }
+    if (statistic == "cwt") {
       title <- ""
-    if (statistic == "sqtba")
+    }
+    if (statistic == "sqtba") {
       title <- stringr::str_glue("SQTBA\n{quick_text(pollutant)}")
+    }
 
     data <- openair::trajLevel(
       mydata = data,
@@ -274,24 +299,30 @@ gg_traj_level <-
 
     plt <- plt +
       ggplot2::geom_rect(
-        ggplot2::aes(xmin = .data$xgrid - (lon_inc / 2),
-                     xmax = .data$xgrid + (lon_inc / 2),
-                     ymin = .data$ygrid - (lat_inc / 2),
-                     ymax = .data$ygrid + (lat_inc / 2),
-                     fill = .data[[pollutant]]),
+        ggplot2::aes(
+          xmin = .data$xgrid - (lon_inc / 2),
+          xmax = .data$xgrid + (lon_inc / 2),
+          ymin = .data$ygrid - (lat_inc / 2),
+          ymax = .data$ygrid + (lat_inc / 2),
+          fill = .data[[pollutant]]
+        ),
         alpha = .5,
         color = border_colour
       ) +
-      ggplot2::coord_map(projection = projection,
-                         xlim = lonrange,
-                         ylim = latrange,
-                         ...) +
+      ggplot2::coord_map(
+        projection = projection,
+        xlim = lonrange,
+        ylim = latrange,
+        ...
+      ) +
       ggplot2::labs(x = NULL, y = NULL, fill = title)
 
     if (any(facet != "default")) {
       if (length(facet) == 2) {
-        plt <- plt + ggplot2::facet_grid(rows = ggplot2::vars(.data[[facet[1]]]),
-                                         cols = ggplot2::vars(.data[[facet[2]]]))
+        plt <- plt + ggplot2::facet_grid(
+          rows = ggplot2::vars(.data[[facet[1]]]),
+          cols = ggplot2::vars(.data[[facet[2]]])
+        )
       }
       if (length(facet) == 1) {
         plt <-
@@ -308,7 +339,7 @@ gg_traj_level <-
 #' function is specifically designed to work with the trajectories imported
 #' using the [openair::importTraj()] function, which provides pre-calculated
 #' back trajectories at specific receptor locations. Clustered trajectories can
-#' be visualised using [gg_traj_plot()].
+#' be visualised using [traj_plot()].
 #'
 #' @param data Data frame, the result of importing a trajectory file using
 #'   [openair::importTraj()].
@@ -325,8 +356,8 @@ gg_traj_level <-
 #'   \code{FALSE}. When \code{TRUE}, a [patchwork][patchwork::patchwork-package]
 #'   assemblage is returned. The plots can be controlled using `...`.
 #'   Alternatively, the output of [traj_cluster()] can be manually passed to
-#'   [gg_traj_plot()].
-#' @inheritDotParams gg_traj_plot -data -lat -lon -colour -facet
+#'   [traj_plot()].
+#' @inheritDotParams traj_plot -data -lat -lon -colour -facet
 #' @export
 #' @family trajectory analysis functions
 traj_cluster <-
@@ -337,8 +368,9 @@ traj_cluster <-
            split_after = FALSE,
            plot = FALSE,
            ...) {
-    if (is.null(facet))
+    if (is.null(facet)) {
       facet <- "default"
+    }
     out <-
       openair::trajCluster(
         traj = data,
@@ -355,8 +387,8 @@ traj_cluster <-
       if (facet == "default") facet <- NULL
       plt <-
         patchwork::wrap_plots(
-          gg_traj_plot(out$traj, colour = "cluster", facet = facet, ...),
-          gg_traj_plot(out$results, colour = "cluster", facet = facet, ...)
+          traj_plot(out$traj, colour = "cluster", facet = facet, ...),
+          traj_plot(out$results, colour = "cluster", facet = facet, ...)
         ) +
         patchwork::plot_layout(guides = "collect")
       return(plt)

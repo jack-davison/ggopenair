@@ -1,5 +1,6 @@
 ---
 title: "Trajectory Analysis"
+subtitle: "Analyse and visualise HYSPLIT trajectory files."
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Trajectory Analysis}
@@ -45,22 +46,24 @@ traj_red <-
 
 # Path Plots
 
-`{ggopenair}` exports `gg_traj_plot()`, which is extremely similar to `trajPlot()`.
+`{ggopenair}` exports `traj_plot()`, which is extremely similar to `trajPlot()`.
 
 ```{r}
-gg_traj_plot(traj_red, colour = "pm2.5") +
-  scale_opencolours_c() + 
+traj_plot(traj_red, colour = "pm2.5") +
+  scale_opencolours_c() +
   theme_classic()
 ```
 
 # Binned Plots
 
-`gg_traj_level()` is also exported, which again behaves almost identically to `trajLevel()`. All statistic types are supported. Note that using scale transforms on the "fill" aesthetic is almost always recommended.
+`traj_level()` is also exported, which again behaves almost identically to `trajLevel()`. All statistic types are supported. Note that using scale transforms on the "fill" aesthetic is almost always recommended.
 
 ```{r}
-gg_traj_level(traj_red) +
-  scale_opencolours_c(trans = "sqrt",
-                      label = scales::label_percent(scale = 1)) +
+traj_level(traj_red) +
+  scale_opencolours_c(
+    trans = "sqrt",
+    label = scales::label_percent(scale = 1)
+  ) +
   labs(fill = "% Trajectories\n(sqrt scale)\n") +
   theme_classic()
 ```
@@ -73,11 +76,11 @@ Unlike `trajCluster()`, `traj_cluster()` only returns clustered data by default.
 traj_cluster(traj_red)
 ```
 
-This can be inserted directly into `gg_traj_plot()` to visualise the clusters. 
+This can be inserted directly into `traj_plot()` to visualise the clusters. 
 
 ```{r}
 traj_cluster(traj_red)$traj %>%
-  gg_traj_plot(colour = "cluster") +
+  traj_plot(colour = "cluster") +
   theme_classic()
 ```
 

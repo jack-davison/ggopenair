@@ -1,8 +1,9 @@
 ---
-title: "Polar Plots"
+title: "Polar Analysis"
+subtitle: "Examine the relationship between wind speed, wind direction and pollutant concentrations."
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Polar Plots}
+  %\VignetteIndexEntry{Polar Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,7 +29,7 @@ To achieve the same result in `{ggopenair}` one would write:
 library(ggopenair)
 library(ggplot2)
 
-gg_polar_plot(marylebone, "nox") +
+polar_plot(marylebone, "nox") +
   theme_polar() +
   scale_opencolours_c()
 ```
@@ -40,7 +41,7 @@ This is more long winded, but the flexibility allows users to customise their ou
 Use any `ggplot2` scale function to change how the plot behaves. For example, use `scale_color_binned()` to bin the colour bar.
 
 ```{r scales}
-gg_polar_plot(marylebone, "nox") +
+polar_plot(marylebone, "nox") +
   theme_polar() +
   scale_color_steps(
     low = "black",
@@ -49,11 +50,11 @@ gg_polar_plot(marylebone, "nox") +
   )
 ```
 
-Alternatively, one could use the "trans" argument to shift the colour scale. This could be particularly useful for `gg_polar_freq()`, which had its own "trans" argument in `openair`.
+Alternatively, one could use the "trans" argument to shift the colour scale. This could be particularly useful for `polar_freq()`, which had its own "trans" argument in `openair`.
 
 ```{r trans, fig.width=12}
 shift_axis <- function(trans) {
-  gg_polar_freq(marylebone, "nox") +
+  polar_freq(marylebone, "nox") +
     theme_polar() +
     scale_fill_gradientn(
       colours = c("darkgreen", "hotpink"),
@@ -74,7 +75,7 @@ patchwork::wrap_plots(
 Use `annotate()` to easily draw on your polar plots and to draw attention to certain aspects. In-built annotation functions make it easy to, for example, draw a highlighting wedge or direct axis labels.
 
 ```{r annotations}
-gg_polar_plot(marylebone, "nox") +
+polar_plot(marylebone, "nox") +
   theme_polar() +
   scale_opencolours_c("inferno") +
   annotate_polar_wedge("S", "W") +
@@ -89,12 +90,12 @@ Use any of the `ggplot2` extension packages out there, such as `patchwork`. For 
 library(patchwork)
 
 polar <-
-  gg_polar_plot(marylebone, "nox") +
+  polar_plot(marylebone, "nox") +
   theme_polar() +
   theme(panel.border = element_rect(fill = NA, color = "black")) +
   scale_opencolours_c()
 
-tv <- gg_timevariation(marylebone, "nox", return = "list")
+tv <- trend_variation(marylebone, "nox", return = "list")
 tv <-
   purrr::map(
     tv,
@@ -114,17 +115,17 @@ Currently the main six `{openair}` polar plots have been implemented in `{ggopen
 
 ```{r allpolar, fig.width=7, fig.height=4}
 polarplot <-
-  gg_polar_plot(marylebone, "nox") + theme_polar() + scale_opencolours_c()
+  polar_plot(marylebone, "nox") + theme_polar() + scale_opencolours_c()
 polarannulus <-
-  gg_polar_annulus(marylebone, "nox") + theme_polar() + scale_opencolours_c()
+  polar_annulus(marylebone, "nox") + theme_polar() + scale_opencolours_c()
 polarfreq <-
-  gg_polar_freq(marylebone, "nox") + theme_polar() + scale_opencolours_c(trans = "sqrt")
+  polar_freq(marylebone, "nox") + theme_polar() + scale_opencolours_c(trans = "sqrt")
 polarperc <-
-  gg_polar_percentile(marylebone, "nox") + theme_polar() + scale_color_manual(values = openair::openColours(n = 5))
+  polar_percentile(marylebone, "nox") + theme_polar() + scale_color_manual(values = openair::openColours(n = 5))
 # pollrose <-
-#   gg_pollutionrose(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))
+#   pollutionrose(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))
 # windrose <-
-#   gg_windrose(marylebone) + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 4)))
+#   windrose(marylebone) + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 4)))
 
 wrap_plots(polarplot, polarannulus, polarfreq, polarperc)
 ```
@@ -136,12 +137,12 @@ Note that the two "roses" aren't shown here and `polarDiff()` and `polarCluster(
 <!-- Note that the two "roses" above - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/pollutionrose due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North. -->
 
 <!-- ```{r} -->
-<!-- gg_windrose(marylebone, facet = "daylight") + -->
+<!-- windrose(marylebone, facet = "daylight") + -->
 <!--   theme_polar(panel_ontop = FALSE) + -->
 <!--   annotate_rose_text(y = 15, wd = "SE", size = 2.5) -->
 <!-- ``` -->
 
-<!-- The functionality to compare two sets of ws/wd data felt a bit misplaced in `pollutionRose()`, so `{ggopenair}` exports a separate `gg_biasrose()` function. This also lets the plot better reflect what it is actually representing (no more N/S/E/W axis labels). -->
+<!-- The functionality to compare two sets of ws/wd data felt a bit misplaced in `pollutionRose()`, so `{ggopenair}` exports a separate `biasrose()` function. This also lets the plot better reflect what it is actually representing (no more N/S/E/W axis labels). -->
 
 <!-- ```{r} -->
 <!-- mydata <- dplyr::mutate(marylebone, -->
@@ -154,7 +155,7 @@ Note that the two "roses" aren't shown here and `polarDiff()` and `polarCluster(
 <!-- mydata$wd2[id] <- mydata$wd2[id] + 360 -->
 
 <!-- ## results show postive bias in wd and ws -->
-<!-- gg_biasrose( -->
+<!-- biasrose( -->
 <!--   mydata, -->
 <!--   ws = "ws", -->
 <!--   wd = "wd", -->

@@ -1,6 +1,6 @@
 #' Function to plot wind speed/direction frequencies and other statistics
 #'
-#' @inheritParams gg_polar_plot
+#' @inheritParams polar_plot
 #' @param pollutant A column name identifying pollutant concentration.
 #' @param statistic The statistic that should be applied to each wind
 #'   speed/direction bin. Can be \dQuote{frequency}, \dQuote{mean},
@@ -22,8 +22,8 @@
 #' @param border_colour The colour to use for the border of each tile. Defaults
 #'   to `NA`, which removes the border.
 #' @export
-#' @family polar directional analysis plotting functions
-gg_polar_freq <-
+#' @family polar directional analysis functions
+polar_freq <-
   function(data,
            pollutant = NULL,
            statistic = "frequency",
@@ -67,7 +67,7 @@ gg_polar_freq <-
       dplyr::mutate(
         wd = .data$wd - (360 / wd_nint),
         wd = dplyr::if_else(.data$wd == max(.data$wd),
-                            0, .data$wd + (360 / wd_nint)
+          0, .data$wd + (360 / wd_nint)
         ),
         ws = .data$ws - (ws_int / 2)
       )

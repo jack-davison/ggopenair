@@ -1,11 +1,11 @@
 #' Annotate a Polar Plot with a Coloured Wedge
 #'
 #' This is a wrapper around [ggplot2::annotate()] which draws a semi-transparent
-#' wedge on a plot with continuous polar coordinates (any of [gg_polar_plot()],
-#' [gg_polar_annulus()], [gg_polar_freq()] or [gg_polar_percentile()]). Note
+#' wedge on a plot with continuous polar coordinates (any of [polar_plot()],
+#' [polar_annulus()], [polar_freq()] or [polar_percentile()]). Note
 #' that, owing to the way [ggplot2::geom_col()] interacts with
 #' [ggplot2::coord_polar()], the `.rose_angle` argument should be used with
-#' [gg_pollutionrose()] and [gg_windrose()].
+#' [pollutionrose()] and [windrose()].
 #'
 #' @param start The angle at which to start the wedge. Can be expressed
 #'   numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
@@ -18,7 +18,7 @@
 #'   completely transparent.
 #' @param ... Arguments to pass to [ggplot2::annotate()].
 #' @param .rose_angle The number passed to the `angle` argument of
-#'   [gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `start`
+#'   [pollutionrose()]/[windrose()]. This is required to adjust `start`
 #'   and `end` when they are near to North/0 due to the way
 #'   [ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].
 #'
@@ -27,7 +27,7 @@
 #' @family polar annotation functions
 #' @examples
 #' \dontrun{
-#' gg_polar_plot(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
+#' polar_plot(mydata, "nox") + annotate_polar_wedge(start = "N", end = "E")
 #' }
 #'
 annotate_polar_wedge <-
@@ -86,7 +86,7 @@ annotate_polar_wedge <-
 #' directly on the plot, and optionally drops the labels at the side. Note that,
 #' owing to the way [ggplot2::geom_col()] interacts with
 #' [ggplot2::coord_polar()], the `.rose_angle` argument should be used with
-#' [gg_pollutionrose()] and [gg_windrose()].
+#' [pollutionrose()] and [windrose()].
 #'
 #' @param breaks The axis breaks to label on the plot. It may be appropriate to
 #'   use [seq()] to obtain equally spaced labels.
@@ -98,7 +98,7 @@ annotate_polar_wedge <-
 #'   [ggplot2::theme_minimal()] or [theme_polar()].
 #' @param ... Arguments to pass to [ggplot2::annotate()].
 #' @param .rose_angle The number passed to the `angle` argument of
-#'   [gg_pollutionrose()]/[gg_windrose()]. This is required to adjust `wd` when
+#'   [pollutionrose()]/[windrose()]. This is required to adjust `wd` when
 #'   it is near to North/0 due to the way [ggplot2::geom_col()] interacts with
 #'   [ggplot2::coord_polar()].
 #' @return An annotation to be added to [ggplot2::ggplot()].
@@ -106,7 +106,7 @@ annotate_polar_wedge <-
 #' @family polar annotation functions
 #' @examples
 #' \dontrun{
-#' gg_polar_plot(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
+#' polar_plot(mydata, "nox") + annotate_polar_axis(seq(5, 25, 5))
 #' }
 #'
 annotate_polar_axis <-
@@ -117,42 +117,42 @@ annotate_polar_axis <-
            .rose_angle = NULL) {
     x <- str_to_angle(direction)
 
-  if (!is.null(.rose_angle)) {
-    ra <- .rose_angle / 2
-    if (x >= 0 && x < ra) {
-      x <- x + 360
+    if (!is.null(.rose_angle)) {
+      ra <- .rose_angle / 2
+      if (x >= 0 && x < ra) {
+        x <- x + 360
+      }
     }
-  }
 
-  func <- function(.x) {
-    ggplot2::annotate(
-      geom = "text",
-      x = x,
-      y = .x,
-      label = as.character(.x),
-      ...
-    )
-  }
-
-  out <-
-    purrr::map(
-      .x = breaks,
-      .f = func
-    )
-
-  if (drop) {
-    out <-
-      append(
-        out,
-        list(ggplot2::theme(
-          axis.text.y = ggplot2::element_blank(),
-          axis.ticks.y = ggplot2::element_blank()
-        ))
+    func <- function(.x) {
+      ggplot2::annotate(
+        geom = "text",
+        x = x,
+        y = .x,
+        label = as.character(.x),
+        ...
       )
-  }
+    }
 
-  out
-}
+    out <-
+      purrr::map(
+        .x = breaks,
+        .f = func
+      )
+
+    if (drop) {
+      out <-
+        append(
+          out,
+          list(ggplot2::theme(
+            axis.text.y = ggplot2::element_blank(),
+            axis.ticks.y = ggplot2::element_blank()
+          ))
+        )
+    }
+
+    out
+  }
 
 #' Turn cardinal direction to numeric
 #' @param x A string.

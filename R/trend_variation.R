@@ -126,20 +126,20 @@
 #'   to assemble them in a different way or with other plots entirely. * "data"
 #'   --- the raw data used to create the time variation panels.
 #' @export
-#'
-gg_timevariation <- function(mydata,
-                             pollutant = "nox",
-                             local_tz = NULL,
-                             normalise = FALSE,
-                             type = "default",
-                             group = NULL,
-                             difference = FALSE,
-                             statistic = "mean",
-                             conf_int = 0.95,
-                             b = 100,
-                             ci = TRUE,
-                             alpha = 0.3,
-                             return = "ensemble") {
+#' @family time series and trend functions
+trend_variation <- function(mydata,
+                            pollutant = "nox",
+                            local_tz = NULL,
+                            normalise = FALSE,
+                            type = "default",
+                            group = NULL,
+                            difference = FALSE,
+                            statistic = "mean",
+                            conf_int = 0.95,
+                            b = 100,
+                            ci = TRUE,
+                            alpha = 0.3,
+                            return = "ensemble") {
   # get ylab
   if (normalise) {
     ylab <-
@@ -299,7 +299,7 @@ gg_timevariation <- function(mydata,
   if (return == "ensemble") {
     bottom <- patchwork::wrap_plots(plt_hour, plt_day, plt_month)
     (patchwork::wrap_plots(plt_day_hour, bottom, ncol = 1) +
-        patchwork::plot_layout(guides = "collect")) &
+      patchwork::plot_layout(guides = "collect")) &
       ggplot2::labs(y = ylab)
   }
 }

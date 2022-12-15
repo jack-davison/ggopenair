@@ -54,9 +54,10 @@
 #'   missing entries, it might need to be set to \code{FALSE} (see Details
 #'   below.)
 #' @export
+#' @family time series and trend functions
 #' @return A [ggplot2::ggplot2] figure
 
-gg_trendlevel <-
+trend_level <-
   function(data,
            pollutant,
            x,
@@ -81,13 +82,19 @@ gg_trendlevel <-
 
     oa_names <- names(oa_data)
     oa_data <-
-      dplyr::mutate(oa_data,
-                    dplyr::across(dplyr::everything(), num.convert))
+      dplyr::mutate(
+        oa_data,
+        dplyr::across(dplyr::everything(), num.convert)
+      )
 
     plt <-
-      ggplot2::ggplot(oa_data,
-                      ggplot2::aes(x = .data[[oa_names[[1]]]],
-                                   y = .data[[oa_names[[2]]]])) +
+      ggplot2::ggplot(
+        oa_data,
+        ggplot2::aes(
+          x = .data[[oa_names[[1]]]],
+          y = .data[[oa_names[[2]]]]
+        )
+      ) +
       ggplot2::geom_tile(ggplot2::aes(fill = .data[[oa_names[[4]]]])) +
       ggplot2::coord_cartesian(expand = FALSE)
 

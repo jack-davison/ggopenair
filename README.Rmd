@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/ggopenair)](https://CRAN.R-project.org/package=ggopenair)
 <!-- badges: end -->
 
-The goal of `ggopenair` is to bridge the gap between the data analysis functions of `openair` and the flexibility of `ggplot2`. One of the key strengths of `ggplot2` over `lattice` is that it allows plots to be manipulated *after* they are created, which allows for a much more flexible plotting experience. `ggplot2` is also being actively developed and extended, which `ggopenair` can take advantage of.
+The goal of `ggopenair` is to bridge the gap between the data analysis functions of `openair` and the flexibility of `ggplot2`. One of the key strengths of `ggplot2` over `lattice` is that it allows plots to be manipulated *after* they are created, which allows for a much more flexible plotting experience. Unlike `lattice`, `ggplot2` is also being actively developed and extended, which `ggopenair` can take advantage of.
 
 ## Installation
 
@@ -42,22 +42,26 @@ library(ggopenair)
 library(ggplot2)
 library(patchwork)
 
-plt <- gg_polar_plot(marylebone, "nox") + theme_polar() +
+plt <- polar_plot(marylebone, "nox") + theme_polar() +
   scale_y_continuous(breaks = seq(0, 12, 4))
 
 classic <- plt + scale_opencolours_c() + ggtitle("Classic")
 
-sqrt_trans <- plt + scale_opencolours_c(trans = c("sqrt")) + 
+sqrt_trans <- plt + scale_opencolours_c(trans = c("sqrt")) +
   ggtitle("Scale Transform")
 
-steps <- plt + ggtitle("Binned") + 
-  scale_color_stepsn(colours = openair::openColours(), 
-                     n.breaks = 10)
+steps <- plt + ggtitle("Binned") +
+  scale_color_stepsn(
+    colours = openair::openColours(),
+    n.breaks = 10
+  )
 
 annotated <- classic + ggtitle("Annotated") +
   annotate_polar_wedge("S", "W", fill = "black") +
-  annotate("label", x = 225, y = 8, fill = "white", color = "red", 
-           label = "watch out\nover here!")
+  annotate("label",
+    x = 225, y = 8, fill = "white", color = "red",
+    label = "watch out\nover here!"
+  )
 
 classic + sqrt_trans + steps + annotated
 ```

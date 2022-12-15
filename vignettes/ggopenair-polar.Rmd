@@ -1,8 +1,8 @@
 ---
-title: "ggopenair Overview"
+title: "Polar Plots"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ggopenair Overview}
+  %\VignetteIndexEntry{Polar Plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -81,18 +81,7 @@ gg_polar_plot(marylebone, "nox") +
   annotate_polar_axis(seq(5, 15, 5), color = "grey50")
 ```
 
-Calendar plots also possess their own dedicated annotation functions.
-
-```{r calendar, fig.width=10}
-marylebone |>
-  openair::selectByDate(year = 2019) |>
-  gg_calendar("nox") +
-  annotate_calendar_text("date") +
-  annotate_calendar_wd(colour = "black") +
-  scale_opencolours_c()
-```
-
-# Extension 
+# Extensions
 
 Use any of the `ggplot2` extension packages out there, such as `patchwork`. For example, a polar plot could be inserted into a time variation plot.
 
@@ -117,5 +106,64 @@ tv <-
 
 tv$day_hour / (tv$month | tv$day | polar) +
   plot_layout(heights = c(.8, 1), guides = "collect")
+```
+
+# Other Polar Plots
+
+Currently the main six `{openair}` polar plots have been implemented in `{ggopenair}`.
+
+```{r allpolar, fig.width=10, fig.height=4}
+polarplot <-
+  gg_polar_plot(marylebone, "nox") + theme_polar() + scale_opencolours_c()
+polarannulus <-
+  gg_polar_annulus(marylebone, "nox") + theme_polar() + scale_opencolours_c()
+polarfreq <-
+  gg_polar_freq(marylebone, "nox") + theme_polar() + scale_opencolours_c(trans = "sqrt")
+polarperc <-
+  gg_polar_percentile(marylebone, "nox") + theme_polar() + scale_color_manual(values = openair::openColours(n = 5))
+pollrose <-
+  gg_pollutionrose(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))
+windrose <-
+  gg_windrose(marylebone) + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 4)))
+
+wrap_plots(polarplot, polarannulus, polarfreq, polarperc, pollrose, windrose)
+```
+
+`polarDiff()` and `polarCluster()` are still to be developed owing to developments required in `{openair}` itself.
+
+# The Three Roses
+
+Note that the two "roses" above - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/pollutionrose due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North.
+
+```{r}
+gg_windrose(marylebone, facet = "daylight") +
+  theme_polar(panel_ontop = FALSE) +
+  annotate_rose_text(y = 15, wd = "SE", size = 2.5)
+```
+
+The functionality to compare two sets of ws/wd data felt a bit misplaced in `pollutionRose()`, so `{ggopenair}` exports a separate `gg_biasrose()` function. This also lets the plot better reflect what it is actually representing (no more N/S/E/W axis labels).
+
+```{r}
+mydata <- dplyr::mutate(marylebone,
+                        ws2 = ws + 2 * rnorm(nrow(marylebone)) + 1,
+                        wd2 = wd + 30 * rnorm(nrow(marylebone)) + 30
+)
+
+## need to correct negative wd
+id <- which(mydata$wd2 < 0)
+mydata$wd2[id] <- mydata$wd2[id] + 360
+
+## results show postive bias in wd and ws
+gg_biasrose(
+  mydata,
+  ws = "ws",
+  wd = "wd",
+  ws2 = "ws2",
+  wd2 = "wd2"
+) +
+  theme_polar(panel_ontop = FALSE) +
+  scale_fill_manual(values = c("darkblue", "hotpink")) +
+  annotate_rose_text(wd = "SW", y = 10, rose_angle = 10)
+
 ```
 

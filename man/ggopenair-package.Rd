@@ -6,6 +6,8 @@
 \alias{ggopenair-package}
 \title{ggopenair: Air Pollution Data Visualisation using ggplot2}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Recreate the air quality data visualisations of 'openair' using the popular 'ggplot2' plotting package.
 }
 \seealso{

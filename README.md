@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggopenair: open source air quality data analysis using ggplot2
+# ggopenair: open source air quality data analysis using ggplot2 <a href="https://jack-davison.github.io/ggopenair/"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 <!-- badges: start -->
 

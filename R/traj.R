@@ -165,6 +165,7 @@ traj_plot <- function(data,
 #'   slower.
 #' @inheritDotParams ggplot2::coord_sf -crs -xlim -ylim
 #' @family trajectory analysis functions
+#' @family cluster analysis functions
 #' @seealso the `{openairmaps}` package for interactive trajectory maps using
 #'   `{leaflet}`
 #' @export
@@ -319,27 +320,28 @@ traj_level <-
 #'   [openair::importTraj()].
 #' @param method Method used to calculate the distance matrix for the back
 #'   trajectories. There are two methods available: "Euclid" and "Angle".
-#' @param n_cluster Number of clusters to calculate.
+#' @param n_clusters Number of clusters to calculate.
 #' @param facet One or two faceting columns. \code{facet} determines how the
 #'   data are split and then clustered. Note that the cluster calculations are
 #'   separately made of each level of "type".
 #' @param split_after When \code{facet} != \code{NULL}, the trajectories can
 #'   either be calculated for each facet independently or extracted after the
 #'   cluster calculations have been applied to the whole data set.
-#' @param plot Automatically plot the clustered trajectories? Defaults to
-#'   \code{FALSE}. When \code{TRUE}, the plots can be controlled using `...`.
-#'   Alternatively, the output of [traj_cluster()] can be manually passed to
-#'   [traj_plot()].
+#' @param return `"plot"` (the default) or `"data"`. `"plot"` will return
+#'   plotted clusters for visual analysis so that an appropriate value for
+#'   `n_clusters` can be selected. When such a value has been chosen, `"data"`
+#'   will return the original data frame appended with a `cluster` column for
+#'   use in, for example, [trend_prop()].
 #' @inheritDotParams traj_plot -data -lat -lon -colour -facet
 #' @family trajectory analysis functions
 #' @export
 traj_cluster <-
   function(data,
            method = "Euclid",
-           n_cluster = 5,
+           n_clusters = 5,
            facet = NULL,
            split_after = FALSE,
-           plot = FALSE,
+           return = "plot",
            ...) {
     if (is.null(facet)) {
       facet <- "default"
@@ -348,7 +350,7 @@ traj_cluster <-
       openair::trajCluster(
         traj = data,
         method = method,
-        n.cluster = n_cluster,
+        n.cluster = n_clusters,
         type = facet,
         split.after = split_after,
         plot = FALSE
@@ -356,7 +358,7 @@ traj_cluster <-
 
     out <- lapply(out, dplyr::ungroup)
 
-    if (plot) {
+    if (return == "plot") {
       top <- out$results %>%
         dplyr::group_by(.data$cluster, .data[[facet]]) %>%
         dplyr::slice_head(n = 1)
@@ -369,7 +371,7 @@ traj_cluster <-
           label = paste0(.data$freq, "%")
         ))
       return(plt)
-    } else {
-      return(out)
+    } else if (return == "data") {
+      return(out$traj)
     }
   }

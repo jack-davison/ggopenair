@@ -7,10 +7,10 @@
 traj_cluster(
   data,
   method = "Euclid",
-  n_cluster = 5,
+  n_clusters = 5,
   facet = NULL,
   split_after = FALSE,
-  plot = FALSE,
+  return = "plot",
   ...
 )
 }
@@ -21,7 +21,7 @@ traj_cluster(
 \item{method}{Method used to calculate the distance matrix for the back
 trajectories. There are two methods available: "Euclid" and "Angle".}
 
-\item{n_cluster}{Number of clusters to calculate.}
+\item{n_clusters}{Number of clusters to calculate.}
 
 \item{facet}{One or two faceting columns. \code{facet} determines how the
 data are split and then clustered. Note that the cluster calculations are
@@ -31,10 +31,11 @@ separately made of each level of "type".}
 either be calculated for each facet independently or extracted after the
 cluster calculations have been applied to the whole data set.}
 
-\item{plot}{Automatically plot the clustered trajectories? Defaults to
-\code{FALSE}. When \code{TRUE}, the plots can be controlled using \code{...}.
-Alternatively, the output of \code{\link[=traj_cluster]{traj_cluster()}} can be manually passed to
-\code{\link[=traj_plot]{traj_plot()}}.}
+\item{return}{\code{"plot"} (the default) or \code{"data"}. \code{"plot"} will return
+plotted clusters for visual analysis so that an appropriate value for
+\code{n_clusters} can be selected. When such a value has been chosen, \code{"data"}
+will return the original data frame appended with a \code{cluster} column for
+use in, for example, \code{\link[=trend_prop]{trend_prop()}}.}
 
 \item{...}{
   Arguments passed on to \code{\link[=traj_plot]{traj_plot}}

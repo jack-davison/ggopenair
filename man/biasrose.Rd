@@ -70,6 +70,8 @@ Bias Rose
 \seealso{
 Other polar directional analysis functions: 
 \code{\link{polar_annulus}()},
+\code{\link{polar_cluster}()},
+\code{\link{polar_diff}()},
 \code{\link{polar_freq}()},
 \code{\link{polar_percentile}()},
 \code{\link{polar_plot}()},

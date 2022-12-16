@@ -300,7 +300,8 @@ polar_plot <-
            tau = 0.5,
            alpha = 1) {
     # run original openair
-    if (is.null(facet)) facet <- "default"
+    if (is.null(facet))
+      facet <- "default"
     oa_data <-
       openair::polarPlot(
         mydata = data,
@@ -333,26 +334,254 @@ polar_plot <-
     plot_data <-
       oa_data %>%
       tidyr::drop_na("miss", "u", "v") %>%
-      dplyr::mutate(
-        r = sqrt(.data$u^2 + (.data$v * -1)^2),
-        t = dplyr::if_else(.data$u < 0,
-          atan((.data$v * -1) / .data$u) + pi,
-          atan((.data$v * -1) / .data$u)
-        ),
-        t = (.data$t * (180 / pi)) + 90
-      ) %>%
+      cart_to_polar() %>%
       dplyr::arrange("z")
 
     # fix multiple pollutants
     pollutant <- paste(pollutant, collapse = ", ")
 
     plt <-
+      plot_polar(
+        plot_data = plot_data,
+        alpha = alpha,
+        pollutant = pollutant,
+        facet = facet
+      )
+
+    return(plt)
+  }
+
+#' K-means clustering of bivariate polar plots
+#'
+#' Function for identifying clusters in bivariate polar plots ([polarPlot()]);
+#' identifying clusters in the original data for subsequent processing.
+#'
+#' Bivariate polar plots generated using the [polarPlot()] function provide a
+#' very useful graphical technique for identifying and characterising different
+#' air pollution sources. While bivariate polar plots provide a useful graphical
+#' indication of potential sources, their location and wind-speed or other
+#' variable dependence, they do have several limitations. Often, a `feature'
+#' will be detected in a plot but the subsequent analysis of data meeting
+#' particular wind speed/direction criteria will be based only on the judgement
+#' of the investigator concerning the wind speed-direction intervals of
+#' interest. Furthermore, the identification of a feature can depend on the
+#' choice of the colour scale used, making the process somewhat arbitrary.
+#'
+#' \code{polarCluster} applies Partition Around Medoids (PAM) clustering
+#' techniques to [polarPlot()] surfaces to help identify potentially interesting
+#' features for further analysis. Details of PAM can be found in the
+#' \code{cluster} package (a core R package that will be pre-installed on all R
+#' systems). PAM clustering is similar to k-means but has several advantages
+#' e.g. is more robust to outliers. The clustering is based on the equal
+#' contribution assumed from the u and v wind components and the associated
+#' concentration. The data are standardized before clustering takes place.
+#'
+#' The function works best by first trying different numbers of clusters and
+#' plotting them. This is achieved by setting \code{n_clusters} to be of length
+#' more than 1. For example, if \code{n_clusters = 2:10} then a plot will be
+#' output showing the 9 cluster levels 2 to 10.
+#'
+#' The clustering can also be applied to differences in polar plot surfaces (see
+#' [polarDiff()]). On this case a second data frame (`after`) should be
+#' supplied.
+#'
+#' Note that clustering is computationally intensive and the function can take a
+#' long time to run --- particularly when the number of clusters is increased.
+#' For this reason it can be a good idea to run a few clusters first to get a
+#' feel for it, e.g., \code{n_clusters = 2:5}.
+#'
+#' Once the number of clusters has been decided, the user can then run
+#' [polar_cluster()] to return the original data frame together with a new
+#' column `cluster`, which gives the cluster number as a character (see
+#' example). Note that any rows where the value of `pollutant` is `NA` are
+#' ignored so that the returned data frame may have fewer rows than the
+#' original.
+#'
+#' Note that there are no automatic ways in ensuring the most appropriate number
+#' of clusters as this is application dependent. However, there is often
+#' a-priori information available on what different features in polar plots
+#' correspond to. Nevertheless, the appropriateness of different clusters is
+#' best determined by post-processing the data. The Carslaw and Beevers (2012)
+#' paper discusses these issues in more detail.
+#'
+#' @inheritParams polar_plot
+#' @param n_clusters Number of clusters to use. If `n_clusters` is more than
+#'   length 1, then a faceted plot will be output showing the clusters
+#'   identified for each one of `n_clusters`.
+#' @param return `"plot"` (the default) or `"data"`. `"plot"` will return
+#'   plotted clusters for visual analysis so that an appropriate value for
+#'   `n_clusters` can be selected. When such a value has been chosen, `"data"`
+#'   will return the original data frame appended with a `cluster` column for
+#'   use in, for exaple, [trend_prop()].
+#' @inheritDotParams openair::polarPlot -mydata -pollutant -x -wd -type -limits
+#'   -cols -mis.col -alpha -upper -angle.scale -units -key -key.header
+#'   -key.footer -auto.text -plot
+#' @family polar directional analysis functions
+#' @family cluster analysis functions
+#' @references
+#'
+#' Carslaw, D.C., Beevers, S.D, Ropkins, K and M.C. Bell (2006). Detecting and
+#' quantifying aircraft and other on-airport contributions to ambient nitrogen
+#' oxides in the vicinity of a large international airport.  Atmospheric
+#' Environment. 40/28 pp 5424-5434.
+#'
+#' Carslaw, D.C., & Beevers, S.D. (2013). Characterising and understanding
+#' emission sources using bivariate polar plots and k-means clustering.
+#' Environmental Modelling & Software, 40, 325-329.
+#' doi:10.1016/j.envsoft.2012.09.005
+#' @export
+polar_cluster <-
+  function(data,
+           pollutant,
+           x = "ws",
+           wd = "wd",
+           n_clusters = 6,
+           after = NA,
+           return = "plot",
+           ...) {
+    if (return == "data" & length(n_clusters) > 1) {
+      stop("To return data, please only provide one value for n_clusters.")
+    }
+
+    # run original openair
+    if (return == "plot") {
+      oa_data <-
+        openair::polarCluster(
+          mydata = data,
+          x = x,
+          pollutant = pollutant,
+          wd = wd,
+          n.clusters = n_clusters,
+          after = after,
+          plot = FALSE,
+          plot.data = TRUE,
+          ...
+        )$data
+
+      if (!"miss" %in% names(oa_data)) {
+        oa_data[["miss"]] <- oa_data[["z"]]
+      }
+
+      plot_data <-
+        oa_data %>%
+        tidyr::drop_na("miss", "u", "v") %>%
+        cart_to_polar() %>%
+        dplyr::arrange("z")
+
+      plt <- plot_polar(
+        plot_data = plot_data,
+        alpha = 1,
+        pollutant = "cluster",
+        facet = "default",
+        color = "cluster",
+        pointsize = 2
+      ) +
+        ggplot2::facet_wrap(ggplot2::vars(.data[["nclust"]]))
+
+      return(plt)
+    } else if (return == "data") {
+      oa_data <-
+        openair::polarCluster(
+          mydata = data,
+          x = x,
+          pollutant = pollutant,
+          wd = wd,
+          n.clusters = n_clusters,
+          after = after,
+          plot = FALSE,
+          plot.data = FALSE,
+          ...
+        )$data
+
+      return(oa_data)
+    }
+  }
+
+#' Polar plots considering changes in concentrations between two time periods
+#'
+#' This function provides a way of showing the differences in concentrations
+#' between two time periods as a polar plot. There are several uses of this
+#' function, but the most common will be to see how source(s) may have changed
+#' between two periods.
+#'
+#' While the function is primarily intended to compare two time periods at the
+#' same location, it can be used for any two data sets that contain the same
+#' pollutant. For example, data from two sites that are close to one another, or
+#' two co-located instruments.
+#'
+#' The analysis works by calculating the polar plot surface for the
+#' \code{before} and \code{after} periods and then subtracting the \code{before}
+#' surface from the \code{after} surface.
+#'
+#' @inheritParams polar_plot
+#' @param data_before,data_after Data frames that represent the "before" and
+#'   "after" cases. See [polar_plot()] for details of different input
+#'   requirements.
+#' @inheritDotParams openair::polarPlot -mydata -pollutant -x -wd -type -limits
+#'   -cols -mis.col -alpha -upper -angle.scale -units -key -key.header
+#'   -key.footer -auto.text -plot
+#' @family polar directional analysis functions
+#' @return an [openair][openair-package] plot.
+#' @export
+polar_diff <-
+  function(data_before,
+           data_after,
+           pollutant,
+           x = "ws",
+           alpha = 1,
+           ...) {
+    # run original openair
+    oa_data <-
+      openair::polarDiff(
+        before = data_before,
+        after = data_after,
+        pollutant = pollutant,
+        x = x,
+        plot = FALSE,
+        ...
+      )$data
+
+    oa_data <-
+      dplyr::mutate(oa_data, miss = .data$after - .data$before)
+
+    plot_data <-
+      oa_data %>%
+      tidyr::drop_na("miss", "u", "v") %>%
+      cart_to_polar() %>%
+      dplyr::arrange("miss")
+
+    # fix multiple pollutants
+    pollutant <- paste(pollutant, collapse = ", ")
+
+    plt <-
+      plot_polar(
+        plot_data = plot_data,
+        alpha = alpha,
+        pollutant = pollutant,
+        facet = facet,
+        color = "miss",
+        pointsize = 1.5
+      )
+
+    return(plt)
+  }
+
+#' ggplot polar-type plots
+#' @noRd
+plot_polar <-
+  function(plot_data,
+           alpha,
+           pollutant,
+           facet,
+           color = "z",
+           pointsize = 1) {
+    plt <-
       ggplot2::ggplot(plot_data, ggplot2::aes(.data$t, .data$r)) +
       ggplot2::coord_polar() +
       scattermore::geom_scattermore(
         interpolate = TRUE,
-        pointsize = 1,
-        ggplot2::aes(color = .data$z),
+        pointsize = pointsize,
+        ggplot2::aes(color = .data[[color]]),
         na.rm = TRUE,
         alpha = alpha
       ) +
@@ -373,10 +602,8 @@ polar_plot <-
     if (any(facet != "default")) {
       if (length(facet) == 1) {
         plt <-
-          plt + ggplot2::facet_wrap(
-            facets = ggplot2::vars(quick_text(.data[[facet]])),
-            labeller = ggplot2::label_parsed
-          )
+          plt + ggplot2::facet_wrap(facets = ggplot2::vars(quick_text(.data[[facet]])),
+                                    labeller = ggplot2::label_parsed)
       } else {
         plt <-
           plt + ggplot2::facet_grid(
@@ -386,6 +613,18 @@ polar_plot <-
           )
       }
     }
-
     return(plt)
   }
+
+#' convert to polar coordinates
+#' @noRd
+cart_to_polar <- function(data) {
+  dplyr::mutate(
+    data,
+    r = sqrt(.data$u ^ 2 + (.data$v * -1) ^ 2),
+    t = dplyr::if_else(.data$u < 0,
+                       atan((.data$v * -1) / .data$u) + pi,
+                       atan((.data$v * -1) / .data$u)),
+    t = (.data$t * (180 / pi)) + 90
+  )
+}

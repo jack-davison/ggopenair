@@ -111,7 +111,7 @@ tv$day_hour / (tv$month | tv$day | polar) +
 
 # Other Polar Plots
 
-Currently the main six `{openair}` polar plots have been implemented in `{ggopenair}`.
+Currently the main eight `{openair}` polar plots have been implemented in `{ggopenair}`.
 
 ```{r allpolar, fig.width=7, fig.height=4}
 polarplot <-
@@ -130,7 +130,7 @@ polarperc <-
 wrap_plots(polarplot, polarannulus, polarfreq, polarperc)
 ```
 
-Note that the two "roses" aren't shown here and `polarDiff()` and `polarCluster()` are still to be developed, both owing to developments required in `{openair}` itself.
+Note that `windrose()`, `pollutionrose()`, `polar_diff()` and `polar_cluster()` have all been developed, but only function with the development version of `{openair}`.
 
 <!-- # The Three Roses -->
 

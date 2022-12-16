@@ -181,5 +181,10 @@ the \code{{openairmaps}} package for interactive trajectory maps using
 Other trajectory analysis functions: 
 \code{\link{traj_cluster}()},
 \code{\link{traj_plot}()}
+
+Other cluster analysis functions: 
+\code{\link{polar_cluster}()},
+\code{\link{trend_prop}()}
 }
+\concept{cluster analysis functions}
 \concept{trajectory analysis functions}

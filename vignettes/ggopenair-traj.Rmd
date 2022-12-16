@@ -84,11 +84,11 @@ traj_cluster(traj_red)$traj %>%
   theme_classic()
 ```
 
-However, if you prefer the behaviour of `trajCluster()`, you can use the `plot` argument. This creates a `patchwork` object with two panels and a shared legend --- one showing all of the data, and another showing the average trajectories per cluster.
+However, if you prefer the behaviour of `trajCluster()`, you can use the `plot` argument. This requires the most recent version of `openair` from GitHub.
 
-```{r}
-traj_cluster(traj_red, plot = TRUE) &
-  theme_classic() &
-  theme(legend.position = "top")
-```
+<!-- ```{r} -->
+<!-- traj_cluster(traj_red, plot = TRUE) & -->
+<!--   theme_classic() & -->
+<!--   theme(legend.position = "top") -->
+<!-- ``` -->
 

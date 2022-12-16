@@ -32,8 +32,7 @@ either be calculated for each facet independently or extracted after the
 cluster calculations have been applied to the whole data set.}
 
 \item{plot}{Automatically plot the clustered trajectories? Defaults to
-\code{FALSE}. When \code{TRUE}, a \link[patchwork:patchwork-package]{patchwork}
-assemblage is returned. The plots can be controlled using \code{...}.
+\code{FALSE}. When \code{TRUE}, the plots can be controlled using \code{...}.
 Alternatively, the output of \code{\link[=traj_cluster]{traj_cluster()}} can be manually passed to
 \code{\link[=traj_plot]{traj_plot()}}.}
 
@@ -53,10 +52,11 @@ the \code{maps} package is used.}
     \item{\code{map_fill}}{Fill colour of map.}
     \item{\code{map_colour}}{Line colour of map.}
     \item{\code{map_alpha}}{Alpha of map.}
-    \item{\code{projection}}{The map projection to be used. Different map projections
-are possible through the \code{mapproj} package. See \code{?mapproject} for
-extensive details and information on setting other parameters and
-orientation (see below).}
+    \item{\code{lon_range,lat_range}}{Longitude and latitude range, provided as a
+numeric vector of length 2.}
+    \item{\code{crs}}{The coordinate reference system (CRS) used for the base map.
+Defaults to \code{4326}, which behaves similarly to Cartesian coordinates. A useful
+alternative could be \code{3035} (the "lambert" projection).}
   }}
 }
 \description{

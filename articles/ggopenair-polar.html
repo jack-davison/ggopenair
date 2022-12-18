@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggopenair</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -184,7 +184,7 @@ inserted into a time variation plot.</p>
 <div class="section level2">
 <h2 id="other-polar-plots">Other Polar Plots<a class="anchor" aria-label="anchor" href="#other-polar-plots"></a>
 </h2>
-<p>Currently the main six <a href="https://davidcarslaw.github.io/openair/" class="external-link">openair</a> polar plots have been
+<p>Currently the main eight <a href="https://davidcarslaw.github.io/openair/" class="external-link">openair</a> polar plots have been
 implemented in <a href="https://jack-davison.github.io/ggopenair/">ggopenair</a>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">polarplot</span> <span class="op">&lt;-</span></span>
@@ -202,10 +202,10 @@ implemented in <a href="https://jack-davison.github.io/ggopenair/">ggopenair</a>
 <span></span>
 <span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">polarplot</span>, <span class="va">polarannulus</span>, <span class="va">polarfreq</span>, <span class="va">polarperc</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-polar_files/figure-html/allpolar-1.png" width="672"></p>
-<p>Note that the two “roses” aren’t shown here and
-<code>polarDiff()</code> and <code>polarCluster()</code> are still to be
-developed, both owing to developments required in <a href="https://davidcarslaw.github.io/openair/" class="external-link">openair</a>
-itself.</p>
+<p>Note that <code><a href="../reference/windrose.html">windrose()</a></code>, <code><a href="../reference/pollutionrose.html">pollutionrose()</a></code>,
+<code><a href="../reference/polar_diff.html">polar_diff()</a></code> and <code><a href="../reference/polar_cluster.html">polar_cluster()</a></code> have all been
+developed, but only function with the development version of
+<a href="https://davidcarslaw.github.io/openair/" class="external-link">openair</a>.</p>
 <!-- # The Three Roses -->
 <!-- Note that the two "roses" above - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/pollutionrose due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North. -->
 <!-- ```{r} -->

@@ -12,7 +12,7 @@ data are imported using the openair::importTraj() function."><meta property="og:
     
     <a class="navbar-brand me-2" href="../index.html">ggopenair</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,8 +60,8 @@ data are imported using the <code><a href="https://davidcarslaw.github.io/openai
 <span>  statistic <span class="op">=</span> <span class="st">"frequency"</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"height"</span>,</span>
 <span>  facet <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  lat_inc <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  lon_inc <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  lat_inc <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  min_bin <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  percentile <span class="op">=</span> <span class="fl">90</span>,</span>
 <span>  sqtba_combine <span class="op">=</span> <span class="cn">NA</span>,</span>
@@ -71,7 +71,9 @@ data are imported using the <code><a href="https://davidcarslaw.github.io/openai
 <span>  map_fill <span class="op">=</span> <span class="st">"grey95"</span>,</span>
 <span>  map_colour <span class="op">=</span> <span class="st">"grey85"</span>,</span>
 <span>  map_alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  projection <span class="op">=</span> <span class="st">"mercator"</span>,</span>
+<span>  lon_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lat_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  crs <span class="op">=</span> <span class="fl">4326</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -171,24 +173,98 @@ the <code>maps</code> package is used.</p></dd>
 <dd><p>Alpha of map.</p></dd>
 
 
-<dt>projection</dt>
-<dd><p>The map projection to be used. Different map projections
-are possible through the <code>mapproj</code> package. See <code>?mapproject</code> for
-extensive details and information on setting other parameters and
-orientation (see below).</p></dd>
+<dt>lon_range, lat_range</dt>
+<dd><p>Longitude and latitude range, provided as a
+numeric vector of length 2.</p></dd>
+
+
+<dt>crs</dt>
+<dd><p>The coordinate reference system (CRS) used for the base map.
+Defaults to <code>4326</code>. Note that any other projections will likely run much
+slower.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Arguments passed on to <code><a href="https://ggplot2.tidyverse.org/reference/coord_map.html" class="external-link">ggplot2::coord_map</a></code></p><dl><dt><code>orientation</code></dt>
-<dd><p>projection orientation, which defaults to
-<code>c(90, 0, mean(range(x)))</code>.  This is not optimal for many
-projections, so you will have to supply your own. See
-<code><a href="https://rdrr.io/pkg/mapproj/man/mapproject.html" class="external-link">mapproj::mapproject()</a></code> for more information.</p></dd>
+<dd><p>Arguments passed on to <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">ggplot2::coord_sf</a></code></p><dl><dt><code>expand</code></dt>
+<dd><p>If <code>TRUE</code>, the default, adds a small expansion factor to
+the limits to ensure that data and axes don't overlap. If <code>FALSE</code>,
+limits are taken exactly from the data or <code>xlim</code>/<code>ylim</code>.</p></dd>
+
+    <dt><code>default_crs</code></dt>
+<dd><p>The default CRS to be used for non-sf layers (which
+don't carry any CRS information) and scale limits. The default value of
+<code>NULL</code> means that the setting for <code>crs</code> is used. This implies that all
+non-sf layers and scale limits are assumed to be specified in projected
+coordinates. A useful alternative setting is <code>default_crs = sf::st_crs(4326)</code>,
+which means x and y positions are interpreted as longitude and latitude,
+respectively, in the World Geodetic System 1984 (WGS84).</p></dd>
+
+    <dt><code>datum</code></dt>
+<dd><p>CRS that provides datum to use when generating graticules.</p></dd>
+
+    <dt><code>label_graticule</code></dt>
+<dd><p>Character vector indicating which graticule lines should be labeled
+where. Meridians run north-south, and the letters <code>"N"</code> and <code>"S"</code> indicate that
+they should be labeled on their north or south end points, respectively.
+Parallels run east-west, and the letters <code>"E"</code> and <code>"W"</code> indicate that they
+should be labeled on their east or west end points, respectively. Thus,
+<code>label_graticule = "SW"</code> would label meridians at their south end and parallels at
+their west end, whereas <code>label_graticule = "EW"</code> would label parallels at both
+ends and meridians not at all. Because meridians and parallels can in general
+intersect with any side of the plot panel, for any choice of <code>label_graticule</code> labels
+are not guaranteed to reside on only one particular side of the plot panel. Also,
+<code>label_graticule</code> can cause labeling artifacts, in particular if a graticule line
+coincides with the edge of the plot panel. In such circumstances, <code>label_axes</code> will
+generally yield better results and should be used instead.</p>
+<p>This parameter can be used alone or in combination with <code>label_axes</code>.</p></dd>
+
+    <dt><code>label_axes</code></dt>
+<dd><p>Character vector or named list of character values
+specifying which graticule lines (meridians or parallels) should be labeled on
+which side of the plot. Meridians are indicated by <code>"E"</code> (for East) and
+parallels by <code>"N"</code> (for North). Default is <code>"--EN"</code>, which specifies
+(clockwise from the top) no labels on the top, none on the right, meridians
+on the bottom, and parallels on the left. Alternatively, this setting could have been
+specified with <code>list(bottom = "E", left = "N")</code>.</p>
+<p>This parameter can be used alone or in combination with <code>label_graticule</code>.</p></dd>
+
+    <dt><code>lims_method</code></dt>
+<dd><p>Method specifying how scale limits are converted into
+limits on the plot region. Has no effect when <code>default_crs = NULL</code>.
+For a very non-linear CRS (e.g., a perspective centered
+around the North pole), the available methods yield widely differing results, and
+you may want to try various options. Methods currently implemented include <code>"cross"</code>
+(the default), <code>"box"</code>, <code>"orthogonal"</code>, and <code>"geometry_bbox"</code>. For method <code>"cross"</code>,
+limits along one direction (e.g., longitude) are applied at the midpoint of the
+other direction (e.g., latitude). This method avoids excessively large limits for
+rotated coordinate systems but means that sometimes limits need to be expanded a
+little further if extreme data points are to be included in the final plot region.
+By contrast, for method <code>"box"</code>, a box is generated out of the limits along both directions,
+and then limits in projected coordinates are chosen such that the entire box is
+visible. This method can yield plot regions that are too large. Finally, method
+<code>"orthogonal"</code> applies limits separately along each axis, and method
+<code>"geometry_bbox"</code> ignores all limit information except the bounding boxes of any
+objects in the <code>geometry</code> aesthetic.</p></dd>
+
+    <dt><code>ndiscr</code></dt>
+<dd><p>Number of segments to use for discretising graticule lines;
+try increasing this number when graticules look incorrect.</p></dd>
+
+    <dt><code>default</code></dt>
+<dd><p>Is this the default coordinate system? If <code>FALSE</code> (the default),
+then replacing this coordinate system with another one creates a message alerting
+the user that the coordinate system is being replaced. If <code>TRUE</code>, that warning
+is suppressed.</p></dd>
 
     <dt><code>clip</code></dt>
 <dd><p>Should drawing be clipped to the extent of the plot panel? A
 setting of <code>"on"</code> (the default) means yes, and a setting of <code>"off"</code>
-means no. For details, please see <code><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian()</a></code>.</p></dd>
+means no. In most cases, the default of <code>"on"</code> should not be changed,
+as setting <code>clip = "off"</code> can cause unexpected results. It allows
+drawing of data points anywhere on the plot, including in the plot margins. If
+limits are set via <code>xlim</code> and <code>ylim</code> and some data points fall outside those
+limits, then those data points may show up in places such as the axes, the
+legend, the plot title, or the plot margins.</p></dd>
 
   
 </dl></dd>
@@ -196,9 +272,14 @@ means no. For details, please see <code><a href="https://ggplot2.tidyverse.org/r
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other trajectory analysis functions: 
+    <div class="dont-index"><p>the <code>{openairmaps}</code> package for interactive trajectory maps using
+<code>{leaflet}</code></p>
+<p>Other trajectory analysis functions: 
 <code><a href="traj_cluster.html">traj_cluster</a>()</code>,
-<code><a href="traj_plot.html">traj_plot</a>()</code></p></div>
+<code><a href="traj_plot.html">traj_plot</a>()</code></p>
+<p>Other cluster analysis functions: 
+<code><a href="polar_cluster.html">polar_cluster</a>()</code>,
+<code><a href="trend_prop.html">trend_prop</a>()</code></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

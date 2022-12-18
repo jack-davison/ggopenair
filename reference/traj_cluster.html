@@ -18,7 +18,7 @@ be visualised using traj_plot()."><meta property="og:image" content="https://jac
     
     <a class="navbar-brand me-2" href="../index.html">ggopenair</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,10 +65,10 @@ be visualised using <code><a href="traj_plot.html">traj_plot()</a></code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">traj_cluster</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"Euclid"</span>,</span>
-<span>  n_cluster <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  n_clusters <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  facet <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  split_after <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  return <span class="op">=</span> <span class="st">"plot"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -85,7 +85,7 @@ be visualised using <code><a href="traj_plot.html">traj_plot()</a></code>.</p>
 trajectories. There are two methods available: "Euclid" and "Angle".</p></dd>
 
 
-<dt>n_cluster</dt>
+<dt>n_clusters</dt>
 <dd><p>Number of clusters to calculate.</p></dd>
 
 
@@ -101,12 +101,12 @@ either be calculated for each facet independently or extracted after the
 cluster calculations have been applied to the whole data set.</p></dd>
 
 
-<dt>plot</dt>
-<dd><p>Automatically plot the clustered trajectories? Defaults to
-<code>FALSE</code>. When <code>TRUE</code>, a <a href="https://patchwork.data-imaginist.com/reference/patchwork-package.html" class="external-link">patchwork</a>
-assemblage is returned. The plots can be controlled using <code>...</code>.
-Alternatively, the output of <code>traj_cluster()</code> can be manually passed to
-<code><a href="traj_plot.html">traj_plot()</a></code>.</p></dd>
+<dt>return</dt>
+<dd><p><code>"plot"</code> (the default) or <code>"data"</code>. <code>"plot"</code> will return
+plotted clusters for visual analysis so that an appropriate value for
+<code>n_clusters</code> can be selected. When such a value has been chosen, <code>"data"</code>
+will return the original data frame appended with a <code>cluster</code> column for
+use in, for example, <code><a href="trend_prop.html">trend_prop()</a></code>.</p></dd>
 
 
 <dt>...</dt>
@@ -135,11 +135,14 @@ the <code>maps</code> package is used.</p></dd>
     <dt><code>map_alpha</code></dt>
 <dd><p>Alpha of map.</p></dd>
 
-    <dt><code>projection</code></dt>
-<dd><p>The map projection to be used. Different map projections
-are possible through the <code>mapproj</code> package. See <code>?mapproject</code> for
-extensive details and information on setting other parameters and
-orientation (see below).</p></dd>
+    <dt><code>lon_range,lat_range</code></dt>
+<dd><p>Longitude and latitude range, provided as a
+numeric vector of length 2.</p></dd>
+
+    <dt><code>crs</code></dt>
+<dd><p>The coordinate reference system (CRS) used for the base map.
+Defaults to <code>4326</code>, which behaves similarly to Cartesian coordinates. A useful
+alternative could be <code>3035</code> (the "lambert" projection).</p></dd>
 
   
 </dl></dd>

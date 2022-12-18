@@ -408,6 +408,8 @@ polar_plot <-
 #' @param n_clusters Number of clusters to use. If `n_clusters` is more than
 #'   length 1, then a faceted plot will be output showing the clusters
 #'   identified for each one of `n_clusters`.
+#' @param data_after Optional. Data representing the "after" case; see
+#'   [polar_diff()] for more information.
 #' @param return `"plot"` (the default) or `"data"`. `"plot"` will return
 #'   plotted clusters for visual analysis so that an appropriate value for
 #'   `n_clusters` can be selected. When such a value has been chosen, `"data"`
@@ -452,7 +454,7 @@ polar_cluster <-
           pollutant = pollutant,
           wd = wd,
           n.clusters = n_clusters,
-          after = after,
+          after = data_after,
           plot = FALSE,
           plot.data = TRUE,
           ...
@@ -558,7 +560,7 @@ polar_diff <-
         plot_data = plot_data,
         alpha = alpha,
         pollutant = pollutant,
-        facet = facet,
+        facet = "default",
         color = "miss",
         pointsize = 1.5
       )

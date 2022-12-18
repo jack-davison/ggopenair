@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ggopenair)
 library(ggplot2)
+library(sf)
 ```
 
 # Importing Data
@@ -70,21 +71,20 @@ traj_level(traj_red) +
 
 # Traj Clustering
 
-Unlike `trajCluster()`, `traj_cluster()` only returns clustered data by default.
+Like `trajCluster()`, `traj_cluster()` returns a plot by default. This allows users to determine an appropriate number of clusters.
 
 ```{r}
-traj_cluster(traj_red)
-```
-
-This can be inserted directly into `traj_plot()` to visualise the clusters. 
-
-```{r}
-traj_cluster(traj_red)$traj %>%
-  traj_plot(colour = "cluster") +
+traj_cluster(traj_red) +
   theme_classic()
 ```
 
-However, if you prefer the behaviour of `trajCluster()`, you can use the `plot` argument. This requires the most recent version of `openair` from GitHub.
+To extract the clustered data, one can change the `return` option. This could then be analysed further (e.g., using `trend_prop()`) or visualised with a call to `traj_plot()`.
+
+```{r}
+traj_cluster(traj_red, return = "data") %>%
+  traj_plot(colour = "cluster") +
+  theme_classic()
+```
 
 <!-- ```{r} -->
 <!-- traj_cluster(traj_red, plot = TRUE) & -->

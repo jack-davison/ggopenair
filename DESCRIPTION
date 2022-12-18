@@ -40,5 +40,6 @@ URL: https://jack-davison.github.io/ggopenair/
 Roxygen: list(markdown = TRUE)
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    sf
 VignetteBuilder: knitr

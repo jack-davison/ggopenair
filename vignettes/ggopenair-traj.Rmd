@@ -71,46 +71,48 @@ traj_level(traj_red) +
 
 # Traj Clustering
 
-Like `trajCluster()`, `traj_cluster()` returns a plot by default. This allows users to determine an appropriate number of clusters.
+`traj_cluster()` also exists in `{ggopenair}`, but is waiting on the next CRAN release of `openair` to be fully functional.
 
-```{r}
-traj_cluster(traj_red) +
-  theme_classic()
-```
-
-To extract the clustered data, one can change the `return` option. This could then be analysed further (e.g., using `trend_prop()`) or visualised with a call to `traj_plot()`.
-
-```{r}
-traj_cluster(traj_red, return = "data") %>%
-  traj_plot(colour = "cluster") +
-  theme_classic()
-```
-
-```{r warning=FALSE}
-library(patchwork)
-traj_plot <- 
-  traj_cluster(traj, return = "plot", n_clusters = 3) +
-  theme_classic() +
-  theme(legend.position = "none")
-
-trend_plot <- 
-  traj_cluster(traj, return = "data", n_clusters = 3) %>%
-  trend_prop("pm2.5", "cluster", "week") +
-  theme_classic() +
-  theme(legend.position = "top")
-
-(traj_plot / trend_plot) +
-  plot_layout(heights = c(2/3, 1)) &
-  scale_color_manual(
-    values = c("C1" = "goldenrod", "C2" = "darkgreen", "C3" = "hotpink"),
-    aesthetics = c("colour", "fill")
-  )
-```
-
+<!-- Like `trajCluster()`, `traj_cluster()` returns a plot by default. This allows users to determine an appropriate number of clusters. -->
 
 <!-- ```{r} -->
-<!-- traj_cluster(traj_red, plot = TRUE) & -->
-<!--   theme_classic() & -->
-<!--   theme(legend.position = "top") -->
+<!-- traj_cluster(traj_red) + -->
+<!--   theme_classic() -->
 <!-- ``` -->
+
+<!-- To extract the clustered data, one can change the `return` option. This could then be analysed further (e.g., using `trend_prop()`) or visualised with a call to `traj_plot()`. -->
+
+<!-- ```{r} -->
+<!-- traj_cluster(traj_red, return = "data") %>% -->
+<!--   traj_plot(colour = "cluster") + -->
+<!--   theme_classic() -->
+<!-- ``` -->
+
+<!-- ```{r warning=FALSE} -->
+<!-- library(patchwork) -->
+<!-- traj_plot <-  -->
+<!--   traj_cluster(traj, return = "plot", n_clusters = 3) + -->
+<!--   theme_classic() + -->
+<!--   theme(legend.position = "none") -->
+
+<!-- trend_plot <-  -->
+<!--   traj_cluster(traj, return = "data", n_clusters = 3) %>% -->
+<!--   trend_prop("pm2.5", "cluster", "week") + -->
+<!--   theme_classic() + -->
+<!--   theme(legend.position = "top") -->
+
+<!-- (traj_plot / trend_plot) + -->
+<!--   plot_layout(heights = c(2/3, 1)) & -->
+<!--   scale_color_manual( -->
+<!--     values = c("C1" = "goldenrod", "C2" = "darkgreen", "C3" = "hotpink"), -->
+<!--     aesthetics = c("colour", "fill") -->
+<!--   ) -->
+<!-- ``` -->
+
+
+<!-- <!-- ```{r} --> -->
+<!-- <!-- traj_cluster(traj_red, plot = TRUE) & --> -->
+<!-- <!--   theme_classic() & --> -->
+<!-- <!--   theme(legend.position = "top") --> -->
+<!-- <!-- ``` --> -->
 

@@ -10,7 +10,7 @@ polar_cluster(
   x = "ws",
   wd = "wd",
   n_clusters = 6,
-  after = NA,
+  data_after = NA,
   return = "plot",
   ...
 )
@@ -33,6 +33,9 @@ coordinates, the default is wind speed, \dQuote{ws}.}
 \item{n_clusters}{Number of clusters to use. If \code{n_clusters} is more than
 length 1, then a faceted plot will be output showing the clusters
 identified for each one of \code{n_clusters}.}
+
+\item{data_after}{Optional. Data representing the "after" case; see
+\code{\link[=polar_diff]{polar_diff()}} for more information.}
 
 \item{return}{\code{"plot"} (the default) or \code{"data"}. \code{"plot"} will return
 plotted clusters for visual analysis so that an appropriate value for

@@ -59,7 +59,7 @@ identifying clusters in the original data for subsequent processing.</p>
 <span>  x <span class="op">=</span> <span class="st">"ws"</span>,</span>
 <span>  wd <span class="op">=</span> <span class="st">"wd"</span>,</span>
 <span>  n_clusters <span class="op">=</span> <span class="fl">6</span>,</span>
-<span>  after <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  data_after <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  return <span class="op">=</span> <span class="st">"plot"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -93,6 +93,11 @@ coordinates, the default is wind speed, “ws”.</p></dd>
 <dd><p>Number of clusters to use. If <code>n_clusters</code> is more than
 length 1, then a faceted plot will be output showing the clusters
 identified for each one of <code>n_clusters</code>.</p></dd>
+
+
+<dt>data_after</dt>
+<dd><p>Optional. Data representing the "after" case; see
+<code><a href="polar_diff.html">polar_diff()</a></code> for more information.</p></dd>
 
 
 <dt>return</dt>

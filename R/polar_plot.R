@@ -523,7 +523,6 @@ polar_cluster <-
 #'   -cols -mis.col -alpha -upper -angle.scale -units -key -key.header
 #'   -key.footer -auto.text -plot
 #' @family polar directional analysis functions
-#' @return an [openair][openair-package] plot.
 #' @export
 polar_diff <-
   function(data_before,

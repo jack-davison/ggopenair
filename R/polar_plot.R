@@ -438,7 +438,7 @@ polar_cluster <-
            x = "ws",
            wd = "wd",
            n_clusters = 6,
-           after = NA,
+           data_after = NA,
            return = "plot",
            ...) {
     if (return == "data" & length(n_clusters) > 1) {
@@ -489,7 +489,7 @@ polar_cluster <-
           pollutant = pollutant,
           wd = wd,
           n.clusters = n_clusters,
-          after = after,
+          after = data_after,
           plot = FALSE,
           plot.data = FALSE,
           ...

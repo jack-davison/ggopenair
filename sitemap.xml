@@ -43,9 +43,6 @@
     <loc>https://jack-davison.github.io/ggopenair/reference/annotate_rose_text.html</loc>
   </url>
   <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/biasrose.html</loc>
-  </url>
-  <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/cut_date.html</loc>
   </url>
   <url>
@@ -76,9 +73,6 @@
     <loc>https://jack-davison.github.io/ggopenair/reference/polar_freq.html</loc>
   </url>
   <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/polar_percentile.html</loc>
-  </url>
-  <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/polar_plot.html</loc>
   </url>
   <url>
@@ -86,6 +80,15 @@
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/quick_text.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/rose_metbias.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/rose_percentile.html</loc>
+  </url>
+  <url>
+    <loc>https://jack-davison.github.io/ggopenair/reference/rose_wind.html</loc>
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/scale_limitval.html</loc>
@@ -119,8 +122,5 @@
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/trend_variation.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/windrose.html</loc>
   </url>
 </urlset>

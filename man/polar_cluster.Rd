@@ -282,14 +282,14 @@ doi:10.1016/j.envsoft.2012.09.005
 }
 \seealso{
 Other polar directional analysis functions: 
-\code{\link{biasrose}()},
 \code{\link{polar_annulus}()},
 \code{\link{polar_diff}()},
 \code{\link{polar_freq}()},
-\code{\link{polar_percentile}()},
 \code{\link{polar_plot}()},
 \code{\link{pollutionrose}()},
-\code{\link{windrose}()}
+\code{\link{rose_metbias}()},
+\code{\link{rose_percentile}()},
+\code{\link{rose_wind}()}
 
 Other cluster analysis functions: 
 \code{\link{traj_level}()},

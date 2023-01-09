@@ -70,10 +70,15 @@ pollutionrose <-
       width <- 1
     }
 
+    intervals <-
+      dplyr::tibble(name = attr(oa_data, "intervals")) %>%
+      dplyr::mutate(interval_id = paste0("Interval", dplyr::row_number()))
+
     data_long <-
       oa_data %>%
       dplyr::filter(.data$wd >= 0) %>%
-      tidyr::pivot_longer(dplyr::contains(" to ")) %>%
+      tidyr::pivot_longer(dplyr::contains("Interval"), names_to = "interval_id") %>%
+      dplyr::left_join(intervals, by = "interval_id") %>%
       dplyr::mutate(name = forcats::fct_inorder(.data$name) %>%
         forcats::fct_rev())
 
@@ -161,7 +166,7 @@ pollutionrose <-
 #'   into four segments: <1, 1-10, 10-100, & >100.
 #' @export
 #' @family polar directional analysis functions
-windrose <-
+rose_wind <-
   function(data,
            ws = "ws",
            wd = "wd",
@@ -180,7 +185,7 @@ windrose <-
       facet <- "default"
     }
     oa_data <-
-      openair::windRose(
+      openair::rose_wind(
         data,
         ws = ws,
         wd = wd,
@@ -198,14 +203,17 @@ windrose <-
       width <- 1
     }
 
+    intervals <-
+      dplyr::tibble(name = attr(oa_data, "intervals")) %>%
+      dplyr::mutate(interval_id = paste0("Interval", dplyr::row_number()))
+
     data_long <-
       oa_data %>%
-      dplyr::filter(wd >= 0) %>%
-      tidyr::pivot_longer(dplyr::contains(" to ")) %>%
-      dplyr::mutate(
-        name = forcats::fct_inorder(.data$name),
-        name = forcats::fct_rev(.data$name)
-      )
+      dplyr::filter(.data$wd >= 0) %>%
+      tidyr::pivot_longer(dplyr::contains("Interval"), names_to = "interval_id") %>%
+      dplyr::left_join(intervals, by = "interval_id") %>%
+      dplyr::mutate(name = forcats::fct_inorder(.data$name) %>%
+                      forcats::fct_rev())
 
     axis_extend <-
       data_long %>%
@@ -280,14 +288,14 @@ windrose <-
 
 #' Bias Rose
 #'
-#' @inheritParams windrose
+#' @inheritParams rose_wind
 #' @param data A data frame containing fields \code{ws}, \code{wd}, \code{ws2}
 #'   and \code{wd2}.
 #' @param ws2 Name of the column representing wind speed (2).
 #' @param wd2 Name of the column representing wind direction (2).
 #' @export
 #' @family polar directional analysis functions
-biasrose <-
+rose_metbias <-
   function(data,
            ws = "ws",
            wd = "wd",
@@ -323,14 +331,17 @@ biasrose <-
       width <- 1
     }
 
+    intervals <-
+      dplyr::tibble(name = attr(oa_data, "intervals")) %>%
+      dplyr::mutate(interval_id = paste0("Interval", dplyr::row_number()))
+
     data_long <-
       oa_data %>%
-      dplyr::filter(wd >= 0) %>%
-      tidyr::pivot_longer(dplyr::contains(" to ")) %>%
-      dplyr::mutate(
-        name = forcats::fct_inorder(.data$name),
-        name = forcats::fct_rev(.data$name)
-      )
+      dplyr::filter(.data$wd >= 0) %>%
+      tidyr::pivot_longer(dplyr::contains("Interval"), names_to = "interval_id") %>%
+      dplyr::left_join(intervals, by = "interval_id") %>%
+      dplyr::mutate(name = forcats::fct_inorder(.data$name) %>%
+                      forcats::fct_rev())
 
     axis_extend <-
       data_long %>%
@@ -406,7 +417,7 @@ biasrose <-
 
 #' Annotate a wind or pollution rose with further information
 #'
-#' Add an annotation to a [pollutionrose()] or [windrose()] plot. This
+#' Add an annotation to a [pollutionrose()] or [rose_wind()] plot. This
 #' annotation typically shows the mean pollutant or wind speed value, along with
 #' the percentage calm value.
 #'
@@ -415,7 +426,7 @@ biasrose <-
 #'   numeric, where 0 is North and 180 is South, or a character representing a
 #'   cardinal direction ("N", "NE", "E", etc.).
 #' @param rose_angle The number passed to the `angle` argument of
-#'   [pollutionrose()]/[windrose()]. This is required to adjust `wd` due
+#'   [pollutionrose()]/[rose_wind()]. This is required to adjust `wd` due
 #'   to the way [ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].
 #' @param size Size of the annotation.
 #' @param alpha Alpha value of the annotation, where 1 is opaque and 0 is

@@ -27,7 +27,7 @@ numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
 \item{...}{Arguments to pass to \code{\link[ggplot2:annotate]{ggplot2::annotate()}}.}
 
 \item{.rose_angle}{The number passed to the \code{angle} argument of
-\code{\link[=pollutionrose]{pollutionrose()}}/\code{\link[=windrose]{windrose()}}. This is required to adjust \code{wd} when
+\code{\link[=pollutionrose]{pollutionrose()}}/\code{\link[=rose_wind]{rose_wind()}}. This is required to adjust \code{wd} when
 it is near to North/0 due to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
 \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}.}
 }
@@ -39,7 +39,7 @@ This is a wrapper around \code{\link[ggplot2:annotate]{ggplot2::annotate()}} whi
 directly on the plot, and optionally drops the labels at the side. Note that,
 owing to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
 \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}, the \code{.rose_angle} argument should be used with
-\code{\link[=pollutionrose]{pollutionrose()}} and \code{\link[=windrose]{windrose()}}.
+\code{\link[=pollutionrose]{pollutionrose()}} and \code{\link[=rose_wind]{rose_wind()}}.
 }
 \examples{
 \dontrun{

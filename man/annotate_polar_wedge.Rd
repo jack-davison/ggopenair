@@ -32,7 +32,7 @@ completely transparent.}
 \item{...}{Arguments to pass to \code{\link[ggplot2:annotate]{ggplot2::annotate()}}.}
 
 \item{.rose_angle}{The number passed to the \code{angle} argument of
-\code{\link[=pollutionrose]{pollutionrose()}}/\code{\link[=windrose]{windrose()}}. This is required to adjust \code{start}
+\code{\link[=pollutionrose]{pollutionrose()}}/\code{\link[=rose_wind]{rose_wind()}}. This is required to adjust \code{start}
 and \code{end} when they are near to North/0 due to the way
 \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}.}
 }
@@ -42,10 +42,10 @@ An annotation to be added to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 \description{
 This is a wrapper around \code{\link[ggplot2:annotate]{ggplot2::annotate()}} which draws a semi-transparent
 wedge on a plot with continuous polar coordinates (any of \code{\link[=polar_plot]{polar_plot()}},
-\code{\link[=polar_annulus]{polar_annulus()}}, \code{\link[=polar_freq]{polar_freq()}} or \code{\link[=polar_percentile]{polar_percentile()}}). Note
+\code{\link[=polar_annulus]{polar_annulus()}}, \code{\link[=polar_freq]{polar_freq()}} or \code{\link[=rose_percentile]{rose_percentile()}}). Note
 that, owing to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
 \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}, the \code{.rose_angle} argument should be used with
-\code{\link[=pollutionrose]{pollutionrose()}} and \code{\link[=windrose]{windrose()}}.
+\code{\link[=rose_pollution]{rose_pollution()}} and \code{\link[=rose_wind]{rose_wind()}}.
 }
 \examples{
 \dontrun{

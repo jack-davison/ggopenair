@@ -196,9 +196,6 @@ supported but this may be enhanced in the future.}
 and will be ignored if \code{"quantile.slope"} is not used.}
   }}
 }
-\value{
-an \link[=openair-package]{openair} plot.
-}
 \description{
 This function provides a way of showing the differences in concentrations
 between two time periods as a polar plot. There are several uses of this
@@ -217,13 +214,13 @@ surface from the \code{after} surface.
 }
 \seealso{
 Other polar directional analysis functions: 
-\code{\link{biasrose}()},
 \code{\link{polar_annulus}()},
 \code{\link{polar_cluster}()},
 \code{\link{polar_freq}()},
-\code{\link{polar_percentile}()},
 \code{\link{polar_plot}()},
 \code{\link{pollutionrose}()},
-\code{\link{windrose}()}
+\code{\link{rose_metbias}()},
+\code{\link{rose_percentile}()},
+\code{\link{rose_wind}()}
 }
 \concept{polar directional analysis functions}

@@ -329,13 +329,13 @@ Atmospheric Environment. 145, 128-134.
 }
 \seealso{
 Other polar directional analysis functions: 
-\code{\link{biasrose}()},
 \code{\link{polar_annulus}()},
 \code{\link{polar_cluster}()},
 \code{\link{polar_diff}()},
 \code{\link{polar_freq}()},
-\code{\link{polar_percentile}()},
 \code{\link{pollutionrose}()},
-\code{\link{windrose}()}
+\code{\link{rose_metbias}()},
+\code{\link{rose_percentile}()},
+\code{\link{rose_wind}()}
 }
 \concept{polar directional analysis functions}

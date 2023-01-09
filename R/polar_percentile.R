@@ -21,7 +21,7 @@
 #' @param mean_colour Line colour for mean line.
 #' @export
 #' @family polar directional analysis functions
-polar_percentile <- function(data, pollutant,
+rose_percentile <- function(data, pollutant,
                              facet = NULL,
                              percentile = c(25, 50, 75, 90, 95),
                              method = "default",

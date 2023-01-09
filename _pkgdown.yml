@@ -11,7 +11,7 @@ reference:
 - title: Directional Analysis
 
 - subtitle: Polar Analysis
-  desc: Examine the relationship between wind speed, wind direction and pollutant concentrations.
+  desc: Examine the relationship between wind speed, wind direction and pollutant concentrations. Functions are split into "roses" with categorical colour axes and "polar" plots with continuous axes.
   contents:
   - has_concept("polar directional analysis functions")
   # - polarDiff

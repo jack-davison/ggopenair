@@ -32,7 +32,7 @@ completely transparent.}
 \item{...}{Arguments to pass to \code{\link[ggplot2:annotate]{ggplot2::annotate()}}.}
 
 \item{.rose_angle}{The number passed to the \code{angle} argument of
-\code{\link[=pollutionrose]{pollutionrose()}}/\code{\link[=rose_wind]{rose_wind()}}. This is required to adjust \code{start}
+\code{\link[=rose_pollution]{rose_pollution()}}/\code{\link[=rose_wind]{rose_wind()}}. This is required to adjust \code{start}
 and \code{end} when they are near to North/0 due to the way
 \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}.}
 }

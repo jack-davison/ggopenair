@@ -196,18 +196,18 @@ implemented in <a href="https://jack-davison.github.io/ggopenair/">ggopenair</a>
 <span><span class="va">polarperc</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/rose_percentile.html">rose_percentile</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/openColours.html" class="external-link">openColours</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># pollrose &lt;-</span></span>
-<span><span class="co">#   pollutionrose(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))</span></span>
+<span><span class="co">#   rose_pollution(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))</span></span>
 <span><span class="co"># rose_wind &lt;-</span></span>
 <span><span class="co">#   rose_wind(marylebone) + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 4)))</span></span>
 <span></span>
 <span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">polarplot</span>, <span class="va">polarannulus</span>, <span class="va">polarfreq</span>, <span class="va">polarperc</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-polar_files/figure-html/allpolar-1.png" width="672"></p>
-<p>Note that <code><a href="../reference/rose_wind.html">rose_wind()</a></code>, <code><a href="../reference/pollutionrose.html">pollutionrose()</a></code>,
+<p>Note that <code><a href="../reference/rose_wind.html">rose_wind()</a></code>, <code><a href="../reference/rose_pollution.html">rose_pollution()</a></code>,
 <code><a href="../reference/polar_diff.html">polar_diff()</a></code> and <code><a href="../reference/polar_cluster.html">polar_cluster()</a></code> have all been
 developed, but only function with the development version of
 <a href="https://davidcarslaw.github.io/openair/" class="external-link">openair</a>.</p>
 <!-- # The Three Roses -->
-<!-- Note that the two "roses" above - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/pollutionrose due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North. -->
+<!-- Note that the two "roses" above - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/rose_pollution due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North. -->
 <!-- ```{r} -->
 <!-- rose_wind(marylebone, facet = "daylight") + -->
 <!--   theme_polar(panel_ontop = FALSE) + -->

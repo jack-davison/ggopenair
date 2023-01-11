@@ -37,7 +37,7 @@ utils::globalVariables(".")
 #' @family polar directional analysis functions
 #' @seealso [annotate_rose_text()] for adding an annotation of mean and calm
 #'   conditions to the figure.
-pollutionrose <-
+rose_pollution <-
   function(data,
            pollutant,
            angle = 30,
@@ -152,7 +152,7 @@ pollutionrose <-
 
 #' Pollution rose variation of the traditional wind rose
 #'
-#' @inheritParams pollutionrose
+#' @inheritParams rose_pollution
 #' @param data A data frame containing fields \code{ws} and \code{wd}
 #' @param ws Name of the column representing wind speed.
 #' @param wd Name of the column representing wind direction.
@@ -185,7 +185,7 @@ rose_wind <-
       facet <- "default"
     }
     oa_data <-
-      openair::rose_wind(
+      openair::windRose(
         data,
         ws = ws,
         wd = wd,
@@ -417,7 +417,7 @@ rose_metbias <-
 
 #' Annotate a wind or pollution rose with further information
 #'
-#' Add an annotation to a [pollutionrose()] or [rose_wind()] plot. This
+#' Add an annotation to a [rose_pollution()] or [rose_wind()] plot. This
 #' annotation typically shows the mean pollutant or wind speed value, along with
 #' the percentage calm value.
 #'
@@ -426,7 +426,7 @@ rose_metbias <-
 #'   numeric, where 0 is North and 180 is South, or a character representing a
 #'   cardinal direction ("N", "NE", "E", etc.).
 #' @param rose_angle The number passed to the `angle` argument of
-#'   [pollutionrose()]/[rose_wind()]. This is required to adjust `wd` due
+#'   [rose_pollution()]/[rose_wind()]. This is required to adjust `wd` due
 #'   to the way [ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].
 #' @param size Size of the annotation.
 #' @param alpha Alpha value of the annotation, where 1 is opaque and 0 is

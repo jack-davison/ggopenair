@@ -22,7 +22,7 @@ numeric, where 0 is North and 180 is South, or a character representing a
 cardinal direction ("N", "NE", "E", etc.).}
 
 \item{rose_angle}{The number passed to the \code{angle} argument of
-\code{\link[=pollutionrose]{pollutionrose()}}/\code{\link[=rose_wind]{rose_wind()}}. This is required to adjust \code{wd} due
+\code{\link[=rose_pollution]{rose_pollution()}}/\code{\link[=rose_wind]{rose_wind()}}. This is required to adjust \code{wd} due
 to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}.}
 
 \item{size}{Size of the annotation.}
@@ -36,7 +36,7 @@ or \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}, respectively.}
 \item{...}{Other arguments to pass to \code{fun}.}
 }
 \description{
-Add an annotation to a \code{\link[=pollutionrose]{pollutionrose()}} or \code{\link[=rose_wind]{rose_wind()}} plot. This
+Add an annotation to a \code{\link[=rose_pollution]{rose_pollution()}} or \code{\link[=rose_wind]{rose_wind()}} plot. This
 annotation typically shows the mean pollutant or wind speed value, along with
 the percentage calm value.
 }

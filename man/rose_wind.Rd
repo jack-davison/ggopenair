@@ -88,8 +88,8 @@ Other polar directional analysis functions:
 \code{\link{polar_diff}()},
 \code{\link{polar_freq}()},
 \code{\link{polar_plot}()},
-\code{\link{pollutionrose}()},
 \code{\link{rose_metbias}()},
-\code{\link{rose_percentile}()}
+\code{\link{rose_percentile}()},
+\code{\link{rose_pollution}()}
 }
 \concept{polar directional analysis functions}

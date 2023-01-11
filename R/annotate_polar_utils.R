@@ -18,7 +18,7 @@
 #'   completely transparent.
 #' @param ... Arguments to pass to [ggplot2::annotate()].
 #' @param .rose_angle The number passed to the `angle` argument of
-#'   [pollutionrose()]/[rose_wind()]. This is required to adjust `start`
+#'   [rose_pollution()]/[rose_wind()]. This is required to adjust `start`
 #'   and `end` when they are near to North/0 due to the way
 #'   [ggplot2::geom_col()] interacts with [ggplot2::coord_polar()].
 #'
@@ -86,7 +86,7 @@ annotate_polar_wedge <-
 #' directly on the plot, and optionally drops the labels at the side. Note that,
 #' owing to the way [ggplot2::geom_col()] interacts with
 #' [ggplot2::coord_polar()], the `.rose_angle` argument should be used with
-#' [pollutionrose()] and [rose_wind()].
+#' [rose_pollution()] and [rose_wind()].
 #'
 #' @param breaks The axis breaks to label on the plot. It may be appropriate to
 #'   use [seq()] to obtain equally spaced labels.
@@ -98,7 +98,7 @@ annotate_polar_wedge <-
 #'   [ggplot2::theme_minimal()] or [theme_polar()].
 #' @param ... Arguments to pass to [ggplot2::annotate()].
 #' @param .rose_angle The number passed to the `angle` argument of
-#'   [pollutionrose()]/[rose_wind()]. This is required to adjust `wd` when
+#'   [rose_pollution()]/[rose_wind()]. This is required to adjust `wd` when
 #'   it is near to North/0 due to the way [ggplot2::geom_col()] interacts with
 #'   [ggplot2::coord_polar()].
 #' @return An annotation to be added to [ggplot2::ggplot()].

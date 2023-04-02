@@ -576,6 +576,11 @@ plot_polar <-
            facet,
            color = "z",
            pointsize = 1) {
+    facet <- dplyr::group_vars(plot_data)
+    for (i in facet) {
+      levels(plot_data[i]) <- quick_text(levels(plot_data[i]))
+    }
+
     plt <-
       ggplot2::ggplot(plot_data, ggplot2::aes(.data$t, .data$r)) +
       ggplot2::coord_polar() +
@@ -599,17 +604,16 @@ plot_polar <-
       ) +
       ggplot2::expand_limits(y = 0)
 
-    facet <- dplyr::group_vars(plot_data)
     if (any(facet != "default")) {
       if (length(facet) == 1) {
         plt <-
-          plt + ggplot2::facet_wrap(facets = ggplot2::vars(quick_text(.data[[facet]])),
+          plt + ggplot2::facet_wrap(facets = ggplot2::vars(.data[[facet]]),
                                     labeller = ggplot2::label_parsed)
       } else {
         plt <-
           plt + ggplot2::facet_grid(
-            cols = ggplot2::vars(quick_text(.data[[facet[1]]])),
-            rows = ggplot2::vars(quick_text(.data[[facet[2]]])),
+            cols = ggplot2::vars(.data[[facet[1]]]),
+            rows = ggplot2::vars(.data[[facet[2]]]),
             labeller = ggplot2::label_parsed
           )
       }

@@ -3,10 +3,10 @@
 #' This function shows time series plots as stacked bar charts. The different
 #' categories in the bar chart are made up from a character or factor variable
 #' in a data frame. The function is primarily developed to support the plotting
-#' of cluster analysis output from [polar_cluster()] and [traj_cluster()] that
-#' consider local and regional (back trajectory) cluster analysis respectively.
-#' However, the function has more general use for understanding time series
-#' data.
+#' of cluster analysis output from [polar_cluster()] and
+#' [openair::trajCluster()] that consider local and regional (back trajectory)
+#' cluster analysis respectively. However, the function has more general use for
+#' understanding time series data.
 #'
 #' In order to plot time series in this way, some sort of time aggregation is
 #' needed, which is controlled by the option \code{avg_time}.

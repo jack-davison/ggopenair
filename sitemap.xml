@@ -13,9 +13,6 @@
     <loc>https://jack-davison.github.io/ggopenair/articles/ggopenair-polar.html</loc>
   </url>
   <url>
-    <loc>https://jack-davison.github.io/ggopenair/articles/ggopenair-traj.html</loc>
-  </url>
-  <url>
     <loc>https://jack-davison.github.io/ggopenair/articles/ggopenair-trends.html</loc>
   </url>
   <url>
@@ -101,15 +98,6 @@
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/time_average.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/traj_cluster.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/traj_level.html</loc>
-  </url>
-  <url>
-    <loc>https://jack-davison.github.io/ggopenair/reference/traj_plot.html</loc>
   </url>
   <url>
     <loc>https://jack-davison.github.io/ggopenair/reference/trend_calendar.html</loc>

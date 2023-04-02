@@ -36,7 +36,7 @@ theme_polar <-
         linetype = 3,
         color = "grey75"
       ),
-      axis.text.x = ggplot2::element_text(face = "bold", size = 12)
+      axis.text.x = ggplot2::element_text(face = "bold", size = base_size*1.1)
     )
 
   theme

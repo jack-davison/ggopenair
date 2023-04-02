@@ -64,10 +64,10 @@ A \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} figure
 This function shows time series plots as stacked bar charts. The different
 categories in the bar chart are made up from a character or factor variable
 in a data frame. The function is primarily developed to support the plotting
-of cluster analysis output from \code{\link[=polar_cluster]{polar_cluster()}} and \code{\link[=traj_cluster]{traj_cluster()}} that
-consider local and regional (back trajectory) cluster analysis respectively.
-However, the function has more general use for understanding time series
-data.
+of cluster analysis output from \code{\link[=polar_cluster]{polar_cluster()}} and
+\code{\link[openair:trajCluster]{openair::trajCluster()}} that consider local and regional (back trajectory)
+cluster analysis respectively. However, the function has more general use for
+understanding time series data.
 }
 \details{
 In order to plot time series in this way, some sort of time aggregation is

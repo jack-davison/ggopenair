@@ -4,9 +4,23 @@
 \alias{theme_polar}
 \title{Default Polar Plot Theme}
 \usage{
-theme_polar(panel_ontop = TRUE)
+theme_polar(
+  base_size = 11,
+  base_family = "",
+  base_line_size = base_size/22,
+  base_rect_size = base_size/22,
+  base_panel_ontop = TRUE
+)
 }
 \arguments{
+\item{base_size}{base font size, given in pts.}
+
+\item{base_family}{base font family}
+
+\item{base_line_size}{base size for line elements}
+
+\item{base_rect_size}{base size for rect elements}
+
 \item{panel_ontop}{Place panel grids on top of the plot geometries? The
 default, \code{TRUE}, can make polar plots easier to interpret, but this
 behaviour may not always be desired.}

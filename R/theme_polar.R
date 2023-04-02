@@ -7,13 +7,25 @@
 #' @param panel_ontop Place panel grids on top of the plot geometries? The
 #'   default, `TRUE`, can make polar plots easier to interpret, but this
 #'   behaviour may not always be desired.
+#' @inheritParams ggplot2::theme_minimal
 #'
 #' @return A ggplot theme object defining for use with [ggplot2::ggplot()].
 #' @export
-theme_polar <- function(panel_ontop = TRUE) {
+theme_polar <-
+  function(base_size = 11,
+           base_family = "",
+           base_line_size = base_size / 22,
+           base_rect_size = base_size / 22,
+           base_panel_ontop = TRUE) {
+
   # make theme
   theme <-
-    ggplot2::theme_minimal() %+replace%
+    ggplot2::theme_minimal(
+      base_size = base_size,
+      base_family = base_family,
+      base_line_size = base_line_size,
+      base_rect_size = base_rect_size
+    ) %+replace%
     ggplot2::theme(
       plot.background = ggplot2::element_rect(fill = "white", color = NA),
       panel.ontop = panel_ontop,

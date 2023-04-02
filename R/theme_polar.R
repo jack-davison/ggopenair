@@ -16,7 +16,7 @@ theme_polar <-
            base_family = "",
            base_line_size = base_size / 22,
            base_rect_size = base_size / 22,
-           base_panel_ontop = TRUE) {
+           panel_ontop = TRUE) {
 
   # make theme
   theme <-

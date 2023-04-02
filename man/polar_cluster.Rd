@@ -292,7 +292,6 @@ Other polar directional analysis functions:
 \code{\link{rose_wind}()}
 
 Other cluster analysis functions: 
-\code{\link{traj_level}()},
 \code{\link{trend_prop}()}
 }
 \concept{cluster analysis functions}

@@ -7,6 +7,7 @@
 annotate_polar_axis(
   breaks,
   direction = "NW",
+  labels = breaks,
   drop = TRUE,
   ...,
   .rose_angle = NULL
@@ -20,6 +21,9 @@ use \code{\link[=seq]{seq()}} to obtain equally spaced labels.}
 numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
 "ENE", etc.).}
 
+\item{labels}{The labels to use for each value of \code{breaks}. Defaults to
+\code{breaks}.}
+
 \item{drop}{Remove the y-axis labels to the side of the plot? Defaults to
 \code{TRUE}. Note that this option is overriden by complete themes such as
 \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}} or \code{\link[=theme_polar]{theme_polar()}}.}
@@ -27,8 +31,8 @@ numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
 \item{...}{Arguments to pass to \code{\link[ggplot2:annotate]{ggplot2::annotate()}}.}
 
 \item{.rose_angle}{The number passed to the \code{angle} argument of
-\code{\link[=rose_pollution]{rose_pollution()}}/\code{\link[=rose_wind]{rose_wind()}}. This is required to adjust \code{wd} when
-it is near to North/0 due to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
+\code{\link[=rose_pollution]{rose_pollution()}}/\code{\link[=rose_wind]{rose_wind()}}. This is required to adjust \code{wd} when it
+is near to North/0 due to the way \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} interacts with
 \code{\link[ggplot2:coord_polar]{ggplot2::coord_polar()}}.}
 }
 \value{

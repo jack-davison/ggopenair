@@ -85,8 +85,7 @@ Other time series and trend functions:
 \code{\link{trend_variation}()}
 
 Other cluster analysis functions: 
-\code{\link{polar_cluster}()},
-\code{\link{traj_level}()}
+\code{\link{polar_cluster}()}
 }
 \concept{cluster analysis functions}
 \concept{time series and trend functions}

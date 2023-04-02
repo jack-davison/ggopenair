@@ -93,13 +93,15 @@ annotate_polar_wedge <-
 #' @param direction The angles at which to write the labels. Can be expressed
 #'   numerically, or using cardinal direction abbreviations ("N", "NNE", "NE",
 #'   "ENE", etc.).
+#' @param labels The labels to use for each value of `breaks`. Defaults to
+#'   `breaks`.
 #' @param drop Remove the y-axis labels to the side of the plot? Defaults to
 #'   `TRUE`. Note that this option is overriden by complete themes such as
 #'   [ggplot2::theme_minimal()] or [theme_polar()].
 #' @param ... Arguments to pass to [ggplot2::annotate()].
 #' @param .rose_angle The number passed to the `angle` argument of
-#'   [rose_pollution()]/[rose_wind()]. This is required to adjust `wd` when
-#'   it is near to North/0 due to the way [ggplot2::geom_col()] interacts with
+#'   [rose_pollution()]/[rose_wind()]. This is required to adjust `wd` when it
+#'   is near to North/0 due to the way [ggplot2::geom_col()] interacts with
 #'   [ggplot2::coord_polar()].
 #' @return An annotation to be added to [ggplot2::ggplot()].
 #' @export
@@ -112,6 +114,7 @@ annotate_polar_wedge <-
 annotate_polar_axis <-
   function(breaks,
            direction = "NW",
+           labels = breaks,
            drop = TRUE,
            ...,
            .rose_angle = NULL) {
@@ -124,19 +127,20 @@ annotate_polar_axis <-
       }
     }
 
-    func <- function(.x) {
+    func <- function(.x, .y) {
       ggplot2::annotate(
         geom = "text",
         x = x,
         y = .x,
-        label = as.character(.x),
+        label = as.character(.y),
         ...
       )
     }
 
     out <-
-      purrr::map(
+      purrr::map2(
         .x = breaks,
+        .y = labels,
         .f = func
       )
 

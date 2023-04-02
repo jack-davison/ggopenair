@@ -17,12 +17,6 @@ reference:
   # - polarDiff
   # - polarCluster
 
-- subtitle: Trajectory Analysis
-  desc:  Analyse and visualise HYSPLIT trajectory files.
-  contents:
-  - has_concept("trajectory analysis functions")
-  # - importTraj
-
 - title: Time Series and Trends
   desc:  Examine how pollutant concentrations change with time.
   contents:

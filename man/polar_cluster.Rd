@@ -41,7 +41,7 @@ identified for each one of \code{n_clusters}.}
 plotted clusters for visual analysis so that an appropriate value for
 \code{n_clusters} can be selected. When such a value has been chosen, \code{"data"}
 will return the original data frame appended with a \code{cluster} column for
-use in, for exaple, \code{\link[=trend_prop]{trend_prop()}}.}
+use in, for example, \code{\link[=trend_prop]{trend_prop()}}.}
 
 \item{...}{
   Arguments passed on to \code{\link[openair:polarPlot]{openair::polarPlot}}

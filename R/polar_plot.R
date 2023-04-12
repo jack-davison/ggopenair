@@ -414,7 +414,7 @@ polar_plot <-
 #'   plotted clusters for visual analysis so that an appropriate value for
 #'   `n_clusters` can be selected. When such a value has been chosen, `"data"`
 #'   will return the original data frame appended with a `cluster` column for
-#'   use in, for exaple, [trend_prop()].
+#'   use in, for example, [trend_prop()].
 #' @inheritDotParams openair::polarPlot -mydata -pollutant -x -wd -type -limits
 #'   -cols -mis.col -alpha -upper -angle.scale -units -key -key.header
 #'   -key.footer -auto.text -plot

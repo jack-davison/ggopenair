@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggopenair</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,7 +95,7 @@ write:</p>
 <span></span>
 <span><span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-polar_files/figure-html/ggpolar-1.png" width="700"></p>
 <p>This is more long winded, but the flexibility allows users to
 customise their outputs very closely. For example:</p>
@@ -146,7 +146,7 @@ labels.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="st">"inferno"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolours_c</a></span><span class="op">(</span><span class="st">"inferno"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/annotate_polar_wedge.html">annotate_polar_wedge</a></span><span class="op">(</span><span class="st">"S"</span>, <span class="st">"W"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/annotate_polar_axis.html">annotate_polar_axis</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">15</span>, <span class="fl">5</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-polar_files/figure-html/annotations-1.png" width="700"></p>
@@ -164,7 +164,7 @@ inserted into a time variation plot.</p>
 <span>  <span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">tv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trend_variation.html">trend_variation</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span>, return <span class="op">=</span> <span class="st">"list"</span><span class="op">)</span></span>
 <span><span class="va">tv</span> <span class="op">&lt;-</span></span>
@@ -187,11 +187,11 @@ inserted into a time variation plot.</p>
 implemented in <a href="https://jack-davison.github.io/ggopenair/">ggopenair</a>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">polarplot</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/polar_plot.html">polar_plot</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">polarannulus</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/polar_annulus.html">polar_annulus</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/polar_annulus.html">polar_annulus</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolours_c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">polarfreq</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/polar_freq.html">polar_freq</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours_c.html">scale_opencolours_c</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"sqrt"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/polar_freq.html">polar_freq</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolours_c</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"sqrt"</span><span class="op">)</span></span>
 <span><span class="va">polarperc</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/rose_percentile.html">rose_percentile</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/openColours.html" class="external-link">openColours</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in</span></span>

@@ -193,7 +193,7 @@ implemented in <a href="https://jack-davison.github.io/ggopenair/">ggopenair</a>
 <span><span class="va">polarfreq</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/polar_freq.html">polar_freq</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolours_c</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"sqrt"</span><span class="op">)</span></span>
 <span><span class="va">polarperc</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/rose_percentile.html">rose_percentile</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/openColours.html" class="external-link">openColours</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/rose_percentile.html">rose_percentile</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolors_d</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in</span></span>
 <span><span class="co">#&gt; dplyr 1.1.0.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `reframe()` instead.</span></span>
@@ -204,45 +204,58 @@ implemented in <a href="https://jack-davison.github.io/ggopenair/">ggopenair</a>
 <span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
-<span><span class="co"># pollrose &lt;-</span></span>
-<span><span class="co">#   rose_pollution(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))</span></span>
-<span><span class="co"># rose_wind &lt;-</span></span>
-<span><span class="co">#   rose_wind(marylebone) + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 4)))</span></span>
+<span><span class="va">pollrose</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/rose_pollution.html">rose_pollution</a></span><span class="op">(</span><span class="va">marylebone</span>, <span class="st">"nox"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span>panel_ontop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolors_d</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">rose_wind</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/rose_wind.html">rose_wind</a></span><span class="op">(</span><span class="va">marylebone</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span>panel_ontop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_opencolours.html">scale_opencolors_d</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">polarplot</span>, <span class="va">polarannulus</span>, <span class="va">polarfreq</span>, <span class="va">polarperc</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">polarplot</span>, <span class="va">polarannulus</span>, <span class="va">polarfreq</span>, <span class="va">polarperc</span>, <span class="va">pollrose</span>, <span class="va">rose_wind</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggopenair-polar_files/figure-html/allpolar-1.png" width="672"></p>
-<p>Note that <code><a href="../reference/rose_wind.html">rose_wind()</a></code>, <code><a href="../reference/rose_pollution.html">rose_pollution()</a></code>,
-<code><a href="../reference/polar_diff.html">polar_diff()</a></code> and <code><a href="../reference/polar_cluster.html">polar_cluster()</a></code> have all been
-developed, but only function with the development version of
-<a href="https://davidcarslaw.github.io/openair/" class="external-link">openair</a>.</p>
-<!-- # The Three Roses -->
-<!-- Note that the two "roses" above - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/rose_pollution due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North. -->
-<!-- ```{r} -->
-<!-- rose_wind(marylebone, facet = "daylight") + -->
-<!--   theme_polar(panel_ontop = FALSE) + -->
-<!--   annotate_rose_text(y = 15, wd = "SE", size = 2.5) -->
-<!-- ``` -->
-<!-- The functionality to compare two sets of ws/wd data felt a bit misplaced in `pollutionRose()`, so `{ggopenair}` exports a separate `rose_metbias()` function. This also lets the plot better reflect what it is actually representing (no more N/S/E/W axis labels). -->
-<!-- ```{r} -->
-<!-- mydata <- dplyr::mutate(marylebone, -->
-<!--                         ws2 = ws + 2 * rnorm(nrow(marylebone)) + 1, -->
-<!--                         wd2 = wd + 30 * rnorm(nrow(marylebone)) + 30 -->
-<!-- ) -->
-<!-- ## need to correct negative wd -->
-<!-- id <- which(mydata$wd2 < 0) -->
-<!-- mydata$wd2[id] <- mydata$wd2[id] + 360 -->
-<!-- ## results show postive bias in wd and ws -->
-<!-- rose_metbias( -->
-<!--   mydata, -->
-<!--   ws = "ws", -->
-<!--   wd = "wd", -->
-<!--   ws2 = "ws2", -->
-<!--   wd2 = "wd2" -->
-<!-- ) + -->
-<!--   theme_polar(panel_ontop = FALSE) + -->
-<!--   scale_fill_manual(values = c("darkblue", "hotpink")) + -->
-<!--   annotate_rose_text(wd = "SW", y = 10, rose_angle = 10) -->
-<!-- ``` -->
+<p>Note that <code><a href="../reference/polar_diff.html">polar_diff()</a></code> and <code><a href="../reference/polar_cluster.html">polar_cluster()</a></code>
+have been developed, but aren’t shown here.</p>
+</div>
+<div class="section level2">
+<h2 id="the-three-roses">The Three Roses<a class="anchor" aria-label="anchor" href="#the-three-roses"></a>
+</h2>
+<p>Note that two of the above “roses” - wind and pollution - have their
+own annotation functions to put on their. The <code>rose_angle</code>
+arguments are required if you change the <code>angle</code> argument of
+wind/rose_pollution due to the way <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col()</a></code> interacts
+with <code><a href="https://ggplot2.tidyverse.org/reference/coord_polar.html" class="external-link">coord_polar()</a></code> — simply copy the chosen argument for
+<code>angle</code> and it’ll fix any strangeness when <code>wd</code> is
+near 0/North.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rose_wind.html">rose_wind</a></span><span class="op">(</span><span class="va">marylebone</span>, facet <span class="op">=</span> <span class="st">"daylight"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span>panel_ontop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/annotate_rose_text.html">annotate_rose_text</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">15</span>, wd <span class="op">=</span> <span class="st">"SE"</span>, size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="ggopenair-polar_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p>The functionality to compare two sets of ws/wd data felt a bit
+misplaced in <code>pollutionRose()</code>, so <a href="https://jack-davison.github.io/ggopenair/">ggopenair</a>
+exports a separate <code><a href="../reference/rose_metbias.html">rose_metbias()</a></code> function. This also lets
+the plot better reflect what it is actually representing (no more
+N/S/E/W axis labels).</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">marylebone</span>,</span>
+<span>                        ws2 <span class="op">=</span> <span class="va">ws</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">marylebone</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span>,</span>
+<span>                        wd2 <span class="op">=</span> <span class="va">wd</span> <span class="op">+</span> <span class="fl">30</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">marylebone</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fl">30</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## need to correct negative wd</span></span>
+<span><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">wd2</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">mydata</span><span class="op">$</span><span class="va">wd2</span><span class="op">[</span><span class="va">id</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mydata</span><span class="op">$</span><span class="va">wd2</span><span class="op">[</span><span class="va">id</span><span class="op">]</span> <span class="op">+</span> <span class="fl">360</span></span>
+<span></span>
+<span><span class="co">## results show postive bias in wd and ws</span></span>
+<span><span class="fu"><a href="../reference/rose_metbias.html">rose_metbias</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  ws <span class="op">=</span> <span class="st">"ws"</span>,</span>
+<span>  wd <span class="op">=</span> <span class="st">"wd"</span>,</span>
+<span>  ws2 <span class="op">=</span> <span class="st">"ws2"</span>,</span>
+<span>  wd2 <span class="op">=</span> <span class="st">"wd2"</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/theme_polar.html">theme_polar</a></span><span class="op">(</span>panel_ontop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>, <span class="st">"hotpink"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/annotate_rose_text.html">annotate_rose_text</a></span><span class="op">(</span>wd <span class="op">=</span> <span class="st">"SW"</span>, y <span class="op">=</span> <span class="fl">10</span>, rose_angle <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<p><img src="ggopenair-polar_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

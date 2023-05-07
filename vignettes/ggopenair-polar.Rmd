@@ -113,7 +113,7 @@ tv$day_hour / (tv$month | tv$day | polar) +
 
 Currently the main eight `{openair}` polar plots have been implemented in `{ggopenair}`.
 
-```{r allpolar, fig.width=7, fig.height=4}
+```{r allpolar, fig.width=7, fig.height=7}
 polarplot <-
   polar_plot(marylebone, "nox") + theme_polar() + scale_opencolours_c()
 polarannulus <-
@@ -121,50 +121,50 @@ polarannulus <-
 polarfreq <-
   polar_freq(marylebone, "nox") + theme_polar() + scale_opencolours_c(trans = "sqrt")
 polarperc <-
-  rose_percentile(marylebone, "nox") + theme_polar() + scale_color_manual(values = openair::openColours(n = 5))
-# pollrose <-
-#   rose_pollution(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 7)))
-# rose_wind <-
-#   rose_wind(marylebone) + theme_polar(panel_ontop = FALSE) + scale_fill_manual(values = rev(openair::openColours(n = 4)))
+  rose_percentile(marylebone, "nox") + theme_polar() + scale_opencolors_d()
+pollrose <-
+  rose_pollution(marylebone, "nox") + theme_polar(panel_ontop = FALSE) + scale_opencolors_d()
+rose_wind <-
+  rose_wind(marylebone) + theme_polar(panel_ontop = FALSE) + scale_opencolors_d()
 
-wrap_plots(polarplot, polarannulus, polarfreq, polarperc)
+patchwork::wrap_plots(polarplot, polarannulus, polarfreq, polarperc, pollrose, rose_wind, nrow = 3)
 ```
 
-Note that `rose_wind()`, `rose_pollution()`, `polar_diff()` and `polar_cluster()` have all been developed, but only function with the development version of `{openair}`.
+Note that `polar_diff()` and `polar_cluster()` have been developed, but aren't shown here.
 
-<!-- # The Three Roses -->
+# The Three Roses
 
-<!-- Note that the two "roses" above - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/rose_pollution due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North. -->
+Note that two of the above "roses" - wind and pollution - have their own annotation functions to put on their. The `rose_angle` arguments are required if you change the `angle` argument of wind/rose_pollution due to the way `geom_col()` interacts with `coord_polar()` --- simply copy the chosen argument for `angle` and it'll fix any strangeness when `wd` is near 0/North.
 
-<!-- ```{r} -->
-<!-- rose_wind(marylebone, facet = "daylight") + -->
-<!--   theme_polar(panel_ontop = FALSE) + -->
-<!--   annotate_rose_text(y = 15, wd = "SE", size = 2.5) -->
-<!-- ``` -->
+```{r}
+rose_wind(marylebone, facet = "daylight") +
+  theme_polar(panel_ontop = FALSE) +
+  annotate_rose_text(y = 15, wd = "SE", size = 2.5)
+```
 
-<!-- The functionality to compare two sets of ws/wd data felt a bit misplaced in `pollutionRose()`, so `{ggopenair}` exports a separate `rose_metbias()` function. This also lets the plot better reflect what it is actually representing (no more N/S/E/W axis labels). -->
+The functionality to compare two sets of ws/wd data felt a bit misplaced in `pollutionRose()`, so `{ggopenair}` exports a separate `rose_metbias()` function. This also lets the plot better reflect what it is actually representing (no more N/S/E/W axis labels).
 
-<!-- ```{r} -->
-<!-- mydata <- dplyr::mutate(marylebone, -->
-<!--                         ws2 = ws + 2 * rnorm(nrow(marylebone)) + 1, -->
-<!--                         wd2 = wd + 30 * rnorm(nrow(marylebone)) + 30 -->
-<!-- ) -->
+```{r}
+mydata <- dplyr::mutate(marylebone,
+                        ws2 = ws + 2 * rnorm(nrow(marylebone)) + 1,
+                        wd2 = wd + 30 * rnorm(nrow(marylebone)) + 30
+)
 
-<!-- ## need to correct negative wd -->
-<!-- id <- which(mydata$wd2 < 0) -->
-<!-- mydata$wd2[id] <- mydata$wd2[id] + 360 -->
+## need to correct negative wd
+id <- which(mydata$wd2 < 0)
+mydata$wd2[id] <- mydata$wd2[id] + 360
 
-<!-- ## results show postive bias in wd and ws -->
-<!-- rose_metbias( -->
-<!--   mydata, -->
-<!--   ws = "ws", -->
-<!--   wd = "wd", -->
-<!--   ws2 = "ws2", -->
-<!--   wd2 = "wd2" -->
-<!-- ) + -->
-<!--   theme_polar(panel_ontop = FALSE) + -->
-<!--   scale_fill_manual(values = c("darkblue", "hotpink")) + -->
-<!--   annotate_rose_text(wd = "SW", y = 10, rose_angle = 10) -->
+## results show postive bias in wd and ws
+rose_metbias(
+  mydata,
+  ws = "ws",
+  wd = "wd",
+  ws2 = "ws2",
+  wd2 = "wd2"
+) +
+  theme_polar(panel_ontop = FALSE) +
+  scale_fill_manual(values = c("darkblue", "hotpink")) +
+  annotate_rose_text(wd = "SW", y = 10, rose_angle = 10)
 
-<!-- ``` -->
+```
 

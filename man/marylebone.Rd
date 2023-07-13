@@ -16,7 +16,7 @@ A data frame with 52,608 rows and 9 variables:
 }
 \source{
 These data were obtained from AURN site "my1" using
-\code{\link[openair:import_ukaq_helper]{openair::importAURN()}}.
+\code{\link[openair:importAURN]{openair::importAURN()}}.
 }
 \usage{
 marylebone

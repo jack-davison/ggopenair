@@ -589,13 +589,19 @@ plot_polar <-
     plt <-
       ggplot2::ggplot(plot_data, ggplot2::aes(.data$t, .data$r)) +
       ggplot2::coord_polar() +
-      scattermore::geom_scattermore(
-        interpolate = TRUE,
-        pointsize = pointsize,
+      ggplot2::geom_point(
+        pch = 16,
         ggplot2::aes(color = .data[[color]]),
         na.rm = TRUE,
         alpha = alpha
       ) +
+      # scattermore::geom_scattermore(
+      #   interpolate = TRUE,
+      #   pointsize = pointsize,
+      #   ggplot2::aes(color = .data[[color]]),
+      #   na.rm = TRUE,
+      #   alpha = alpha
+      # ) +
       ggplot2::scale_x_continuous(
         breaks = seq(0, 270, 90),
         limits = c(0, 360),

@@ -187,9 +187,8 @@ polar_annulus <- function(data,
   plt <-
     ggplot2::ggplot(plot_data, ggplot2::aes(.data$t, .data$r)) +
     ggplot2::coord_polar() +
-    scattermore::geom_scattermore(
-      interpolate = TRUE,
-      pointsize = ps,
+    ggplot2::geom_point(
+      pch = 16,
       ggplot2::aes(color = .data$z),
       na.rm = TRUE,
       alpha = alpha

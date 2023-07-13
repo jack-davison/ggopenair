@@ -345,7 +345,8 @@ polar_plot <-
         plot_data = plot_data,
         alpha = alpha,
         pollutant = pollutant,
-        facet = facet
+        facet = facet,
+        pointsize = 2
       )
 
     return(plt)
@@ -476,7 +477,7 @@ polar_cluster <-
         pollutant = "cluster",
         facet = "default",
         color = "cluster",
-        pointsize = 2
+        pointsize = 3
       ) +
         ggplot2::facet_wrap(ggplot2::vars(.data[["nclust"]]))
 
@@ -561,7 +562,7 @@ polar_diff <-
         pollutant = pollutant,
         facet = "default",
         color = "miss",
-        pointsize = 1.5
+        pointsize = 2
       )
 
     return(plt)

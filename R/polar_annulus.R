@@ -178,7 +178,7 @@ polar_annulus <- function(data,
     dplyr::mutate(plot_data, r = scales::rescale(x = .data$r, to = scale))
 
   # sort out point size
-  ps <- 1
+  ps <- 2
   if (alpha < 1) {
     ps <- 0
   }

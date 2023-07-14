@@ -577,9 +577,10 @@ plot_polar <-
            facet,
            color = "z",
            pointsize = 1) {
+
     facet <- dplyr::group_vars(plot_data)
     for (i in facet) {
-      if (is.factor(plot_data[i])){
+      if (is.factor(plot_data[[i]])){
         levels(plot_data[i]) <- quick_text(levels(plot_data[i]))
       } else {
         plot_data[i] <- quick_text(plot_data[[i]])
